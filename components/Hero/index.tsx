@@ -4,6 +4,8 @@ import Container from '@/components/Container';
 import Typography from '@/components/Typography';
 import Navigation from '@/components/Navigation';
 import heroBackground from '../../public/assets/herobackground.png';
+import heroCar from '../../public/assets/heroCar.png';
+import FindPreferredCar from '../FindPreferredCar';
 
 const Hero = () => {
   return (
@@ -15,28 +17,30 @@ const Hero = () => {
         fill
       />
       <Container>
-        <div className='mb-32  pt-8  pb-9'>
-          <Navigation />
-        </div>
+        <Navigation />
 
-        <div className='text-white pb-[151px]'>
-          <div className='mb-6 opacity-50'>
-            <Typography as='p' weight='font-normal'>
-              New product
+        <div className='text-white pb-[204px] mt-[110px]'>
+          <div className='max-w-[608px] mb-6'>
+            <Typography as='h5' weight='font-medium'>
+              Search, and book a vehicle for rent easily
             </Typography>
           </div>
-          <div className='mb-6 w-[398px]'>
-            <Typography as='h1' weight='font-bold'>
-              gg
-            </Typography>
-          </div>
-          <div className='opacity-75 mb-6 w-[349px]'>
-            <Typography as='xsmall' weight='font-medium'>
-              ggg
+          <div className='max-w-[648px]'>
+            <Typography as='small' weight='font-normal'>
+              With our flexible options, you can easily get a vehicle for any of
+              your journey needs. Browse through our wide range of vehicles
+              today!
             </Typography>
           </div>
         </div>
       </Container>
+      <Image
+        src={heroCar}
+        alt='backgorund image'
+        className='object-cover absolute top-0 right-0'
+        width={600}
+        height={450}
+      />
     </div>
   );
 };

@@ -7,23 +7,20 @@ module.exports = {
   theme: {
     fontSize: {
       xs: ['16px', { lineHeight: '16px' }],
-      sm: ['13px', { lineHeight: '25px', letterSpacing: '2px' }],
+      sm: ['20px', { lineHeight: '30px' }],
+      lg: ['24px', { lineHeight: '33px' }],
+      xl: ['56px', { lineHeight: '76.11px' }],
     },
     extend: {
       colors: {
-        brand: {
-          amber: '#D87D4A',
-          pastelYellow: '#FBAF85',
+        brandGreen: {
+          300: '#42864F',
         },
-        brandBlack: {
-          50: '#101010',
-          100: '#000000',
-        },
-
         brandGray: {
-          100: '#FAFAFA',
+          100: '#646668',
+          // not done 200
           200: '#F1F1F1',
-          300: '#4C4C4C',
+          300: '#444648',
         },
       },
     },

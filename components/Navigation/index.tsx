@@ -15,8 +15,8 @@ const navigation = [
 
 const Navigation = () => {
   return (
-    <div className='flex justify-between items-center'>
-      <div className='flex gap-[9.17px] items-center'>
+    <div className='flex justify-between items-center '>
+      <div className='flex gap-[9.17px] items-center pt-6'>
         <div>
           <Image
             src={logoA}
@@ -36,7 +36,7 @@ const Navigation = () => {
           />
         </div>
       </div>
-      <div className='flex gap-10'>
+      <div className='flex gap-10 pt-10'>
         {navigation.map((nav) => {
           const { name, href } = nav;
           return (
