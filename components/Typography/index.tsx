@@ -3,6 +3,7 @@ import React from 'react';
 type Type =
   | 'h1'
   | 'h2'
+  | 'h2L'
   | 'h3'
   | 'h4'
   | 'h5'
@@ -10,11 +11,14 @@ type Type =
   | 'p'
   | 'p2'
   | 'small'
-  | 'xsmall';
+  | 'xsmall'
+  | 'xsmallL'
+  | 'xxsmall';
 
 const VARIANT_Styles: Record<Type, string> = {
   h1: 'text-5xl',
   h2: 'text-4xl',
+  h2L: 'text-4xlL',
   h3: 'text-3xl',
   h4: 'text-2xl',
   h5: 'text-xl',
@@ -23,17 +27,17 @@ const VARIANT_Styles: Record<Type, string> = {
   p2: 'text-base2',
   small: 'text-sm',
   xsmall: 'text-xs',
+  xsmallL: 'text-xsL',
+  xxsmall: 'text-xxs',
 };
-type Weight =
-  | 'font-thin'
-  | 'font-extralight'
-  | 'font-light'
-  | 'font-normal'
-  | 'font-medium'
-  | 'font-semibold'
-  | 'font-bold'
-  | 'font-extrabold'
-  | 'font-black';
+type Font =
+  | 'font-gordita-regular'
+  | 'font-gordita-thin'
+  | 'font-gordita-light'
+  | 'font-gordita-medium'
+  | 'font-gordita-bold'
+  | 'font-gordita-black'
+  | 'font-gordita-ultra';
 
 type Transforms = 'none' | 'capitalize' | 'uppercase' | 'lowercase';
 
@@ -48,7 +52,7 @@ interface Props {
   children: React.ReactNode;
   as?: Type;
   looksLike?: Type;
-  weight?: Weight;
+  font?: Font;
   transform?: Transforms;
 }
 
@@ -56,7 +60,7 @@ const Typography = ({
   children,
   as = 'p',
   looksLike = as,
-  weight,
+  font,
   transform = 'none',
 }: Props) => {
   const TagName = as as keyof JSX.IntrinsicElements;
@@ -65,7 +69,7 @@ const Typography = ({
       className={`
         ${VARIANT_Styles[looksLike]}
         ${VARIANT_Transforms[transform]}
-        ${weight}
+        ${font}
       `}
     >
       {children}
