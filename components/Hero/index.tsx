@@ -5,6 +5,7 @@ import Typography from '@/components/Typography';
 import Navigation from '@/components/Navigation';
 import heroBackground from '../../public/assets/herobackground.png';
 import heroCar from '../../public/assets/heroCar.png';
+import heroCarHalf from '../../public/assets/heroCarHalf.png';
 
 const Hero = () => {
   return (
@@ -34,12 +35,20 @@ const Hero = () => {
           </div>
         </div>
       </Container>
+
       <Image
         src={heroCar}
         alt='backgorund image'
-        className='object-cover absolute -top-[4px] right-0'
-        width={610}
-        height={410}
+        className='object-cover absolute top-[5rem] hidden 2xl:block right-0 min-[1700px]:right-[80px] min-[1900px]:right-[192px] min-[2200px]:right-[320px]'
+        width={680}
+        height={480}
+      />
+      <Image
+        src={heroCarHalf}
+        alt='backgorund image'
+        className='object-cover absolute top-[14px] 2xl:hidden right-0'
+        width={580}
+        height={380}
       />
     </div>
   );
