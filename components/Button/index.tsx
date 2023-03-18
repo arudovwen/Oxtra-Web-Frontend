@@ -7,6 +7,7 @@ interface Props {
   hover: string;
   link?: string;
   children: React.ReactNode;
+  textColor?: string;
 }
 
 const buttonClasses = classNames(
@@ -15,14 +16,16 @@ const buttonClasses = classNames(
 
 //const blockClasses = classNames('w-full block');
 
-const Button = ({ bg = '', hover, link = '', children }: Props) => {
+const Button = ({ bg = '', hover, link = '', children, textColor }: Props) => {
   return (
     <button>
       <Link
         href={link}
         className={classNames(
-          `${hover} ${buttonClasses} ${bg}`,
-          bg === 'bg-white' && 'hover:text-brandGreen-100'
+          `${hover} ${buttonClasses} ${bg} block ${textColor}`,
+          hover === 'hover:bg-brandGreen-300'
+            ? 'hover:text-white'
+            : 'hover:text-brandGray-300'
         )}
       >
         {children}

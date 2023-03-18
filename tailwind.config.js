@@ -16,10 +16,12 @@ module.exports = {
         'gordita-ultra': ['Gordita Ultra'],
       },
       fontSize: {
+        xxxs: ['12px', { lineHeight: '18px' }],
         xxs: ['14px', { lineHeight: '14px' }],
         xs: ['16px', { lineHeight: '16px' }],
         xsL: ['16px', { lineHeight: '24px' }],
         sm: ['20px', { lineHeight: '30px' }],
+        smL: ['20px', { lineHeight: '20px' }],
         lg: ['24px', { lineHeight: '33px' }],
         xl: ['56px', { lineHeight: '76.11px' }],
 
@@ -41,6 +43,8 @@ module.exports = {
           100: '#646668',
           200: '#F4F6F8',
           300: '#444648',
+          400: '#444444',
+          500: '#242628',
         },
       },
     },

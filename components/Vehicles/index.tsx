@@ -1,6 +1,13 @@
 import React from 'react';
 import Typography from '../Typography';
 import { useState } from 'react';
+import car1 from '../../public/assets/Rectangle 13.png';
+import car2 from '../../public/assets/Rectangle 14.png';
+import car5 from '../../public/assets/Rectangle 17.png';
+import { BsArrowRight } from 'react-icons/bs';
+import Image from 'next/image';
+import Container from '../Container';
+import Button from '../Button';
 
 const vehicles = [
   {
@@ -20,6 +27,19 @@ const vehicles = [
   },
 ];
 
+const placeholders = [
+  {
+    car: car1,
+  },
+  {
+    car: car2,
+  },
+
+  {
+    car: car5,
+  },
+];
+
 const Vehicles = () => {
   const [activeVehicle, setActiveVehicle] = useState('Sedan');
   return (
@@ -36,7 +56,7 @@ const Vehicles = () => {
           drivers to the quality checks we put our cars through
         </Typography>
       </div>
-      <div className='flex justify-center gap-6'>
+      <div className='flex justify-center gap-6 mb-14'>
         {vehicles.map((vehicle) => {
           return (
             <div
@@ -44,7 +64,7 @@ const Vehicles = () => {
               className={`${
                 activeVehicle === vehicle.name
                   ? 'bg-brandGreen-300 text-white'
-                  : 'bg-brandGray-200 text-[#444444]'
+                  : 'bg-brandGray-200 text-brandGray-300'
               } rounded-[60px] px-6 py-3 cursor-pointer`}
             >
               <Typography as='xxsmall' font='font-gordita-medium'>
@@ -54,6 +74,28 @@ const Vehicles = () => {
           );
         })}
       </div>
+      <Container>
+        <div className='grid grid-cols-3 place-content-center place-items-center gap-10 mb-14'>
+          {placeholders.map((v, index) => {
+            return (
+              <div key={index}>
+                <Image src={v.car} alt='car' height={200} width={600} />
+              </div>
+            );
+          })}
+        </div>
+
+        <Button bg='bg-brandGray-200' hover='hover:bg-brandGreen-300'>
+          <div className='flex items-center gap-4'>
+            <Typography as='xxsmall' font='font-gordita-medium'>
+              Show all vehicles
+            </Typography>{' '}
+            <span>
+              <BsArrowRight />
+            </span>
+          </div>
+        </Button>
+      </Container>
     </div>
   );
 };

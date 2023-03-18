@@ -11,9 +11,11 @@ type Type =
   | 'p'
   | 'p2'
   | 'small'
+  | 'smallL'
   | 'xsmall'
   | 'xsmallL'
-  | 'xxsmall';
+  | 'xxsmall'
+  | 'xxxsmall';
 
 const VARIANT_Styles: Record<Type, string> = {
   h1: 'text-5xl',
@@ -26,9 +28,11 @@ const VARIANT_Styles: Record<Type, string> = {
   p: 'text-base',
   p2: 'text-base2',
   small: 'text-sm',
+  smallL: 'text-smL',
   xsmall: 'text-xs',
   xsmallL: 'text-xsL',
   xxsmall: 'text-xxs',
+  xxxsmall: 'text-xxxs',
 };
 type Font =
   | 'font-gordita-regular'

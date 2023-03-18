@@ -37,9 +37,9 @@ const Hero = () => {
       <Image
         src={heroCar}
         alt='backgorund image'
-        className='object-cover absolute top-6 right-0'
-        width={550}
-        height={350}
+        className='object-cover absolute -top-[4px] right-0'
+        width={610}
+        height={410}
       />
     </div>
   );

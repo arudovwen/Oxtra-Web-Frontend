@@ -2,14 +2,13 @@ import React from 'react';
 import Typography from '../Typography';
 import { ImIcoMoon } from 'react-icons/im';
 import { GoSearch } from 'react-icons/go';
-
 import classNames from 'classnames';
 
-const FindPreferredCar = () => {
-  const inputClasses = classNames(
-    'px-2 py-2 border border-brandGray-300 mt-3 opacity-50 w-full'
-  );
+const inputClasses = classNames(
+  'px-2 py-2 border border-brandGray-300 mt-3 opacity-50 w-full'
+);
 
+const FindPreferredCar = () => {
   return (
     <div className='flex justify-center '>
       <div className='bg-white absolute box-shadow w-[1164px] top-[529px]  p-6'>
@@ -94,7 +93,7 @@ const FindPreferredCar = () => {
               className={`${inputClasses}  uppercase`}
             />
           </div>
-          <div className='bg-brandGreen-300 text-white p-6 rounded'>
+          <div className='bg-brandGreen-300 text-white p-6 rounded cursor-pointer'>
             <GoSearch className='w-[26px] h-[26px]' />
           </div>
         </form>
