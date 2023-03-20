@@ -9,6 +9,7 @@ import Button from '../Button';
 const navigation = [
   { name: 'Rent a vehicle', href: '/' },
   { name: 'Put up your vehicle', href: '/' },
+  { name: 'Company', href: '/' },
   { name: 'FAQ', href: '/' },
   { name: 'Login', href: '/' },
   { name: 'Sign Up', href: '/' },

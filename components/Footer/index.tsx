@@ -36,23 +36,21 @@ const Footer = () => {
   return (
     <footer className='pb-[80px]'>
       <Container>
-        <div className='grid grid-cols-5 gap-[79px]'>
-          <div className=''>
-            <div>
-              <Image
-                src={logo}
-                alt='logo'
-                height={800}
-                width={600}
-                className='mb-4'
-              />
-            </div>
+        <div className='grid grid-cols-6 gap-x-[3rem]'>
+          <div className='col-span-2 w-[74%]'>
+            <Image
+              src={logo}
+              alt='logo'
+              height={1200}
+              width={800}
+              className='mb-4'
+            />
 
-            <div className='text-brandGray-100 text-center'>
+            <div className='text-brandGray-100'>
               <Typography as='xxxsmall' font='font-gordita-regular'>
-                We are a team that is trying to reshape the transportation
-                industry in Nigeria one step at a time. We hope to do a lot in
-                the coming years with our ideas.
+                We&apos;re a team with a vision to transform the transportation
+                industry in Lagos and Nigeria. We&apos;re dedicated to making
+                meaningful progress one step at a time.
               </Typography>
             </div>
           </div>
