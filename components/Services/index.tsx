@@ -36,12 +36,12 @@ const offers = [
   },
 ];
 
-const Offers = () => {
+const Services = () => {
   return (
     <div className='mt-[234px] text-center mb-[120px]'>
       <div className='text-brandGray-300 mb-12'>
         <Typography as='h2' font='font-gordita-bold'>
-          What Oxtra offers you
+          Our services
         </Typography>
       </div>
       <div className='grid grid-cols-3 gap-10 w-[884px] mx-auto'>
@@ -81,4 +81,4 @@ const Offers = () => {
   );
 };
 
-export default Offers;
+export default Services;

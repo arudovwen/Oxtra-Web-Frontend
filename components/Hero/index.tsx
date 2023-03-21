@@ -7,7 +7,11 @@ import heroBackground from '../../public/assets/herobackground.png';
 import heroCar from '../../public/assets/heroCar.png';
 import heroCarHalf from '../../public/assets/heroCarHalf.png';
 
-const Hero = () => {
+interface HeroProps {
+  activePage: string;
+}
+
+const Hero = ({ activePage }: HeroProps) => {
   return (
     <div className='relative isolate overflow-hidden'>
       <Image
@@ -17,7 +21,14 @@ const Hero = () => {
         fill
       />
       <Container>
-        <Navigation />
+        <Navigation
+          color='text-white'
+          hover='hover:text-brandGreen-100'
+          buttonBg='bg-white'
+          buttonHover='hover:bg-brandGreen-300'
+          buttonText='text-brandGray-300'
+          activePage={activePage}
+        />
 
         <div className='text-white pb-[204px] mt-[110px]'>
           <div className='max-w-[608px] mb-6'>
@@ -39,7 +50,7 @@ const Hero = () => {
       <Image
         src={heroCar}
         alt='backgorund image'
-        className='object-cover absolute top-[5rem] hidden 2xl:block right-0 min-[1700px]:right-[80px] min-[1900px]:right-[192px] min-[2200px]:right-[320px]'
+        className='object-cover absolute top-[5rem] hidden 2xl:block right-0 min-[1700px]:right-[80px] min-[1900px]:right-[192px] min-[2200px]:right-[320px]  min-[2800px]:right-[35rem] min-[3000px]:right-[46rem] min-[3500px]:right-[58rem] min-[4300px]:right-[88rem]'
         width={680}
         height={480}
       />

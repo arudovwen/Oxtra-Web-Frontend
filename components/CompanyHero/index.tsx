@@ -1,0 +1,69 @@
+import React from 'react';
+import Container from '../Container';
+import Navigation from '../Navigation';
+import Typography from '../Typography';
+import { BsArrowRight } from 'react-icons/bs';
+import Button from '../Button';
+import Image from 'next/image';
+import cloud from '../../public/assets/cloud.png';
+
+interface CompanyHeroProps {
+  activePage: string;
+}
+
+const CompanyHero = ({ activePage }: CompanyHeroProps) => {
+  return (
+    <Container>
+      <div className='text-brandGray-300 text-center relative overflow-cli'>
+        <Navigation
+          color='text-brandGray-300'
+          hover='hover:text-brandGreen-300'
+          buttonBg='bg-brandGreen-300'
+          buttonText='text-white'
+          buttonHover='hover:bg-white'
+          activePage={activePage}
+        />
+        <div className='mt-[250px] mb-6'>
+          <Typography as='h5' font='font-gordita-bold'>
+            We want to transform the <br /> way Lagos moves
+          </Typography>
+        </div>
+        <div className='mb-6'>
+          <Typography as='small' font='font-gordita-regular'>
+            Lagos is a bustling city with millions of residents and visitors,
+            and we understand that getting around can be a <br /> challenge.
+            That&lsquo;s why we are dedicated to improving the transportation
+            infrastructure, services, and <br /> technologies in Lagos to make
+            them more efficient, reliable, and convenient for everyone.
+          </Typography>
+        </div>
+
+        <Button
+          bg='bg-brandGreen-300'
+          hover='hover:bg-brandGray-200'
+          textColor='text-white'
+        >
+          <div className='flex items-center gap-4'>
+            <Typography as='xxsmall' font='font-gordita-medium'>
+              Get moving with us
+            </Typography>{' '}
+            <span>
+              <BsArrowRight />
+            </span>
+          </div>
+        </Button>
+        <div className=''>
+          <Image
+            src={cloud}
+            width={360}
+            height={355}
+            alt='cloud'
+            className='top-[80px] absolute left-0'
+          />
+        </div>
+      </div>
+    </Container>
+  );
+};
+
+export default CompanyHero;

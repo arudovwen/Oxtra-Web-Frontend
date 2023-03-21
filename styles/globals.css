@@ -7,10 +7,11 @@
   box-shadow: 0px 1px 84px rgba(20, 22, 24, 0.15);
 }
 
+/* color: var(--text-color); 
 .hover-underline-animation {
   display: inline-block;
   position: relative;
-  /* color: var(--text-color); */
+  /* color: var(--text-color);
 }
 
 .hover-underline-animation:after {
@@ -30,3 +31,4 @@
   transform: scaleX(1);
   transform-origin: bottom left;
 }
+*/

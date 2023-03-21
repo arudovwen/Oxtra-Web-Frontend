@@ -9,13 +9,29 @@ import Button from '../Button';
 const navigation = [
   { name: 'Rent a vehicle', href: '/' },
   { name: 'Put up your vehicle', href: '/' },
-  { name: 'Company', href: '/' },
+  { name: 'Company', href: '/company' },
   { name: 'FAQ', href: '/' },
   { name: 'Login', href: '/' },
   { name: 'Sign Up', href: '/' },
 ];
 
-const Navigation = () => {
+interface NavigationProps {
+  color: string;
+  hover: string;
+  buttonBg: string;
+  buttonText: string;
+  buttonHover: string;
+  activePage: string;
+}
+
+const Navigation = ({
+  color,
+  hover,
+  buttonBg,
+  buttonText,
+  buttonHover,
+  activePage,
+}: NavigationProps) => {
   return (
     <div className='flex justify-between items-center '>
       <Link href='/' className='flex gap-[9.17px] items-center pt-6'>
@@ -46,7 +62,10 @@ const Navigation = () => {
               <Typography as='xsmall' key={name} font='font-gordita-regular'>
                 <Link
                   href={href}
-                  className='text-white pb-1 hover-underline-animation hover:text-brandGreen-100 duration-300'
+                  className={`${color}  pb-1 ${hover} duration-300 ${
+                    activePage.toLowerCase() === name.toLocaleLowerCase() &&
+                    'font-gordita-bold text-brandGreen-300'
+                  }`}
                 >
                   {name}
                 </Link>
@@ -54,13 +73,9 @@ const Navigation = () => {
             );
           } else {
             return (
-              <div key={name} className='text-brandGray-300'>
+              <div key={name} className={`${buttonText}`}>
                 <Typography as='xsmall' font='font-gordita-regular'>
-                  <Button
-                    bg='bg-white'
-                    link='/'
-                    hover='hover:bg-brandGreen-300'
-                  >
+                  <Button bg={buttonBg} link='/' hover={buttonHover}>
                     {name}
                   </Button>
                 </Typography>
