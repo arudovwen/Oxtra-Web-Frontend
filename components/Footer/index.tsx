@@ -8,12 +8,12 @@ import classNames from 'classnames';
 const navigation = {
   company: [
     { name: 'About us', href: '#' },
-    { name: 'Company', href: '#' },
+    { name: 'Company', href: '/company' },
     { name: 'Press', href: '#' },
     { name: 'Blog', href: '#' },
   ],
   products: [
-    { name: 'Rent a car', href: '#' },
+    { name: 'Rent a car', href: '/rentVehicle' },
     { name: 'Put your car for rent', href: '#' },
     { name: 'Airport Trips', href: '#' },
     { name: 'Courier', href: '#' },

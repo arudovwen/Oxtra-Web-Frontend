@@ -38,7 +38,7 @@ const offers = [
 
 const Services = () => {
   return (
-    <div className='mt-[234px] text-center mb-[120px]'>
+    <div className=' text-center mb-[120px]'>
       <div className='text-brandGray-300 mb-12'>
         <Typography as='h2' font='font-gordita-bold'>
           Our services

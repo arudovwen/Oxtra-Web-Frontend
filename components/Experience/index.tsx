@@ -7,10 +7,10 @@ import { BsArrowRight } from 'react-icons/bs';
 import Button from '../Button';
 import car from '../../public/assets/experienceCar.png';
 
-const Experienve = () => {
+const Experience = ({ marginBottom }: { marginBottom: string }) => {
   return (
-    <Container>
-      <div className='bg-brand-amber py-[80px] w-full mb-[124px] relative  rounded-lg flex gap-[138.28px] justify-center'>
+    <Container marginBottom={marginBottom}>
+      <div className='bg-brand-amber py-[80px] w-full relative  rounded-lg flex gap-[138.28px] justify-center'>
         <Image
           src={experience}
           alt='come and experience'
@@ -30,7 +30,11 @@ const Experienve = () => {
               that you have a delightful experience when you ride with us
             </Typography>
           </div>
-          <Button bg='bg-brandGray-200' hover='hover:bg-brandGreen-300'>
+          <Button
+            bg='bg-brandGray-200'
+            hover='hover:bg-brandGreen-300'
+            width={false}
+          >
             <div className='flex items-center gap-4'>
               <Typography as='xxsmall' font='font-gordita-medium'>
                 Find a vehicle
@@ -54,4 +58,4 @@ const Experienve = () => {
   );
 };
 
-export default Experienve;
+export default Experience;

@@ -3,8 +3,8 @@ import Container from '../Container';
 import Typography from '../Typography';
 import veriftyme from '../../public/assets/verifyme.png';
 import wooven from '../../public/assets/wooven.png';
-import fidelity from '../../public/assets/fidelity.png';
-import credpal from '../../public/assets/credpal.png';
+import paystack from '../../public/assets/paystack.png';
+import nimc from '../../public/assets/nimc.png';
 import Image from 'next/image';
 
 const trustedPartners = [
@@ -13,20 +13,20 @@ const trustedPartners = [
     image: veriftyme,
   },
   { partner: 'wooven', image: wooven },
-  { partner: 'fidelity', image: fidelity },
-  { partner: 'credpal', image: credpal },
+  { partner: 'nimc', image: nimc },
+  { partner: 'paystack', image: paystack },
 ];
 
-const TrustedPartners = () => {
+const TrustedPartners = ({ marginBottom }: { marginBottom: string }) => {
   return (
-    <Container>
-      <div className='text-center mb-[124px]'>
-        <div className='text-brandGray-300 mb-6'>
+    <Container marginBottom={marginBottom}>
+      <div className='text-center text-brandGray-300 border-y py-[42px] border-[#B7DCBE]'>
+        <div className=' mb-6'>
           <Typography as='h2' font='font-gordita-bold'>
             Trusted Partners
           </Typography>
         </div>
-        <div className='text-brandGray-400 mb-[46px]'>
+        <div className=' mb-[46px]'>
           <Typography as='xsmall' font='font-gordita-regular'>
             The people we rely on to ensure you have a quality experience
             driving with us

@@ -12,15 +12,17 @@ const inter = Inter({ subsets: ['latin'] });
 
 export default function Home() {
   const activePage = 'Home';
+
+  const margin = 'mb-[120px]';
   return (
     <>
       <Hero activePage={activePage} />
       <FindPreferredCar />
       <Services />
       <Vehicles />
-      <PassiveIncome />
-      <TrustedPartners />
-      <Experience />
+      <PassiveIncome marginBottom={margin} />
+      <TrustedPartners marginBottom={margin} />
+      <Experience marginBottom={margin} />
       <Footer />
     </>
   );

@@ -1,10 +1,6 @@
 import React from 'react';
 import Container from '../Container';
 import Typography from '../Typography';
-import veriftyme from '../../public/assets/verifyme.png';
-import wooven from '../../public/assets/wooven.png';
-import fidelity from '../../public/assets/fidelity.png';
-import credpal from '../../public/assets/credpal.png';
 import Image from 'next/image';
 import person1 from '../../public/assets/pic1.png';
 import person2 from '../../public/assets/pic2.png';
@@ -30,10 +26,10 @@ const team = [
   },
 ];
 
-const Team = () => {
+const Team = ({ marginBottom }: { marginBottom: string }) => {
   return (
-    <Container>
-      <div className='text-brandGray-300 mb-[124px]'>
+    <Container marginBottom={marginBottom}>
+      <div className='text-brandGray-300'>
         <div className=' mb-6 text-center'>
           <Typography as='h2' font='font-gordita-bold'>
             Our core team

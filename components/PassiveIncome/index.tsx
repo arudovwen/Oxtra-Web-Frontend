@@ -6,50 +6,49 @@ import { BsArrowRight } from 'react-icons/bs';
 import Button from '../Button';
 import Container from '../Container';
 
-const PassiveIncome = () => {
+const PassiveIncome = ({ marginBottom }: { marginBottom: string }) => {
   return (
-    <div className='z-40'>
-      <Container>
-        <div className='flex items-center justify-center gap-20 mb-[120px]'>
-          <Image
-            src={passiveIncome}
-            width={400}
-            height={400}
-            alt='passive income'
-            className='object-cover rounded-lg'
-          />
+    <Container marginBottom={marginBottom}>
+      <div className='flex items-center justify-center gap-20'>
+        <Image
+          src={passiveIncome}
+          width={400}
+          height={400}
+          alt='passive income'
+          className='object-cover rounded-lg'
+        />
 
-          <div className='w-[400px]'>
-            <div className='mb-6 text-brandGray-300'>
-              <Typography as='h2L' font='font-gordita-bold'>
-                Earn passive income with your vehicle
-              </Typography>
-            </div>
-            <div className='mb-6 text-brandGray-400'>
-              <Typography as='xsmallL' font='font-gordita-regular'>
-                You can make money on Oxtra by hosting your vehicle on our
-                platform. We lease your vehicle out and share the payment.
-              </Typography>
-            </div>
-
-            <Button
-              bg='bg-brandGreen-300'
-              hover='hover:bg-brandGray-200'
-              textColor='text-white'
-            >
-              <div className='flex items-center gap-4'>
-                <Typography as='xxsmall' font='font-gordita-medium'>
-                  Host your vehicle for lease
-                </Typography>{' '}
-                <span>
-                  <BsArrowRight />
-                </span>
-              </div>
-            </Button>
+        <div className='w-[400px]'>
+          <div className='mb-6 text-brandGray-300'>
+            <Typography as='h2L' font='font-gordita-bold'>
+              Earn passive income with your vehicle
+            </Typography>
           </div>
+          <div className='mb-6 text-brandGray-400'>
+            <Typography as='xsmallL' font='font-gordita-regular'>
+              You can make money on Oxtra by hosting your vehicle on our
+              platform. We lease your vehicle out and share the payment.
+            </Typography>
+          </div>
+
+          <Button
+            bg='bg-brandGreen-300'
+            hover='hover:bg-brandGray-200'
+            textColor='text-white'
+            width={false}
+          >
+            <div className='flex items-center gap-4'>
+              <Typography as='xxsmall' font='font-gordita-medium'>
+                Host your vehicle for lease
+              </Typography>{' '}
+              <span>
+                <BsArrowRight />
+              </span>
+            </div>
+          </Button>
         </div>
-      </Container>
-    </div>
+      </div>
+    </Container>
   );
 };
 

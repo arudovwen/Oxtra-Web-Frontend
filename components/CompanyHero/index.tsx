@@ -6,6 +6,8 @@ import { BsArrowRight } from 'react-icons/bs';
 import Button from '../Button';
 import Image from 'next/image';
 import cloud from '../../public/assets/cloud.png';
+import car from '../../public/assets//Frame.png';
+import moneyBag from '../../public/assets/image 35.png';
 
 interface CompanyHeroProps {
   activePage: string;
@@ -42,6 +44,7 @@ const CompanyHero = ({ activePage }: CompanyHeroProps) => {
           bg='bg-brandGreen-300'
           hover='hover:bg-brandGray-200'
           textColor='text-white'
+          width={false}
         >
           <div className='flex items-center gap-4'>
             <Typography as='xxsmall' font='font-gordita-medium'>
@@ -52,15 +55,28 @@ const CompanyHero = ({ activePage }: CompanyHeroProps) => {
             </span>
           </div>
         </Button>
-        <div className=''>
-          <Image
-            src={cloud}
-            width={360}
-            height={355}
-            alt='cloud'
-            className='top-[80px] absolute left-0'
-          />
-        </div>
+
+        <Image
+          src={cloud}
+          width={360}
+          height={355}
+          alt='cloud'
+          className='top-[80px] absolute left-0'
+        />
+        <Image
+          src={car}
+          width={300}
+          height={200}
+          alt='blue'
+          className='top-[39rem] absolute right-[8rem]'
+        />
+        <Image
+          src={moneyBag}
+          width={200}
+          height={200}
+          alt='money bag'
+          className='top-[100rem] absolute left-[-3rem] '
+        />
       </div>
     </Container>
   );

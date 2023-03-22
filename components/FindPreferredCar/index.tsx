@@ -5,12 +5,12 @@ import { GoSearch } from 'react-icons/go';
 import classNames from 'classnames';
 
 const inputClasses = classNames(
-  'px-2 py-2 border border-brandGray-300 mt-3 opacity-50 w-full'
+  'px-2 py-2 border border-[#d4d6d8] mt-3  w-full'
 );
 
 const FindPreferredCar = () => {
   return (
-    <div className='flex justify-center '>
+    <div className='flex justify-center mb-[234px]'>
       <div className='bg-white absolute box-shadow w-[1164px] top-[529px]  p-6'>
         <div>
           <div className='text-brandGray-300 mb-[26px]'>

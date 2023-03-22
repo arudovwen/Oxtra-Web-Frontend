@@ -85,7 +85,11 @@ const Vehicles = () => {
           })}
         </div>
 
-        <Button bg='bg-brandGray-200' hover='hover:bg-brandGreen-300'>
+        <Button
+          bg='bg-brandGray-200'
+          hover='hover:bg-brandGreen-300'
+          width={false}
+        >
           <div className='flex items-center gap-4'>
             <Typography as='xxsmall' font='font-gordita-medium'>
               Show all vehicles

@@ -7,7 +7,7 @@ import Typography from '../Typography';
 import Button from '../Button';
 
 const navigation = [
-  { name: 'Rent a vehicle', href: '/' },
+  { name: 'Rent a vehicle', href: '/rent-a-vehicle' },
   { name: 'Put up your vehicle', href: '/' },
   { name: 'Company', href: '/company' },
   { name: 'FAQ', href: '/' },
@@ -59,7 +59,7 @@ const Navigation = ({
           const { name, href } = nav;
           if (name !== 'Sign Up') {
             return (
-              <Typography as='xsmall' key={name} font='font-gordita-regular'>
+              <Typography key={name} as='xsmall' font='font-gordita-regular'>
                 <Link
                   href={href}
                   className={`${color}  pb-1 ${hover} duration-300 ${
@@ -74,11 +74,17 @@ const Navigation = ({
           } else {
             return (
               <div key={name} className={`${buttonText}`}>
-                <Typography as='xsmall' font='font-gordita-regular'>
-                  <Button bg={buttonBg} link='/' hover={buttonHover}>
+                <Button
+                  bg={buttonBg}
+                  link='/'
+                  hover={buttonHover}
+                  width={false}
+                >
+                  <Typography as='xsmall' font='font-gordita-regular'>
+                    {' '}
                     {name}
-                  </Button>
-                </Typography>
+                  </Typography>
+                </Button>
               </div>
             );
           }

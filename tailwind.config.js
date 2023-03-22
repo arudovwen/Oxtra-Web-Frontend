@@ -27,7 +27,7 @@ module.exports = {
 
         // // Headings H6 - H1
         // '2xl': ['28px', { lineHeight: '38px', letterSpacing: '2px' }],
-        // '3xl': ['32px', { lineHeight: '36px', letterSpacing: '1.15px' }],
+        '3xl': ['32px', { lineHeight: '32px' }],
         '4xl': ['40px', { lineHeight: '40px' }],
         '4xlL': ['40px', { lineHeight: '54px' }],
         // '5xl': ['56px', { lineHeight: '58px', letterSpacing: '2px' }],

@@ -1,17 +1,11 @@
 import React from 'react';
 import Typography from '../Typography';
-import { AiOutlineCar } from 'react-icons/ai';
-import { RiTruckLine } from 'react-icons/ri';
-import { TbPlaneTilt } from 'react-icons/tb';
 import { BsArrowRight } from 'react-icons/bs';
-import classNames from 'classnames';
 import Link from 'next/link';
 import offerCar from '../../public/assets/offerCar.png';
 import Image from 'next/image';
 import Container from '../Container';
 import pricing from '../../public/assets/pricing.png';
-
-const offerIconClasses = classNames('w-[36px] h-[36px]');
 
 const offers = [
   {
@@ -19,9 +13,8 @@ const offers = [
     description:
       'We have a ranged fleet of rental cars to meet your needs and preferences. From economy cars to luxury SUVs, we have the right vehicle for every occasion and budget.',
     image: offerCar,
-    background: 'bg-[#FDECEC]',
+    height: 'h-[480px]',
     linkText: 'Check out our cars',
-    icon: <AiOutlineCar className={offerIconClasses} />,
     link: '/',
   },
 
@@ -30,9 +23,8 @@ const offers = [
     description:
       "We understand that every customer has unique rental needs, that's why we offer flexible rental options, including hourly and  daily options. We also offer long-term rental options on special request for customers who need a car for an extended period of time.",
     image: offerCar,
-    background: 'bg-[#FDECEC]',
+    height: 'h-[528px]',
     linkText: 'Check out our cars',
-    icon: <AiOutlineCar className={offerIconClasses} />,
     link: '/',
   },
 
@@ -41,9 +33,8 @@ const offers = [
     description:
       'We want you to have the most affordable and stress-free rental experience possible. So why wait? Book your rental with us today and enjoy a fun and affordable road trip with Oxtra!',
     image: pricing,
-    background: 'bg-[#FFFFEB]',
+    height: 'h-[480px]',
     linkText: 'Check out our cars',
-    icon: <TbPlaneTilt className={offerIconClasses} />,
     link: '/',
   },
 ];
@@ -51,18 +42,18 @@ const offers = [
 const Offer = () => {
   return (
     <Container>
-      <div className='mt-[234px] text-center mb-[120px]'>
+      <div className='mt-[234px] text-center mb-[200px]'>
         <div className='text-brandGray-300 mb-20'>
           <Typography as='h2' font='font-gordita-bold'>
             What we offer
           </Typography>
         </div>
-        <div className='grid grid-cols-3 gap-10  mx-auto'>
+        <div className='flex gap-10 items-center'>
           {offers.map((offer) => {
             return (
               <div
                 key={offer.title}
-                className={`flex flex-col rounded-xl items-center p-6 border border-brandGray-100`}
+                className={`flex ${offer.height} w-full flex-col rounded-xl items-center p-6 border border-[#d4d6d8]`}
               >
                 <Image
                   src={offer.image}

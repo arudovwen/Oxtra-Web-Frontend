@@ -8,21 +8,27 @@ interface Props {
   link?: string;
   children: React.ReactNode;
   textColor?: string;
+  width: boolean;
 }
 
 const buttonClasses = classNames(
-  'duration-300 rounded px-[24px] py-[16px] text-xs '
+  'duration-300 rounded px-[24px]  py-[16px] text-xs '
 );
 
-//const blockClasses = classNames('w-full block');
-
-const Button = ({ bg = '', hover, link = '', children, textColor }: Props) => {
+const Button = ({
+  bg = '',
+  hover,
+  link = '',
+  children,
+  textColor,
+  width,
+}: Props) => {
   return (
-    <button>
+    <button className={`${width && 'w-full'}`}>
       <Link
         href={link}
         className={classNames(
-          `${hover} ${buttonClasses} ${bg} block ${textColor}`,
+          `${hover} ${buttonClasses} ${bg} w-full block ${textColor}`,
           hover === 'hover:bg-brandGreen-300'
             ? 'hover:text-white'
             : 'hover:text-brandGray-300'
