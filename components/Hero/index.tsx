@@ -28,21 +28,20 @@ const Hero = ({ activePage }: HeroProps) => {
           buttonHover='hover:bg-brandGreen-300'
           buttonText='text-brandGray-300'
           activePage={activePage}
+          navBackground='green'
         />
 
         <div className='text-white pb-[204px] mt-[110px]'>
           <div className='max-w-[608px] mb-6'>
-            <Typography as='h5' font='font-gordita-medium'>
+            <Typography as='h2' font='font-gordita-medium'>
               Search, and book a vehicle for rent easily
             </Typography>
           </div>
-          <div className='max-w-[648px]'>
-            <Typography as='small' font='font-gordita-light'>
-              With our flexible options, you can easily get a vehicle for any{' '}
-              <br /> of your journey needs. Browse through our wide range of{' '}
-              <br />
-              vehicles today!
-            </Typography>
+          <div className='max-w-[648px] text-[20px] leading-[30px] font-gordita-light'>
+            With our flexible options, you can easily get a vehicle for any{' '}
+            <br /> of your journey needs. Browse through our wide range of{' '}
+            <br />
+            vehicles today!
           </div>
         </div>
       </Container>

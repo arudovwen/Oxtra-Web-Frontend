@@ -18,9 +18,9 @@ const team = [
     position: 'Chief Technology Officer',
     image: person2,
   },
-  { name: 'Obinna Chidiebere', position: 'Product Designer', image: person3 },
+  { name: 'Obinna', position: 'Product Designer', image: person3 },
   {
-    name: 'Ahon Success',
+    name: 'Ahon',
     position: 'Chief Operations Officer',
     image: person4,
   },
@@ -36,7 +36,7 @@ const Team = ({ marginBottom }: { marginBottom: string }) => {
           </Typography>
         </div>
         <div className=' mb-[46px] text-center'>
-          <Typography as='xsmall' font='font-gordita-regular'>
+          <Typography as='h6' font='font-gordita-regular'>
             Meet the guys working tirelessly to make Oxtra help you
           </Typography>
         </div>
@@ -52,12 +52,12 @@ const Team = ({ marginBottom }: { marginBottom: string }) => {
                   className='mb-4'
                 />
                 <div className='mb-3'>
-                  <Typography as='xsmall' font='font-gordita-regular'>
+                  <Typography as='p' font='font-gordita-regular'>
                     {individual.name}
                   </Typography>
                 </div>
                 <div className=''>
-                  <Typography as='xsmall' font='font-gordita-bold'>
+                  <Typography as='p' font='font-gordita-bold'>
                     {individual.position}
                   </Typography>
                 </div>

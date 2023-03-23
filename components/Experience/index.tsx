@@ -19,26 +19,21 @@ const Experience = ({ marginBottom }: { marginBottom: string }) => {
         />
 
         <div className='text-center w-[749px] z-30'>
-          <div className='mb-6 text-white'>
-            <Typography as='h2L' font='font-gordita-medium'>
-              Come and experience ease and class when ride with Oxtra.
-            </Typography>
+          <div className='mb-6 text-white text-[40px] leading-[51.2px] font-gordita-bold '>
+            Come and experience ease and class when ride with Oxtra.
           </div>
-          <div className='mb-10 text-white'>
-            <Typography as='xsmall' font='font-gordita-regular'>
-              We take pride in the extra mile we go through <br /> to ensure
-              that you have a delightful experience when you ride with us
-            </Typography>
+          <div className='mb-10 text-white text-[16px] font-gordita-regular leading-[24px]'>
+            We take pride in the extra mile we go through <br /> to ensure that
+            you have a delightful experience when you ride with us
           </div>
           <Button
             bg='bg-brandGray-200'
             hover='hover:bg-brandGreen-300'
+            textColor='text-[#444648]'
             width={false}
           >
-            <div className='flex items-center gap-4'>
-              <Typography as='xxsmall' font='font-gordita-medium'>
-                Find a vehicle
-              </Typography>{' '}
+            <div className='flex items-center gap-4 text-sm font-gordita-medium'>
+              <span>Find a vehicle</span>{' '}
               <span>
                 <BsArrowRight />
               </span>

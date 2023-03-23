@@ -46,17 +46,15 @@ const Footer = () => {
               className='mb-4'
             />
 
-            <div className='text-brandGray-100'>
-              <Typography as='xxxsmall' font='font-gordita-regular'>
-                We&apos;re a team with a vision to transform the transportation
-                industry in Lagos and Nigeria. We&apos;re dedicated to making
-                meaningful progress one step at a time.
-              </Typography>
+            <div className='text-brandGray-100 text-xs font-gordita-regular'>
+              We&apos;re a team with a vision to transform the transportation
+              industry in Lagos and Nigeria. We&apos;re dedicated to making
+              meaningful progress one step at a time.
             </div>
           </div>
           <div>
             <div className={headingClasses}>
-              <Typography as='smallL' font='font-gordita-bold'>
+              <Typography as='h6' font='font-gordita-bold'>
                 Company
               </Typography>
             </div>
@@ -64,7 +62,7 @@ const Footer = () => {
               {navigation.company.map((item) => {
                 return (
                   <li key={item.name} className='mb-4 text-brandGray-100'>
-                    <Typography as='xsmall' font='font-gordita-regular'>
+                    <Typography as='p' font='font-gordita-regular'>
                       <Link href={item.href}> {item.name}</Link>
                     </Typography>
                   </li>
@@ -74,7 +72,7 @@ const Footer = () => {
           </div>
           <div>
             <div className={headingClasses}>
-              <Typography as='smallL' font='font-gordita-bold'>
+              <Typography as='h6' font='font-gordita-bold'>
                 Products
               </Typography>
             </div>
@@ -82,7 +80,7 @@ const Footer = () => {
               {navigation.products.map((item) => {
                 return (
                   <li key={item.name} className='mb-4 text-brandGray-100'>
-                    <Typography as='xsmall' font='font-gordita-regular'>
+                    <Typography as='p' font='font-gordita-regular'>
                       <Link href={item.href}> {item.name}</Link>
                     </Typography>
                   </li>
@@ -92,7 +90,7 @@ const Footer = () => {
           </div>
           <div>
             <div className={headingClasses}>
-              <Typography as='smallL' font='font-gordita-bold'>
+              <Typography as='h6' font='font-gordita-bold'>
                 Business
               </Typography>
             </div>
@@ -100,7 +98,7 @@ const Footer = () => {
               {navigation.business.map((item) => {
                 return (
                   <li key={item.name} className='mb-4 text-brandGray-100'>
-                    <Typography as='xsmall' font='font-gordita-regular'>
+                    <Typography as='p' font='font-gordita-regular'>
                       <Link href={item.href}> {item.name}</Link>
                     </Typography>
                   </li>
@@ -110,7 +108,7 @@ const Footer = () => {
           </div>
           <div>
             <div className={headingClasses}>
-              <Typography as='smallL' font='font-gordita-bold'>
+              <Typography as='h6' font='font-gordita-bold'>
                 Contact us
               </Typography>
             </div>
@@ -118,7 +116,7 @@ const Footer = () => {
               {navigation.contact.map((item) => {
                 return (
                   <li key={item.name} className='mb-4 text-brandGray-100'>
-                    <Typography as='xsmall' font='font-gordita-regular'>
+                    <Typography as='p' font='font-gordita-regular'>
                       <Link href={item.href}> {item.name}</Link>
                     </Typography>
                   </li>

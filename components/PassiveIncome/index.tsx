@@ -19,16 +19,12 @@ const PassiveIncome = ({ marginBottom }: { marginBottom: string }) => {
         />
 
         <div className='w-[400px]'>
-          <div className='mb-6 text-brandGray-300'>
-            <Typography as='h2L' font='font-gordita-bold'>
-              Earn passive income with your vehicle
-            </Typography>
+          <div className='mb-6 text-brandGray-300 text-[40px] leading-[54.4px] font-gordita-bold '>
+            Earn passive income with your vehicle
           </div>
-          <div className='mb-6 text-brandGray-400'>
-            <Typography as='xsmallL' font='font-gordita-regular'>
-              You can make money on Oxtra by hosting your vehicle on our
-              platform. We lease your vehicle out and share the payment.
-            </Typography>
+          <div className='mb-6 text-brandGray-400 text-[16px] font-gordita-regular leading-[24px]'>
+            You can make money on Oxtra by hosting your vehicle on our platform.
+            We lease your vehicle out and share the payment.
           </div>
 
           <Button
@@ -37,10 +33,8 @@ const PassiveIncome = ({ marginBottom }: { marginBottom: string }) => {
             textColor='text-white'
             width={false}
           >
-            <div className='flex items-center gap-4'>
-              <Typography as='xxsmall' font='font-gordita-medium'>
-                Host your vehicle for lease
-              </Typography>{' '}
+            <div className='flex items-center gap-4 text-sm font-gordita-medium'>
+              <span>Host your vehicle for lease</span>{' '}
               <span>
                 <BsArrowRight />
               </span>

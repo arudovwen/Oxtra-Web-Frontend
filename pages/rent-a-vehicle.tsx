@@ -19,19 +19,18 @@ const RentVehicle = () => {
         buttonText='text-white'
         buttonHover='hover:bg-white'
         activePage={activePage}
+        navBackground='white'
       />
       <div className='mt-10 text-center text-brandGray-300'>
-        <div className='mb-6'>
+        <div className='mb-4'>
           <Typography as='h3' font='font-gordita-bold'>
             Find the right car for you
           </Typography>
         </div>
-        <div className='mb-8'>
-          <Typography as='xsmallL' font='font-gordita-regular'>
-            You can find the best offers at the top or filter/search for your{' '}
-            <br />
-            preferred car.
-          </Typography>
+        <div className='mb-8 text-[16px] leading-[21.76px] font-gordita-regular'>
+          You can find the best offers at the top or filter/search for your{' '}
+          <br />
+          preferred car.
         </div>
       </div>
 

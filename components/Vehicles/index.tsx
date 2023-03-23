@@ -1,5 +1,4 @@
 import React from 'react';
-import Typography from '../Typography';
 import { useState } from 'react';
 import car1 from '../../public/assets/Rectangle 13.png';
 import car2 from '../../public/assets/Rectangle 14.png';
@@ -44,18 +43,14 @@ const Vehicles = () => {
   const [activeVehicle, setActiveVehicle] = useState('Sedan');
   return (
     <div className=' text-brandGray-300 text-center mb-[120px]'>
-      <div className=' mb-12 w-[643px] mx-auto'>
-        <Typography as='h2L' font='font-gordita-bold'>
-          Our vehicles are <br />
-          ready to take you around town
-        </Typography>
+      <div className=' mb-12 w-[643px] mx-auto text-[40px] leading-[54.4px] font-gordita-bold '>
+        Our vehicles are <br />
+        ready to take you around town
       </div>
-      <div className=' w-[643px] mx-auto mb-8'>
-        <Typography as='xsmallL' font='font-gordita-regular'>
-          We give our riders the best driving experience from our world-class
-          drivers to the quality checks we put our cars through
-        </Typography>
-      </div>
+      <p className=' w-[643px] font-gordita-regular mx-auto mb-8 text-[16px] leading-[24px]'>
+        We give our riders the best driving experience from our world-class
+        drivers to the quality checks we put our cars through
+      </p>
       <div className='flex justify-center gap-6 mb-14'>
         {vehicles.map((vehicle) => {
           return (
@@ -65,11 +60,9 @@ const Vehicles = () => {
                 activeVehicle === vehicle.name
                   ? 'bg-brandGreen-300 text-white'
                   : 'bg-brandGray-200 text-brandGray-300'
-              } rounded-[60px] px-6 py-3 cursor-pointer`}
+              } rounded-[60px] px-6 text-sm py-3 cursor-pointer font-gordita-medium`}
             >
-              <Typography as='xxsmall' font='font-gordita-medium'>
-                {vehicle.name}
-              </Typography>
+              <div>{vehicle.name}</div>
             </div>
           );
         })}
@@ -89,11 +82,11 @@ const Vehicles = () => {
           bg='bg-brandGray-200'
           hover='hover:bg-brandGreen-300'
           width={false}
+          textColor='text-[#444648]'
         >
-          <div className='flex items-center gap-4'>
-            <Typography as='xxsmall' font='font-gordita-medium'>
-              Show all vehicles
-            </Typography>{' '}
+          <div className='flex items-center gap-4 text-sm font-gordita-medium'>
+            <span className=''>Show all vehicles</span>
+
             <span>
               <BsArrowRight />
             </span>

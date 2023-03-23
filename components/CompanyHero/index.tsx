@@ -24,20 +24,19 @@ const CompanyHero = ({ activePage }: CompanyHeroProps) => {
           buttonText='text-white'
           buttonHover='hover:bg-white'
           activePage={activePage}
+          navBackground='white'
         />
         <div className='mt-[250px] mb-6'>
-          <Typography as='h5' font='font-gordita-bold'>
+          <Typography as='h2' font='font-gordita-bold'>
             We want to transform the <br /> way Lagos moves
           </Typography>
         </div>
-        <div className='mb-6'>
-          <Typography as='small' font='font-gordita-regular'>
-            Lagos is a bustling city with millions of residents and visitors,
-            and we understand that getting around can be a <br /> challenge.
-            That&lsquo;s why we are dedicated to improving the transportation
-            infrastructure, services, and <br /> technologies in Lagos to make
-            them more efficient, reliable, and convenient for everyone.
-          </Typography>
+        <div className='mb-6 text-[20px] leading-[30px] font-gordita-regular'>
+          Lagos is a bustling city with millions of residents and visitors, and
+          we understand that getting around can be a <br /> challenge.
+          That&lsquo;s why we are dedicated to improving the transportation
+          infrastructure, services, and <br /> technologies in Lagos to make
+          them more efficient, reliable, and convenient for everyone.
         </div>
 
         <Button
@@ -46,10 +45,8 @@ const CompanyHero = ({ activePage }: CompanyHeroProps) => {
           textColor='text-white'
           width={false}
         >
-          <div className='flex items-center gap-4'>
-            <Typography as='xxsmall' font='font-gordita-medium'>
-              Get moving with us
-            </Typography>{' '}
+          <div className='flex items-center gap-4 text-sm font-gordita-medium'>
+            <span>Get moving with us</span>{' '}
             <span>
               <BsArrowRight />
             </span>

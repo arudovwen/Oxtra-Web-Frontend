@@ -22,12 +22,12 @@ const TrustedPartners = ({ marginBottom }: { marginBottom: string }) => {
     <Container marginBottom={marginBottom}>
       <div className='text-center text-brandGray-300 border-y py-[42px] border-[#B7DCBE]'>
         <div className=' mb-6'>
-          <Typography as='h2' font='font-gordita-bold'>
+          <Typography as='h3' font='font-gordita-bold'>
             Trusted Partners
           </Typography>
         </div>
         <div className=' mb-[46px]'>
-          <Typography as='xsmall' font='font-gordita-regular'>
+          <Typography as='p' font='font-gordita-regular'>
             The people we rely on to ensure you have a quality experience
             driving with us
           </Typography>

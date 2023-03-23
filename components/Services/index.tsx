@@ -40,7 +40,7 @@ const Services = () => {
   return (
     <div className=' text-center mb-[120px]'>
       <div className='text-brandGray-300 mb-12'>
-        <Typography as='h2' font='font-gordita-bold'>
+        <Typography as='h3' font='font-gordita-bold'>
           Our services
         </Typography>
       </div>
@@ -53,23 +53,20 @@ const Services = () => {
             >
               <span className='mb-[26px]'>{offer.icon}</span>
               <div className='mb-5'>
-                <Typography as='small' font='font-gordita-medium'>
+                <Typography as='h6' font='font-gordita-medium'>
                   {offer.title}
                 </Typography>
               </div>
-              <div className='mb-[21px]'>
-                <Typography as='xxsmall' font='font-gordita-regular'>
-                  {offer.description}
-                </Typography>
+              <div className='mb-[21px] font-gordita-regular text-[14px] leading-[21px]'>
+                {offer.description}
               </div>
               <span>
                 <Link
                   href={offer.link}
-                  className='text-brandGreen-300 flex items-center gap-4'
+                  className='text-brandGreen-300 text-sm font-gordita-medium flex items-center gap-4'
                 >
-                  <Typography as='xxsmall' font='font-gordita-medium'>
-                    {offer.linkText}
-                  </Typography>
+                  {offer.linkText}
+
                   <BsArrowRight />
                 </Link>
               </span>

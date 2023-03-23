@@ -16,22 +16,15 @@ module.exports = {
         'gordita-ultra': ['Gordita Ultra'],
       },
       fontSize: {
-        xxxs: ['12px', { lineHeight: '18px' }],
-        xxs: ['14px', { lineHeight: '14px' }],
-        xs: ['16px', { lineHeight: '16px' }],
-        xsL: ['16px', { lineHeight: '24px' }],
-        sm: ['20px', { lineHeight: '30px' }],
-        smL: ['20px', { lineHeight: '20px' }],
-        lg: ['24px', { lineHeight: '33px' }],
-        xl: ['56px', { lineHeight: '76.11px' }],
-
-        // // Headings H6 - H1
-        // '2xl': ['28px', { lineHeight: '38px', letterSpacing: '2px' }],
-        '3xl': ['32px', { lineHeight: '32px' }],
-        '4xl': ['40px', { lineHeight: '40px' }],
-        '4xlL': ['40px', { lineHeight: '54px' }],
-        // '5xl': ['56px', { lineHeight: '58px', letterSpacing: '2px' }],
-        // '6xl': ['78px', { lineHeight: '1' }],
+        xs: ['12px', { lineHeight: '18px' }],
+        sm: ['14px', { lineHeight: '14px' }],
+        base: ['16px', { lineHeight: '16px' }],
+        lg: ['20px', { lineHeight: '20px' }],
+        xl: ['24px', { lineHeight: '33px' }],
+        // Headings H6 - H1
+        '2xl': ['32px', { lineHeight: '32px' }],
+        '3xl': ['40px', { lineHeight: '40px' }],
+        '4xl': ['56px', { lineHeight: '76.11px' }],
       },
 
       colors: {

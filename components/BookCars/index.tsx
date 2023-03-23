@@ -81,33 +81,28 @@ const BookCars = () => {
           <div key={car.id} className='text-brandGray-300'>
             <Image src={car.image} width={290} height={198} alt={car.name} />
             <div className='bg-[#F4F6F8] p-4'>
-              <div className='mb-4'>
-                <Typography as='xxsmall' font='font-gordita-bold'>
-                  {car.name}
-                </Typography>
-              </div>
+              <h5 className='mb-4 text-sm font-gordita-bold'>{car.name}</h5>
               <div className='flex justify-between mb-4'>
-                <div className='text-brandGreen-300 flex gap-1 font-gordita-regular text-xxs'>
+                <div className='text-brandGreen-300 flex gap-1 font-gordita-regular text-sm'>
                   <HiOutlineLocationMarker />
                   {car.location}
                 </div>
-                <span className='font-gordita-regular text-xxs'>
+                <span className='font-gordita-regular text-base'>
                   N{car.price}/hour
                 </span>
               </div>
 
-              <div className='text-white'>
-                <Button
-                  bg='bg-brandGreen-300'
-                  link='/'
-                  hover='hover:bg-white'
-                  width={true}
-                >
-                  <Typography as='xsmall' font='font-gordita-regular'>
-                    Book now
-                  </Typography>
-                </Button>
-              </div>
+              <Button
+                bg='bg-brandGreen-300'
+                link='/'
+                hover='hover:bg-white'
+                width={true}
+                textColor='text-white'
+              >
+                <span className='text-center gap-4 text-sm font-gordita-medium'>
+                  Book now
+                </span>
+              </Button>
             </div>
           </div>
         );

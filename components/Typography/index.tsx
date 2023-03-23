@@ -1,38 +1,15 @@
 import React from 'react';
 
-type Type =
-  | 'h1'
-  | 'h2'
-  | 'h2L'
-  | 'h3'
-  | 'h4'
-  | 'h5'
-  | 'h6'
-  | 'p'
-  | 'p2'
-  | 'small'
-  | 'smallL'
-  | 'xsmall'
-  | 'xsmallL'
-  | 'xxsmall'
-  | 'xxxsmall';
+type Type = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p';
 
 const VARIANT_Styles: Record<Type, string> = {
   h1: 'text-5xl',
   h2: 'text-4xl',
-  h2L: 'text-4xlL',
   h3: 'text-3xl',
   h4: 'text-2xl',
   h5: 'text-xl',
   h6: 'text-lg',
   p: 'text-base',
-  p2: 'text-base2',
-  small: 'text-sm',
-  smallL: 'text-smL',
-  xsmall: 'text-xs',
-  xsmallL: 'text-xsL',
-  xxsmall: 'text-xxs',
-  xxxsmall: 'text-xxxs',
 };
 type Font =
   | 'font-gordita-regular'

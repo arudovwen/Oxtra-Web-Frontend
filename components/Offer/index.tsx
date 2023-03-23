@@ -43,10 +43,8 @@ const Offer = () => {
   return (
     <Container>
       <div className='mt-[234px] text-center mb-[200px]'>
-        <div className='text-brandGray-300 mb-20'>
-          <Typography as='h2' font='font-gordita-bold'>
-            What we offer
-          </Typography>
+        <div className='text-brandGray-300 mb-20 font-gordita-bold text-[56px] leading-[56px]'>
+          What we offer
         </div>
         <div className='flex gap-10 items-center'>
           {offers.map((offer) => {
@@ -64,26 +62,22 @@ const Offer = () => {
                 />
 
                 <div className='my-6 text-brandGray-300'>
-                  <Typography as='small' font='font-gordita-medium'>
+                  <Typography as='h6' font='font-gordita-medium'>
                     {offer.title}
                   </Typography>
                 </div>
-                <div className='mb-6 text-brandGray-100'>
-                  <Typography as='xxsmall' font='font-gordita-regular'>
-                    {offer.description}
-                  </Typography>
+                <div className='mb-6 text-[14px] leading-[21px] font-gordita-regular text-brandGray-100'>
+                  {offer.description}
                 </div>
-                <span>
+                <div>
                   <Link
                     href={offer.link}
-                    className='text-brandGreen-300 flex items-center gap-4'
+                    className='text-brandGreen-300 text-sm font-gordita-medium flex items-center gap-4'
                   >
-                    <Typography as='xxsmall' font='font-gordita-medium'>
-                      {offer.linkText}
-                    </Typography>
+                    <span>{offer.linkText}</span>
                     <BsArrowRight />
                   </Link>
-                </span>
+                </div>
               </div>
             );
           })}

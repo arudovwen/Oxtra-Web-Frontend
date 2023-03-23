@@ -5,6 +5,7 @@ import logoA from '../../public/assets/logoA.png';
 import logoB from '../../public/assets/logoB.png';
 import Typography from '../Typography';
 import Button from '../Button';
+import logo2 from '../../public/assets/Asset 3.png';
 
 const navigation = [
   { name: 'Rent a vehicle', href: '/rent-a-vehicle' },
@@ -12,7 +13,7 @@ const navigation = [
   { name: 'Company', href: '/company' },
   { name: 'FAQ', href: '/' },
   { name: 'Login', href: '/' },
-  { name: 'Sign Up', href: '/' },
+  { name: 'Sign Up', href: '/signup' },
 ];
 
 interface NavigationProps {
@@ -22,6 +23,7 @@ interface NavigationProps {
   buttonText: string;
   buttonHover: string;
   activePage: string;
+  navBackground: string;
 }
 
 const Navigation = ({
@@ -31,35 +33,49 @@ const Navigation = ({
   buttonText,
   buttonHover,
   activePage,
+  navBackground,
 }: NavigationProps) => {
   return (
     <div className='flex justify-between items-center '>
-      <Link href='/' className='flex gap-[9.17px] items-center pt-6'>
-        <div>
+      {navBackground === 'green' ? (
+        <Link href='/' className='flex gap-[9.17px] items-center pt-6'>
+          <div>
+            <Image
+              src={logoA}
+              alt='logo'
+              className='object-cover'
+              width={30}
+              height={30}
+            />
+          </div>
+          <div>
+            <Image
+              src={logoB}
+              alt='logo'
+              width={111}
+              height={48}
+              className='object-cover'
+            />
+          </div>
+        </Link>
+      ) : (
+        <Link href='/' className='pt-6'>
           <Image
-            src={logoA}
-            alt='logo'
-            className='object-cover'
-            width={30}
-            height={30}
-          />
-        </div>
-        <div>
-          <Image
-            src={logoB}
+            src={logo2}
             alt='logo'
             width={111}
             height={48}
             className='object-cover'
           />
-        </div>
-      </Link>
+        </Link>
+      )}
+
       <div className='flex gap-10 items-center pt-10 z-10'>
         {navigation.map((nav) => {
           const { name, href } = nav;
           if (name !== 'Sign Up') {
             return (
-              <Typography key={name} as='xsmall' font='font-gordita-regular'>
+              <Typography key={name} as='p' font='font-gordita-regular'>
                 <Link
                   href={href}
                   className={`${color}  pb-1 ${hover} duration-300 ${
@@ -76,11 +92,11 @@ const Navigation = ({
               <div key={name} className={`${buttonText}`}>
                 <Button
                   bg={buttonBg}
-                  link='/'
+                  link={href}
                   hover={buttonHover}
                   width={false}
                 >
-                  <Typography as='xsmall' font='font-gordita-regular'>
+                  <Typography as='p' font='font-gordita-regular'>
                     {' '}
                     {name}
                   </Typography>

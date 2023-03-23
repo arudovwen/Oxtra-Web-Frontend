@@ -8,26 +8,30 @@ const inputClasses = classNames(
   'px-2 py-2 border border-[#d4d6d8] mt-3  w-full'
 );
 
+const labelClasses = classNames(
+  'font-gordita-medium text-brandGray-300 text-sm'
+);
+
 const FindPreferredCar = () => {
   return (
     <div className='flex justify-center mb-[234px]'>
       <div className='bg-white absolute box-shadow w-[1164px] top-[529px]  p-6'>
         <div>
           <div className='text-brandGray-300 mb-[26px]'>
-            <Typography as='h6' font='font-gordita-medium'>
+            <Typography as='h5' font='font-gordita-medium'>
               Find your preferred car now
             </Typography>
           </div>
           <div className='flex gap-[26px] mb-[26px]'>
             <div className='text-brandGreen-300 flex items-center gap-2.5'>
               <ImIcoMoon />
-              <Typography as='xsmall' font='font-gordita-medium'>
+              <Typography as='p' font='font-gordita-medium'>
                 Daily trip
               </Typography>
             </div>
             <div className='text-brandGray-100 flex items-center gap-2.5'>
               <ImIcoMoon />
-              <Typography as='xsmall' font='font-gordita-regular'>
+              <Typography as='p' font='font-gordita-regular'>
                 Hourly trip
               </Typography>
             </div>
@@ -40,10 +44,8 @@ const FindPreferredCar = () => {
           className='flex gap-5'
         >
           <div className='w-[37%]'>
-            <label htmlFor='Pick up location' className='text-brandGray-300'>
-              <Typography as='xxsmall' font='font-gordita-medium'>
-                Pick up location
-              </Typography>
+            <label htmlFor='Pick up location' className={labelClasses}>
+              Pick up location
             </label>
             <input
               type='text'
@@ -52,10 +54,8 @@ const FindPreferredCar = () => {
             />
           </div>
           <div className='w-[20%]'>
-            <label htmlFor='pick up Date' className='text-brandGray-300'>
-              <Typography as='xxsmall' font='font-gordita-medium'>
-                Pick up Date
-              </Typography>
+            <label htmlFor='pick up Date' className={labelClasses}>
+              Pick up Date
             </label>
             <input
               type='date'
@@ -65,26 +65,20 @@ const FindPreferredCar = () => {
             />
           </div>
           <div>
-            <label htmlFor='Time' className='text-brandGray-300'>
-              <Typography as='xxsmall' font='font-gordita-medium'>
-                Time
-              </Typography>
+            <label htmlFor='Time' className={labelClasses}>
+              Time
             </label>
             <input type='time' className={inputClasses} name='Time' />
           </div>
           <div className='w-[13%]'>
-            <label htmlFor='Number of Days' className='text-brandGray-300'>
-              <Typography as='xxsmall' font='font-gordita-medium'>
-                Number of Days
-              </Typography>
+            <label htmlFor='Number of Days' className={labelClasses}>
+              Number of Days
             </label>
             <input type='number' className={inputClasses} />
           </div>
           <div className='w-[20%]'>
-            <label htmlFor='Return Date & Time' className='text-brandGray-300'>
-              <Typography as='xxsmall' font='font-gordita-medium'>
-                Return Date & Time
-              </Typography>
+            <label htmlFor='Return Date & Time' className={labelClasses}>
+              Return Date & Time
             </label>
             <input
               type='datetime-local'
