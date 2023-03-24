@@ -9,13 +9,9 @@ import seats from '../public/assets/seats.png';
 import classNames from 'classnames';
 import ac from '../public/assets/ac.png';
 import Button from '@/components/Button';
-import Offer from '@/components/Offer';
-import { link } from 'fs';
-import AlterFooter from '@/components/Footer/alterFooter';
-
-const commonClasses = classNames(
-  `text-base flex gap-[13.33px] mb-4 text-brandGreen-300 font-gordita-medium`
-);
+import AlterFooter from '@/components/Footer/AlterFooter';
+import auto from '../public/assets/automatic.png';
+import fuel from '../public/assets/GasPump.png';
 
 const blockClasses = classNames(
   `border   border-[#d4d6d8] p-5 rounded-lg mb-[24px]`
@@ -48,6 +44,25 @@ const offers = [
   },
   {
     name: 'Includes Unlimited Free Kilometers',
+  },
+];
+
+const carFeatures = [
+  {
+    feature: '5 Seats',
+    icon: seats,
+  },
+  {
+    feature: 'Automatic',
+    icon: auto,
+  },
+  {
+    feature: 'Air conditioning',
+    icon: ac,
+  },
+  {
+    feature: 'Fuel Unlimited',
+    icon: fuel,
   },
 ];
 
@@ -97,22 +112,22 @@ const SingleCar = () => {
                     Honda CR-V (2015)
                   </Typography>
                 </div>
-                <div className={commonClasses}>
-                  <Image src={seats} alt='seats' width={12.14} height={13.33} />
-                  <span>5 Seats</span>
-                </div>
-                <div className={commonClasses}>
-                  <Image src={seats} alt='seats' width={12.14} height={13.33} />
-                  <span>Automatic</span>
-                </div>
-                <div className={commonClasses}>
-                  <Image src={ac} alt='ac' width={12.14} height={13.33} />
-                  <span>Air conditioning</span>
-                </div>
-                <div className={commonClasses}>
-                  <Image src={seats} alt='seats' width={12.14} height={13.33} />
-                  <span>Fuel Unlimited</span>
-                </div>
+                {carFeatures.map((feature) => {
+                  return (
+                    <div
+                      key={feature.feature}
+                      className='text-base flex gap-[13.33px] mb-4 text-brandGreen-300 font-gordita-medium'
+                    >
+                      <Image
+                        src={feature.icon}
+                        alt={feature.feature}
+                        width={12.14}
+                        height={13.33}
+                      />
+                      <span>{feature.feature}</span>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </div>
@@ -230,8 +245,9 @@ const SingleCar = () => {
               hover='hover:bg-brandGray-200'
               textColor='text-white'
               width={true}
+              size='text-sm'
             >
-              <span className=' text-sm font-gordita-medium'>Continue</span>
+              Continue
             </Button>
           </div>
         </div>

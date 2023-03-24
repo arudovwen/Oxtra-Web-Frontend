@@ -9,7 +9,7 @@ import logo2 from '../../public/assets/Asset 3.png';
 
 const navigation = [
   { name: 'Rent a vehicle', href: '/rent-a-vehicle' },
-  { name: 'Put up your vehicle', href: '/' },
+  { name: 'Put up your vehicle', href: '/put-up-your-vehicle' },
   { name: 'Company', href: '/company' },
   { name: 'FAQ', href: '/' },
   { name: 'Login', href: '/' },
@@ -75,7 +75,7 @@ const Navigation = ({
           const { name, href } = nav;
           if (name !== 'Sign Up') {
             return (
-              <Typography key={name} as='p' font='font-gordita-regular'>
+              <Typography key={name} as='p' font='font-gordita-medium'>
                 <Link
                   href={href}
                   className={`${color}  pb-1 ${hover} duration-300 ${
@@ -95,11 +95,9 @@ const Navigation = ({
                   link={href}
                   hover={buttonHover}
                   width={false}
+                  size='text-base'
                 >
-                  <Typography as='p' font='font-gordita-regular'>
-                    {' '}
-                    {name}
-                  </Typography>
+                  {name}
                 </Button>
               </div>
             );

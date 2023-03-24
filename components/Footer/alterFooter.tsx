@@ -20,7 +20,7 @@ const footerLinks = [
     href: '/',
   },
   {
-    name: 'Insurace Policy',
+    name: 'Insurance Policy',
     href: '/',
   },
 ];

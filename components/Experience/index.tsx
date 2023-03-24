@@ -31,8 +31,9 @@ const Experience = ({ marginBottom }: { marginBottom: string }) => {
             hover='hover:bg-brandGreen-300'
             textColor='text-[#444648]'
             width={false}
+            size='text-sm'
           >
-            <div className='flex items-center gap-4 text-sm font-gordita-medium'>
+            <div className='flex items-center gap-4'>
               <span>Find a vehicle</span>{' '}
               <span>
                 <BsArrowRight />

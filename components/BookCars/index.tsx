@@ -98,10 +98,9 @@ const BookCars = () => {
                 hover='hover:bg-white'
                 width={true}
                 textColor='text-white'
+                size='text-sm'
               >
-                <span className='text-center gap-4 text-sm font-gordita-medium'>
-                  Book now
-                </span>
+                <span className='text-center gap-4'>Book now</span>
               </Button>
             </div>
           </div>

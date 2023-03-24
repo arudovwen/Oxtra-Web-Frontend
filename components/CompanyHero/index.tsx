@@ -44,8 +44,9 @@ const CompanyHero = ({ activePage }: CompanyHeroProps) => {
           hover='hover:bg-brandGray-200'
           textColor='text-white'
           width={false}
+          size='text-sm'
         >
-          <div className='flex items-center gap-4 text-sm font-gordita-medium'>
+          <div className='flex items-center gap-4'>
             <span>Get moving with us</span>{' '}
             <span>
               <BsArrowRight />

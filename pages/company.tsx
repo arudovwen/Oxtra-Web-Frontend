@@ -7,12 +7,9 @@ import PassiveIncome from '@/components/PassiveIncome';
 import Experience from '@/components/Experience';
 import Footer from '@/components/Footer';
 import Image from 'next/image';
-import cloud from '../public/assets/backCar.png';
 import pink from '../public/assets/pink.png';
 import blue from '../public/assets/blue.png';
-
 import halfCar from '../public/assets/heroCar.png';
-
 import backcar from '../public/assets/Rectangle 100.png';
 import Container from '@/components/Container';
 
@@ -21,7 +18,7 @@ const Company = () => {
   const margin = 'mb-[200px]';
 
   return (
-    <div className='relative overflow-hidden'>
+    <div className='overflow-hidden'>
       <CompanyHero activePage={activePage} />
       <Offer />
       <TrustedPartners marginBottom={margin} />
@@ -84,7 +81,7 @@ const Company = () => {
             width={750}
             height={750}
             alt='pink'
-            className='bottom-[242rem] absolute right-[-320px]'
+            className='bottom-[3872px] absolute right-[-320px]'
           />
         </div>
       </Container>
