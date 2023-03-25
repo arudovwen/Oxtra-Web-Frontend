@@ -75,7 +75,7 @@ const Navigation = ({
           const { name, href } = nav;
           if (name !== 'Sign Up') {
             return (
-              <Typography key={name} as='p' font='font-gordita-medium'>
+              <Typography key={name} as='p' font='font-gordita-regular'>
                 <Link
                   href={href}
                   className={`${color}  pb-1 ${hover} duration-300 ${

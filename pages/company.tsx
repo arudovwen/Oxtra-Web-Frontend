@@ -74,14 +74,14 @@ const Company = () => {
             width={500}
             height={500}
             alt='pink'
-            className='bottom-[3987px] absolute right-[-432px]'
+            className='top-[-4355px] absolute right-[-432px]'
           />
           <Image
             src={pink}
             width={750}
             height={750}
             alt='pink'
-            className='bottom-[3872px] absolute right-[-320px]'
+            className='top-[-4576px] absolute right-[-320px]'
           />
         </div>
       </Container>

@@ -16,7 +16,7 @@ interface CompanyHeroProps {
 const CompanyHero = ({ activePage }: CompanyHeroProps) => {
   return (
     <Container>
-      <div className='text-brandGray-300 text-center relative overflow-cli'>
+      <div className='text-brandGray-300 text-center relative'>
         <Navigation
           color='text-brandGray-300'
           hover='hover:text-brandGreen-300'
@@ -61,19 +61,20 @@ const CompanyHero = ({ activePage }: CompanyHeroProps) => {
           alt='cloud'
           className='top-[80px] absolute left-0'
         />
+
         <Image
           src={car}
           width={300}
           height={200}
-          alt='blue'
-          className='top-[39rem] absolute right-[8rem]'
+          alt='car'
+          className='top-[624px] absolute right-[128px]'
         />
         <Image
           src={moneyBag}
           width={200}
           height={200}
           alt='money bag'
-          className='top-[100rem] absolute left-[-3rem] '
+          className='top-[1600px] absolute left-[-48px] '
         />
       </div>
     </Container>

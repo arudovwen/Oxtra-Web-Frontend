@@ -12,6 +12,7 @@ import Button from '@/components/Button';
 import AlterFooter from '@/components/Footer/AlterFooter';
 import auto from '../public/assets/automatic.png';
 import fuel from '../public/assets/GasPump.png';
+import { useRouter } from 'next/router';
 
 const blockClasses = classNames(
   `border   border-[#d4d6d8] p-5 rounded-lg mb-[24px]`
@@ -68,6 +69,9 @@ const carFeatures = [
 
 const SingleCar = () => {
   const activePage = 'singlecar';
+
+  const router = useRouter();
+
   return (
     <div>
       <Container>
@@ -85,10 +89,13 @@ const SingleCar = () => {
           className='text-brandGray-500 flex items-center mb-5 gap-[399px] mt-8
 '
         >
-          <div className='flex items-center gap-2'>
-            <AiOutlineArrowLeft />
+          <span
+            className='cursor-pointer text-sm font-gordita-medium flex items-center gap-2'
+            onClick={() => router.back()}
+          >
+            <AiOutlineArrowLeft className='text-brandGray-500  w-[22px] h-[22px]' />
             Back
-          </div>
+          </span>
           <div>
             <Typography as='h4' font='font-gordita-bold'>
               Trip Breakdown

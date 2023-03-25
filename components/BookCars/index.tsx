@@ -13,7 +13,7 @@ const cars = [
     image: honda,
     location: 'Lagos',
     price: 4680,
-    link: '/',
+    link: '/singlecar',
   },
   {
     id: 2,
@@ -21,7 +21,7 @@ const cars = [
     image: honda,
     location: 'Lagos',
     price: 4680,
-    link: '/',
+    link: '/singlecar',
   },
   {
     id: 3,
@@ -29,7 +29,7 @@ const cars = [
     image: honda,
     location: 'Lagos',
     price: 4680,
-    link: '/',
+    link: '/singlecar',
   },
   {
     id: 4,
@@ -37,7 +37,7 @@ const cars = [
     image: honda,
     location: 'Lagos',
     price: 4680,
-    link: '/',
+    link: '/singlecar',
   },
   {
     id: 5,
@@ -45,7 +45,7 @@ const cars = [
     image: honda,
     location: 'Lagos',
     price: 4680,
-    link: '/',
+    link: '/singlecar',
   },
   {
     id: 6,
@@ -53,7 +53,7 @@ const cars = [
     image: honda,
     location: 'Lagos',
     price: 4680,
-    link: '/',
+    link: '/singlecar',
   },
   {
     id: 7,
@@ -61,7 +61,7 @@ const cars = [
     image: honda,
     location: 'Lagos',
     price: 4680,
-    link: '/',
+    link: '/singlecar',
   },
   {
     id: 8,
@@ -69,7 +69,7 @@ const cars = [
     image: honda,
     location: 'Lagos',
     price: 4680,
-    link: '/',
+    link: '/singlecar',
   },
 ];
 
@@ -94,7 +94,7 @@ const BookCars = () => {
 
               <Button
                 bg='bg-brandGreen-300'
-                link='/'
+                link={car.link}
                 hover='hover:bg-white'
                 width={true}
                 textColor='text-white'

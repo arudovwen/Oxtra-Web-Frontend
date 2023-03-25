@@ -2,6 +2,7 @@ import React from 'react';
 import Typography from '../Typography';
 import classNames from 'classnames';
 import Button from '../Button';
+import { useRouter } from 'next/router';
 
 const labelClasses = classNames(
   'block text-[14px] leading-[14px] font-gordita-medium text-brandGray-300'
@@ -24,6 +25,13 @@ const vehicleFeatures = [
 ];
 
 const VehicleInformationForm = () => {
+  const router = useRouter();
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    router.push('/put-up-your-vehicle/documents');
+  };
+
   return (
     <main className='mx-auto  max-w-[500px] lg:min-h-full  lg:overflow-hidden'>
       <div className='mb-4 mt-[40px] text-brandGray-300'>
@@ -39,7 +47,7 @@ const VehicleInformationForm = () => {
 
       <section className='flex-auto'>
         <div className=''>
-          <form className='mt-6'>
+          <form className='mt-6' onSubmit={handleSubmit}>
             <div className='grid grid-cols-12 gap-y-6 gap-x-4'>
               <div className='col-span-8 md:col-span-6'>
                 <label htmlFor='expiration-date' className={labelClasses}>
@@ -50,6 +58,7 @@ const VehicleInformationForm = () => {
                     type='text'
                     placeholder='First name'
                     className={inputClasses}
+                    required
                   />
                 </div>
               </div>
@@ -63,6 +72,7 @@ const VehicleInformationForm = () => {
                     type='text'
                     placeholder='Last name'
                     className={inputClasses}
+                    required
                   />
                 </div>
               </div>
@@ -72,7 +82,7 @@ const VehicleInformationForm = () => {
                   Year
                 </label>
                 <div className='mt-1'>
-                  <input type='number' className={inputClasses} />
+                  <input type='number' required className={inputClasses} />
                 </div>
               </div>
               <div className='col-span-4 md:col-span-6'>
@@ -80,7 +90,7 @@ const VehicleInformationForm = () => {
                   Transmision
                 </label>
                 <div className='mt-1'>
-                  <input type='text' className={inputClasses} />
+                  <input type='text' required className={inputClasses} />
                 </div>
               </div>
 
@@ -89,7 +99,7 @@ const VehicleInformationForm = () => {
                   Color
                 </label>
                 <div className='mt-1'>
-                  <input type='text' className={inputClasses} />
+                  <input type='text' required className={inputClasses} />
                 </div>
               </div>
 
@@ -98,27 +108,25 @@ const VehicleInformationForm = () => {
                   Plate number
                 </label>
                 <div className='mt-1'>
-                  <input type='text' className={inputClasses} />
+                  <input type='text' required className={inputClasses} />
                 </div>
               </div>
             </div>
 
-            <div className='mt-6 flex gap-[21px] mb-[35.5px]'>
-              <div className='flex h-5 gap-2 items-center'>
-                {vehicleFeatures.map((feat) => {
-                  return (
-                    <div
-                      key={feat.name}
-                      className='flex h-5 gap-[8px] items-center'
-                    >
-                      <input name={feat.name} type='checkbox' className='' />
-                      <span className='text-[12px]  leading-[20px] text-brandGray-300 font-gordita-regular'>
-                        {feat.name}
-                      </span>
-                    </div>
-                  );
-                })}
-              </div>
+            <div className='flex h-5 gap-[21px] my-8 items-center'>
+              {vehicleFeatures.map((feat) => {
+                return (
+                  <div
+                    key={feat.name}
+                    className='flex h-5 gap-[8px] items-center'
+                  >
+                    <input name={feat.name} type='checkbox' className='' />
+                    <span className='text-[12px]  leading-[20px] text-brandGray-300 font-gordita-regular'>
+                      {feat.name}
+                    </span>
+                  </div>
+                );
+              })}
             </div>
             <div>DRAG AND DROP COMPONENENT</div>
             <Button
@@ -127,6 +135,7 @@ const VehicleInformationForm = () => {
               textColor='text-white'
               width={true}
               size='text-sm'
+              type='submit'
             >
               Next
             </Button>
