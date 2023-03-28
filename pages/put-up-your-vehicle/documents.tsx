@@ -1,5 +1,5 @@
 import React from 'react';
-import PutUpYourVehicleLayout from '@/components/Layout/PutUpYourVehicleLayout';
+import PutUpYourVehicleLayout from '@/components/Layouts/PutUpYourVehicleLayout';
 import DocumentForm from '@/components/Forms/DocumentForm';
 
 const Document = () => {

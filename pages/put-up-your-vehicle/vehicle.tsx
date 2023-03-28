@@ -1,5 +1,5 @@
 import React from 'react';
-import PutUpYourVehicleLayout from '@/components/Layout/PutUpYourVehicleLayout';
+import PutUpYourVehicleLayout from '@/components/Layouts/PutUpYourVehicleLayout';
 import VehicleInformationForm from '@/components/Forms/VehicleInformationForm';
 
 const Vehicle = () => {

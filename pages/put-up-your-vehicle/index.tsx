@@ -3,7 +3,7 @@ import Navigation from '@/components/Navigation';
 import Container from '@/components/Container';
 import LeaseCarSignUp from '@/components/Forms/LeaseCarSignUpForm';
 import AlterFooter from '@/components/Footer/AlterFooter';
-import PutUpYourVehicleLayout from '@/components/Layout/PutUpYourVehicleLayout';
+import PutUpYourVehicleLayout from '@/components/Layouts/PutUpYourVehicleLayout';
 
 const PutUpVehicle = () => {
   const putYourVehicleLayoutActivePage = 'Basic information';
