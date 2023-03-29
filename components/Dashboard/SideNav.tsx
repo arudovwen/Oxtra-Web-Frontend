@@ -1,12 +1,12 @@
 import React from 'react';
 import Link from 'next/link';
 
-const navigation = [
+const sideNav = [
   { name: 'Rent a vehicle', href: '/dashboard' },
   { name: 'Courier service', href: '/dashboard/courier-service' },
-  { name: 'Lease vehicle', href: '/company' },
-  { name: 'Profile', href: '/' },
-  { name: 'Password', href: '/' },
+  { name: 'Lease vehicle', href: '/dashboard/lease-vehicle' },
+  { name: 'Profile', href: '/dashboard/profile' },
+  { name: 'Password', href: '/dashboard/password' },
 ];
 
 interface SideNavProps {
@@ -17,7 +17,7 @@ const SideNav = ({ activePage }: SideNavProps) => {
   return (
     <div className='flex flex-col gap-[60px] font-gordita-regular'>
       <div className='flex flex-col gap-6'>
-        {navigation.map((nav) => {
+        {sideNav.map((nav) => {
           return (
             <Link
               href={nav.href}
