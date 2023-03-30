@@ -15,10 +15,10 @@ const PassiveIncome = ({ marginBottom }: { marginBottom: string }) => {
           width={400}
           height={400}
           alt='passive income'
-          className='object-cover rounded-lg'
+          className='object-cover rounded-lg z-50'
         />
 
-        <div className='w-[400px]'>
+        <div className='w-[400px] z-10'>
           <div className='mb-6 text-brandGray-300 text-[40px] leading-[54.4px] font-gordita-bold '>
             Earn passive income with your vehicle
           </div>

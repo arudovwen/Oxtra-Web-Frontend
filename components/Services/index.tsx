@@ -49,7 +49,7 @@ const Services = () => {
           return (
             <div
               key={offer.title}
-              className={`flex flex-col rounded items-center pt-[33px] px-[25px] pb-[25px] ${offer.background}`}
+              className={`flex flex-col rounded items-center pt-[33px] z-10 px-[25px] pb-[25px] ${offer.background}`}
             >
               <span className='mb-[26px]'>{offer.icon}</span>
               <div className='mb-5'>

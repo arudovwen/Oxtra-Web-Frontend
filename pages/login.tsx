@@ -1,12 +1,11 @@
-import React from 'react';
 import Navigation from '@/components/Navigation';
 import Container from '@/components/Container';
-import SignUpForm from '@/components/Forms/SignUpForm';
+import React from 'react';
+import LoginForm from '@/components/Forms/LoginForm';
 import AlterFooter from '@/components/Footers/AlterFooter';
 
-const SignUp = () => {
-  const activePage = '';
-
+const Login = () => {
+  const activePage = 'Login';
   return (
     <div>
       <Container>
@@ -19,11 +18,12 @@ const SignUp = () => {
           activePage={activePage}
           navBackground='white'
         />
-        <SignUpForm />
+
+        <LoginForm />
       </Container>
       <AlterFooter />
     </div>
   );
 };
 
-export default SignUp;
+export default Login;

@@ -46,12 +46,12 @@ const Offer = () => {
         <div className='text-brandGray-300 mb-20 font-gordita-bold text-[56px] leading-[56px]'>
           What we offer
         </div>
-        <div className='flex gap-10 items-center'>
+        <div className='flex gap-10 items-center '>
           {offers.map((offer) => {
             return (
               <div
                 key={offer.title}
-                className={`flex ${offer.height} w-full flex-col rounded-xl items-center p-6 border border-[#d4d6d8]`}
+                className={`flex ${offer.height} z-50 w-full flex-col rounded-xl items-center p-6 border border-[#d4d6d8]`}
               >
                 <Image
                   src={offer.image}

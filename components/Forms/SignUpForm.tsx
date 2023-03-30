@@ -2,6 +2,8 @@ import React from 'react';
 import Typography from '../Typography';
 import classNames from 'classnames';
 import Button from '../Button';
+import { AiOutlineEyeInvisible, AiOutlineEye } from 'react-icons/ai';
+import { useState } from 'react';
 
 const labelClasses = classNames(
   'block text-[14px] leading-[14px] font-gordita-medium text-brandGray-300'
@@ -12,6 +14,8 @@ const inputClasses = classNames(
 );
 
 const SignUpForm = () => {
+  const [enterPasswordHidden, setEnterPasswordHidden] = useState(true);
+
   return (
     <main className='mx-auto  max-w-[500px] lg:min-h-full  lg:overflow-hidden'>
       <div className='mb-4 mt-[40px] text-brandGray-300'>
@@ -55,6 +59,34 @@ const SignUpForm = () => {
                     placeholder='Enter your email address'
                     className={inputClasses}
                   />
+                </div>
+              </div>
+              <div className='col-span-full'>
+                <label htmlFor='email-address' className={labelClasses}>
+                  Enter password
+                </label>
+                <div className='mt-1 relative'>
+                  <input
+                    type={`${enterPasswordHidden ? 'password' : 'text'}`}
+                    placeholder='Enter password'
+                    className={inputClasses}
+                  />
+
+                  {enterPasswordHidden ? (
+                    <AiOutlineEyeInvisible
+                      className='absolute top-[24px] right-[12px]'
+                      onClick={() =>
+                        setEnterPasswordHidden(!enterPasswordHidden)
+                      }
+                    />
+                  ) : (
+                    <AiOutlineEye
+                      className='absolute top-[24px] right-[12px]'
+                      onClick={() =>
+                        setEnterPasswordHidden(!enterPasswordHidden)
+                      }
+                    />
+                  )}
                 </div>
               </div>
 
@@ -131,9 +163,7 @@ const SignUpForm = () => {
               width={true}
               size='text-sm'
             >
-            
-                Create Account
-            
+              Create Account
             </Button>
           </form>
         </div>

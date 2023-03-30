@@ -2,7 +2,7 @@ import React from 'react';
 import Navigation from '../Dashboard/Navigation';
 import DashbordHeader from '../Dashboard/DashbordHeader';
 import SideNav from '../Dashboard/SideNav';
-import AlterFooter from '../Footer/AlterFooter';
+import AlterFooter from '../Footers/AlterFooter';
 
 interface DashboardLayoutProps {
   children: React.ReactNode;

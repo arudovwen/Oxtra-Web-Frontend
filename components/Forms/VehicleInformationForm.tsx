@@ -34,7 +34,7 @@ const VehicleInformationForm = () => {
 
   return (
     <main className='mx-auto  max-w-[500px] lg:min-h-full  lg:overflow-hidden'>
-      <div className='mb-4 mt-[40px] text-brandGray-300'>
+      <div className='mb-4  text-brandGray-300'>
         <Typography as='h4' font='font-gordita-medium'>
           Vehicle information
         </Typography>

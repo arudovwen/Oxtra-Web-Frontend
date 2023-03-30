@@ -5,7 +5,7 @@ import Typography from '@/components/Typography';
 import Search from '@/components/Search';
 import BookCars from '@/components/BookCars';
 import Services from '@/components/Services';
-import Footer from '@/components/Footer';
+import Footer from '@/components/Footers';
 
 const RentVehicle = () => {
   const activePage = 'Rent a vehicle';

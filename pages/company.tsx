@@ -5,7 +5,7 @@ import TrustedPartners from '@/components/TrustedPartners';
 import Team from '@/components/Team';
 import PassiveIncome from '@/components/PassiveIncome';
 import Experience from '@/components/Experience';
-import Footer from '@/components/Footer';
+import Footer from '@/components/Footers';
 import Image from 'next/image';
 import pink from '../public/assets/pink.png';
 import blue from '../public/assets/blue.png';
@@ -35,7 +35,7 @@ const Company = () => {
             width={1400}
             height={1400}
             alt='blue'
-            className='bottom-[3216px] absolute left-[-736px]'
+            className='bottom-[3216px] absolute left-[-736px] opacity-70'
           />
           <Image
             src={backcar}
@@ -51,14 +51,14 @@ const Company = () => {
             height={750}
             alt='blue'
             className='bottom-[2400px]
-          absolute right-[-352px]'
+          absolute right-[-352px] opacity-70'
           />
           <Image
             src={pink}
             width={750}
             height={750}
             alt='pink'
-            className='bottom-[1248px] absolute right-[-304px]'
+            className='bottom-[1248px] absolute right-[-304px] opacity-70'
           />
 
           <Image
@@ -66,7 +66,7 @@ const Company = () => {
             width={750}
             height={750}
             alt='blue'
-            className='bottom-[1008px] absolute left-[-304px]'
+            className='bottom-[1602px] absolute left-[-304px] opacity-70'
           />
 
           <Image
@@ -81,7 +81,7 @@ const Company = () => {
             width={750}
             height={750}
             alt='pink'
-            className='top-[-4576px] absolute right-[-320px]'
+            className='top-[-4576px] absolute right-[-320px] opacity-70'
           />
         </div>
       </Container>

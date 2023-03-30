@@ -5,7 +5,11 @@ interface ContainerProps {
 
 const Container = ({ children, marginBottom }: ContainerProps) => {
   return (
-    <div className={`max-w-[1192px]  mx-auto ${marginBottom}`}>{children}</div>
+    <div
+      className={`max-w-[1192px] flex-col flex grow mx-auto ${marginBottom}`}
+    >
+      {children}
+    </div>
   );
 };
 

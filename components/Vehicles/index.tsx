@@ -72,7 +72,13 @@ const Vehicles = () => {
           {placeholders.map((v, index) => {
             return (
               <div key={index}>
-                <Image src={v.car} alt='car' height={200} width={600} />
+                <Image
+                  src={v.car}
+                  alt='car'
+                  height={200}
+                  width={600}
+                  className='z-50'
+                />
               </div>
             );
           })}

@@ -12,7 +12,7 @@ const navigation = [
   { name: 'Put up your vehicle', href: '/put-up-your-vehicle' },
   { name: 'Company', href: '/company' },
   { name: 'FAQ', href: '/' },
-  { name: 'Login', href: '/' },
+  { name: 'Login', href: '/login' },
   { name: 'Sign Up', href: '/signup' },
 ];
 
@@ -36,9 +36,9 @@ const Navigation = ({
   navBackground,
 }: NavigationProps) => {
   return (
-    <div className='flex justify-between items-center '>
+    <div className='flex justify-between items-center'>
       {navBackground === 'green' ? (
-        <Link href='/' className='flex gap-[9.17px] items-center pt-6'>
+        <Link href='/' className='flex gap-[9.17px] items-center z-10 pt-6'>
           <div>
             <Image
               src={logoA}
@@ -59,7 +59,7 @@ const Navigation = ({
           </div>
         </Link>
       ) : (
-        <Link href='/' className='pt-6'>
+        <Link href='/' className='pt-6 z-10'>
           <Image
             src={logo2}
             alt='logo'

@@ -34,7 +34,7 @@ const headingClasses = classNames('text-brandGray-500 mb-4');
 
 const Footer = () => {
   return (
-    <footer className='pb-[80px]'>
+    <footer className='pb-[80px] '>
       <Container>
         <div className='grid grid-cols-6 gap-x-[3rem]'>
           <div className='col-span-2 w-[74%]'>

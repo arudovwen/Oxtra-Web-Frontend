@@ -1,7 +1,7 @@
 import React from 'react';
 import Navigation from '../Navigation';
 import Container from '../Container';
-import AlterFooter from '../Footer/AlterFooter';
+import AlterFooter from '../Footers/AlterFooter';
 import Typography from '@/components/Typography';
 import { AiOutlineArrowLeft } from 'react-icons/ai';
 import { TbCircleNumber1 } from 'react-icons/tb';
@@ -46,7 +46,7 @@ const PutUpYourVehicleLayout = ({
           navBackground='white'
         />
 
-        <div className='relative mx-auto max-w-[500px] mt-[29px] flex justify-between'>
+        <div className='relative mx-auto max-w-[500px] mt-[69px] mb-[49px] flex justify-between'>
           {nav.map((n, index) => {
             return (
               <div

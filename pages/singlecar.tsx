@@ -9,7 +9,7 @@ import seats from '../public/assets/seats.png';
 import classNames from 'classnames';
 import ac from '../public/assets/ac.png';
 import Button from '@/components/Button';
-import AlterFooter from '@/components/Footer/AlterFooter';
+import AlterFooter from '@/components/Footers/AlterFooter';
 import auto from '../public/assets/automatic.png';
 import fuel from '../public/assets/GasPump.png';
 import { useRouter } from 'next/router';

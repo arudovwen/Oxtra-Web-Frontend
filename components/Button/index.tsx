@@ -29,7 +29,7 @@ const Button = ({
 }: ButtonProps) => {
   if (type) {
     return (
-      <button type={type} className={`${width && 'w-full'}`}>
+      <button type={type} className={` ${width && 'w-full'}`}>
         <a
           className={classNames(
             `${hover} ${buttonClasses} ${size} ${bg} w-full block ${textColor}`,
@@ -61,17 +61,3 @@ const Button = ({
 };
 
 export default Button;
-
-//  <button className={`${width && 'w-full'}`} type={type}>
-//    {/* <Link
-//         href={link}
-//         className={classNames(
-//           `${hover} ${buttonClasses} ${bg} w-full block ${textColor}`,
-//           hover === 'hover:bg-brandGreen-300'
-//             ? 'hover:text-white'
-//             : 'hover:text-brandGray-300'
-//         )}
-//       > */}
-//    {children}
-//    {/* </Link> */}
-//  </button>;

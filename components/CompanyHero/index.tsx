@@ -74,7 +74,7 @@ const CompanyHero = ({ activePage }: CompanyHeroProps) => {
           width={200}
           height={200}
           alt='money bag'
-          className='top-[1600px] absolute left-[-48px] '
+          className='top-[3040px] absolute left-[12px]'
         />
       </div>
     </Container>

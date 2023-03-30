@@ -28,7 +28,7 @@ const footerLinks = [
 const AlterFooter = () => {
   return (
     <div className='mt-8 text-brandGray-300 bg-brandGray-200 pt-[40px] pb-[24px]'>
-      <div className='flex justify-evenly'>
+      <div className='flex justify-center gap-[132px]'>
         {footerLinks.map((footer) => {
           return (
             <Link key={footer.name} href={footer.name}>
