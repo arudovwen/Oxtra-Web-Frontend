@@ -9,7 +9,7 @@ const DashbordHeader = () => {
           Hello, Adeleke!
         </Typography>
       </div>
-      <p className='text-sm text-[#475467]'>
+      <p className='text-sm text-[#475467] font-gordita-regular'>
         Manage your account and activities here
       </p>
     </div>
