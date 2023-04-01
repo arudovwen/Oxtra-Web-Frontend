@@ -11,7 +11,7 @@ import { AiOutlineLine } from 'react-icons/ai';
 import { BiCurrentLocation } from 'react-icons/bi';
 
 const rowClasses = classNames(
-  'flex flex-col items-baseline mb-[20px] justify-between'
+  'flex flex-col items-baseline mb-[30px] justify-between'
 );
 
 const headingClasses = classNames(
@@ -41,13 +41,13 @@ const CourierService = () => {
          p-4 rounded-lg inline-flex'
         >
           <div className='flex flex-col justify-between'>
-            <TbTruck className='bg-brandGreen-300 p-2 text-white rounded-full w-[40px] h-[40px]' />
+            <TbTruck className='bg-brandGreen-300 p-[8px] text-white rounded-full w-[40px] h-[40px]' />
 
             <span className='text-[12px] text-[#666666] flex gap-2  leading-[12px] font-gordita-medium'>
               <FiCalendar /> 24/2/2023
             </span>
           </div>
-          <div className='w-[270px] mr-[39px] relative'>
+          <div className='w-[270px] mr-[39px] relative '>
             <div className={rowClasses}>
               <span className={headingClasses}>Pick-up address</span>
               <span className={infoClasses}>
@@ -55,14 +55,14 @@ const CourierService = () => {
               </span>
             </div>
             <BiCurrentLocation className='text-brandGreen-300 absolute top-[3px] left-[-24px]' />
-            <div className={rowClasses}>
+            <div className='border-t-2 border-brandGreen-300  w-[38px] top-[40px] rotate-90 absolute left-[-35px]'></div>
+            <HiOutlineLocationMarker className=' absolute top-[63px] left-[-24px]' />
+            <div className={`${rowClasses}`}>
               <span className={headingClasses}>Drop-off adress</span>
               <span className={infoClasses}>
                 12, ajifoluke avenue, Lekki - Lekki, Lagos state
               </span>
             </div>
-            <div className='border-t-2 border-brandGreen-300  w-[32px] top-[35px] rotate-90 absolute left-[-32px]'></div>
-            <HiOutlineLocationMarker className=' absolute top-[54px] left-[-24px]' />
           </div>
           <div className='flex flex-col justify-between'>
             <span className='text-[10px] leading-[10px] text-[#E59400] bg-[#FFF6E5] py-[9px] px-[12px] rounded-lg '>
