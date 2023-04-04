@@ -6,6 +6,7 @@ import Image from 'next/image';
 import classNames from 'classnames';
 import { MdArrowForwardIos } from 'react-icons/md';
 import Button from '@/components/Button';
+import Link from 'next/link';
 
 const rowClasses = classNames('flex items-baseline mb-[20px] justify-between');
 
@@ -17,8 +18,14 @@ const infoClasses = classNames(
   'text-[12px] leading-[12px] font-gordita-regular text-brandGray-100'
 );
 
+const nav = [
+  { name: 'Pending', link: '/dashboard' },
+  { name: 'Completed', link: '/dashboard/rent-a-vehicle/completed' },
+];
+
 const RentVehicle = () => {
   const activePage = 'Rent a vehicle';
+  const subPage = 'Pending';
   return (
     <DashboardLayout activePage={activePage}>
       <div className='bg-brandGray-200 p-8 rounded-xl w-[840px]'>
@@ -27,9 +34,22 @@ const RentVehicle = () => {
             Rent a car
           </Typography>
         </div>
-        <div className='flex mb-8 gap-[91px] pl-[59px] pb-[10px] font-gordita-regular text-sm border-b border-[#D4D6D8]'>
-          <span>Pending</span>
-          <span className='text-brandGray-100'>Completed</span>
+        <div className='flex mb-8 gap-[91px]  font-gordita-regular text-sm border-b border-[#D4D6D8]'>
+          {nav.map((item) => {
+            return (
+              <Link
+                key={item.name}
+                href={item.link}
+                className={` px-5 pb-2.5 ${
+                  item.name === subPage
+                    ? 'text-brandGreen-300 border-b-4 border-brandGreen-300 font-gordita-medium'
+                    : 'text-brandGray-100'
+                }`}
+              >
+                {item.name}
+              </Link>
+            );
+          })}
         </div>
         <div className='bg-white p-4 rounded-lg inline-flex'>
           <div className='mr-6'>
