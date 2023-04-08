@@ -17,7 +17,7 @@ const SignUpForm = () => {
   const [enterPasswordHidden, setEnterPasswordHidden] = useState(true);
 
   return (
-    <main className='mx-auto  max-w-[500px] lg:min-h-full  lg:overflow-hidden'>
+    <main>
       <div className='mb-4 mt-[40px] text-brandGray-300'>
         <Typography as='h4' font='font-gordita-medium'>
           Sign up to complete order

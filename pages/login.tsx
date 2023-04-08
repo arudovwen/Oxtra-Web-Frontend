@@ -7,7 +7,7 @@ import AlterFooter from '@/components/Footers/AlterFooter';
 const Login = () => {
   const activePage = 'Login';
   return (
-    <div>
+    <div className='h-screen flex flex-col'>
       <Container>
         <Navigation
           color='text-brandGray-300'
@@ -18,9 +18,12 @@ const Login = () => {
           activePage={activePage}
           navBackground='white'
         />
-
-        <LoginForm />
       </Container>
+
+      <div className='flex-1 flex justify-center items-center'>
+        <LoginForm />
+      </div>
+
       <AlterFooter />
     </div>
   );

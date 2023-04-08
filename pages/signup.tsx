@@ -8,7 +8,7 @@ const SignUp = () => {
   const activePage = '';
 
   return (
-    <div>
+    <div className='h-screen flex flex-col'>
       <Container>
         <Navigation
           color='text-brandGray-300'
@@ -19,8 +19,10 @@ const SignUp = () => {
           activePage={activePage}
           navBackground='white'
         />
-        <SignUpForm />
       </Container>
+      <div className='flex-1 flex justify-center items-center'>
+        <SignUpForm />{' '}
+      </div>
       <AlterFooter />
     </div>
   );

@@ -6,6 +6,7 @@ import logoB from '../../public/assets/logoB.png';
 import Typography from '../Typography';
 import Button from '../Button';
 import logo2 from '../../public/assets/Asset 3.png';
+import Container from '../Container';
 
 const navigation = [
   { name: 'Rent a vehicle', href: '/rent-a-vehicle' },

@@ -34,7 +34,7 @@ const PutUpYourVehicleLayout = ({
   const router = useRouter();
 
   return (
-    <div className='text-brandGray-500 '>
+    <div className='text-brandGray-500 h-screen flex flex-col '>
       <Container>
         <Navigation
           color='text-brandGray-300'
@@ -78,9 +78,9 @@ const PutUpYourVehicleLayout = ({
             Back
           </span>
         </div>
-
-        {children}
       </Container>
+      <div className='flex-1 flex items-center justify-center'> {children}</div>
+
       <AlterFooter />
     </div>
   );

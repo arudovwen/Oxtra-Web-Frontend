@@ -21,7 +21,7 @@ const LeaseCarSignUp = () => {
   };
 
   return (
-    <main className='mx-auto  max-w-[500px] lg:min-h-full  lg:overflow-hidden'>
+    <main>
       <div className='mb-4 text-brandGray-300'>
         <Typography as='h4' font='font-gordita-medium'>
           Sign up to lease your car
