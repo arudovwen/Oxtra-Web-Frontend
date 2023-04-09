@@ -4,7 +4,7 @@ import Link from 'next/link';
 const sideNav = [
   { name: 'Rent a vehicle', href: '/dashboard' },
   { name: 'Courier service', href: '/dashboard/courier-service' },
-  { name: 'Lease vehicle', href: '/dashboard/lease-vehicle' },
+  { name: 'Lease vehicle', href: '/dashboard/lease-a-vehicle' },
   { name: 'Profile', href: '/dashboard/profile' },
   { name: 'Password', href: '/dashboard/password' },
 ];

@@ -11,9 +11,9 @@ interface DashboardLayoutProps {
 
 const DashboardLayout = ({ children, activePage }: DashboardLayoutProps) => {
   return (
-    <div>
+    <div className='h-screen flex flex-col'>
       <Navigation />
-      <div className='max-w-[1033px] mx-auto'>
+      <div className='flex-1 max-w-[1033px] mx-auto'>
         <DashbordHeader />
         <div className='flex mt-12 gap-10'>
           <div>
