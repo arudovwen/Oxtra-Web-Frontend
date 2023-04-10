@@ -17,7 +17,7 @@ const SignUpForm = () => {
   const [enterPasswordHidden, setEnterPasswordHidden] = useState(true);
 
   return (
-    <main>
+    <main className='mx-auto max-w-[500px]'>
       <div className='mb-4 mt-[40px] text-brandGray-300'>
         <Typography as='h4' font='font-gordita-medium'>
           Sign up to complete order
@@ -121,7 +121,7 @@ const SignUpForm = () => {
                 </div>
               </div>
 
-              <div className='col-span-8 md:col-span-7'>
+              <div className='col-span-6'>
                 <label htmlFor='expiration-date' className={labelClasses}>
                   State
                 </label>
@@ -130,7 +130,7 @@ const SignUpForm = () => {
                 </div>
               </div>
 
-              <div className='col-span-4 md:col-span-5'>
+              <div className='col-span-6'>
                 <label htmlFor='city' className={labelClasses}>
                   City
                 </label>

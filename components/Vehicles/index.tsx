@@ -60,7 +60,7 @@ const Vehicles = () => {
                 activeVehicle === vehicle.name
                   ? 'bg-brandGreen-300 text-white'
                   : 'bg-brandGray-200 text-brandGray-300'
-              } rounded-[60px] px-6 text-sm py-3 cursor-pointer font-gordita-medium`}
+              } rounded-[60px] px-6 text-sm py-3 cursor-pointer font-gordita-medium z-30`}
             >
               <div>{vehicle.name}</div>
             </div>

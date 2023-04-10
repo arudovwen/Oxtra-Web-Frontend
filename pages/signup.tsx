@@ -23,6 +23,7 @@ const SignUp = () => {
       <div className='flex-1 flex justify-center items-center'>
         <SignUpForm />{' '}
       </div>
+
       <AlterFooter />
     </div>
   );
