@@ -43,15 +43,15 @@ const Vehicles = () => {
   const [activeVehicle, setActiveVehicle] = useState('Sedan');
   return (
     <div className=' text-brandGray-300 text-center mb-[120px]'>
-      <div className=' mb-12 w-[643px] mx-auto text-[40px] leading-[54.4px] font-gordita-bold '>
+      <div className=' mb-12 lg:w-[643px] mx-auto text-[40px] leading-[54.4px] font-gordita-bold '>
         Our vehicles are <br />
         ready to take you around town
       </div>
-      <p className=' w-[643px] font-gordita-regular mx-auto mb-8 text-[16px] leading-[24px]'>
+      <p className=' lg:w-[643px] font-gordita-regular mx-auto mb-8 text-[16px] leading-[24px]'>
         We give our riders the best driving experience from our world-class
         drivers to the quality checks we put our cars through
       </p>
-      <div className='flex justify-center gap-6 mb-14'>
+      <div className='flex overflow-scroll md:overflow-auto justify-center gap-6 mb-14'>
         {vehicles.map((vehicle) => {
           return (
             <div
@@ -68,7 +68,7 @@ const Vehicles = () => {
         })}
       </div>
       <Container>
-        <div className='grid grid-cols-3 place-content-center place-items-center gap-10 mb-14'>
+        <div className='grid grid-cols-1 md:grid-cols-3 place-content-center place-items-center gap-10 mb-14'>
           {placeholders.map((v, index) => {
             return (
               <div key={index}>

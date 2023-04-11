@@ -9,7 +9,7 @@ import Container from '../Container';
 const PassiveIncome = ({ marginBottom }: { marginBottom: string }) => {
   return (
     <Container marginBottom={marginBottom}>
-      <div className='flex items-center justify-center gap-20'>
+      <div className='flex flex-col lg:flex-row items-center justify-center gap-20'>
         <Image
           src={passiveIncome}
           width={400}
@@ -18,7 +18,7 @@ const PassiveIncome = ({ marginBottom }: { marginBottom: string }) => {
           className='object-cover rounded-lg z-50'
         />
 
-        <div className='w-[400px] z-10'>
+        <div className='text-center lg:w-[400px] z-10'>
           <div className='mb-6 text-brandGray-300 text-[40px] leading-[54.4px] font-gordita-bold '>
             Earn passive income with your vehicle
           </div>

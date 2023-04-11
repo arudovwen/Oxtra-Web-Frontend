@@ -40,7 +40,7 @@ const Team = ({ marginBottom }: { marginBottom: string }) => {
             Meet the guys working tirelessly to make Oxtra help you
           </Typography>
         </div>
-        <div className='flex items-center gap-[72px] justify-center'>
+        <div className='flex flex-col lg:flex-row items-center gap-[72px] justify-center'>
           {team.map((individual) => {
             return (
               <div key={individual.name}>

@@ -35,14 +35,14 @@ const Company = () => {
             width={1400}
             height={1400}
             alt='blue'
-            className='bottom-[3216px] absolute left-[-736px] opacity-70'
+            className='bottom-[3216px]  absolute left-[-736px] opacity-70'
           />
           <Image
             src={backcar}
             width={750}
             height={750}
             alt='car'
-            className='bottom-[3768px] absolute left-[-670px]'
+            className='bottom-[3768px] hidden xl:block absolute left-[-670px]'
           />
 
           <Image
@@ -51,14 +51,14 @@ const Company = () => {
             height={750}
             alt='blue'
             className='bottom-[2400px]
-          absolute right-[-352px] opacity-70'
+          absolute right-[-352px] opacity-70 hidden xl:block'
           />
           <Image
             src={pink}
             width={750}
             height={750}
             alt='pink'
-            className='bottom-[1248px] absolute right-[-304px] opacity-70'
+            className='bottom-[1248px] hidden xl:block absolute right-[-304px] opacity-70'
           />
 
           <Image
@@ -66,7 +66,7 @@ const Company = () => {
             width={750}
             height={750}
             alt='blue'
-            className='bottom-[1602px] absolute left-[-304px] opacity-70'
+            className='bottom-[1602px] hidden xl:block absolute left-[-304px] opacity-70'
           />
 
           <Image
@@ -74,7 +74,7 @@ const Company = () => {
             width={500}
             height={500}
             alt='pink'
-            className='top-[-4355px] absolute right-[-432px]'
+            className='top-[-4355px] hidden xl:block absolute right-[-432px]'
           />
           <Image
             src={pink}

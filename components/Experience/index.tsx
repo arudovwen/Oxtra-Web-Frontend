@@ -14,13 +14,13 @@ const Experience = ({ marginBottom }: { marginBottom: string }) => {
         <Image
           src={experience}
           alt='come and experience'
-          className='object-cover rounded-3xl'
+          className='object-cover rounded-3xl -z-30 xl:z-0'
           fill
         />
 
-        <div className='text-center w-[749px] z-30'>
+        <div className='text-center w-[749px] -z-30 xl:z-30'>
           <div className='mb-6 text-white text-[40px] leading-[51.2px] font-gordita-bold '>
-            Come and experience ease and class when ride with Oxtra.
+            Come and experience ease and class when you ride with Oxtra.
           </div>
           <div className='mb-10 text-white text-[16px] font-gordita-regular leading-[24px]'>
             We take pride in the extra mile we go through <br /> to ensure that
@@ -45,7 +45,7 @@ const Experience = ({ marginBottom }: { marginBottom: string }) => {
         <Image
           src={car}
           alt='come and experience'
-          className='object-cover absolute z-30 bottom-0 right-0'
+          className='object-cover hidden lg:block absolute -z-30 xl:z-10 bottom-0 right-0'
           width={400}
           height={400}
         />

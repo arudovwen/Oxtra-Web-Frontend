@@ -46,7 +46,7 @@ const Offer = () => {
         <div className='text-brandGray-300 mb-20 font-gordita-bold text-[56px] leading-[56px]'>
           What we offer
         </div>
-        <div className='flex gap-10 items-center '>
+        <div className='flex flex-col lg:flex-row gap-10 items-center '>
           {offers.map((offer) => {
             return (
               <div

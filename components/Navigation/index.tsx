@@ -37,7 +37,7 @@ const Navigation = ({
   navBackground,
 }: NavigationProps) => {
   return (
-    <div className='flex justify-between items-center'>
+    <div className='hidden xl:flex justify-between items-center'>
       {navBackground === 'green' ? (
         <Link href='/' className='flex gap-[9.17px] items-center z-10 pt-6'>
           <div>

@@ -4,6 +4,7 @@ import logo from '../../public/assets/Frame 2293.png';
 import Link from 'next/link';
 import Typography from '../Typography';
 import classNames from 'classnames';
+import { GrTwitter, GrFacebook, GrInstagram } from 'react-icons/gr';
 
 const navigation = {
   company: [
@@ -30,14 +31,29 @@ const navigation = {
   ],
 };
 
+const socials = [
+  {
+    name: 'Facebook',
+    icon: <GrFacebook />,
+  },
+  {
+    name: 'Twitter',
+    icon: <GrTwitter />,
+  },
+  {
+    name: 'Instagram',
+    icon: <GrInstagram />,
+  },
+];
+
 const headingClasses = classNames('text-brandGray-500 mb-4');
 
 const Footer = () => {
   return (
     <footer className='pb-[80px] '>
       <Container>
-        <div className='grid grid-cols-6 gap-x-[3rem]'>
-          <div className='col-span-2 w-[74%]'>
+        <div className='grid grid-cols-2 lg:grid-cols-6 gap-x-[48px] gap-y-[48px]'>
+          <div className='lg:col-span-2 lg:w-[74%]'>
             <Image
               src={logo}
               alt='logo'
@@ -119,6 +135,15 @@ const Footer = () => {
                     <Typography as='p' font='font-gordita-regular'>
                       <Link href={item.href}> {item.name}</Link>
                     </Typography>
+                  </li>
+                );
+              })}
+            </ul>
+            <ul className='flex gap-7'>
+              {socials.map((item) => {
+                return (
+                  <li key={item.name} className='mb-4 text-brandGreen-300'>
+                    {item.icon}
                   </li>
                 );
               })}

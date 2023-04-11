@@ -8,6 +8,7 @@ import Image from 'next/image';
 import cloud from '../../public/assets/cloud.png';
 import car from '../../public/assets//Frame.png';
 import moneyBag from '../../public/assets/image 35.png';
+import CollapseNav from '../Navigation/CollapseNav';
 
 interface CompanyHeroProps {
   activePage: string;
@@ -26,6 +27,17 @@ const CompanyHero = ({ activePage }: CompanyHeroProps) => {
           activePage={activePage}
           navBackground='white'
         />
+        <CollapseNav
+          color='text-white'
+          hover='hover:text-brandGreen-100'
+          buttonBg='bg-white'
+          buttonHover='hover:bg-brandGreen-300'
+          buttonText='text-brandGray-300'
+          activePage={activePage}
+          navBackground='white'
+          menuColor='text-brandGreen-300'
+        />
+
         <div className='mt-[250px] mb-6'>
           <Typography as='h2' font='font-gordita-bold'>
             We want to transform the <br /> way Lagos moves
@@ -59,7 +71,7 @@ const CompanyHero = ({ activePage }: CompanyHeroProps) => {
           width={360}
           height={355}
           alt='cloud'
-          className='top-[80px] absolute left-0'
+          className='top-[80px] absolute  left-0'
         />
 
         <Image
@@ -67,14 +79,14 @@ const CompanyHero = ({ activePage }: CompanyHeroProps) => {
           width={300}
           height={200}
           alt='car'
-          className='top-[624px] absolute right-[128px]'
+          className='top-[624px] absolute hidden xl:block right-[128px]'
         />
         <Image
           src={moneyBag}
           width={200}
           height={200}
           alt='money bag'
-          className='top-[3040px] absolute left-[12px]'
+          className='top-[3040px] hidden xl:block absolute left-[12px]'
         />
       </div>
     </Container>

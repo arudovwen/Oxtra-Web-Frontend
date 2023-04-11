@@ -32,7 +32,7 @@ const TrustedPartners = ({ marginBottom }: { marginBottom: string }) => {
             driving with us
           </Typography>
         </div>
-        <div className='flex items-center gap-[72px] justify-center'>
+        <div className='flex flex-col lg:flex-row items-center gap-[72px] justify-center'>
           {trustedPartners.map((trustedPartner) => {
             return (
               <div key={trustedPartner.partner}>

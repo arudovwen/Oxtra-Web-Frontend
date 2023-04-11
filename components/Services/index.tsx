@@ -5,6 +5,7 @@ import { RiTruckLine } from 'react-icons/ri';
 import { TbPlaneTilt } from 'react-icons/tb';
 import { BsArrowRight } from 'react-icons/bs';
 import classNames from 'classnames';
+import Container from '../Container';
 import Link from 'next/link';
 
 const offerIconClasses = classNames('w-[36px] h-[36px]');
@@ -38,18 +39,18 @@ const offers = [
 
 const Services = () => {
   return (
-    <div className=' text-center mb-[120px]'>
-      <div className='text-brandGray-300 mb-12'>
+    <Container marginBottom='mb-[120px]'>
+      <div className='text-center text-brandGray-300 mb-12'>
         <Typography as='h3' font='font-gordita-bold'>
           Our services
         </Typography>
       </div>
-      <div className='grid grid-cols-3 gap-10 w-[884px] mx-auto'>
+      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 xl:w-[884px] mx-auto'>
         {offers.map((offer) => {
           return (
             <div
               key={offer.title}
-              className={`flex flex-col rounded items-center pt-[33px] z-10 px-[25px] pb-[25px] ${offer.background}`}
+              className={`flex flex-col rounded items-center pt-[33px] z-0 px-[25px] pb-[25px] ${offer.background}`}
             >
               <span className='mb-[26px]'>{offer.icon}</span>
               <div className='mb-5'>
@@ -57,7 +58,7 @@ const Services = () => {
                   {offer.title}
                 </Typography>
               </div>
-              <div className='mb-[21px] font-gordita-regular text-[14px] leading-[21px]'>
+              <div className='mb-[21px] text-center font-gordita-regular text-[14px] leading-[21px]'>
                 {offer.description}
               </div>
               <span>
@@ -74,7 +75,7 @@ const Services = () => {
           );
         })}
       </div>
-    </div>
+    </Container>
   );
 };
 

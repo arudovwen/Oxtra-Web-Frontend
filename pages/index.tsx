@@ -22,7 +22,7 @@ export default function Home() {
     <div className='overflow-hidden'>
       <Hero activePage={activePage} />
 
-      <FindPreferredCar />
+      {/* <FindPreferredCar /> */}
 
       <Services />
       <Vehicles />
@@ -38,21 +38,21 @@ export default function Home() {
             width={1000}
             height={1000}
             alt='blue'
-            className='right-[-31rem] top-[-204rem] absolute opacity-70'
+            className='right-[-31rem] hidden xl:block top-[-204rem] absolute opacity-70'
           />
           <Image
             src={pink}
             width={1000}
             height={1000}
             alt='pink'
-            className='left-[-31rem] top-[-162rem] absolute opacity-70'
+            className='left-[-31rem]  hidden xl:block top-[-162rem] absolute opacity-70'
           />
           <Image
             src={pink}
             width={1000}
             height={1000}
             alt='pink'
-            className='right-[-31rem] top-[-114rem] absolute opacity-70'
+            className='right-[-31rem]  hidden xl:block top-[-114rem] absolute opacity-70'
           />
         </div>
       </Container>
