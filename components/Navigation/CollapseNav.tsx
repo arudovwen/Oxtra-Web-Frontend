@@ -86,7 +86,7 @@ const CollapseNav = ({
       </div>
 
       {open && (
-        <div className='flex fixed overflow-y-hidden top-0 right-0 left-0 bottom-0 flex-col bg-black gap-10 p-[19px] z-50'>
+        <div className='flex fixed top-0 right-0 left-0 bottom-0 flex-col bg-black gap-10 p-[19px] z-50'>
           <div className='flex items-baseline justify-between'>
             <Link href='/' className='pt-6 z-50'>
               <Image
