@@ -75,11 +75,12 @@ const cars = [
 
 const BookCars = () => {
   return (
-    <div className='grid grid-cols-4 gap-[40px] mb-[120px]'>
+    <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[40px] mb-[120px]'>
       {cars.map((car) => {
         return (
           <div key={car.id} className='text-brandGray-300'>
-            <Image src={car.image} width={290} height={198} alt={car.name} />
+            <Image src={car.image} width={490} height={198} alt={car.name} />
+
             <div className='bg-[#F4F6F8] p-4'>
               <h5 className='mb-4 text-sm font-gordita-bold'>{car.name}</h5>
               <div className='flex justify-between mb-4'>

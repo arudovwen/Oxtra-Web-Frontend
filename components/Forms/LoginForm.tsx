@@ -18,7 +18,7 @@ const LoginForm = () => {
   const [enterPasswordHidden, setEnterPasswordHidden] = useState(true);
 
   return (
-    <main className='mx-auto max-w-[500px]'>
+    <main className='w-[90%] lg:mx-auto lg:max-w-[500px]'>
       <div className='mb-4 mt-[40px] text-brandGray-300'>
         <Typography as='h4' font='font-gordita-medium'>
           Login to complete order
@@ -30,7 +30,7 @@ const LoginForm = () => {
         </Typography>
       </div>
 
-      <section className='flex h-full w-full grow flex-col'>
+      <section className='flex w-full flex-col'>
         <form className='mt-6'>
           <div className='grid grid-cols-12 gap-y-6'>
             <div className='col-span-full'>
@@ -60,12 +60,12 @@ const LoginForm = () => {
                 />
 
                 {enterPasswordHidden ? (
-                  <AiOutlineEyeInvisible
+                  <AiOutlineEye
                     className='absolute top-[24px] right-[12px]'
                     onClick={() => setEnterPasswordHidden(!enterPasswordHidden)}
                   />
                 ) : (
-                  <AiOutlineEye
+                  <AiOutlineEyeInvisible
                     className='absolute top-[24px] right-[12px]'
                     onClick={() => setEnterPasswordHidden(!enterPasswordHidden)}
                   />

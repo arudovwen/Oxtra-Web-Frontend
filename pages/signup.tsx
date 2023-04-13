@@ -3,6 +3,7 @@ import Navigation from '@/components/Navigation';
 import Container from '@/components/Container';
 import SignUpForm from '@/components/Forms/SignUpForm';
 import AlterFooter from '@/components/Footers/AlterFooter';
+import CollapseNav from '@/components/Navigation/CollapseNav';
 
 const SignUp = () => {
   const activePage = '';
@@ -18,6 +19,16 @@ const SignUp = () => {
           buttonHover='hover:bg-white'
           activePage={activePage}
           navBackground='white'
+        />{' '}
+        <CollapseNav
+          color='text-white'
+          hover='hover:text-brandGreen-100'
+          buttonBg='bg-white'
+          buttonHover='hover:bg-brandGreen-300'
+          buttonText='text-brandGray-300'
+          activePage={activePage}
+          navBackground='white'
+          menuColor='text-brandGreen-300'
         />
       </Container>
       <div className='flex-1 flex justify-center items-center'>

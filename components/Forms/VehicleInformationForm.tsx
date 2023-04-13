@@ -33,7 +33,7 @@ const VehicleInformationForm = () => {
   };
 
   return (
-    <main>
+    <main className='w-[90%] lg:mx-auto lg:max-w-[500px]'>
       <div className='mb-4  text-brandGray-300'>
         <Typography as='h4' font='font-gordita-medium'>
           Vehicle information
@@ -49,7 +49,7 @@ const VehicleInformationForm = () => {
         <div className=''>
           <form className='mt-6' onSubmit={handleSubmit}>
             <div className='grid grid-cols-12 gap-y-6 gap-x-4'>
-              <div className='col-span-8 md:col-span-6'>
+              <div className='col-span-full md:col-span-6'>
                 <label htmlFor='expiration-date' className={labelClasses}>
                   Brand
                 </label>
@@ -63,7 +63,7 @@ const VehicleInformationForm = () => {
                 </div>
               </div>
 
-              <div className='col-span-4 md:col-span-6'>
+              <div className='col-span-full  md:col-span-6'>
                 <label htmlFor='cvc' className={labelClasses}>
                   Model
                 </label>
@@ -77,7 +77,7 @@ const VehicleInformationForm = () => {
                 </div>
               </div>
 
-              <div className='col-span-4 md:col-span-6'>
+              <div className='col-span-6'>
                 <label htmlFor='cvc' className={labelClasses}>
                   Year
                 </label>
@@ -85,7 +85,7 @@ const VehicleInformationForm = () => {
                   <input type='number' required className={inputClasses} />
                 </div>
               </div>
-              <div className='col-span-4 md:col-span-6'>
+              <div className='col-span-6'>
                 <label htmlFor='cvc' className={labelClasses}>
                   Transmision
                 </label>
@@ -94,7 +94,7 @@ const VehicleInformationForm = () => {
                 </div>
               </div>
 
-              <div className='col-span-4 md:col-span-6'>
+              <div className='col-span-6'>
                 <label htmlFor='cvc' className={labelClasses}>
                   Color
                 </label>
@@ -103,7 +103,7 @@ const VehicleInformationForm = () => {
                 </div>
               </div>
 
-              <div className='col-span-4 md:col-span-6'>
+              <div className='col-span-6'>
                 <label htmlFor='cvc' className={labelClasses}>
                   Plate number
                 </label>

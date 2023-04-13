@@ -13,6 +13,7 @@ const DashboardLayout = ({ children, activePage }: DashboardLayoutProps) => {
   return (
     <div className='h-screen flex flex-col'>
       <Navigation />
+
       <div className='flex-1 max-w-[1033px] mx-auto'>
         <DashbordHeader />
         <div className='flex mt-12 gap-10'>

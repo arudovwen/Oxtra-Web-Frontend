@@ -6,6 +6,7 @@ import Search from '@/components/Search';
 import BookCars from '@/components/BookCars';
 import Services from '@/components/Services';
 import Footer from '@/components/Footers';
+import CollapseNav from '@/components/Navigation/CollapseNav';
 
 const RentVehicle = () => {
   const activePage = 'Rent a vehicle';
@@ -20,6 +21,16 @@ const RentVehicle = () => {
         buttonHover='hover:bg-white'
         activePage={activePage}
         navBackground='white'
+      />
+      <CollapseNav
+        color='text-white'
+        hover='hover:text-brandGreen-100'
+        buttonBg='bg-white'
+        buttonHover='hover:bg-brandGreen-300'
+        buttonText='text-brandGray-300'
+        activePage={activePage}
+        navBackground='white'
+        menuColor='text-brandGreen-300'
       />
       <div className='mt-10 text-center text-brandGray-300'>
         <div className='mb-4'>

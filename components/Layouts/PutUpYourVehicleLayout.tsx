@@ -2,11 +2,9 @@ import React from 'react';
 import Navigation from '../Navigation';
 import Container from '../Container';
 import AlterFooter from '../Footers/AlterFooter';
-import Typography from '@/components/Typography';
 import { AiOutlineArrowLeft } from 'react-icons/ai';
-import { TbCircleNumber1 } from 'react-icons/tb';
 import { useRouter } from 'next/router';
-import Link from 'next/link';
+import CollapseNav from '../Navigation/CollapseNav';
 
 interface PutUpYourVehicleLayoutProps {
   children: React.ReactNode;
@@ -45,8 +43,18 @@ const PutUpYourVehicleLayout = ({
           activePage={activePage}
           navBackground='white'
         />
+        <CollapseNav
+          color='text-white'
+          hover='hover:text-brandGreen-100'
+          buttonBg='bg-white'
+          buttonHover='hover:bg-brandGreen-300'
+          buttonText='text-brandGray-300'
+          activePage={activePage}
+          navBackground='white'
+          menuColor='text-brandGreen-300'
+        />
 
-        <div className='relative mx-auto max-w-[500px] mt-[69px] mb-[49px] flex justify-between'>
+        <div className='relative mx-auto max-w-[500px] mt-[69px] mb-[49px] flex flex-col lg:flex-row gap-[15px]  justify-between lg:gap-0'>
           {nav.map((n, index) => {
             return (
               <div
