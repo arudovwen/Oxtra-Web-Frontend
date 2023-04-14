@@ -45,16 +45,16 @@ const Navigation = ({
               src={logoA}
               alt='logo'
               className='object-cover'
-              width={30}
-              height={30}
+              width={25}
+              height={25}
             />
           </div>
           <div>
             <Image
               src={logoB}
               alt='logo'
-              width={111}
-              height={48}
+              width={90}
+              height={30}
               className='object-cover'
             />
           </div>
