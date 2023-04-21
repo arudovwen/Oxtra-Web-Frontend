@@ -7,6 +7,7 @@ import BookCars from '@/components/BookCars';
 import Services from '@/components/Services';
 import Footer from '@/components/Footers';
 import CollapseNav from '@/components/Navigation/CollapseNav';
+import CollapseSearch from '@/components/Search/CollapseSearch';
 
 const RentVehicle = () => {
   const activePage = 'Rent a vehicle';
@@ -44,8 +45,13 @@ const RentVehicle = () => {
           preferred car.
         </div>
       </div>
+      <div className='lg:hidden'>
+        <CollapseSearch />
+      </div>
+      <div className='hidden lg:block'>
+        <Search />
+      </div>
 
-      <Search />
       <BookCars />
       <Services />
       <Footer />

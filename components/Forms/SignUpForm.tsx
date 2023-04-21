@@ -16,6 +16,47 @@ const inputClasses = classNames(
 const SignUpForm = () => {
   const [enterPasswordHidden, setEnterPasswordHidden] = useState(true);
 
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [dob, setDob] = useState('');
+  const [address, setAddress] = useState('');
+  const [state, setState] = useState('');
+  const [phone, setPhone] = useState('');
+  const [city, setCity] = useState('');
+
+  const signUp = async (e: any) => {
+    e.preventDefault();
+    const person = {
+      firstName,
+      lastName,
+      email,
+      password,
+      dob,
+      address,
+      state,
+      phone,
+      city,
+    };
+
+    const result = await fetch(
+      'https://oxtra-backend.herokuapp.com/api/v1/register',
+      {
+        method: `POST`,
+        body: JSON.stringify(person),
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+      }
+    );
+
+    const theResult = await result.json();
+
+    console.log('result', theResult);
+  };
+
   return (
     <main className='w-[90%] lg:mx-auto lg:max-w-[500px]'>
       <div className='mb-4 mt-[40px] text-brandGray-300'>
@@ -31,17 +72,33 @@ const SignUpForm = () => {
 
       <section className='flex-auto'>
         <div className=''>
-          <form className='mt-6'>
+          <form className='mt-6' onSubmit={signUp}>
             <div className='grid grid-cols-12 gap-y-6 gap-x-4'>
               <div className='col-span-full'>
                 <label htmlFor='email-address' className={labelClasses}>
-                  Full name
+                  First name
                 </label>
                 <div className='mt-1'>
                   <input
                     type='text'
-                    placeholder='Enter your first name and last name '
+                    placeholder='Enter your first name'
+                    onChange={(e) => setFirstName(e.target.value)}
                     className={inputClasses}
+                    required
+                  />
+                </div>
+              </div>
+              <div className='col-span-full'>
+                <label htmlFor='email-address' className={labelClasses}>
+                  Last name
+                </label>
+                <div className='mt-1'>
+                  <input
+                    type='text'
+                    placeholder='Enter your last name'
+                    onChange={(e) => setLastName(e.target.value)}
+                    className={inputClasses}
+                    required
                   />
                 </div>
               </div>
@@ -53,11 +110,11 @@ const SignUpForm = () => {
                 <div className='mt-1'>
                   <input
                     type='email'
-                    id='email-address'
-                    name='email-address'
                     autoComplete='email'
                     placeholder='Enter your email address'
+                    onChange={(e) => setEmail(e.target.value)}
                     className={inputClasses}
+                    required
                   />
                 </div>
               </div>
@@ -69,7 +126,9 @@ const SignUpForm = () => {
                   <input
                     type={`${enterPasswordHidden ? 'password' : 'text'}`}
                     placeholder='Enter password'
+                    onChange={(e) => setPassword(e.target.value)}
                     className={inputClasses}
+                    required
                   />
 
                   {enterPasswordHidden ? (
@@ -95,7 +154,16 @@ const SignUpForm = () => {
                   Phone number
                 </label>
                 <div className='mt-1'>
-                  <input type='number' className={inputClasses} />
+                  <input
+                    type='tel'
+                    id='phone'
+                    name='phone'
+                    pattern='[0-9]{3}-[0-9]{3}-[0-9]{3}-[0-9]{4}'
+                    required
+                    placeholder='234-808-359-4505'
+                    onChange={(e) => setPhone(e.target.value)}
+                    className={inputClasses}
+                  />
                 </div>
               </div>
 
@@ -104,7 +172,12 @@ const SignUpForm = () => {
                   Date of birth
                 </label>
                 <div className='mt-1'>
-                  <input type='date' className={`${inputClasses}, uppercase`} />
+                  <input
+                    type='date'
+                    required
+                    onChange={(e) => setDob(e.target.value)}
+                    className={`${inputClasses}, uppercase`}
+                  />
                 </div>
               </div>
 
@@ -116,6 +189,8 @@ const SignUpForm = () => {
                   <input
                     type='text'
                     className={inputClasses}
+                    required
+                    onChange={(e) => setAddress(e.target.value)}
                     placeholder='Enter your residential address'
                   />
                 </div>
@@ -126,7 +201,12 @@ const SignUpForm = () => {
                   State
                 </label>
                 <div className='mt-1'>
-                  <input type='number' className={inputClasses} />
+                  <input
+                    type='text'
+                    onChange={(e) => setState(e.target.value)}
+                    required
+                    className={inputClasses}
+                  />
                 </div>
               </div>
 
@@ -135,7 +215,12 @@ const SignUpForm = () => {
                   City
                 </label>
                 <div className='mt-1'>
-                  <input type='text' className={inputClasses} />
+                  <input
+                    type='text'
+                    required
+                    onChange={(e) => setCity(e.target.value)}
+                    className={inputClasses}
+                  />
                 </div>
               </div>
             </div>
@@ -146,6 +231,7 @@ const SignUpForm = () => {
                   id='same-as-shipping'
                   name='same-as-shipping'
                   type='checkbox'
+                  required
                   className=''
                 />
                 <p className='text-[12px] text-brandGray-300 leading-[12px] font-gordita-regular'>
@@ -162,6 +248,7 @@ const SignUpForm = () => {
               textColor='text-white'
               width={true}
               size='text-sm'
+              type='submit'
             >
               Create Account
             </Button>

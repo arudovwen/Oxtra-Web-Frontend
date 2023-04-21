@@ -129,7 +129,7 @@ const LeaseCarSignUp = () => {
               </div>
             </div>
 
-            <div className='col-span-8 md:col-span-6'>
+            <div className='col-span-6 md:col-span-6'>
               <label htmlFor='expiration-date' className={labelClasses}>
                 State
               </label>
@@ -138,7 +138,7 @@ const LeaseCarSignUp = () => {
               </div>
             </div>
 
-            <div className='col-span-4 md:col-span-6'>
+            <div className='col-span-6 md:col-span-6'>
               <label htmlFor='city' className={labelClasses}>
                 City
               </label>

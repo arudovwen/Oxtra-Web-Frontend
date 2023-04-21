@@ -79,7 +79,7 @@ const BookCars = () => {
       {cars.map((car) => {
         return (
           <div key={car.id} className='text-brandGray-300'>
-            <Image src={car.image} width={490} height={198} alt={car.name} />
+            <Image src={car.image} width={690} height={198} alt={car.name} />
 
             <div className='bg-[#F4F6F8] p-4'>
               <h5 className='mb-4 text-sm font-gordita-bold'>{car.name}</h5>
