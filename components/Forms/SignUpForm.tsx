@@ -41,7 +41,8 @@ const SignUpForm = () => {
       city,
     };
 
-    handleCsrf().then(() => {
+    handleCsrf().then((response) => {
+      console.log(response)
       registerUser(person)
         .then((res) => {
           console.log("res", res);

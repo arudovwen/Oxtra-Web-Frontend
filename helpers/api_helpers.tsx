@@ -4,7 +4,7 @@ import axios from "axios";
 //const token = localStorage.getItem('user-token')
 
 //apply base url for axios
-const API_URL = "http://localhost:8000";
+const API_URL = "https://oxtra-backend.herokuapp.com";
 
 const axiosApi = axios.create({
   baseURL: API_URL,
