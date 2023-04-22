@@ -4,7 +4,10 @@ import Button from '../Button';
 import classNames from 'classnames';
 import { useState } from 'react';
 import { AiOutlineEyeInvisible, AiOutlineEye } from 'react-icons/ai';
+import { loginUser, handleCsrf,} from '@/services/authservices';
+import { useRouter } from 'next/router'
 import Link from 'next/link';
+
 
 const labelClasses = classNames(
   'block text-[14px] leading-[14px] font-gordita-medium text-brandGray-300'
@@ -15,7 +18,35 @@ const inputClasses = classNames(
 );
 
 const LoginForm = () => {
+   const router = useRouter()
   const [enterPasswordHidden, setEnterPasswordHidden] = useState(true);
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+
+  const handleSubmit = (e: any) => {
+    e.preventDefault()
+  
+    const user = {
+      email, password
+    }
+
+     handleCsrf().then((res) => {
+      loginUser(user)
+        .then((res) => {
+          router.push('/dashboard')
+          console.log('res', res);
+        })
+        .catch((err) => {
+          console.log(err);
+           const error = err.response.data.message
+        
+
+            setErrorMessage(error)
+         });
+    });
+  }
 
   return (
     <main className='w-[90%] lg:mx-auto lg:max-w-[500px]'>
@@ -31,7 +62,7 @@ const LoginForm = () => {
       </div>
 
       <section className='flex w-full flex-col'>
-        <form className='mt-6'>
+        <form className='mt-6' onSubmit={handleSubmit}>
           <div className='grid grid-cols-12 gap-y-6'>
             <div className='col-span-full'>
               <label htmlFor='' className={labelClasses}>
@@ -44,6 +75,7 @@ const LoginForm = () => {
                   name='email-address'
                   autoComplete='email'
                   placeholder='Enter your email address'
+                   onChange={(e) => setEmail(e.target.value)}
                   className={inputClasses}
                 />
               </div>
@@ -56,6 +88,7 @@ const LoginForm = () => {
                 <input
                   type={`${enterPasswordHidden ? 'password' : 'text'}`}
                   placeholder='Enter password'
+                  onChange={(e) => setPassword(e.target.value)}
                   className={inputClasses}
                 />
 
@@ -71,6 +104,7 @@ const LoginForm = () => {
                   />
                 )}
               </div>
+               {errorMessage && <p className='text-red-700 text-sm mt-1'>{errorMessage}</p>} 
             </div>
           </div>
           <div className='text-end mt-[22px] mb-[32px]'>
@@ -84,8 +118,9 @@ const LoginForm = () => {
             textColor='text-white'
             width={true}
             size='text-sm'
+            type='submit'
           >
-            Create Account
+            Login
           </Button>
           <div className='text-end mt-[32px]'>
             <span className='text-[12px] text-brandGray-300 leading-[12px] font-gordita-medium'>

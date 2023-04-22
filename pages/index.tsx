@@ -22,7 +22,7 @@ export default function Home() {
     <div className='overflow-hidden'>
       <Hero activePage={activePage} />
 
-      {/* <FindPreferredCar /> */}
+      <FindPreferredCar />
 
       <Services />
       <Vehicles />
