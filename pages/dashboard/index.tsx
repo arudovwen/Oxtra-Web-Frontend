@@ -20,20 +20,27 @@ const infoClasses = classNames(
 
 const Card = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className='bg-white p-4 rounded-lg inline-flex'>
-      <div className='mr-6'>
+    <div className='bg-white p-4 rounded-lg flex flex-col md:inline-flex  md:flex-row'>
+      <div className=' mb-2 md:mb-0 md:mr-6'>
         <Image
           src={honda}
           width={120}
           height={88}
           alt='car'
-          className='rounded-xl mb-3'
+          className='rounded-xl mb-3 hidden md:block'
+        />
+         <Image
+          src={honda}
+          width={600}
+          height={188}
+          alt='car'
+          className='rounded-xl mb-3 md:hidden'
         />
         <span className='text-[12px] leading-[12px] font-gordita-medium'>
           Honda CR-V (2015)
         </span>
       </div>
-      <div className='w-[200px] mr-[54px]'>
+      <div className='md:w-[200px] md:mr-[54px]'>
         <div className={rowClasses}>
           <span className={infoClasses}>Trip date:</span>
           <span className={contentClasses}>24/2/2023</span>
@@ -53,7 +60,7 @@ const Card = ({ children }: { children: React.ReactNode }) => {
           </span>
         </div>
       </div>
-      <div className='flex flex-col justify-between'>
+      <div className='flex items-center mt-[20px] md:mt-0 md:flex-col justify-between'>
         {children}
         <span className='text-[10px] flex font-gordita-medium gap-[9px] leading-[10px] text-brandGray-100'>
           View Details{' '}
@@ -72,13 +79,13 @@ const RentVehicle = () => {
 
   return (
     <DashboardLayout activePage={activePage}>
-      <div className='bg-brandGray-200 p-8 rounded-xl w-[840px]'>
+      <div className='bg-brandGray-200 p-8 rounded-xl xl:w-[840px]'>
         <div className='mb-8'>
           <Typography as='p' font='font-gordita-medium'>
             Rent a car
           </Typography>
         </div>
-        <div className='flex mb-8 gap-[91px]  font-gordita-regular text-sm border-b border-[#D4D6D8]'>
+        <div className='flex mb-8 gap-[10px] md:gap-[91px]  font-gordita-regular text-sm border-b border-[#D4D6D8]'>
           <span
             onClick={() => setPending(true)}
             className={`text-brandGray-100 px-5 cursor-pointer pb-2.5 ${

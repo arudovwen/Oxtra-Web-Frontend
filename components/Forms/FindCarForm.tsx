@@ -3,11 +3,11 @@ import classNames from 'classnames';
 import { GoSearch } from 'react-icons/go';
 
 const inputClasses = classNames(
-  'px-2 py-2 border border-[#d4d6d8] mt-3  w-full'
+  'px-2 py-2 border rounded-sm border-[#d4d6d8] mt-3  w-full'
 );
 
 const labelClasses = classNames(
-  'font-gordita-medium text-brandGray-300 text-sm'
+  'font-gordita-medium text-brandGray-300 text-xs lg:text-sm'
 );
 
 const FindCarForm = () => {
@@ -15,9 +15,9 @@ const FindCarForm = () => {
     <form
       action='
       '
-      className='flex gap-5'
+      className='grid grid-cols-12 gap-[20px]'
     >
-      <div className='w-[37%]'>
+      <div className='col-span-full xl:col-span-3'>
         <label htmlFor='Pick up location' className={labelClasses}>
           Pick up location
         </label>
@@ -27,7 +27,7 @@ const FindCarForm = () => {
           className={inputClasses}
         />
       </div>
-      <div className='w-[20%]'>
+      <div className='col-span-6 xl:col-span-2'>
         <label htmlFor='pick up Date' className={labelClasses}>
           Pick up Date
         </label>
@@ -38,19 +38,19 @@ const FindCarForm = () => {
           name='pick up Date'
         />
       </div>
-      <div>
+       <div className='col-span-6 xl:col-span-2'>
         <label htmlFor='Time' className={labelClasses}>
           Time
         </label>
         <input type='time' className={inputClasses} name='Time' />
       </div>
-      <div className='w-[13%] z-10'>
+        <div className='col-span-6 xl:col-span-2 z-10'>
         <label htmlFor='Number of Days' className={labelClasses}>
           Number of Days
         </label>
         <input type='number' className={inputClasses} />
       </div>
-      <div className='w-[20%] z-10'>
+          <div className='col-span-6 xl:col-span-2 z-10'>
         <label htmlFor='Return Date & Time' className={labelClasses}>
           Return Date & Time
         </label>
@@ -61,9 +61,12 @@ const FindCarForm = () => {
           className={`${inputClasses}  uppercase`}
         />
       </div>
-      <div className='bg-brandGreen-300 text-white p-6 rounded cursor-pointer'>
+        <div className='bg-brandGreen-300 text-white py-6 flex flex-col items-center justify-center  col-span-full xl:col-auto rounded cursor-pointer'>
         <GoSearch className='w-[26px] h-[26px]' />
       </div>
+      
+
+  
     </form>
   );
 };

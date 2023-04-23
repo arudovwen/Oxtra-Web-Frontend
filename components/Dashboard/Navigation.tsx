@@ -10,7 +10,7 @@ import classNames from 'classnames';
 
 const navigation = [{ name: 'Rent a vehicle', href: '/rent-a-vehicle' }];
 
-const iconClasses = classNames('text-brandGray-100 w-5 h-5');
+const iconClasses = classNames('text-brandGray-100 w-4 h-4 md:w-5 md:h-5');
 
 const Navigation = () => {
   return (
@@ -26,12 +26,12 @@ const Navigation = () => {
           />
         </Link>
 
-        <div className='flex gap-10 items-center pt-10 z-10'>
+        <div className='flex gap-2 md:gap-10 items-center pt-10 z-10'>
           {navigation.map((nav) => {
             const { name, href } = nav;
             return (
               <Typography key={name} as='p' font='font-gordita-regular'>
-                <Link href={href} className='p'>
+                <Link href={href}>
                   {name}
                 </Link>
               </Typography>
