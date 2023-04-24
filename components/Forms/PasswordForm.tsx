@@ -19,7 +19,7 @@ const PasswordForm = () => {
   const [confirmPasswordHidden, setConfirmPasswordHidden] = useState(true);
 
   return (
-    <form className='grid grid-cols-12 gap-y-6 gap-x-4 w-1/2 '>
+    <form className='grid grid-cols-12 gap-y-6 gap-x-4  md:w-1/2 '>
       <div className='col-span-full'>
         <label htmlFor='email-address' className={labelClasses}>
           Enter password

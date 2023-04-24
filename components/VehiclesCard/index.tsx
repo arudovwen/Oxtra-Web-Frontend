@@ -12,11 +12,11 @@ const contentClasses = classNames(
 
 const VehiclesCard = () => {
   return (
-    <div className='bg-[#E4E6E8] py-[16px] px-[20px] inline-block rounded-lg'>
+    <div className='bg-[#E4E6E8] py-[16px] px-[20px] md:inline-block rounded-lg'>
       <h5 className='text-[#444648] text-[12px] leading-[12px] font-gordita-medium text-center mb-[19px]'>
         Vehicles
       </h5>
-      <div className='flex justify-between items-center gap-[63px] mb-[22px] text-[#444648] font-gordita-medium'>
+      <div className='flex justify-between items-center  mb-[22px] text-[#444648] font-gordita-medium'>
         <span>
           <BsArrowLeftCircle className={iconClasses} />
         </span>
@@ -55,7 +55,7 @@ const VehiclesCard = () => {
           Verified
         </span>
       </div>
-      <div className='flex items-center gap-2 bg-brandGreen-300 rounded-3xl font-gordita-regular text-white py-[10px] px-[24px]'>
+      <div className='flex text-xs md:text-sm items-center gap-2 bg-brandGreen-300 rounded-3xl font-gordita-regular text-white py-[10px] px-[24px]'>
         <AiOutlinePlusCircle className='w-[20px] h-[20px]' /> Add another
         vehicle
       </div>

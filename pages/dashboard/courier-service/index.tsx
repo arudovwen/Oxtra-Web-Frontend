@@ -24,10 +24,7 @@ const infoClasses = classNames(
 
 const Card = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div
-      className='bg-white
-         p-4 rounded-lg inline-flex'
-    >
+    <div className='bg-white p-4 rounded-lg flex justify-between w-[517px]'>
       <div className='flex flex-col justify-between'>
         <TbTruck className='bg-brandGreen-300 p-[8px] text-white rounded-full w-[40px] h-[40px]' />
 
@@ -35,7 +32,7 @@ const Card = ({ children }: { children: React.ReactNode }) => {
           <FiCalendar /> 24/2/2023
         </span>
       </div>
-      <div className='w-[270px] mr-[39px] relative '>
+      <div className='relative '>
         <div className={rowClasses}>
           <span className={headingClasses}>Pick-up address</span>
           <span className={infoClasses}>
@@ -52,14 +49,60 @@ const Card = ({ children }: { children: React.ReactNode }) => {
           </span>
         </div>
       </div>
-      <div className='flex flex-col justify-between'>
+      <div className='flex items-end justify-between flex-col '>
         {children}
-        <span className='text-[10px] flex font-gordita-medium gap-[9px] leading-[10px] text-brandGray-100'>
+
+        <div className='text-[10px] flex font-gordita-medium gap-[9px] leading-[10px] text-brandGray-100'>
           View Details{' '}
           <span>
             <MdArrowForwardIos />
           </span>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const CardMobile = ({ children }: { children: React.ReactNode }) => {
+  return (
+    <div className='bg-white p-4 rounded-lg flex flex-col justify-between '>
+      <div className='flex justify-between items-center mb-[16px]'>
+        <TbTruck className='bg-brandGreen-300 p-[8px] text-white rounded-full w-[40px] h-[40px]' />
+        {children}
+      </div>
+      <div className='flex gap-3'>
+        <div className='relative '>
+          <BiCurrentLocation className='text-brandGreen-300' />
+          <div className='border-t-2 border-brandGreen-300  w-[38px] absolute top-[45px] right-[-11px] rotate-90'></div>
+          <HiOutlineLocationMarker className='absolute top-[80px] ' />
+        </div>
+        <div>
+          <div className={rowClasses}>
+            <span className={headingClasses}>Pick-up address</span>
+            <span className={infoClasses}>
+              12, ajifoluke avenue, Lekki - Lekki, Lagos state
+            </span>
+          </div>
+
+          <div className={`${rowClasses}`}>
+            <span className={headingClasses}>Drop-off adress</span>
+            <span className={infoClasses}>
+              12, ajifoluke avenue, Lekki - Lekki, Lagos state
+            </span>
+          </div>
+        </div>
+      </div>
+      <div className='flex justify-between'>
+        <span className='text-[12px] text-[#666666] flex gap-2  leading-[12px] font-gordita-medium'>
+          <FiCalendar /> 24/2/2023
         </span>
+
+        <div className='text-[10px] flex font-gordita-medium gap-[9px] leading-[10px] text-brandGray-100'>
+          View Details{' '}
+          <span>
+            <MdArrowForwardIos />
+          </span>
+        </div>
       </div>
     </div>
   );
@@ -72,13 +115,13 @@ const CourierService = () => {
 
   return (
     <DashboardLayout activePage={activePage}>
-      <div className='bg-brandGray-200 p-8 rounded-xl w-[840px]'>
+      <div>
         <div className='mb-8'>
           <Typography as='p' font='font-gordita-medium'>
             Courier service
           </Typography>
         </div>
-        <div className='flex mb-8 gap-[91px]  font-gordita-regular text-sm border-b border-[#D4D6D8]'>
+        <div className='flex mb-8 gap-[10px] md:gap-[91px] font-gordita-regular text-sm border-b border-[#D4D6D8]'>
           <span
             onClick={() => setPending(true)}
             className={`text-brandGray-100 px-5 cursor-pointer pb-2.5 ${
@@ -98,20 +141,39 @@ const CourierService = () => {
             Completed
           </span>
         </div>
-        {pending ? (
-          <Card>
-            <span className='text-[10px] leading-[10px] text-[#E59400] bg-[#FFF6E5] py-[9px] px-[12px] rounded-lg '>
-              Pending
-            </span>
-          </Card>
-        ) : (
-          <Card>
-            {' '}
-            <span className='text-[10px] leading-[10px] text-brandGreen-300 bg-brandGreen-100 py-[9px] px-[12px] rounded-lg '>
-              Completed
-            </span>
-          </Card>
-        )}
+        <div className='hidden md:block'>
+          {pending ? (
+            <Card>
+              <span className='text-[10px] justify-center px-[12px]  leading-[10px] text-[#E59400]  bg-[#FFF6E5] py-[9px] flex items-center rounded-lg '>
+                Pending
+              </span>
+            </Card>
+          ) : (
+            <Card>
+              {' '}
+              <span className='text-[10px] leading-[10px] text-brandGreen-300 bg-brandGreen-100 py-[9px] px-[12px] rounded-lg '>
+                Completed
+              </span>
+            </Card>
+          )}{' '}
+        </div>
+
+        <div className='md:hidden'>
+          {pending ? (
+            <CardMobile>
+              <span className='text-[10px] justify-center  leading-[10px] text-[#E59400] py-[9px] px-[12px] bg-[#FFF6E5] rounded-lg'>
+                Pending
+              </span>
+            </CardMobile>
+          ) : (
+            <CardMobile>
+              {' '}
+              <span className='text-[10px] leading-[10px] text-brandGreen-300 bg-brandGreen-100 py-[9px] px-[12px] rounded-lg '>
+                Completed
+              </span>
+            </CardMobile>
+          )}{' '}
+        </div>
       </div>
       <div className='mt-8 max-w-[480px] mx-auto'>
         <Button

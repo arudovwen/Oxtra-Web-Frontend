@@ -11,7 +11,7 @@ interface DashboardLayoutProps {
 
 const DashboardLayout = ({ children, activePage }: DashboardLayoutProps) => {
   return (
-    <div className='h-screen flex flex-col'>
+    <div className='h-screen flex flex-col '>
       <Navigation />
 
       <div className='flex-1 w-[90%] lg:max-w-[1033px] mx-auto'>
@@ -20,7 +20,9 @@ const DashboardLayout = ({ children, activePage }: DashboardLayoutProps) => {
           <div>
             <SideNav activePage={activePage} />
           </div>
-          <div>{children}</div>
+          <div className='bg-brandGray-200 p-8 rounded-xl lg:w-[740px] xl:w-[840px]'>
+            {children}
+          </div>
         </div>
       </div>
       <AlterFooter />

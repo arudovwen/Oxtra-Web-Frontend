@@ -14,7 +14,7 @@ const ProfileForm = () => {
   return (
     <form className='mt-6'>
       <div className='grid grid-cols-12 gap-y-6 gap-x-6'>
-        <div className='col-span-4'>
+        <div className='col-span-6 md:col-span-4'>
           <label htmlFor='expiration-date' className={labelClasses}>
             First name
           </label>
@@ -28,7 +28,7 @@ const ProfileForm = () => {
           </div>
         </div>
 
-        <div className='col-span-4'>
+        <div className='col-span-6 md:col-span-4'>
           <label htmlFor='cvc' className={labelClasses}>
             Last name
           </label>
@@ -41,7 +41,7 @@ const ProfileForm = () => {
             />
           </div>
         </div>
-        <div className='col-span-8'>
+        <div className='col-span-full md:col-span-8'>
           <label htmlFor='' className={labelClasses}>
             Email
           </label>
@@ -57,7 +57,7 @@ const ProfileForm = () => {
           </div>
         </div>
 
-        <div className='col-span-8'>
+        <div className='col-span-full md:col-span-8'>
           <label htmlFor='card-number' className={labelClasses}>
             Phone number
           </label>
@@ -66,7 +66,7 @@ const ProfileForm = () => {
           </div>
         </div>
 
-        <div className='col-span-8'>
+        <div className='col-span-full md:col-span-8'>
           <label htmlFor='card-number' className={labelClasses}>
             Address
           </label>
@@ -78,7 +78,7 @@ const ProfileForm = () => {
             />
           </div>
         </div>
-        <div className='col-span-8'>
+        <div className='col-span-full md:col-span-8'>
           {' '}
           <Button
             bg='bg-brandGreen-300'

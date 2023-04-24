@@ -29,7 +29,7 @@ const Card = ({ children }: { children: React.ReactNode }) => {
           alt='car'
           className='rounded-xl mb-3 hidden md:block'
         />
-         <Image
+        <Image
           src={honda}
           width={600}
           height={188}
@@ -79,7 +79,7 @@ const RentVehicle = () => {
 
   return (
     <DashboardLayout activePage={activePage}>
-      <div className='bg-brandGray-200 p-8 rounded-xl xl:w-[840px]'>
+      <div>
         <div className='mb-8'>
           <Typography as='p' font='font-gordita-medium'>
             Rent a car
