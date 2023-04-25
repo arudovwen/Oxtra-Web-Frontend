@@ -4,10 +4,9 @@ import Button from '../Button';
 import classNames from 'classnames';
 import { useState } from 'react';
 import { AiOutlineEyeInvisible, AiOutlineEye } from 'react-icons/ai';
-import { loginUser, handleCsrf,} from '@/services/authservices';
-import { useRouter } from 'next/router'
+import { loginUser, handleCsrf } from '@/services/authservices';
 import Link from 'next/link';
-
+import { useAuth } from '@/hooks/useAuth';
 
 const labelClasses = classNames(
   'block text-[14px] leading-[14px] font-gordita-medium text-brandGray-300'
@@ -18,35 +17,36 @@ const inputClasses = classNames(
 );
 
 const LoginForm = () => {
-   const router = useRouter()
   const [enterPasswordHidden, setEnterPasswordHidden] = useState(true);
   const [errorMessage, setErrorMessage] = useState('');
+  const { login } = useAuth();
 
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const handleSubmit = (e: any) => {
-    e.preventDefault()
-  
-    const user = {
-      email, password
-    }
+    e.preventDefault();
 
-     handleCsrf().then((res) => {
+    const user = {
+      email,
+      password,
+    };
+
+    handleCsrf().then((res) => {
       loginUser(user)
         .then((res) => {
-          router.push('/dashboard')
           console.log('res', res);
+
+          login(res.data.user);
         })
         .catch((err) => {
           console.log(err);
-           const error = err.response.data.message
-        
+          const error = err.response.data.message;
 
-            setErrorMessage(error)
-         });
+          setErrorMessage(error);
+        });
     });
-  }
+  };
 
   return (
     <main className='w-[90%] lg:mx-auto lg:max-w-[500px]'>
@@ -75,7 +75,7 @@ const LoginForm = () => {
                   name='email-address'
                   autoComplete='email'
                   placeholder='Enter your email address'
-                   onChange={(e) => setEmail(e.target.value)}
+                  onChange={(e) => setEmail(e.target.value)}
                   className={inputClasses}
                 />
               </div>
@@ -104,7 +104,9 @@ const LoginForm = () => {
                   />
                 )}
               </div>
-               {errorMessage && <p className='text-red-700 text-sm mt-1'>{errorMessage}</p>} 
+              {errorMessage && (
+                <p className='text-red-700 text-sm mt-1'>{errorMessage}</p>
+              )}
             </div>
           </div>
           <div className='text-end mt-[22px] mb-[32px]'>

@@ -1,15 +1,23 @@
 import Typography from '@/components/Typography';
 import DashboardLayout from '@/components/Layouts/DashboardLayout';
 import ProfileForm from '@/components/Forms/ProfileForm';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import VehiclesCard from '@/components/VehiclesCard';
+import { useRouter } from 'next/router';
+import { useAuth } from '@/hooks/useAuth';
 
 const Profile = () => {
   const activePage = 'Profile';
-
+  const { user } = useAuth();
+  const router = useRouter();
   const [profileForm, setProfileForm] = useState(true);
   const [vehicleCard, setVehicleCard] = useState(false);
   const [document, setDocument] = useState(false);
+
+  useEffect(() => {
+    user ? router.push('/dashboard/profile') : router.push('/');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <DashboardLayout activePage={activePage}>

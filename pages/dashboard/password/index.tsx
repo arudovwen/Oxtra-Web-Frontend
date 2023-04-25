@@ -2,11 +2,21 @@ import React from 'react';
 import DashboardLayout from '@/components/Layouts/DashboardLayout';
 import Typography from '@/components/Typography';
 import PasswordForm from '@/components/Forms/PasswordForm';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useAuth } from '@/hooks/useAuth';
+import { useRouter } from 'next/router';
 
 const Password = () => {
   const activePage = 'password';
   const [changePassword, setChangePassword] = useState(true);
+
+  const { user } = useAuth();
+  const router = useRouter();
+
+  useEffect(() => {
+    user ? router.push('/dashboard/password') : router.push('/');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
     <DashboardLayout activePage={activePage}>
       <div className='mb-8'>

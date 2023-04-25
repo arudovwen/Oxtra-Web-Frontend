@@ -6,7 +6,9 @@ import Image from 'next/image';
 import classNames from 'classnames';
 import { MdArrowForwardIos } from 'react-icons/md';
 import Button from '@/components/Button';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useAuth } from '@/hooks/useAuth';
+import { useRouter } from 'next/router';
 
 const rowClasses = classNames('flex items-baseline mb-[20px] justify-between');
 
@@ -19,6 +21,14 @@ const infoClasses = classNames(
 );
 
 const Card = ({ children }: { children: React.ReactNode }) => {
+  const { user } = useAuth();
+  const router = useRouter();
+
+  useEffect(() => {
+    user ? router.push('/dashboard') : router.push('/');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <div className='bg-white p-4 rounded-lg flex flex-col md:inline-flex  md:flex-row'>
       <div className=' mb-2 md:mb-0 md:mr-6'>

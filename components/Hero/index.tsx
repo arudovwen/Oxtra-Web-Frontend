@@ -30,8 +30,9 @@ const Hero = ({ activePage }: HeroProps) => {
           buttonText='text-brandGray-300'
           activePage={activePage}
           navBackground='green'
+          menuColor='text-white'
         />
-        <CollapseNav
+        {/* <CollapseNav
           color='text-white'
           hover='hover:text-brandGreen-100'
           buttonBg='bg-white'
@@ -40,7 +41,7 @@ const Hero = ({ activePage }: HeroProps) => {
           activePage={activePage}
           navBackground='green'
           menuColor='text-white'
-        />
+        /> */}
 
         <div className='text-white text-center xl:text-left pb-[204px] mt-[110px]'>
           <div className='xl:max-w-[608px] mb-6'>

@@ -4,7 +4,9 @@ import Typography from '@/components/Typography';
 import classNames from 'classnames';
 import { CiClock2 } from 'react-icons/ci';
 import { FiCalendar } from 'react-icons/fi';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useAuth } from '@/hooks/useAuth';
+import { useRouter } from 'next/router';
 
 const labelClasses = classNames(
   'block text-[12px] leading-[12px] font-gordita-medium text-[#4C4C4C]'
@@ -17,6 +19,14 @@ const infoClasses = classNames(
 const LeaseVehicle = () => {
   const activePage = 'Lease vehicle';
   const [pending, setPending] = useState(true);
+
+  const { user } = useAuth();
+  const router = useRouter();
+
+  useEffect(() => {
+    user ? router.push('/dashboard/lease-a-vehicle') : router.push('/');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <DashboardLayout activePage={activePage}>

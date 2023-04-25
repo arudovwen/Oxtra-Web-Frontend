@@ -8,8 +8,7 @@ import Button from '../Button';
 import logo2 from '../../public/assets/Asset 3.png';
 import { RiMenu3Fill } from 'react-icons/ri';
 import { AiOutlineClose } from 'react-icons/ai';
-
-import Container from '../Container';
+import { useAuth } from '@/hooks/useAuth';
 
 interface CollapseNavProps {
   color: string;
@@ -20,6 +19,7 @@ interface CollapseNavProps {
   activePage: string;
   navBackground: string;
   menuColor: string;
+  children?: React.ReactNode;
 }
 
 const navigation = [
@@ -27,9 +27,31 @@ const navigation = [
   { name: 'Put up your vehicle', href: '/put-up-your-vehicle' },
   { name: 'Company', href: '/company' },
   { name: 'FAQ', href: '/' },
-  { name: 'Login', href: '/login' },
-  { name: 'Sign Up', href: '/signup' },
 ];
+
+const NavItems = ({ color, hover, activePage, children }: CollapseNavProps) => {
+  return (
+    <div className='flex flex-col gap-[40px]'>
+      {navigation.map((nav) => {
+        const { name, href } = nav;
+        return (
+          <Typography key={name} as='p' font='font-gordita-regular'>
+            <Link
+              href={href}
+              className={`${color}  pb-1 z-50 ${hover} duration-300 ${
+                activePage.toLowerCase() === name.toLocaleLowerCase() &&
+                'font-gordita-bold text-brandGreen-300'
+              }`}
+            >
+              {name}
+            </Link>
+          </Typography>
+        );
+      })}
+      {children}
+    </div>
+  );
+};
 
 const CollapseNav = ({
   color,
@@ -42,6 +64,8 @@ const CollapseNav = ({
   menuColor,
 }: CollapseNavProps) => {
   const [open, setOpen] = useState(false);
+
+  const { user } = useAuth();
 
   return (
     <div className='xl:hidden  flex items-baseline justify-between text-white'>
@@ -86,7 +110,7 @@ const CollapseNav = ({
       </div>
 
       {open && (
-        <div className='flex fixed top-0 right-0 left-0 bottom-0 flex-col bg-black gap-10 p-[19px] z-50'>
+        <div className='flex w-full min-h-screen overflow-hidden fixed top-0 right-0 left-0 bottom-0 flex-col bg-black gap-10 p-[19px] z-50'>
           <div className='flex items-baseline justify-between'>
             <Link href='/' className='pt-6 z-50'>
               <Image
@@ -104,38 +128,55 @@ const CollapseNav = ({
               />
             </div>
           </div>
-          {navigation.map((nav) => {
-            const { name, href } = nav;
-            if (name !== 'Sign Up') {
-              return (
-                <Typography key={name} as='p' font='font-gordita-regular'>
+          <NavItems
+            navBackground={navBackground}
+            color={color}
+            hover={hover}
+            activePage={activePage}
+            buttonHover={buttonHover}
+            buttonText={buttonText}
+            buttonBg={buttonBg}
+            menuColor={menuColor}
+          >
+            {user ? (
+              <div className={`${buttonText}`}>
+                <Button
+                  bg={buttonBg}
+                  link='/dashboard'
+                  hover={buttonHover}
+                  width={false}
+                  size='text-base'
+                >
+                  Dashboard
+                </Button>
+              </div>
+            ) : (
+              <div className='flex flex-col gap-[40px]'>
+                <Typography as='p' font='font-gordita-regular'>
                   <Link
-                    href={href}
-                    className={`${color}  pb-1 z-50 ${hover} duration-300 ${
-                      activePage.toLowerCase() === name.toLocaleLowerCase() &&
+                    href='login'
+                    className={`${color}  pb-1 ${hover} duration-300 ${
+                      activePage.toLowerCase() === 'login' &&
                       'font-gordita-bold text-brandGreen-300'
                     }`}
                   >
-                    {name}
+                    Login
                   </Link>
                 </Typography>
-              );
-            } else {
-              return (
-                <div key={name} className={`${buttonText}`}>
+                <div className={`${buttonText}`}>
                   <Button
                     bg={buttonBg}
-                    link={href}
+                    link='signup'
                     hover={buttonHover}
                     width={false}
                     size='text-base'
                   >
-                    {name}
+                    Sign Up
                   </Button>
                 </div>
-              );
-            }
-          })}
+              </div>
+            )}
+          </NavItems>
         </div>
       )}
     </div>

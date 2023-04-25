@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import { useAuth } from '@/hooks/useAuth';
 
 const sideNav = [
   { name: 'Rent a vehicle', href: '/dashboard' },
@@ -14,6 +15,7 @@ interface SideNavProps {
 }
 
 const SideNav = ({ activePage }: SideNavProps) => {
+  const { logout } = useAuth();
   return (
     <div className='flex  lg:flex-col gap-[60px]   font-gordita-regular overflow-scroll lg:overflow-auto'>
       <div className='flex lg:flex-col gap-6 items-center lg:items-start'>
@@ -34,8 +36,9 @@ const SideNav = ({ activePage }: SideNavProps) => {
         })}
       </div>
       <span
-        className='lg:pl-3 py-2 bg-[#FFDBDB] text-[#660000] font-gordita-regular  px-3 lg:w-[152px] rounded-lg
+        className='lg:pl-3 py-2 bg-[#FFDBDB] text-[#660000] font-gordita-regular cursor-pointer px-3 lg:w-[152px] rounded-lg
 '
+        onClick={logout}
       >
         Logout
       </span>

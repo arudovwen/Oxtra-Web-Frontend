@@ -8,7 +8,9 @@ import { TbTruck } from 'react-icons/tb';
 import Button from '@/components/Button';
 import { HiOutlineLocationMarker } from 'react-icons/hi';
 import { BiCurrentLocation } from 'react-icons/bi';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useAuth } from '@/hooks/useAuth';
+import { useRouter } from 'next/router';
 
 const rowClasses = classNames(
   'flex flex-col items-baseline mb-[30px] justify-between'
@@ -112,6 +114,14 @@ const CourierService = () => {
   const activePage = 'Courier service';
 
   const [pending, setPending] = useState(true);
+
+  const { user } = useAuth();
+  const router = useRouter();
+
+  useEffect(() => {
+    user ? router.push('/dashboard/courier-service') : router.push('/');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <DashboardLayout activePage={activePage}>
