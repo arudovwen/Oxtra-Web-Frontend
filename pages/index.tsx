@@ -12,8 +12,6 @@ import Image from 'next/image';
 import Container from '@/components/Container';
 import pink from '../public/assets/pink.png';
 
-const inter = Inter({ subsets: ['latin'] });
-
 export default function Home() {
   const activePage = 'Home';
 

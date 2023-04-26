@@ -83,6 +83,7 @@ const SingleCar = () => {
           buttonHover='hover:bg-white'
           activePage={activePage}
           navBackground='white'
+          menuColor='text-brandGreen-300'
         />
 
         <div

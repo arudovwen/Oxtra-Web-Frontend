@@ -8,7 +8,6 @@ import Image from 'next/image';
 import cloud from '../../public/assets/cloud.png';
 import car from '../../public/assets//Frame.png';
 import moneyBag from '../../public/assets/image 35.png';
-import CollapseNav from '../Navigation/CollapseNav';
 
 interface CompanyHeroProps {
   activePage: string;
@@ -24,15 +23,6 @@ const CompanyHero = ({ activePage }: CompanyHeroProps) => {
           buttonBg='bg-brandGreen-300'
           buttonText='text-white'
           buttonHover='hover:bg-white'
-          activePage={activePage}
-          navBackground='white'
-        />
-        <CollapseNav
-          color='text-white'
-          hover='hover:text-brandGreen-100'
-          buttonBg='bg-white'
-          buttonHover='hover:bg-brandGreen-300'
-          buttonText='text-brandGray-300'
           activePage={activePage}
           navBackground='white'
           menuColor='text-brandGreen-300'

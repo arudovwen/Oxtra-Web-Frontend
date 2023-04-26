@@ -8,8 +8,8 @@ const VARIANT_Styles: Record<Type, string> = {
   h3: 'text-2xl md:text-3xl',
   h4: 'text-xl md:text-2xl',
   h5: 'text-lg md:text-xl',
-  h6: 'text-lg',
-  p: 'text-base',
+  h6: 'text-base md:text-lg',
+  p: 'text-xs md:text-base',
 };
 type Font =
   | 'font-gordita-regular'

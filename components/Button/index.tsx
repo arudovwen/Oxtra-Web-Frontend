@@ -11,6 +11,7 @@ interface ButtonProps {
   width: boolean;
   type?: 'button' | 'submit' | 'reset';
   size: 'text-base' | 'text-sm';
+  disable?: boolean;
 }
 
 const buttonClasses = classNames(
@@ -26,10 +27,15 @@ const Button = ({
   width,
   type,
   size,
+  disable,
 }: ButtonProps) => {
   if (type) {
     return (
-      <button type={type} className={` ${width && 'w-full'}`}>
+      <button
+        disabled={disable}
+        type={type}
+        className={` ${width && 'w-full'} ${disable && 'cursor-no-drop'}`}
+      >
         <a
           className={classNames(
             `${hover} ${buttonClasses} ${size} ${bg} w-full block ${textColor}`,

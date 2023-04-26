@@ -6,7 +6,6 @@ import Navigation from '@/components/Navigation';
 import heroBackground from '../../public/assets/herobackground.png';
 import heroCar from '../../public/assets/heroCar.png';
 import heroCarHalf from '../../public/assets/heroCarHalf.png';
-import CollapseNav from '../Navigation/CollapseNav';
 
 interface HeroProps {
   activePage: string;
@@ -32,16 +31,6 @@ const Hero = ({ activePage }: HeroProps) => {
           navBackground='green'
           menuColor='text-white'
         />
-        {/* <CollapseNav
-          color='text-white'
-          hover='hover:text-brandGreen-100'
-          buttonBg='bg-white'
-          buttonHover='hover:bg-brandGreen-300'
-          buttonText='text-brandGray-300'
-          activePage={activePage}
-          navBackground='green'
-          menuColor='text-white'
-        /> */}
 
         <div className='text-white text-center xl:text-left pb-[204px] mt-[110px]'>
           <div className='xl:max-w-[608px] mb-6'>

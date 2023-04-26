@@ -18,11 +18,39 @@ const PasswordForm = () => {
 
   const [confirmPasswordHidden, setConfirmPasswordHidden] = useState(true);
 
+  const [oldPassword, setOldPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [newPassword_confirmation, setNewPassword_confirmation] = useState('');
+
   return (
     <form className='grid grid-cols-12 gap-y-6 gap-x-4  md:w-1/2 '>
       <div className='col-span-full'>
         <label htmlFor='email-address' className={labelClasses}>
-          Enter password
+          Enter old password
+        </label>
+        <div className='mt-1 relative'>
+          <input
+            type={`${enterPasswordHidden ? 'password' : 'text'}`}
+            placeholder='Enter password'
+            className={inputClasses}
+          />
+
+          {enterPasswordHidden ? (
+            <AiOutlineEyeInvisible
+              className='absolute top-[24px] right-[12px]'
+              onClick={() => setEnterPasswordHidden(!enterPasswordHidden)}
+            />
+          ) : (
+            <AiOutlineEye
+              className='absolute top-[24px] right-[12px]'
+              onClick={() => setEnterPasswordHidden(!enterPasswordHidden)}
+            />
+          )}
+        </div>
+      </div>
+      <div className='col-span-full'>
+        <label htmlFor='email-address' className={labelClasses}>
+          Enter new password
         </label>
         <div className='mt-1 relative'>
           <input
@@ -47,7 +75,7 @@ const PasswordForm = () => {
 
       <div className='col-span-full'>
         <label htmlFor='' className={labelClasses}>
-          Confirm password
+          Confirm new password
         </label>
         <div className='mt-1 relative'>
           <input

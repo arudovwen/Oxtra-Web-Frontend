@@ -52,7 +52,7 @@ const Footer = () => {
   return (
     <footer className='pb-[80px] '>
       <Container>
-        <div className='grid grid-cols-2 lg:grid-cols-6 gap-x-[48px] gap-y-[48px]'>
+        <div className='grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-x-[100px] lg:gap-x-[48px] gap-y-[48px]'>
           <div className='lg:col-span-2 lg:w-[74%]'>
             <Image
               src={logo}
@@ -133,7 +133,7 @@ const Footer = () => {
                 return (
                   <li key={item.name} className='mb-4 text-brandGray-100'>
                     <Typography as='p' font='font-gordita-regular'>
-                      <Link href={item.href}> {item.name}</Link>
+                      <Link href={item.href}>{item.name}</Link>
                     </Typography>
                   </li>
                 );

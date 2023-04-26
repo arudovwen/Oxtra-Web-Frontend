@@ -23,7 +23,7 @@ module.exports = {
         xl: ['24px', { lineHeight: '33px' }],
         // Headings H6 - H1
         '2xl': ['32px', { lineHeight: '32px' }],
-        '3xl': ['40px', { lineHeight: '40px' }],
+        '3xl': ['40px', { lineHeight: '48px' }],
         '4xl': ['56px', { lineHeight: '76.11px' }],
       },
 

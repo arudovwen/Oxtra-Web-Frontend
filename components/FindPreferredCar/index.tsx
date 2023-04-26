@@ -8,7 +8,7 @@ import FindCarForm from '../Forms/FindCarForm';
 const FindPreferredCar = () => {
   return (
     <div className='flex justify-center mb-[512px] xl:mb-[234px] '>
-      <div className='bg-white absolute box-shadow w-[90%]  xl:w-[1164px] top-[498px] lg:top-[529px]  p-6'>
+      <div className='bg-white absolute box-shadow w-[90%]  xl:w-[1164px] top-[523px] lg:top-[529px]  p-6'>
         <div>
           <div className='text-brandGray-300 mb-[26px]'>
             <Typography as='h5' font='font-gordita-medium'>

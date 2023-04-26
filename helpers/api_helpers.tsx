@@ -1,10 +1,11 @@
+import { dangerAlert } from '@/components/Toasts';
 import axios from 'axios';
 
 //pass new generated access token here
 //const token = localStorage.getItem('user-token')
 
 //apply base url for axios
-const API_URL = "https://oxtra-backend.herokuapp.com";
+const API_URL = 'https://oxtra-backend.herokuapp.com';
 
 const axiosApi = axios.create({
   baseURL: API_URL,
@@ -20,6 +21,11 @@ axiosApi.interceptors.response.use(
 
   (error) => {
     console.log(error);
+
+    error.response
+      ? dangerAlert(error.response.data.message)
+      : dangerAlert(error.message);
+
     if (
       error.response.status === 401 &&
       error.code === 'ERR_BAD_REQUEST' &&

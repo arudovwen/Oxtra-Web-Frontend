@@ -7,6 +7,8 @@ import { AiOutlineEyeInvisible, AiOutlineEye } from 'react-icons/ai';
 import { loginUser, handleCsrf } from '@/services/authservices';
 import Link from 'next/link';
 import { useAuth } from '@/hooks/useAuth';
+import Loading from '../Loading';
+import { successAlert } from '../Toasts';
 
 const labelClasses = classNames(
   'block text-[14px] leading-[14px] font-gordita-medium text-brandGray-300'
@@ -18,14 +20,14 @@ const inputClasses = classNames(
 
 const LoginForm = () => {
   const [enterPasswordHidden, setEnterPasswordHidden] = useState(true);
-  const [errorMessage, setErrorMessage] = useState('');
-  const { login } = useAuth();
+  const { login, disable, setDisable } = useAuth();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
+    setDisable(true);
 
     const user = {
       email,
@@ -38,14 +40,17 @@ const LoginForm = () => {
           console.log('res', res);
 
           login(res.data.user);
+          successAlert(res.data.message);
+          setDisable(false);
         })
         .catch((err) => {
           console.log(err);
-          const error = err.response.data.message;
 
-          setErrorMessage(error);
+          setDisable(false);
         });
     });
+
+    // setDisable(false);
   };
 
   return (
@@ -104,9 +109,6 @@ const LoginForm = () => {
                   />
                 )}
               </div>
-              {errorMessage && (
-                <p className='text-red-700 text-sm mt-1'>{errorMessage}</p>
-              )}
             </div>
           </div>
           <div className='text-end mt-[22px] mb-[32px]'>
@@ -115,14 +117,19 @@ const LoginForm = () => {
             </span>
           </div>
           <Button
-            bg='bg-brandGreen-300'
+            bg={!disable ? 'bg-brandGreen-300' : 'bg-brandGreen-100'}
             hover='hover:bg-brandGray-200'
             textColor='text-white'
             width={true}
             size='text-sm'
             type='submit'
+            disable={disable}
           >
-            Login
+            {!disable ? (
+              'Login'
+            ) : (
+              <Loading type='spin' width={14} height={14} color='#42864F' />
+            )}
           </Button>
           <div className='text-end mt-[32px]'>
             <span className='text-[12px] text-brandGray-300 leading-[12px] font-gordita-medium'>

@@ -4,7 +4,6 @@ import Container from '../Container';
 import AlterFooter from '../Footers/AlterFooter';
 import { AiOutlineArrowLeft } from 'react-icons/ai';
 import { useRouter } from 'next/router';
-import CollapseNav from '../Navigation/CollapseNav';
 
 interface PutUpYourVehicleLayoutProps {
   children: React.ReactNode;
@@ -40,15 +39,6 @@ const PutUpYourVehicleLayout = ({
           buttonBg='bg-brandGreen-300'
           buttonText='text-white'
           buttonHover='hover:bg-white'
-          activePage={activePage}
-          navBackground='white'
-        />
-        <CollapseNav
-          color='text-white'
-          hover='hover:text-brandGreen-100'
-          buttonBg='bg-white'
-          buttonHover='hover:bg-brandGreen-300'
-          buttonText='text-brandGray-300'
           activePage={activePage}
           navBackground='white'
           menuColor='text-brandGreen-300'
