@@ -11,7 +11,7 @@ const labelClasses = classNames(
 );
 
 const inputClasses = classNames(
-  `px-2 py-2 border border-[#d4d6d8] rounded-lg mt-3  w-full font-gordita-regular`
+  `px-2  h-[40px] py-2 border border-[#d4d6d8] rounded-lg mt-3  w-full font-gordita-regular`
 );
 
 const LeaseCarSignUp = () => {

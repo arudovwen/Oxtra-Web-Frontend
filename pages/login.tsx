@@ -3,9 +3,20 @@ import Container from '@/components/Container';
 import React from 'react';
 import LoginForm from '@/components/Forms/LoginForm';
 import AlterFooter from '@/components/Footers/AlterFooter';
+import { useEffect } from 'react';
+import { useAuth } from '@/hooks/useAuth';
+import { useRouter } from 'next/router';
 
 const Login = () => {
   const activePage = 'Login';
+  const router = useRouter();
+  const { user } = useAuth();
+
+  useEffect(() => {
+    user ? router.push('/') : router.push('/login');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <div className='h-screen flex flex-col'>
       <Container>

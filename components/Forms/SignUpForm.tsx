@@ -13,7 +13,7 @@ const labelClasses = classNames(
 );
 
 const inputClasses = classNames(
-  `px-2 py-2 border border-[#d4d6d8] rounded-lg mt-3  w-full font-gordita-regular`
+  `px-2 py-2 border border-[#d4d6d8] rounded-lg mt-3  w-full font-gordita-regular h-[40px]`
 );
 
 const SignUpForm = () => {
@@ -74,7 +74,7 @@ const SignUpForm = () => {
     <main className='w-[90%] lg:mx-auto lg:max-w-[500px]'>
       <div className='mb-4 mt-[40px] text-brandGray-300'>
         <Typography as='h4' font='font-gordita-medium'>
-          Sign up to complete order
+          Sign up
         </Typography>
       </div>
       <div className='text-brandGray-100 mb-8'>
@@ -195,9 +195,9 @@ const SignUpForm = () => {
                     type='tel'
                     id='phone'
                     name='phone'
-                    pattern='[0-9]{4}-[0-9]{3}-[0-9]{4}'
+                    pattern='[0-9]{11}'
                     required
-                    placeholder='0808-359-4505'
+                    placeholder='08083594505'
                     onChange={(e) => setPhoneNumber(e.target.value)}
                     className={inputClasses}
                   />

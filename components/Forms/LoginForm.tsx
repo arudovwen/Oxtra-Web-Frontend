@@ -114,9 +114,12 @@ const LoginForm = () => {
             </div>
           </div>
           <div className='text-end mt-[22px] mb-[32px]'>
-            <span className='text-[12px] leading-[12px] text-brandGreen-300 font-gordita-medium'>
+            <Link
+              href='/reset-password'
+              className='text-[12px] leading-[12px] text-brandGreen-300 font-gordita-medium'
+            >
               Forgot Password?
-            </span>
+            </Link>
           </div>
           <Button
             bg={!disable ? 'bg-brandGreen-300' : 'bg-brandGreen-100'}

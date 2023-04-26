@@ -13,7 +13,7 @@ const labelClasses = classNames(
 );
 
 const inputClasses = classNames(
-  `px-2 py-2 border border-[#d4d6d8] rounded-lg mt-3  w-full font-gordita-regular bg-brandGray-200 text-brandGray-100 text-base`
+  `px-2 py-2 h-[40px] border border-[#d4d6d8] rounded-lg mt-3  w-full font-gordita-regular bg-brandGray-200 text-brandGray-100 text-base`
 );
 
 const ResetPasswordForm = () => {

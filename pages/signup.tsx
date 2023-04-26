@@ -3,10 +3,20 @@ import Navigation from '@/components/Navigation';
 import Container from '@/components/Container';
 import SignUpForm from '@/components/Forms/SignUpForm';
 import AlterFooter from '@/components/Footers/AlterFooter';
-
+import { useRouter } from 'next/router';
+import { useAuth } from '@/hooks/useAuth';
+import { useEffect } from 'react';
 
 const SignUp = () => {
   const activePage = '';
+
+  const router = useRouter();
+  const { user } = useAuth();
+
+  useEffect(() => {
+    user ? router.push('/') : router.push('/signup');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className='h-screen flex flex-col'>
