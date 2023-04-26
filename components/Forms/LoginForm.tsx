@@ -57,7 +57,7 @@ const LoginForm = () => {
     <main className='w-[90%] lg:mx-auto lg:max-w-[500px]'>
       <div className='mb-4 mt-[40px] text-brandGray-300'>
         <Typography as='h4' font='font-gordita-medium'>
-          Login to complete order
+          Login
         </Typography>
       </div>
       <div className='text-brandGray-100 mb-8'>
@@ -82,6 +82,7 @@ const LoginForm = () => {
                   placeholder='Enter your email address'
                   onChange={(e) => setEmail(e.target.value)}
                   className={inputClasses}
+                  required
                 />
               </div>
             </div>
@@ -95,6 +96,7 @@ const LoginForm = () => {
                   placeholder='Enter password'
                   onChange={(e) => setPassword(e.target.value)}
                   className={inputClasses}
+                  required
                 />
 
                 {enterPasswordHidden ? (
