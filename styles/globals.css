@@ -37,6 +37,7 @@ input[type='number'] {
   -moz-appearance: textfield;
 }
 
-input {
+input[type='datetime-local'],
+input[type='time'] {
   -webkit-appearance: none;
 }
