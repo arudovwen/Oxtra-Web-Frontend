@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import { GoSearch } from 'react-icons/go';
 
 const inputClasses = classNames(
-  'px-2 py-2 border rounded-sm border-[#d4d6d8] mt-3  w-full'
+  'px-2 py-2 border rounded-sm border-[#d4d6d8] mt-3  w-full h-[2rem]'
 );
 
 const labelClasses = classNames(
@@ -36,19 +36,13 @@ const FindCarForm = () => {
           id='pick up Date'
           className={`${inputClasses}  uppercase`}
           name='pick up Date'
-          placeholder='Enter address or airport'
         />
       </div>
       <div className='col-span-6 xl:col-span-2'>
         <label htmlFor='Time' className={labelClasses}>
           Time
         </label>
-        <input
-          type='time'
-          className={inputClasses}
-          name='Time'
-          placeholder='Enter address or airport'
-        />
+        <input type='time' className={inputClasses} name='Time' />
       </div>
       <div className='col-span-6 xl:col-span-2 z-10'>
         <label htmlFor='Number of Days' className={labelClasses}>
@@ -64,7 +58,6 @@ const FindCarForm = () => {
           type='datetime-local'
           id='meeting-time'
           name='meeting-time'
-          placeholder='Enter address or airport'
           className={`${inputClasses}  uppercase`}
         />
       </div>

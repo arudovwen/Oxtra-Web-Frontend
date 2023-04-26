@@ -51,7 +51,7 @@ const Vehicles = () => {
         We give our riders the best driving experience from our world-class
         drivers to the quality checks we put our cars through
       </p>
-      <div className='flex overflow-scroll md:overflow-auto justify-center gap-6 mb-14'>
+      <div className='flex overflow-scroll  gap-6 mb-14'>
         {vehicles.map((vehicle) => {
           return (
             <div
