@@ -16,7 +16,7 @@ const labelClasses = classNames(
 );
 
 const inputClasses = classNames(
-  `px-2 py-2 border border-[#d4d6d8] rounded-lg mt-3  w-full font-gordita-regular h-[40px]`
+  `px-2 py-2 h-[40px] border border-[#d4d6d8] rounded-lg mt-3  w-full font-gordita-regular `
 );
 
 const SignUpForm = () => {
@@ -215,7 +215,7 @@ const SignUpForm = () => {
               </div>
 
               <div className='col-span-6 md:col-span-4'>
-                <label htmlFor='cvc' className={labelClasses}>
+                <label htmlFor='pick up Date' className={labelClasses}>
                   Date of birth
                 </label>
                 <div className='mt-1'>
@@ -223,7 +223,9 @@ const SignUpForm = () => {
                     type='date'
                     required
                     onChange={(e) => setDob(e.target.value)}
+                    id='pick up Date'
                     className={`${inputClasses}, uppercase`}
+                    name='pick up Date'
                   />
                 </div>
               </div>
