@@ -38,6 +38,7 @@ input[type='number'] {
 }
 
 input[type='datetime-local'],
-input[type='time'] {
+input[type='time'],
+input[type='date'] {
   -webkit-appearance: none;
 }
