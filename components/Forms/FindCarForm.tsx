@@ -36,21 +36,22 @@ const FindCarForm = () => {
           id='pick up Date'
           className={`${inputClasses}  uppercase`}
           name='pick up Date'
+          placeholder='ddd-dd-'
         />
       </div>
-       <div className='col-span-6 xl:col-span-2'>
+      <div className='col-span-6 xl:col-span-2'>
         <label htmlFor='Time' className={labelClasses}>
           Time
         </label>
         <input type='time' className={inputClasses} name='Time' />
       </div>
-        <div className='col-span-6 xl:col-span-2 z-10'>
+      <div className='col-span-6 xl:col-span-2 z-10'>
         <label htmlFor='Number of Days' className={labelClasses}>
           Number of Days
         </label>
         <input type='number' className={inputClasses} />
       </div>
-          <div className='col-span-6 xl:col-span-2 z-10'>
+      <div className='col-span-6 xl:col-span-2 z-10'>
         <label htmlFor='Return Date & Time' className={labelClasses}>
           Return Date & Time
         </label>
@@ -61,12 +62,9 @@ const FindCarForm = () => {
           className={`${inputClasses}  uppercase`}
         />
       </div>
-        <div className='bg-brandGreen-300 text-white py-6 flex flex-col items-center justify-center  col-span-full xl:col-auto rounded cursor-pointer'>
+      <div className='bg-brandGreen-300 text-white py-6 flex flex-col items-center justify-center  col-span-full xl:col-auto rounded cursor-pointer'>
         <GoSearch className='w-[26px] h-[26px]' />
       </div>
-      
-
-  
     </form>
   );
 };
