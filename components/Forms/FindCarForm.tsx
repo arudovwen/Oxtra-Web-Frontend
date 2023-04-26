@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import { GoSearch } from 'react-icons/go';
 
 const inputClasses = classNames(
-  'px-2 py-2 border rounded-sm border-[#d4d6d8] mt-3  w-full h-[2rem]'
+  'px-2 py-2 border rounded-sm border-[#d4d6d8] mt-3  w-full h-[40px]'
 );
 
 const labelClasses = classNames(
