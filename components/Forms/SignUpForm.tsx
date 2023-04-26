@@ -5,8 +5,8 @@ import Button from '../Button';
 import { AiOutlineEyeInvisible, AiOutlineEye } from 'react-icons/ai';
 import { useState } from 'react';
 import { handleCsrf, registerUser } from '@/services/authservices';
-import { useRouter } from 'next/router'
-
+import { useRouter } from 'next/router';
+import { SyntheticEvent } from 'react';
 
 const labelClasses = classNames(
   'block text-[14px] leading-[14px] font-gordita-medium text-brandGray-300'
@@ -17,8 +17,7 @@ const inputClasses = classNames(
 );
 
 const SignUpForm = () => {
-
-   const router = useRouter()
+  const router = useRouter();
 
   const [enterPasswordHidden, setEnterPasswordHidden] = useState(true);
   const [errorMessageEmail, setErrorMessageEmail] = useState('');
@@ -35,9 +34,7 @@ const SignUpForm = () => {
   const [city, setCity] = useState('');
   const [phoneCode, setPhoneCode] = useState('');
 
-  const handleSubmit = async (e: any) => {
-
-    
+  const handleSubmit = async (e: SyntheticEvent) => {
     e.preventDefault();
     const user = {
       firstName,
@@ -49,31 +46,29 @@ const SignUpForm = () => {
       state,
       phoneNumber,
       city,
-      phoneCode
+      phoneCode,
     };
 
     handleCsrf().then((res) => {
       registerUser(user)
         .then((res) => {
-           router.push('/login')
+          router.push('/login');
           console.log('res', res);
         })
         .catch((err) => {
           console.log(err);
-          if(err.response.data.message.includes('email')) {
-            
-            const error = err.response.data.message
-        
+          if (err.response.data.message.includes('email')) {
+            const error = err.response.data.message;
 
-            setErrorMessageEmail(error)
+            setErrorMessageEmail(error);
           } else if (err.response.data.message.includes('password')) {
-          const error = err.response.data.message
-          
-            setErrorMessagePassword(error)
-        }});
+            const error = err.response.data.message;
+
+            setErrorMessagePassword(error);
+          }
+        });
     });
-  
-}
+  };
 
   return (
     <main className='w-[90%] lg:mx-auto lg:max-w-[500px]'>
@@ -135,7 +130,7 @@ const SignUpForm = () => {
                     required
                   />
                 </div>
-              <p className='text-red-700 text-sm mt-1'>{errorMessageEmail}</p>
+                <p className='text-red-700 text-sm mt-1'>{errorMessageEmail}</p>
               </div>
               <div className='col-span-full'>
                 <label htmlFor='email-address' className={labelClasses}>
@@ -166,10 +161,14 @@ const SignUpForm = () => {
                     />
                   )}
                 </div>
-            
-                 {errorMessagePassword && <p className='text-red-700 text-sm mt-1'>{errorMessagePassword}</p>}  
+
+                {errorMessagePassword && (
+                  <p className='text-red-700 text-sm mt-1'>
+                    {errorMessagePassword}
+                  </p>
+                )}
               </div>
- <div className='col-span-5 md:col-span-3'>
+              <div className='col-span-5 md:col-span-3'>
                 <label htmlFor='expiration-date' className={labelClasses}>
                   Phone code
                 </label>
@@ -205,7 +204,7 @@ const SignUpForm = () => {
                 </div>
               </div>
 
-             <div className='col-span-6 md:col-span-4'>
+              <div className='col-span-6 md:col-span-4'>
                 <label htmlFor='cvc' className={labelClasses}>
                   Date of birth
                 </label>

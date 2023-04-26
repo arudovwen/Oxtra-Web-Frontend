@@ -9,6 +9,7 @@ import Link from 'next/link';
 import { useAuth } from '@/hooks/useAuth';
 import Loading from '../Loading';
 import { successAlert } from '../Toasts';
+import { SyntheticEvent } from 'react';
 
 const labelClasses = classNames(
   'block text-[14px] leading-[14px] font-gordita-medium text-brandGray-300'
@@ -25,7 +26,7 @@ const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
     setDisable(true);
 
@@ -38,7 +39,6 @@ const LoginForm = () => {
       loginUser(user)
         .then((res) => {
           console.log('res', res);
-
           login(res.data.user);
           successAlert(res.data.message);
           setDisable(false);

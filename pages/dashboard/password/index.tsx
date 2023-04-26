@@ -2,6 +2,7 @@ import React from 'react';
 import DashboardLayout from '@/components/Layouts/DashboardLayout';
 import Typography from '@/components/Typography';
 import PasswordForm from '@/components/Forms/PasswordForm';
+import ResetPasswordForm from '@/components/Forms/ResetPasswordForm';
 import { useState, useEffect } from 'react';
 import { useAuth } from '@/hooks/useAuth';
 import { useRouter } from 'next/router';
@@ -41,11 +42,11 @@ const Password = () => {
             'text-brandGreen-300 border-b-4 border-brandGreen-300 font-gordita-medium'
           }`}
         >
-          Forgot password
+          Reset password
         </span>
       </div>
 
-      {changePassword ? <PasswordForm /> : <span>forgot password</span>}
+      {changePassword ? <PasswordForm /> : <ResetPasswordForm />}
     </DashboardLayout>
   );
 };
