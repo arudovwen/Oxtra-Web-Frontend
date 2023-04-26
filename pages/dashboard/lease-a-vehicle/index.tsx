@@ -24,7 +24,7 @@ const LeaseVehicle = () => {
   const router = useRouter();
 
   useEffect(() => {
-    user ? router.push('/dashboard/lease-a-vehicle') : router.push('/');
+    user ? router.push('/dashboard/lease-a-vehicle') : router.push('/login');
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

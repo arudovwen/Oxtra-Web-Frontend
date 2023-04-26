@@ -15,7 +15,7 @@ const Profile = () => {
   const [document, setDocument] = useState(false);
 
   useEffect(() => {
-    user ? router.push('/dashboard/profile') : router.push('/');
+    user ? router.push('/dashboard/profile') : router.push('/login');
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

@@ -13,7 +13,7 @@ const Password = () => {
   const router = useRouter();
 
   useEffect(() => {
-    user ? router.push('/dashboard/password') : router.push('/');
+    user ? router.push('/dashboard/password') : router.push('/login');
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (

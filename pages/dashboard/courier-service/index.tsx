@@ -119,7 +119,7 @@ const CourierService = () => {
   const router = useRouter();
 
   useEffect(() => {
-    user ? router.push('/dashboard/courier-service') : router.push('/');
+    user ? router.push('/dashboard/courier-service') : router.push('/login');
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

@@ -25,7 +25,7 @@ const Card = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
 
   useEffect(() => {
-    user ? router.push('/dashboard') : router.push('/');
+    user ? router.push('/dashboard') : router.push('/login');
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

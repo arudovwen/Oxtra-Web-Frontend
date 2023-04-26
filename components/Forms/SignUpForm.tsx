@@ -7,6 +7,9 @@ import { useState } from 'react';
 import { handleCsrf, registerUser } from '@/services/authservices';
 import { useRouter } from 'next/router';
 import { SyntheticEvent } from 'react';
+import { successAlert, dangerAlert } from '../Toasts';
+import { useAuth } from '@/hooks/useAuth';
+import Loading from '../Loading';
 
 const labelClasses = classNames(
   'block text-[14px] leading-[14px] font-gordita-medium text-brandGray-300'
@@ -18,6 +21,8 @@ const inputClasses = classNames(
 
 const SignUpForm = () => {
   const router = useRouter();
+
+  const { disable, setDisable } = useAuth();
 
   const [enterPasswordHidden, setEnterPasswordHidden] = useState(true);
   const [errorMessageEmail, setErrorMessageEmail] = useState('');
@@ -36,6 +41,7 @@ const SignUpForm = () => {
 
   const handleSubmit = async (e: SyntheticEvent) => {
     e.preventDefault();
+    setDisable(true);
     const user = {
       firstName,
       lastName,
@@ -52,18 +58,22 @@ const SignUpForm = () => {
     handleCsrf().then((res) => {
       registerUser(user)
         .then((res) => {
+          successAlert(res.data.message);
           router.push('/login');
+          setDisable(false);
           console.log('res', res);
         })
         .catch((err) => {
           console.log(err);
           if (err.response.data.message.includes('email')) {
             const error = err.response.data.message;
-
+            dangerAlert(error);
+            setDisable(false);
             setErrorMessageEmail(error);
           } else if (err.response.data.message.includes('password')) {
             const error = err.response.data.message;
-
+            dangerAlert(error);
+            setDisable(false);
             setErrorMessagePassword(error);
           }
         });
@@ -280,14 +290,18 @@ const SignUpForm = () => {
               </div>
             </div>
             <Button
-              bg='bg-brandGreen-300'
+              bg={!disable ? 'bg-brandGreen-300' : 'bg-brandGreen-100'}
               hover='hover:bg-brandGray-200'
               textColor='text-white'
               width={true}
               size='text-sm'
               type='submit'
             >
-              Create Account
+              {!disable ? (
+                'Create Account'
+              ) : (
+                <Loading type='spin' width={14} height={14} color='#42864F' />
+              )}
             </Button>
           </form>
         </div>
