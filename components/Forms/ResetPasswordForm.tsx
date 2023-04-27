@@ -7,6 +7,9 @@ import { handleCsrf, resetPassword } from '@/services/authservices';
 import { useState } from 'react';
 import { useAuth } from '@/hooks/useAuth';
 import { dangerAlert } from '../Toasts';
+import Typography from '../Typography';
+import Loading from '../Loading';
+import Link from 'next/link';
 
 const labelClasses = classNames(
   'block text-[14px] leading-[14px] font-gordita-medium text-brandGray-300 '
@@ -19,19 +22,18 @@ const inputClasses = classNames(
 const ResetPasswordForm = () => {
   const [enterPasswordHidden, setEnterPasswordHidden] = useState(true);
   const [confirmPasswordHidden, setConfirmPasswordHidden] = useState(true);
-
+  const { disable, setDisable } = useAuth();
   const [password, setPassword] = useState('');
   const [password_confirmation, setPassword_confirmation] = useState('');
+  const [errorMessagePassword, setErrorMessagePassword] = useState('');
 
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
-
+    setDisable(true);
     const resetThePassword = {
       password,
       password_confirmation,
     };
-
-    console.log(password);
 
     handleCsrf().then((res) => {
       resetPassword(resetThePassword)
@@ -40,87 +42,135 @@ const ResetPasswordForm = () => {
 
           //  login(res.data.user);
           //  successAlert(res.data.message);
-          //  setDisable(false);
+          setDisable(false);
         })
         .catch((err) => {
           console.log(err);
+          setErrorMessagePassword(err?.data?.message);
           dangerAlert(err?.data?.message);
-          //  setDisable(false);
+          setDisable(false);
         });
     });
   };
 
   return (
-    <form
-      className='grid grid-cols-12 gap-y-6 gap-x-4  md:w-1/2 '
-      onSubmit={handleSubmit}
-    >
-      <div className='col-span-full'>
-        <label htmlFor='email-address' className={labelClasses}>
-          Enter new password
-        </label>
-        <div className='mt-1 relative'>
-          <input
-            type={`${enterPasswordHidden ? 'password' : 'text'}`}
-            placeholder='Enter new password'
-            className={inputClasses}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-
-          {enterPasswordHidden ? (
-            <AiOutlineEyeInvisible
-              className='absolute top-[24px] right-[12px]'
-              onClick={() => setEnterPasswordHidden(!enterPasswordHidden)}
-            />
-          ) : (
-            <AiOutlineEye
-              className='absolute top-[24px] right-[12px]'
-              onClick={() => setEnterPasswordHidden(!enterPasswordHidden)}
-            />
-          )}
-        </div>
+    <main className='w-[90%] lg:mx-auto lg:max-w-[500px]'>
+      <div className='mb-4 mt-[40px] text-brandGray-300'>
+        <Typography as='h4' font='font-gordita-medium'>
+          Reset Password?
+        </Typography>
+      </div>
+      <div className='text-brandGray-100 mb-8'>
+        <p className='font-gordita-regular text-[16px]'>
+          You requested for a password reset. Please enter a new password and
+          confirm.
+        </p>
       </div>
 
-      <div className='col-span-full'>
-        <label htmlFor='' className={labelClasses}>
-          Confirm new password
-        </label>
-        <div className='mt-1 relative'>
-          <input
-            type={`${confirmPasswordHidden ? 'password' : 'text'}`}
-            id='email-address'
-            name='email-address'
-            autoComplete='email'
-            placeholder='Confirm new password'
-            className={inputClasses}
-            onChange={(e) => setPassword_confirmation(e.target.value)}
-          />
-          {confirmPasswordHidden ? (
-            <AiOutlineEyeInvisible
-              className='absolute top-[24px] right-[12px]'
-              onClick={() => setConfirmPasswordHidden(!confirmPasswordHidden)}
-            />
-          ) : (
-            <AiOutlineEye
-              className='absolute top-[24px] right-[12px]'
-              onClick={() => setConfirmPasswordHidden(!confirmPasswordHidden)}
-            />
-          )}
+      <section className='flex-auto'>
+        <div className=''>
+          <form className='mt-6' onSubmit={handleSubmit}>
+            <div className='grid grid-cols-12 gap-y-6 gap-x-4 mb-7'>
+              <div className='col-span-full'>
+                <label htmlFor='email-address' className={labelClasses}>
+                  Enter new password
+                </label>
+                <div className='mt-1 relative'>
+                  <input
+                    type={`${enterPasswordHidden ? 'password' : 'text'}`}
+                    placeholder='Enter password'
+                    onChange={(e) => setPassword(e.target.value)}
+                    className={inputClasses}
+                    required
+                  />
+
+                  {enterPasswordHidden ? (
+                    <AiOutlineEye
+                      className='absolute top-[24px] right-[12px]'
+                      onClick={() =>
+                        setEnterPasswordHidden(!enterPasswordHidden)
+                      }
+                    />
+                  ) : (
+                    <AiOutlineEyeInvisible
+                      className='absolute top-[24px] right-[12px]'
+                      onClick={() =>
+                        setEnterPasswordHidden(!enterPasswordHidden)
+                      }
+                    />
+                  )}
+                </div>
+
+                {errorMessagePassword && (
+                  <p className='text-red-700 text-sm mt-1'>
+                    {errorMessagePassword}
+                  </p>
+                )}
+              </div>{' '}
+              <div className='col-span-full '>
+                <label htmlFor='email-address' className={labelClasses}>
+                  Confirm new password
+                </label>
+                <div className='mt-1 relative'>
+                  <input
+                    type={`${confirmPasswordHidden ? 'password' : 'text'}`}
+                    placeholder='Enter password'
+                    onChange={(e) => setPassword_confirmation(e.target.value)}
+                    className={inputClasses}
+                    required
+                  />
+
+                  {confirmPasswordHidden ? (
+                    <AiOutlineEye
+                      className='absolute top-[24px] right-[12px]'
+                      onClick={() =>
+                        setConfirmPasswordHidden(!confirmPasswordHidden)
+                      }
+                    />
+                  ) : (
+                    <AiOutlineEyeInvisible
+                      className='absolute top-[24px] right-[12px]'
+                      onClick={() =>
+                        setConfirmPasswordHidden(!confirmPasswordHidden)
+                      }
+                    />
+                  )}
+                </div>
+
+                {errorMessagePassword && (
+                  <p className='text-red-700 text-sm mt-1'>
+                    {errorMessagePassword}
+                  </p>
+                )}
+              </div>{' '}
+            </div>
+
+            <Button
+              bg={!disable ? 'bg-brandGreen-300' : 'bg-brandGreen-100'}
+              hover='hover:bg-brandGray-200'
+              textColor='text-white'
+              width={true}
+              size='text-sm'
+              type='submit'
+            >
+              {!disable ? (
+                'Reset Password'
+              ) : (
+                <Loading type='spin' width={14} height={14} color='#42864F' />
+              )}
+            </Button>
+            <div className='text-center mt-[32px]'>
+              <span className='text-[12px] text-brandGray-300 leading-[12px] font-gordita-medium'>
+                I did not make the reset request{' '}
+                <Link href='/' className='text-brandGreen-300 '>
+                  Report here
+                </Link>
+              </span>
+            </div>
+          </form>
         </div>
-      </div>
-      <div className='col-span-full'>
-        <Button
-          bg='bg-brandGreen-300'
-          hover='hover:bg-brandGray-200'
-          textColor='text-white'
-          width={true}
-          size='text-sm'
-          type='submit'
-        >
-          Save
-        </Button>
-      </div>
-    </form>
+      </section>
+    </main>
   );
 };
 

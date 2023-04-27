@@ -6,8 +6,14 @@ import { dangerAlert } from '@/components/Toasts';
 export interface User {
   firstName: string;
   lastName: string;
+  email: string;
+  password: string;
+  dob: string;
+  address: string;
   state: string;
+  phoneNumber: string;
   city: string;
+  phoneCode: string;
 }
 
 interface AuthContextValue {

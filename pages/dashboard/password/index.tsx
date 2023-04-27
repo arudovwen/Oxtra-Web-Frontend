@@ -1,7 +1,7 @@
 import React from 'react';
 import DashboardLayout from '@/components/Layouts/DashboardLayout';
 import Typography from '@/components/Typography';
-import PasswordForm from '@/components/Forms/PasswordForm';
+import ChangePasswordForm from '@/components/Forms/ChangePasswordForm';
 import { useEffect } from 'react';
 import { useAuth } from '@/hooks/useAuth';
 import { useRouter } from 'next/router';
@@ -29,7 +29,7 @@ const Password = () => {
         </span>{' '}
       </div>
 
-      <PasswordForm />
+      <ChangePasswordForm />
     </DashboardLayout>
   );
 };

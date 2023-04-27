@@ -7,5 +7,6 @@ const urls = {
   GET_CSRF: `/sanctum/csrf-cookie`,
   CHANGE_PASSWORD: `${version}/change-password`,
   RESET_PASSWORD: `${version}/reset-password`,
+  FORGOT_PASSWORD: `${version}/forgot-password`,
 };
 export default urls;

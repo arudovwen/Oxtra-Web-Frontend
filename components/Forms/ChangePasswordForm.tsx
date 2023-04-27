@@ -14,7 +14,7 @@ const inputClasses = classNames(
   `px-2  h-[40px] py-2 border border-[#d4d6d8] rounded-lg mt-3  w-full font-gordita-regular bg-brandGray-200 text-brandGray-100 text-base`
 );
 
-const PasswordForm = () => {
+const ChangePasswordForm = () => {
   const [enterPasswordHidden, setEnterPasswordHidden] = useState(true);
 
   const [confirmPasswordHidden, setConfirmPasswordHidden] = useState(true);
@@ -150,4 +150,4 @@ const PasswordForm = () => {
   );
 };
 
-export default PasswordForm;
+export default ChangePasswordForm;
