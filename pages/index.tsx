@@ -11,6 +11,7 @@ import blue from '../public/assets/blue.png';
 import Image from 'next/image';
 import Container from '@/components/Container';
 import pink from '../public/assets/pink.png';
+import MovingCar from '@/components/MovingCar';
 
 export default function Home() {
   const activePage = 'Home';
@@ -54,6 +55,7 @@ export default function Home() {
           />
         </div>
       </Container>
+      <MovingCar />
     </div>
   );
 }

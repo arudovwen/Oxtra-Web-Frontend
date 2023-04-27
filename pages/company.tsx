@@ -12,6 +12,7 @@ import blue from '../public/assets/blue.png';
 import halfCar from '../public/assets/heroCar.png';
 import backcar from '../public/assets/Rectangle 100.png';
 import Container from '@/components/Container';
+import MovingCar from '@/components/MovingCar';
 
 const Company = () => {
   const activePage = 'Company';
@@ -85,6 +86,7 @@ const Company = () => {
           />
         </div>
       </Container>
+      <MovingCar />
     </div>
   );
 };
