@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import Button from '../Button';
 import { AiOutlineEyeInvisible, AiOutlineEye } from 'react-icons/ai';
 import { SyntheticEvent } from 'react';
-import { handleCsrf, changePassword } from '@/services/authservices';
+import { changePassword } from '@/services/authservices';
 import { useState } from 'react';
 
 const labelClasses = classNames(
@@ -34,21 +34,19 @@ const PasswordForm = () => {
 
     console.log(password);
 
-   
-      changePassword(password)
-        .then((res) => {
-          console.log('res', res);
+    changePassword(password)
+      .then((res) => {
+        console.log('res', res);
 
-          //  login(res.data.user);
-          //  successAlert(res.data.message);
-          //  setDisable(false);
-        })
-        .catch((err) => {
-          console.log(err);
+        //  login(res.data.user);
+        //  successAlert(res.data.message);
+        //  setDisable(false);
+      })
+      .catch((err) => {
+        console.log(err);
 
-          //  setDisable(false);
-        });
-   
+        //  setDisable(false);
+      });
   };
 
   return (

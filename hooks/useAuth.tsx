@@ -39,9 +39,7 @@ const AuthContext = createContext<AuthContextValue>({
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useLocalStorage('user', null);
-  const [token, setToken] = useState('');
-
-  console.log(token);
+  const [token, setToken] = useLocalStorage('token', '');
 
   const [disable, setDisable] = useState(false);
   const router = useRouter();
@@ -53,6 +51,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   const logout = () => {
     setUser(null);
+    setToken('');
     dangerAlert('Logged out!');
     router.push('/login');
   };

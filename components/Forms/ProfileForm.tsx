@@ -5,8 +5,7 @@ import { useState } from 'react';
 import { useAuth } from '@/hooks/useAuth';
 import { SyntheticEvent } from 'react';
 import { updateUserProfile } from '@/services/userservices';
-import { handleCsrf } from '@/services/authservices';
-import { User } from '@/hooks/useAuth';
+import Loading from '../Loading';
 
 const labelClasses = classNames(
   'block text-[14px] leading-[14px] font-gordita-medium text-brandGray-300'
@@ -17,7 +16,7 @@ const inputClasses = classNames(
 );
 
 const ProfileForm = () => {
-  const { user, token } = useAuth();
+  const { user, token, disable, setDisable } = useAuth();
 
   const [address, setAddress] = useState(user?.address as string);
 
@@ -25,6 +24,7 @@ const ProfileForm = () => {
 
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
+    setDisable(true);
 
     const config = { headers: { Authorization: `Bearer ${token}` } };
 
@@ -36,9 +36,11 @@ const ProfileForm = () => {
     updateUserProfile(editProfileValues, config)
       .then((res) => {
         console.log('res', res);
+        setDisable(false);
       })
       .catch((err) => {
         console.log(err);
+        setDisable(false);
       });
   };
 
@@ -124,14 +126,19 @@ const ProfileForm = () => {
         <div className='col-span-full md:col-span-8'>
           {' '}
           <Button
-            bg='bg-brandGreen-300'
+            bg={!disable ? 'bg-brandGreen-300' : 'bg-brandGreen-100'}
             hover='hover:bg-brandGray-200'
             textColor='text-white'
             width={true}
             size='text-sm'
             type='submit'
+            disable={disable}
           >
-            Save changes
+            {!disable ? (
+              'Save changes'
+            ) : (
+              <Loading type='spin' width={14} height={14} color='#42864F' />
+            )}
           </Button>
         </div>
       </div>
