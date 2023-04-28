@@ -35,7 +35,7 @@ const ResetPasswordForm = () => {
       password_confirmation,
     };
 
-    handleCsrf().then((res) => {
+
       resetPassword(resetThePassword)
         .then((res) => {
           console.log('res', res);
@@ -50,7 +50,7 @@ const ResetPasswordForm = () => {
           dangerAlert(err?.data?.message);
           setDisable(false);
         });
-    });
+   
   };
 
   return (

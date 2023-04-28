@@ -8,5 +8,8 @@ const urls = {
   CHANGE_PASSWORD: `${version}/change-password`,
   RESET_PASSWORD: `${version}/reset-password`,
   FORGOT_PASSWORD: `${version}/forgot-password`,
+
+  // User urls
+  UPDATE_USER_PROFILE: `${version}/user`,
 };
 export default urls;

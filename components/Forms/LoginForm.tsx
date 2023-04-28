@@ -21,7 +21,7 @@ const inputClasses = classNames(
 
 const LoginForm = () => {
   const [enterPasswordHidden, setEnterPasswordHidden] = useState(true);
-  const { login, disable, setDisable } = useAuth();
+  const { login, disable, setDisable, setToken } = useAuth();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -39,6 +39,7 @@ const LoginForm = () => {
       loginUser(user)
         .then((res) => {
           console.log('res', res);
+          setToken(res.data.token);
           login(res.data.user);
           successAlert(res.data.message);
           setDisable(false);

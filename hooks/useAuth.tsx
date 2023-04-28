@@ -8,6 +8,7 @@ export interface User {
   lastName: string;
   email: string;
   password: string;
+  id?: string;
   dob: string;
   address: string;
   state: string;
@@ -22,6 +23,8 @@ interface AuthContextValue {
   user: User | null;
   disable: boolean;
   setDisable: React.Dispatch<React.SetStateAction<boolean>>;
+  token: string;
+  setToken: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const AuthContext = createContext<AuthContextValue>({
@@ -30,10 +33,16 @@ const AuthContext = createContext<AuthContextValue>({
   user: null,
   disable: false,
   setDisable: () => {},
+  token: '',
+  setToken: () => {},
 });
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useLocalStorage('user', null);
+  const [token, setToken] = useState('');
+
+  console.log(token);
+
   const [disable, setDisable] = useState(false);
   const router = useRouter();
 
@@ -44,12 +53,14 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   const logout = () => {
     setUser(null);
-    dangerAlert('Logout');
+    dangerAlert('Logged out!');
     router.push('/login');
   };
 
   return (
-    <AuthContext.Provider value={{ login, logout, user, disable, setDisable }}>
+    <AuthContext.Provider
+      value={{ login, logout, user, disable, setDisable, token, setToken }}
+    >
       {children}
     </AuthContext.Provider>
   );

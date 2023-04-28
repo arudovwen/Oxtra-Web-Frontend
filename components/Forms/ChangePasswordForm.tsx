@@ -32,9 +32,7 @@ const ChangePasswordForm = () => {
       newPassword_confirmation,
     };
 
-    console.log(password);
-
-    handleCsrf().then((res) => {
+    
       changePassword(password)
         .then((res) => {
           console.log('res', res);
@@ -48,7 +46,7 @@ const ChangePasswordForm = () => {
 
           //  setDisable(false);
         });
-    });
+ 
   };
 
   return (

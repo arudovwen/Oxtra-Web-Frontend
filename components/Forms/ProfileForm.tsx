@@ -1,6 +1,12 @@
 import React from 'react';
 import classNames from 'classnames';
 import Button from '../Button';
+import { useState } from 'react';
+import { useAuth } from '@/hooks/useAuth';
+import { SyntheticEvent } from 'react';
+import { updateUserProfile } from '@/services/userservices';
+import { handleCsrf } from '@/services/authservices';
+import { User } from '@/hooks/useAuth';
 
 const labelClasses = classNames(
   'block text-[14px] leading-[14px] font-gordita-medium text-brandGray-300'
@@ -11,8 +17,33 @@ const inputClasses = classNames(
 );
 
 const ProfileForm = () => {
+  const { user, token } = useAuth();
+
+  const [address, setAddress] = useState(user?.address as string);
+
+  const [phoneNumber, setPhoneNumber] = useState(user?.phoneNumber as string);
+
+  const handleSubmit = (e: SyntheticEvent) => {
+    e.preventDefault();
+
+    const config = { headers: { Authorization: `Bearer ${token}` } };
+
+    const editProfileValues = {
+      address,
+      phoneNumber,
+      id: user?.id as string,
+    };
+    updateUserProfile(editProfileValues, config)
+      .then((res) => {
+        console.log('res', res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
-    <form className='mt-6'>
+    <form className='mt-6' onSubmit={handleSubmit}>
       <div className='grid grid-cols-12 gap-y-6 gap-x-6'>
         <div className='col-span-6 md:col-span-4'>
           <label htmlFor='expiration-date' className={labelClasses}>
@@ -22,8 +53,9 @@ const ProfileForm = () => {
             <input
               type='text'
               required
-              placeholder='First name'
               className={inputClasses}
+              value={user?.firstName}
+              readOnly
             />
           </div>
         </div>
@@ -36,8 +68,9 @@ const ProfileForm = () => {
             <input
               type='text'
               required
-              placeholder='Last name'
               className={inputClasses}
+              value={user?.lastName}
+              readOnly
             />
           </div>
         </div>
@@ -51,8 +84,9 @@ const ProfileForm = () => {
               id='email-address'
               name='email-address'
               autoComplete='email'
-              placeholder='Enter your email address'
+              value={user?.email}
               className={inputClasses}
+              readOnly
             />
           </div>
         </div>
@@ -62,7 +96,14 @@ const ProfileForm = () => {
             Phone number
           </label>
           <div className='mt-1'>
-            <input type='number' required className={inputClasses} />
+            <input
+              type='tel'
+              pattern='[0-9]{11}'
+              value={phoneNumber}
+              onChange={(e) => setPhoneNumber(e.target.value)}
+              required
+              className={inputClasses}
+            />
           </div>
         </div>
 
@@ -74,6 +115,8 @@ const ProfileForm = () => {
             <input
               type='text'
               className={inputClasses}
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
               placeholder='Enter your residential address'
             />
           </div>
@@ -86,6 +129,7 @@ const ProfileForm = () => {
             textColor='text-white'
             width={true}
             size='text-sm'
+            type='submit'
           >
             Save changes
           </Button>

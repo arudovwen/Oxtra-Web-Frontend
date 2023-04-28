@@ -29,7 +29,7 @@ const ForgotPasswordForm = () => {
       email,
     };
 
-    handleCsrf().then((res) => {
+  
       forgotPassword(user)
         .then((res) => {
           console.log('res', res);
@@ -41,7 +41,7 @@ const ForgotPasswordForm = () => {
 
           setDisable(false);
         });
-    });
+
 
     // setDisable(false);
   };

@@ -55,7 +55,7 @@ const SignUpForm = () => {
       phoneCode,
     };
 
-    handleCsrf().then((res) => {
+  
       registerUser(user)
         .then((res) => {
           successAlert(res.data.message);
@@ -77,7 +77,7 @@ const SignUpForm = () => {
             setErrorMessagePassword(error);
           }
         });
-    });
+  
   };
 
   return (

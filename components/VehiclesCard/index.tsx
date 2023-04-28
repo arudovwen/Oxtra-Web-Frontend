@@ -55,7 +55,7 @@ const VehiclesCard = () => {
           Verified
         </span>
       </div>
-      <div className='flex text-xs md:text-sm items-center gap-2 bg-brandGreen-300 rounded-3xl font-gordita-regular text-white py-[10px] px-[24px]'>
+      <div className='flex justify-center text-xs md:text-sm items-center gap-2 bg-brandGreen-300 rounded-3xl font-gordita-regular text-white py-[10px] px-[24px]'>
         <AiOutlinePlusCircle className='w-[20px] h-[20px]' /> Add another
         vehicle
       </div>
