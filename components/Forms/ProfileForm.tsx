@@ -6,6 +6,7 @@ import { useAuth } from '@/hooks/useAuth';
 import { SyntheticEvent } from 'react';
 import { updateUserProfile } from '@/services/userservices';
 import Loading from '../Loading';
+import { successAlert } from '../Toasts';
 
 const labelClasses = classNames(
   'block text-[14px] leading-[14px] font-gordita-medium text-brandGray-300'
@@ -36,6 +37,7 @@ const ProfileForm = () => {
     updateUserProfile(editProfileValues, config)
       .then((res) => {
         console.log('res', res);
+        successAlert(res.data.message);
         setDisable(false);
       })
       .catch((err) => {
