@@ -41,10 +41,39 @@ const VehicleInformationForm = () => {
     router.push('/put-up-your-vehicle/documents');
   };
 
-  const [dragEnter, setDragEnter] = useState(false);
-
   const [exteriorFront, setExteriorFront] = useState<{ name: string } | null>();
   const [exteriorBack, setExteriorBack] = useState<{ name: string } | null>();
+  const [exteriorLeftSide, setExteriorLeftSide] = useState<{
+    name: string;
+  } | null>();
+
+  const [exteriorRightSide, setExteriorRightSide] = useState<{
+    name: string;
+  } | null>();
+
+  const [interiorBack, setInteriorBack] = useState<{
+    name: string;
+  } | null>();
+
+  const [interiorFront, setInteriorFront] = useState<{
+    name: string;
+  } | null>();
+
+  const [doorHandleFrontRight, setDoorHandleFrontRight] = useState<{
+    name: string;
+  } | null>();
+
+  const [doorHandleFrontLeft, setDoorHandleFrontLeft] = useState<{
+    name: string;
+  } | null>();
+
+  const [doorHandleBackRight, setDoorHandleBackRight] = useState<{
+    name: string;
+  } | null>();
+
+  const [doorHandleBackLeft, setDoorHandleBackLeft] = useState<{
+    name: string;
+  } | null>();
 
   const wrapperRef = useRef(null);
 
@@ -72,7 +101,7 @@ const VehicleInformationForm = () => {
                 <div className='mt-1'>
                   <input
                     type='text'
-                    placeholder='First name'
+                    placeholder='Toyota'
                     className={inputClasses}
                     required
                   />
@@ -86,7 +115,7 @@ const VehicleInformationForm = () => {
                 <div className='mt-1'>
                   <input
                     type='text'
-                    placeholder='Last name'
+                    placeholder='Camry'
                     className={inputClasses}
                     required
                   />
@@ -105,8 +134,12 @@ const VehicleInformationForm = () => {
                 <label htmlFor='cvc' className={labelClasses}>
                   Transmision
                 </label>
+
                 <div className='mt-1'>
-                  <input type='text' required className={inputClasses} />
+                  <select className={inputClasses}>
+                    <option label='Automatic'>Automatic</option>
+                    <option label='Manual'>Manual</option>
+                  </select>
                 </div>
               </div>
 
@@ -124,7 +157,7 @@ const VehicleInformationForm = () => {
                   Plate number
                 </label>
                 <div className='mt-1'>
-                  <input type='text' required className={inputClasses} />
+                  <input type='number' required className={inputClasses} />
                 </div>
               </div>
             </div>
@@ -136,7 +169,12 @@ const VehicleInformationForm = () => {
                     key={feat.name}
                     className='flex h-5 gap-[8px] items-center'
                   >
-                    <input name={feat.name} type='checkbox' className='' />
+                    <input
+                      name={feat.name}
+                      type='checkbox'
+                      className=''
+                      onChange={(e) => console.log(e.target)}
+                    />
                     <span className='text-[12px]  leading-[20px] text-brandGray-300 font-gordita-regular'>
                       {feat.name}
                     </span>
@@ -145,7 +183,8 @@ const VehicleInformationForm = () => {
               })}
             </div>
 
-            <div className='grid grid-cols-2 gap-[32px]'>
+            <div className='grid grid-cols-1 md:grid-cols-2 gap-[32px]'>
+              {/* first row */}
               <div
                 ref={wrapperRef}
                 className='drop-file-input bg-[#f9fafb]
@@ -159,14 +198,13 @@ const VehicleInformationForm = () => {
                   Drag and drop or Choose file to upload
                 </div>
                 <span className={typeDocClasses}>
-                  {exteriorFront?.name || 'Exterior front(with headlights on)'}
+                  {exteriorFront?.name || 'Exterior front (with headlights on)'}
                 </span>
                 <input
                   multiple={false}
                   type='file'
-                  value=''
                   required
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                  onChange={(e) => {
                     if (!e.target.files) {
                       return;
                     }
@@ -192,15 +230,240 @@ const VehicleInformationForm = () => {
                     'Exterior back (with reverse light on)'}
                 </span>
                 <input
-                  multiple={false}
                   type='file'
-                  value=''
                   required
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                  onChange={(e) => {
                     if (!e.target.files) {
                       return;
                     }
                     setExteriorBack(e.target.files[0]);
+                  }}
+                />
+              </div>
+
+              {/* second row */}
+
+              <div
+                ref={wrapperRef}
+                className='drop-file-input bg-[#f9fafb]
+                '
+              >
+                <span className=''>
+                  <AiOutlineCloudUpload className='w-7 h-7' />
+                </span>
+
+                <div className={dragAndDropClasses}>
+                  Drag and drop or Choose file to upload
+                </div>
+                <span className={typeDocClasses}>
+                  {exteriorLeftSide?.name ||
+                    'Exterior left side (with parking lights on)'}
+                </span>
+                <input
+                  multiple={false}
+                  type='file'
+                  required
+                  onChange={(e) => {
+                    if (!e.target.files) {
+                      return;
+                    }
+                    setExteriorLeftSide(e.target.files[0]);
+                  }}
+                />
+              </div>
+
+              <div
+                ref={wrapperRef}
+                className='drop-file-input bg-[#f9fafb]
+                '
+              >
+                <span className=''>
+                  <AiOutlineCloudUpload className='w-7 h-7' />
+                </span>
+
+                <div className={dragAndDropClasses}>
+                  Drag and drop or Choose file to upload
+                </div>
+                <span className={typeDocClasses}>
+                  {exteriorRightSide?.name ||
+                    'Exterior right side (with parking lights on)'}
+                </span>
+                <input
+                  type='file'
+                  required
+                  onChange={(e) => {
+                    if (!e.target.files) {
+                      return;
+                    }
+                    setExteriorRightSide(e.target.files[0]);
+                  }}
+                />
+              </div>
+
+              {/* third row */}
+              <div
+                ref={wrapperRef}
+                className='drop-file-input bg-[#f9fafb]
+                '
+              >
+                <span className=''>
+                  <AiOutlineCloudUpload className='w-7 h-7' />
+                </span>
+
+                <div className={dragAndDropClasses}>
+                  Drag and drop or Choose file to upload
+                </div>
+                <span className={typeDocClasses}>
+                  {interiorBack?.name || 'Interior back'}
+                </span>
+                <input
+                  multiple={false}
+                  type='file'
+                  required
+                  onChange={(e) => {
+                    if (!e.target.files) {
+                      return;
+                    }
+                    setInteriorBack(e.target.files[0]);
+                  }}
+                />
+              </div>
+
+              <div
+                ref={wrapperRef}
+                className='drop-file-input bg-[#f9fafb]
+                '
+              >
+                <span className=''>
+                  <AiOutlineCloudUpload className='w-7 h-7' />
+                </span>
+
+                <div className={dragAndDropClasses}>
+                  Drag and drop or Choose file to upload
+                </div>
+                <span className={typeDocClasses}>
+                  {interiorFront?.name || 'Interior front'}
+                </span>
+                <input
+                  type='file'
+                  required
+                  onChange={(e) => {
+                    if (!e.target.files) {
+                      return;
+                    }
+                    setInteriorFront(e.target.files[0]);
+                  }}
+                />
+              </div>
+
+              {/* forth row */}
+              <div
+                ref={wrapperRef}
+                className='drop-file-input bg-[#f9fafb]
+                '
+              >
+                <span className=''>
+                  <AiOutlineCloudUpload className='w-7 h-7' />
+                </span>
+
+                <div className={dragAndDropClasses}>
+                  Drag and drop or Choose file to upload
+                </div>
+                <span className={typeDocClasses}>
+                  {doorHandleFrontRight?.name || 'Door handle front right'}
+                </span>
+                <input
+                  multiple={false}
+                  type='file'
+                  required
+                  onChange={(e) => {
+                    if (!e.target.files) {
+                      return;
+                    }
+                    setDoorHandleFrontRight(e.target.files[0]);
+                  }}
+                />
+              </div>
+
+              <div
+                ref={wrapperRef}
+                className='drop-file-input bg-[#f9fafb]
+                '
+              >
+                <span className=''>
+                  <AiOutlineCloudUpload className='w-7 h-7' />
+                </span>
+
+                <div className={dragAndDropClasses}>
+                  Drag and drop or Choose file to upload
+                </div>
+                <span className={typeDocClasses}>
+                  {doorHandleFrontLeft?.name || 'Door handle front left'}
+                </span>
+                <input
+                  type='file'
+                  required
+                  onChange={(e) => {
+                    if (!e.target.files) {
+                      return;
+                    }
+                    setDoorHandleFrontLeft(e.target.files[0]);
+                  }}
+                />
+              </div>
+
+              {/* fifth row */}
+              <div
+                ref={wrapperRef}
+                className='drop-file-input mb-8 bg-[#f9fafb]
+                '
+              >
+                <span className=''>
+                  <AiOutlineCloudUpload className='w-7 h-7' />
+                </span>
+
+                <div className={dragAndDropClasses}>
+                  Drag and drop or Choose file to upload
+                </div>
+                <span className={typeDocClasses}>
+                  {doorHandleBackRight?.name || 'Door handle back right'}
+                </span>
+                <input
+                  multiple={false}
+                  type='file'
+                  required
+                  onChange={(e) => {
+                    if (!e.target.files) {
+                      return;
+                    }
+                    setDoorHandleBackRight(e.target.files[0]);
+                  }}
+                />
+              </div>
+
+              <div
+                ref={wrapperRef}
+                className='drop-file-input mb-8 bg-[#f9fafb]
+                '
+              >
+                <span className=''>
+                  <AiOutlineCloudUpload className='w-7 h-7' />
+                </span>
+
+                <div className={dragAndDropClasses}>
+                  Drag and drop or Choose file to upload
+                </div>
+                <span className={typeDocClasses}>
+                  {doorHandleBackLeft?.name || 'Door handle back left'}
+                </span>
+                <input
+                  type='file'
+                  required
+                  onChange={(e) => {
+                    if (!e.target.files) {
+                      return;
+                    }
+                    setDoorHandleBackLeft(e.target.files[0]);
                   }}
                 />
               </div>
