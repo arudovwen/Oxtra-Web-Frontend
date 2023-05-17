@@ -50,8 +50,6 @@ const LoginForm = () => {
           setDisable(false);
         });
     });
-
-    // setDisable(false);
   };
 
   return (

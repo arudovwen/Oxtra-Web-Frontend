@@ -75,7 +75,28 @@ const VehicleInformationForm = () => {
     name: string;
   } | null>();
 
+  const [brand, setBrand] = useState('');
+  const [model, setModel] = useState('');
+  const [year, setYear] = useState('');
+  const [transmission, setTransmission] = useState('');
+  const [color, setColor] = useState('');
+  const [plate_number, setPlateNumber] = useState('');
+
   const wrapperRef = useRef(null);
+
+  // loginUser(user)
+  //   .then((res) => {
+  //     console.log('res', res);
+  //     setToken(res.data.token);
+  //     login(res.data.user);
+  //     successAlert(res.data.message);
+  //     setDisable(false);
+  //   })
+  //   .catch((err) => {
+  //     console.log(err);
+
+  //     setDisable(false);
+  //   });
 
   return (
     <main className='w-[90%] lg:mx-auto lg:max-w-[500px]'>
@@ -103,6 +124,7 @@ const VehicleInformationForm = () => {
                     type='text'
                     placeholder='Toyota'
                     className={inputClasses}
+                    onChange={(e) => setBrand(e.target.value)}
                     required
                   />
                 </div>
@@ -117,6 +139,7 @@ const VehicleInformationForm = () => {
                     type='text'
                     placeholder='Camry'
                     className={inputClasses}
+                    onChange={(e) => setBrand(e.target.value)}
                     required
                   />
                 </div>
@@ -136,7 +159,10 @@ const VehicleInformationForm = () => {
                 </label>
 
                 <div className='mt-1'>
-                  <select className={inputClasses}>
+                  <select
+                    className={inputClasses}
+                    onChange={(e) => setTransmission(e.target.value)}
+                  >
                     <option label='Automatic'>Automatic</option>
                     <option label='Manual'>Manual</option>
                   </select>
@@ -148,7 +174,12 @@ const VehicleInformationForm = () => {
                   Color
                 </label>
                 <div className='mt-1'>
-                  <input type='text' required className={inputClasses} />
+                  <input
+                    type='text'
+                    required
+                    className={inputClasses}
+                    onChange={(e) => setColor(e.target.value)}
+                  />
                 </div>
               </div>
 
@@ -157,7 +188,12 @@ const VehicleInformationForm = () => {
                   Plate number
                 </label>
                 <div className='mt-1'>
-                  <input type='number' required className={inputClasses} />
+                  <input
+                    type='number'
+                    required
+                    className={inputClasses}
+                    onChange={(e) => setPlateNumber(e.target.value)}
+                  />
                 </div>
               </div>
             </div>

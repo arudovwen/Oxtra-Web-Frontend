@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import VehiclesCard from '@/components/VehiclesCard';
 import { useRouter } from 'next/router';
 import { useAuth } from '@/hooks/useAuth';
+import Documents from '@/components/Documents';
 
 const Profile = () => {
   const activePage = 'Profile';
@@ -70,7 +71,7 @@ const Profile = () => {
       </div>
       {(profileForm && <ProfileForm />) ||
         (vehicleCard && <VehiclesCard />) ||
-        (document && <div>document</div>)}
+        (document && <Documents />)}
     </DashboardLayout>
   );
 };

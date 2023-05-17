@@ -11,5 +11,9 @@ const urls = {
 
   // User urls
   UPDATE_USER_PROFILE: `${version}/user`,
+  GET_ALL_VEHICLE_DOCUMENTS: `${version}/vehicle-documents`,
+
+  // vehicles
+  ADD_VEHICLES: `${version}/vehicles`,
 };
 export default urls;
