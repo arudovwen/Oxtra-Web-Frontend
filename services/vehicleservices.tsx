@@ -8,3 +8,7 @@ export async function getAllVehicles(config = {}) {
 export async function addVehicle(data: {}, config = {}) {
   return await post(urls.ADD_VEHICLES, data, config);
 }
+
+export async function addVehicleDocuments(data: {}, config = {}) {
+  return await post(urls.ADD_VEHICLE_DOCUMENTS, data, config);
+}

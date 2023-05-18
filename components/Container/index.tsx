@@ -5,7 +5,7 @@ interface ContainerProps {
 
 const Container = ({ children, marginBottom }: ContainerProps) => {
   return (
-    <div className={`w-[90%] xl:w-[1192px] mx-auto ${marginBottom}`}>
+    <div className={`w-[90%] xl:max-w-[1192px] mx-auto ${marginBottom}`}>
       {children}
     </div>
   );

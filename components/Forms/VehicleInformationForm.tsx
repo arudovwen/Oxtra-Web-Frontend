@@ -4,6 +4,8 @@ import classNames from 'classnames';
 import Button from '../Button';
 import { useRouter } from 'next/router';
 import { AiOutlineCloudUpload } from 'react-icons/ai';
+import { addVehicle } from '@/services/vehicleservices';
+import { useAuth } from '@/hooks/useAuth';
 
 const labelClasses = classNames(
   'block text-[14px] leading-[14px] font-gordita-medium text-brandGray-300'
@@ -21,25 +23,8 @@ const typeDocClasses = classNames(
   `text-[#797980] font-gordita-regular text-[12px] leading-[17px] `
 );
 
-const vehicleFeatures = [
-  {
-    name: 'Air Conditioning',
-  },
-  {
-    name: 'Air Bags',
-  },
-  {
-    name: 'Air Suspension',
-  },
-];
-
 const VehicleInformationForm = () => {
   const router = useRouter();
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    router.push('/put-up-your-vehicle/documents');
-  };
 
   const [exteriorFront, setExteriorFront] = useState<{ name: string } | null>();
   const [exteriorBack, setExteriorBack] = useState<{ name: string } | null>();
@@ -78,25 +63,65 @@ const VehicleInformationForm = () => {
   const [brand, setBrand] = useState('');
   const [model, setModel] = useState('');
   const [year, setYear] = useState('');
-  const [transmission, setTransmission] = useState('');
+  const [transmission, setTransmission] = useState('Automatic');
   const [color, setColor] = useState('');
   const [plate_number, setPlateNumber] = useState('');
+  const { token } = useAuth();
+
+  const carImages = [
+    doorHandleBackLeft,
+    doorHandleBackRight,
+    doorHandleFrontLeft,
+    doorHandleFrontRight,
+    interiorBack,
+    interiorFront,
+    exteriorBack,
+    exteriorFront,
+    exteriorLeftSide,
+    exteriorRightSide,
+  ];
+
+  const [extras, setExtras] = useState([
+    { id: 1, name: 'Ac conditioning', available: false },
+    { id: 2, name: 'Air bags', available: false },
+    { id: 3, name: 'Air suspension', available: false },
+  ]);
+
+  const handleCheckboxChange = (itemId: number) => {
+    setExtras((prevItems) =>
+      prevItems.map((item) =>
+        item.id === itemId ? { ...item, available: !item.available } : item
+      )
+    );
+  };
 
   const wrapperRef = useRef(null);
 
-  // loginUser(user)
-  //   .then((res) => {
-  //     console.log('res', res);
-  //     setToken(res.data.token);
-  //     login(res.data.user);
-  //     successAlert(res.data.message);
-  //     setDisable(false);
-  //   })
-  //   .catch((err) => {
-  //     console.log(err);
+  const vehicleInfo = {
+    brand,
+    model,
+    year,
+    transmission,
+    color,
+    plate_number,
+    carImages,
+    extras,
+  };
 
-  //     setDisable(false);
-  //   });
+  const config = { headers: { Authorization: `Bearer ${token}` } };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    addVehicle(vehicleInfo, config)
+      .then((res) => {
+        console.log('res', res);
+        router.push('/put-up-your-vehicle/documents');
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
     <main className='w-[90%] lg:mx-auto lg:max-w-[500px]'>
@@ -139,7 +164,7 @@ const VehicleInformationForm = () => {
                     type='text'
                     placeholder='Camry'
                     className={inputClasses}
-                    onChange={(e) => setBrand(e.target.value)}
+                    onChange={(e) => setModel(e.target.value)}
                     required
                   />
                 </div>
@@ -150,7 +175,12 @@ const VehicleInformationForm = () => {
                   Year
                 </label>
                 <div className='mt-1'>
-                  <input type='number' required className={inputClasses} />
+                  <input
+                    type='number'
+                    required
+                    className={inputClasses}
+                    onChange={(e) => setYear(e.target.value)}
+                  />
                 </div>
               </div>
               <div className='col-span-6'>
@@ -199,20 +229,16 @@ const VehicleInformationForm = () => {
             </div>
 
             <div className='flex h-5 gap-[21px] my-8 items-center'>
-              {vehicleFeatures.map((feat) => {
+              {extras.map((ex) => {
                 return (
-                  <div
-                    key={feat.name}
-                    className='flex h-5 gap-[8px] items-center'
-                  >
+                  <div key={ex.id} className='flex h-5 gap-[8px] items-center'>
                     <input
-                      name={feat.name}
                       type='checkbox'
-                      className=''
-                      onChange={(e) => console.log(e.target)}
+                      checked={ex.available}
+                      onChange={() => handleCheckboxChange(ex.id)}
                     />
                     <span className='text-[12px]  leading-[20px] text-brandGray-300 font-gordita-regular'>
-                      {feat.name}
+                      {ex.name}
                     </span>
                   </div>
                 );

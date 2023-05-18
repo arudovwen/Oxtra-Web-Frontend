@@ -15,5 +15,6 @@ const urls = {
 
   // vehicles
   ADD_VEHICLES: `${version}/vehicles`,
+  ADD_VEHICLE_DOCUMENTS: `${version}/vehicle-documents`,
 };
 export default urls;
