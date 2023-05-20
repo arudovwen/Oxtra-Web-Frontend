@@ -32,7 +32,7 @@ const PasswordForm = () => {
       newPassword_confirmation,
     };
 
-    console.log(password);
+   
 
     changePassword(password)
       .then((res) => {

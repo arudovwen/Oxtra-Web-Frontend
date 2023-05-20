@@ -1,7 +1,7 @@
 import React from 'react';
 import { useAuth } from '@/hooks/useAuth';
-import { getAllVehicles } from '@/services/vehicleservices';
-import { useState } from 'react';
+import { getAllVehiclesDocuments } from '@/services/vehicleservices';
+import { useState, useEffect } from 'react';
 
 const Documents = () => {
   const { token } = useAuth();
@@ -9,13 +9,18 @@ const Documents = () => {
 
   const config = { headers: { Authorization: `Bearer ${token}` } };
 
-  getAllVehicles(config)
-    .then((res) => {
-      console.log('res', res);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  useEffect(() => {
+    getAllVehiclesDocuments(config)
+      .then((res) => {
+        console.log('res', res);
+
+        setDocuments(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return <div>Documents</div>;
 };

@@ -1,10 +1,11 @@
 import React from 'react';
 import honda from '../../public/assets/honda.png';
 import Image from 'next/image';
-import Typography from '../Typography';
+import { useEffect, useState } from 'react';
 import { HiOutlineLocationMarker } from 'react-icons/hi';
-
+import { getVehicles } from '@/services/vehicleservices';
 import Button from '../Button';
+import { useAuth } from '@/hooks/useAuth';
 
 const cars = [
   {
@@ -74,6 +75,23 @@ const cars = [
 ];
 
 const BookCars = () => {
+  const { token } = useAuth();
+  const [vehicles, setVehicles] = useState([]);
+
+  const config = { headers: { Authorization: `Bearer ${token}` } };
+
+  useEffect(() => {
+    getVehicles(config)
+      .then((res) => {
+        console.log('res', res);
+        setVehicles(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[40px] mb-[120px]'>
       {cars.map((car) => {

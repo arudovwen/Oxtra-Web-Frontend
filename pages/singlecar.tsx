@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Navigation from '@/components/Navigation';
 import Container from '@/components/Container';
 import Typography from '@/components/Typography';
@@ -11,8 +11,12 @@ import ac from '../public/assets/ac.png';
 import Button from '@/components/Button';
 import AlterFooter from '@/components/Footers/AlterFooter';
 import auto from '../public/assets/automatic.png';
+import { TbPointFilled, TbPoint } from 'react-icons/tb';
 import fuel from '../public/assets/GasPump.png';
 import { useRouter } from 'next/router';
+import { SyntheticEvent } from 'react';
+import { useAuth } from '@/hooks/useAuth';
+import { rentVehicle } from '@/services/vehicleservices';
 
 const blockClasses = classNames(
   `border   border-[#d4d6d8] p-5 rounded-lg mb-[24px]`
@@ -71,6 +75,44 @@ const SingleCar = () => {
   const activePage = 'singlecar';
 
   const router = useRouter();
+
+  const [pickup_location, setPickupLocation] = useState('');
+  const [pickup_date, setPickupDate] = useState('');
+  const [trip_type, setTripType] = useState('5');
+  const [hours, setHours] = useState('');
+  const [pickup_time, setPickupTime] = useState('');
+  const [price, setPrice] = useState('5');
+  const [fee, setFee] = useState('4');
+  const [days, setDays] = useState('4')
+  const [vehicle_id, setVehicleId] = useState('9');
+  const [dailyTrip, setDailyTrip] = useState(false);
+
+  const { token } = useAuth();
+
+  const config = { headers: { Authorization: `Bearer ${token}` } };
+
+  const handleSubmit = (e: SyntheticEvent) => {
+    e.preventDefault();
+
+    const rentVehicleInfo = {
+      pickup_location,
+      pickup_date,
+      hours,
+      pickup_time,
+      price,
+      fee,
+      vehicle_id,
+      trip_type,
+    };
+
+    rentVehicle(rentVehicleInfo, config)
+      .then((res) => {
+        console.log('res', res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
     <div>
@@ -139,7 +181,7 @@ const SingleCar = () => {
               </div>
             </div>
           </div>
-          <div className='w-1/2'>
+          <form className='w-1/2' onSubmit={handleSubmit}>
             <div className={blockClasses}>
               <div className='flex gap-[40px] mb-[20px]'>
                 <div className='w-3/4'>
@@ -150,6 +192,8 @@ const SingleCar = () => {
                     type='text'
                     placeholder='Enter address or airport'
                     className={inputClasses}
+                    required
+                    onChange={(e) => setPickupLocation(e.target.value)}
                   />
                 </div>
                 <div className='w-1/4'>
@@ -161,34 +205,92 @@ const SingleCar = () => {
                     id='pick up Date'
                     className={`${inputClasses}  uppercase`}
                     name='pick up Date'
+                    required
+                    onChange={(e) => setPickupDate(e.target.value)}
                   />
                 </div>
               </div>
 
-              <div className='flex gap-[26px] mb-[20px]'>
-                <div className=' flex items-center gap-2.5'>
-                  <input type='checkbox' className='rounded' />
-                  <div className={tripClasses}>Daily trip</div>
+              <div className='mt-6 flex gap-[32px] mb-[35.5px]'>
+                <div className='flex gap-1 items-center'>
+                  {dailyTrip ? (
+                    <TbPoint
+                      className='w-5 h-5 cursor-pointer'
+                      onClick={() => setDailyTrip(false)}
+                    />
+                  ) : (
+                    <TbPointFilled className='w-5 h-5 text-[#438950]' />
+                  )}
+
+                  <span
+                    className={`${
+                      !dailyTrip
+                        ? 'text-brandGreen-300 font-gordita-bold '
+                        : ' font-gordita-regular'
+                    } text-[12px] text-brandGray-300 leading-[12px] `}
+                  >
+                    Hourly trip
+                  </span>
                 </div>
-                <div className='flex items-center gap-2.5'>
-                  <input type='checkbox' className='rounded bg-green-400' />
-                  <div className={tripClasses}>Hourly trip</div>
+                <div className='flex h-5 gap-1 items-center'>
+                  {dailyTrip ? (
+                    <TbPointFilled className='w-5 h-5 text-[#438950]' />
+                  ) : (
+                    <TbPoint
+                      className='w-5 h-5 cursor-pointer'
+                      onClick={() => setDailyTrip(true)}
+                    />
+                  )}
+                  <span
+                    className={`${
+                      dailyTrip
+                        ? 'text-brandGreen-300 font-gordita-bold '
+                        : ' font-gordita-regular'
+                    } text-[12px] text-brandGray-300 leading-[12px] `}
+                  >
+                    Daily trip
+                  </span>
                 </div>
               </div>
 
               <div className='flex justify-between mb-[20px]'>
                 <div className='flex gap-[40px]'>
-                  <div className='w-1/3'>
-                    <label htmlFor='Number of Days' className={labelClasses}>
-                      Number of Hours
-                    </label>
-                    <input type='number' className={inputClasses} />
-                  </div>
+                  {!dailyTrip ? (
+                    <div className='w-1/3'>
+                      <label htmlFor='Number of Hours' className={labelClasses}>
+                        Number of Hours
+                      </label>
+                      <input
+                        type='number'
+                        className={inputClasses}
+                        required
+                        onChange={(e) => setHours(e.target.value)}
+                      />
+                    </div>
+                  ) : (
+                    <div className='w-1/3'>
+                      <label htmlFor='Number of Days' className={labelClasses}>
+                        Number of Days
+                      </label>
+                      <input
+                        type='number'
+                        className={inputClasses}
+                        required
+                        onChange={(e) => setDays(e.target.value)}
+                      />
+                    </div>
+                  )}
                   <div className='w-1/4'>
                     <label htmlFor='Time' className={labelClasses}>
                       Pick up Time
                     </label>
-                    <input type='time' className={inputClasses} name='Time' />
+                    <input
+                      type='time'
+                      className={inputClasses}
+                      name='Time'
+                      required
+                      onChange={(e) => setPickupTime(e.target.value)}
+                    />
                   </div>
                 </div>
 
@@ -254,10 +356,11 @@ const SingleCar = () => {
               textColor='text-white'
               width={true}
               size='text-sm'
+              type='submit'
             >
               Continue
             </Button>
-          </div>
+          </form>
         </div>
       </Container>
       <AlterFooter />
