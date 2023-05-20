@@ -136,6 +136,7 @@ const RentVehicle = () => {
           textColor='text-white'
           width={true}
           size='text-sm'
+          link='/rent-a-vehicle'
         >
           Rent a car
         </Button>

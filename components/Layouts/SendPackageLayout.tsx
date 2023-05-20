@@ -5,28 +5,28 @@ import AlterFooter from '../Footers/AlterFooter';
 import { AiOutlineArrowLeft } from 'react-icons/ai';
 import { useRouter } from 'next/router';
 
-interface PutUpYourVehicleLayoutProps {
+interface SendPackageLayoutProps {
   children: React.ReactNode;
-  putYourVehicleLayoutActivePage: string;
+  sendPackageLayoutActivePage: string;
 }
 
 const nav = [
   {
-    name: 'Basic information',
+    name: 'Sender Details',
   },
   {
-    name: 'Vehicle',
+    name: 'Receiver Details',
   },
   {
-    name: 'Documents',
+    name: 'Package',
   },
 ];
 
-const PutUpYourVehicleLayout = ({
+const SendPackageLayout = ({
   children,
-  putYourVehicleLayoutActivePage,
-}: PutUpYourVehicleLayoutProps) => {
-  const activePage = 'Put up your vehicle';
+  sendPackageLayoutActivePage,
+}: SendPackageLayoutProps) => {
+  const activePage = 'Send a package';
 
   const router = useRouter();
 
@@ -50,14 +50,14 @@ const PutUpYourVehicleLayout = ({
               <div
                 key={n.name}
                 className={`text-sm flex items-center gap-2 ${
-                  putYourVehicleLayoutActivePage === n.name
+                  sendPackageLayoutActivePage === n.name
                     ? 'text-brandGreen-300 font-gordita-medium'
                     : 'font-gordita-regular text-[#B3B3B3]'
                 }`}
               >
                 <span
                   className={`w-[32px]  h-[32px] rounded-full items-center text-white flex justify-center ${
-                    putYourVehicleLayoutActivePage === n.name
+                    sendPackageLayoutActivePage === n.name
                       ? 'bg-brandGreen-300'
                       : 'bg-[#B3B3B3]'
                   }`}
@@ -84,4 +84,4 @@ const PutUpYourVehicleLayout = ({
   );
 };
 
-export default PutUpYourVehicleLayout;
+export default SendPackageLayout;

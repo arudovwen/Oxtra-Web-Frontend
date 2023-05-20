@@ -83,7 +83,7 @@ const SingleCar = () => {
   const [pickup_time, setPickupTime] = useState('');
   const [price, setPrice] = useState('5');
   const [fee, setFee] = useState('4');
-  const [days, setDays] = useState('4')
+  const [days, setDays] = useState('4');
   const [vehicle_id, setVehicleId] = useState('9');
   const [dailyTrip, setDailyTrip] = useState(false);
 
@@ -223,11 +223,8 @@ const SingleCar = () => {
                   )}
 
                   <span
-                    className={`${
-                      !dailyTrip
-                        ? 'text-brandGreen-300 font-gordita-bold '
-                        : ' font-gordita-regular'
-                    } text-[12px] text-brandGray-300 leading-[12px] `}
+                    className=' font-gordita-regular
+                     text-[12px] text-brandGray-300 leading-[12px]'
                   >
                     Hourly trip
                   </span>
@@ -242,11 +239,8 @@ const SingleCar = () => {
                     />
                   )}
                   <span
-                    className={`${
-                      dailyTrip
-                        ? 'text-brandGreen-300 font-gordita-bold '
-                        : ' font-gordita-regular'
-                    } text-[12px] text-brandGray-300 leading-[12px] `}
+                    className=' font-gordita-regular
+                     text-[12px] text-brandGray-300 leading-[12px]'
                   >
                     Daily trip
                   </span>

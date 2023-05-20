@@ -1,6 +1,10 @@
 import React from 'react';
 import classNames from 'classnames';
 import { GoSearch } from 'react-icons/go';
+import { useState } from 'react';
+import { useAuth } from '@/hooks/useAuth';
+import { SyntheticEvent } from 'react';
+import { rentVehicle } from '@/services/vehicleservices';
 
 const inputClasses = classNames(
   'px-2 py-2 border rounded-sm border-[#d4d6d8] mt-3  w-full h-[40px]'
@@ -11,6 +15,44 @@ const labelClasses = classNames(
 );
 
 const FindCarForm = () => {
+  const [pickup_location, setPickupLocation] = useState('');
+  const [pickup_date, setPickupDate] = useState('');
+  const [trip_type, setTripType] = useState('5');
+  const [hours, setHours] = useState('');
+  const [pickup_time, setPickupTime] = useState('');
+  const [price, setPrice] = useState('5');
+  const [fee, setFee] = useState('4');
+  const [days, setDays] = useState('4');
+  const [vehicle_id, setVehicleId] = useState('9');
+  const [dailyTrip, setDailyTrip] = useState(false);
+
+  const { token } = useAuth();
+
+  const config = { headers: { Authorization: `Bearer ${token}` } };
+
+  const handleSubmit = (e: SyntheticEvent) => {
+    e.preventDefault();
+
+    const rentVehicleInfo = {
+      pickup_location,
+      pickup_date,
+      hours,
+      pickup_time,
+      price,
+      fee,
+      vehicle_id,
+      trip_type,
+    };
+
+    rentVehicle(rentVehicleInfo, config)
+      .then((res) => {
+        console.log('res', res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <form
       action='

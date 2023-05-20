@@ -192,6 +192,7 @@ const CourierService = () => {
           textColor='text-white'
           width={true}
           size='text-sm'
+          link='/send-a-package'
         >
           Send a package
         </Button>
