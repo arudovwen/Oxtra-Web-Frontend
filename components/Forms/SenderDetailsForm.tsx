@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Typography from '../Typography';
 import classNames from 'classnames';
 import Button from '../Button';
@@ -14,6 +14,14 @@ const inputClasses = classNames(
 
 const SenderDetialsForm = () => {
   const router = useRouter();
+
+  const [sender_name, setSenderName] = useState('');
+  const [general_location, setGeneralLocation] = useState('');
+  const [phone_number, setPhoneNumber] = useState('');
+  const [sender_email, setSenderEmail] = useState('');
+  const [pickup_address, setPickupAddress] = useState('');
+  const [sender_state, setSenderState] = useState('');
+  const [sender_city, setSenderCity] = useState('');
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
