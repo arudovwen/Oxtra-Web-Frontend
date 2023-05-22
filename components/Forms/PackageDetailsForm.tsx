@@ -3,6 +3,8 @@ import Typography from '../Typography';
 import classNames from 'classnames';
 import Button from '../Button';
 import { useRouter } from 'next/router';
+import Cookies from 'js-cookie';
+import { useEffect, useState } from 'react';
 
 const labelClasses = classNames(
   'block text-[14px] leading-[14px] font-gordita-medium text-brandGray-300'
@@ -14,6 +16,17 @@ const inputClasses = classNames(
 
 const PackageDetailsForm = () => {
   const router = useRouter();
+
+  useEffect(() => {
+    const senderAndReceiverDetails = Cookies.get('senderAndReceiverDetails');
+    if (senderAndReceiverDetails) {
+      const parsedData = JSON.parse(senderAndReceiverDetails as string);
+      // setSender(parsedData);
+    } else {
+      router.push('/send-a-package');
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

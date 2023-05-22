@@ -3,6 +3,8 @@ import Typography from '../Typography';
 import classNames from 'classnames';
 import Button from '../Button';
 import { useRouter } from 'next/router';
+import Cookies from 'js-cookie';
+import { cookiesExpiry } from '@/helpers/url_helpers';
 
 const labelClasses = classNames(
   'block text-[14px] leading-[14px] font-gordita-medium text-brandGray-300'
@@ -25,6 +27,21 @@ const SenderDetialsForm = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    const senderDetails = {
+      sender_name,
+      general_location,
+      phone_number,
+      sender_email,
+      pickup_address,
+      sender_state,
+      sender_city,
+    };
+
+    Cookies.set('senderDetails', JSON.stringify(senderDetails), {
+      expires: cookiesExpiry,
+    });
+
     router.push('/send-a-package/receiver');
   };
 
@@ -54,6 +71,7 @@ const SenderDetialsForm = () => {
                   required
                   placeholder=' Sender name'
                   className={inputClasses}
+                  onChange={(e) => setSenderName(e.target.value)}
                 />
               </div>
             </div>
@@ -68,6 +86,7 @@ const SenderDetialsForm = () => {
                   required
                   placeholder='General location'
                   className={inputClasses}
+                  onChange={(e) => setGeneralLocation(e.target.value)}
                 />
               </div>
             </div>
@@ -76,7 +95,12 @@ const SenderDetialsForm = () => {
                 Phone number
               </label>
               <div className='mt-1'>
-                <input type='number' required className={inputClasses} />
+                <input
+                  type='number'
+                  required
+                  className={inputClasses}
+                  onChange={(e) => setPhoneNumber(e.target.value)}
+                />
               </div>
             </div>
             <div className='col-span-full'>
@@ -92,6 +116,7 @@ const SenderDetialsForm = () => {
                   autoComplete='email'
                   placeholder='Enter your email address'
                   className={inputClasses}
+                  onChange={(e) => setSenderEmail(e.target.value)}
                 />
               </div>
             </div>
@@ -106,6 +131,7 @@ const SenderDetialsForm = () => {
                   required
                   className={inputClasses}
                   placeholder='Enter your address'
+                  onChange={(e) => setPickupAddress(e.target.value)}
                 />
               </div>
             </div>
@@ -115,7 +141,12 @@ const SenderDetialsForm = () => {
                 State
               </label>
               <div className='mt-1'>
-                <input type='text' required className={inputClasses} />
+                <input
+                  type='text'
+                  required
+                  className={inputClasses}
+                  onChange={(e) => setSenderState(e.target.value)}
+                />
               </div>
             </div>
 
@@ -124,7 +155,12 @@ const SenderDetialsForm = () => {
                 City
               </label>
               <div className='mt-1'>
-                <input type='text' required className={inputClasses} />
+                <input
+                  type='text'
+                  required
+                  className={inputClasses}
+                  onChange={(e) => setSenderCity(e.target.value)}
+                />
               </div>
             </div>
           </div>

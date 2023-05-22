@@ -1,6 +1,6 @@
 const version = '/api/v1';
 
-const urls = {
+export const urls = {
   //Auth urls
   LOGIN_USER: `${version}/login`,
   REGISTER: `${version}/register`,
@@ -20,4 +20,5 @@ const urls = {
   RENT_VEHICLE: `${version}/rents`,
   GET_VEHICLES: `${version}/vehicles`,
 };
-export default urls;
+
+export const cookiesExpiry = new Date(new Date().getTime() + 5 * 60 * 1000);

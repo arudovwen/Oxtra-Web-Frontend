@@ -3,6 +3,9 @@ import Typography from '../Typography';
 import classNames from 'classnames';
 import Button from '../Button';
 import { useRouter } from 'next/router';
+import Cookies from 'js-cookie';
+import { useEffect, useState } from 'react';
+import { cookiesExpiry } from '@/helpers/url_helpers';
 
 const labelClasses = classNames(
   'block text-[14px] leading-[14px] font-gordita-medium text-brandGray-300'
@@ -15,8 +18,46 @@ const inputClasses = classNames(
 const ReceiverDetailsForm = () => {
   const router = useRouter();
 
+  const [receiver_name, setReceiverName] = useState('');
+  const [receiver_phone_number, setReceiverPhoneNumber] = useState('');
+  const [receiver_email, setReceiverEmail] = useState('');
+  const [receiver_state, setReceiverState] = useState('');
+  const [receiver_address, setReceiverAddress] = useState('');
+  const [receiver_city, setReceiverCity] = useState('');
+  const [delivery_landmark, setDeliveryLandmark] = useState('');
+  const [delivery_date, setDeliveryDate] = useState('');
+  const [sender, setSender] = useState({});
+
+  useEffect(() => {
+    const senderDetails = Cookies.get('senderDetails');
+    if (senderDetails) {
+      const parsedData = JSON.parse(senderDetails as string);
+      setSender(parsedData);
+    } else {
+      router.push('/send-a-package');
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    const senderAndReceiverDetails = {
+      ...sender,
+      receiver_name,
+      receiver_phone_number,
+      receiver_email,
+      receiver_state,
+      receiver_address,
+      receiver_city,
+      delivery_landmark,
+      delivery_date,
+    };
+
+    Cookies.set('senderAndReceiverDetails', JSON.stringify(senderAndReceiverDetails), {
+      expires: cookiesExpiry,
+    });
+
     router.push('/send-a-package/package');
   };
 
@@ -44,8 +85,9 @@ const ReceiverDetailsForm = () => {
                 <input
                   type='text'
                   required
-                  placeholder=' Sender name'
+                  placeholder=' Receiver name'
                   className={inputClasses}
+                  onChange={(e) => setReceiverName(e.target.value)}
                 />
               </div>
             </div>
@@ -55,7 +97,12 @@ const ReceiverDetailsForm = () => {
                 Phone number
               </label>
               <div className='mt-1'>
-                <input type='number' required className={inputClasses} />
+                <input
+                  type='number'
+                  required
+                  className={inputClasses}
+                  onChange={(e) => setReceiverPhoneNumber(e.target.value)}
+                />
               </div>
             </div>
 
@@ -72,6 +119,7 @@ const ReceiverDetailsForm = () => {
                   autoComplete='email'
                   placeholder='Enter your email address'
                   className={inputClasses}
+                  onChange={(e) => setReceiverEmail(e.target.value)}
                 />
               </div>
             </div>
@@ -84,6 +132,7 @@ const ReceiverDetailsForm = () => {
                   required
                   className={inputClasses}
                   placeholder='Enter address'
+                  onChange={(e) => setReceiverAddress(e.target.value)}
                 />
               </div>
             </div>
@@ -93,7 +142,12 @@ const ReceiverDetailsForm = () => {
                 State
               </label>
               <div className='mt-1'>
-                <input type='text' required className={inputClasses} />
+                <input
+                  type='text'
+                  required
+                  className={inputClasses}
+                  onChange={(e) => setReceiverState(e.target.value)}
+                />
               </div>
             </div>
 
@@ -102,7 +156,12 @@ const ReceiverDetailsForm = () => {
                 City
               </label>
               <div className='mt-1'>
-                <input type='text' required className={inputClasses} />
+                <input
+                  type='text'
+                  required
+                  className={inputClasses}
+                  onChange={(e) => setReceiverCity(e.target.value)}
+                />
               </div>
             </div>
 
@@ -111,7 +170,12 @@ const ReceiverDetailsForm = () => {
                 Delivery landmark
               </label>
               <div className='mt-1'>
-                <input type='text' required className={inputClasses} />
+                <input
+                  type='text'
+                  required
+                  className={inputClasses}
+                  onChange={(e) => setDeliveryLandmark(e.target.value)}
+                />
               </div>
             </div>
 
@@ -124,6 +188,7 @@ const ReceiverDetailsForm = () => {
                   type='date'
                   className={`${inputClasses}  uppercase`}
                   required
+                  onChange={(e) => setDeliveryDate(e.target.value)}
                 />
               </div>
             </div>
