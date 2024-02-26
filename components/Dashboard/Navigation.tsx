@@ -8,7 +8,7 @@ import { BsBellFill } from 'react-icons/bs';
 import { CgProfile } from 'react-icons/cg';
 import classNames from 'classnames';
 
-const navigation = [{ name: 'Rent a vehicle', href: '/rent-a-vehicle' }];
+const navigation = [{ name: 'Rent a car', href: '/rent-a-car' }];
 
 const iconClasses = classNames('text-brandGray-100 w-4 h-4 md:w-5 md:h-5');
 

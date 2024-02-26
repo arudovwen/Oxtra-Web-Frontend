@@ -25,6 +25,34 @@ input:focus {
   border: 1px solid #42864f;
 }
 
+.new_input {
+  box-sizing: border-box !important;
+  -webkit-transition: 0.5s !important;
+  transition: 0.5s !important;
+  outline: none !important;
+  border: none !important;
+}
+
+.new_input:focus {
+  box-shadow: none !important;
+}
+
+.arrow {
+  transition: transform 0.3s ease-in-out;
+}
+
+.par:hover .arrow {
+  transform: scale(1.5);
+}
+
+.car {
+  transition: transform 0.3s ease-in-out;
+}
+
+.pare:hover .car {
+  transform: scale(1.2);
+}
+
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
@@ -33,13 +61,13 @@ input::-webkit-inner-spin-button {
 }
 
 /* Firefox */
-input[type='number'] {
+input[type="number"] {
   -moz-appearance: textfield;
 }
 
-input[type='datetime-local'],
-input[type='time'],
-input[type='date'] {
+input[type="datetime-local"],
+input[type="time"],
+input[type="date"] {
   -webkit-appearance: none;
 }
 

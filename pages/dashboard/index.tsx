@@ -84,7 +84,7 @@ const Card = ({ children }: { children: React.ReactNode }) => {
 };
 
 const RentVehicle = () => {
-  const activePage = 'Rent a vehicle';
+  const activePage = 'Rent a car';
   const [pending, setPending] = useState(true);
 
   return (
@@ -136,7 +136,7 @@ const RentVehicle = () => {
           textColor='text-white'
           width={true}
           size='text-sm'
-          link='/rent-a-vehicle'
+          link='/rent-a-car'
         >
           Rent a car
         </Button>

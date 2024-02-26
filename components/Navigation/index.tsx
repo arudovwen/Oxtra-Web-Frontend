@@ -26,8 +26,8 @@ interface NavigationProps {
 }
 
 const navigation = [
-  { name: 'Rent a vehicle', href: '/rent-a-vehicle' },
-  { name: 'Put up your vehicle', href: '/put-up-your-vehicle' },
+  { name: 'Rent a car', href: '/rent-a-car' },
+  { name: 'Sign up as a car owner', href: '/register-car' },
   { name: 'Company', href: '/company' },
   { name: 'FAQ', href: '/' },
 ];

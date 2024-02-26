@@ -7,6 +7,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
+        'gordita': ['Gordita Regular'],
         'gordita-regular': ['Gordita Regular'],
         'gordita-thin': ['Gordita Thin'],
         'gordita-light': ['Gordita Light'],

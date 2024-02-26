@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { useAuth } from '@/hooks/useAuth';
 
 const sideNav = [
-  { name: 'Rent a vehicle', href: '/dashboard' },
+  { name: 'Rent a car', href: '/dashboard' },
   { name: 'Courier service', href: '/dashboard/courier-service' },
   { name: 'Lease vehicle', href: '/dashboard/lease-a-vehicle' },
   { name: 'Profile', href: '/dashboard/profile' },
