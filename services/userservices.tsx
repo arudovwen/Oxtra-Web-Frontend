@@ -1,4 +1,5 @@
 import { put } from '../helpers/api_helpers';
+ /* @ts-ignore */
 import urls from '@/helpers/url_helpers';
 
 export async function updateUserProfile(

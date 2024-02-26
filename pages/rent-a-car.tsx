@@ -163,7 +163,10 @@ const RentVehicle = () => {
 
                     <div className="flex items-center  justify-between">
                       {carAccessories.map((item: any, i: any) => (
-                        <div className="flex flex-col justify-center items-center">
+                        <div
+                          key={i}
+                          className="flex flex-col justify-center items-center"
+                        >
                           <img className="h-[13px] w-[13px]" src={item.img} />
                           <div className="mt-[8px] text-[12px] text-[#646464] font-gordita-medium">
                             {item.name}

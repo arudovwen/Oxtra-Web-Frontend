@@ -1,3 +1,4 @@
+ /* @ts-ignore */
 import urls from '../helpers/url_helpers';
 import { post, get } from '../helpers/api_helpers';
 import { User } from '@/hooks/useAuth';

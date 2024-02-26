@@ -53,6 +53,7 @@ const Typography = ({
         ${font}
       `}
     >
+      { /* @ts-ignore */}
       {children}
     </TagName>
   );
