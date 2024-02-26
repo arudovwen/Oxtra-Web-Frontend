@@ -76,7 +76,7 @@ const RentVehicle = () => {
           search for your preferred car.
         </div>
         <div className="mt-[40px] flex w-full justify-center items-center">
-          <div className="flex w-[45%] p-[16px] pl-0 bg-[#f4f6f8] h-[48px] rounded-[8px] justify-center items-center">
+          <div className="flex w-full md:w-[45%] p-[16px] pl-0 bg-[#f4f6f8] h-[48px] rounded-[8px] justify-center items-center">
             <input
               className="new_input bg-[unset] w-full px-[16px] placeholder:text-[#646668] h-[48px] rounded-[8px]"
               placeholder="search by car name"
@@ -86,7 +86,7 @@ const RentVehicle = () => {
         </div>
 
         <div className="flex items-start gap-[32px]">
-          <div className="w-[18%]">
+          <div className="w-[18%] hidden md:block">
             <div className="font-gordita-medium text-[#242424]">Filters</div>
 
             <div className="mt-[16px]">
@@ -107,11 +107,11 @@ const RentVehicle = () => {
             </div>
           </div>
 
-          <div className="w-[82%] mt-[20px]">
+          <div className="w-full md:w-[82%] mt-[20px]">
             <div className="flex w-full justify-end">
               <div
                 onClick={() => setShowSort((prev) => !prev)}
-                className={`bg-[#E3F2E6] cursor-pointer w-[28%] relative box flex  ${
+                className={`bg-[#E3F2E6] cursor-pointer w-full md:w-[28%] relative box flex  ${
                   showSort ? "rounded-[8px] rounded-b-none" : "rounded-[8px]"
                 }  p-[16px] h-[48px] items-center gap-[12px]`}
               >
@@ -139,7 +139,7 @@ const RentVehicle = () => {
               </div>
             </div>
 
-            <div className="grid grid-cols-3 gap-[32px] mt-[24px]">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-[32px] mt-[24px]">
               {Array(9)
                 .fill(null)
                 .map((item: any, index) => (
