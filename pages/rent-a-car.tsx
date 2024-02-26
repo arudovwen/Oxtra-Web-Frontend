@@ -3,6 +3,7 @@ import Navigation from "@/components/Navigation";
 import React, { useEffect, useState } from "react";
 import { RiSearchLine } from "react-icons/ri";
 import { HiArrowLongRight } from "react-icons/hi2";
+import { IoIosArrowDown } from "react-icons/io";
 import {
   carAccessories,
   filters,
@@ -111,12 +112,16 @@ const RentVehicle = () => {
             <div className="flex w-full justify-end">
               <div
                 onClick={() => setShowSort((prev) => !prev)}
-                className={`bg-[#E3F2E6] cursor-pointer w-full md:w-[28%] relative box flex  ${
+                className={`bg-[#E3F2E6] cursor-pointer w-full md:w-[30%] relative box flex  ${
                   showSort ? "rounded-[8px] rounded-b-none" : "rounded-[8px]"
-                }  p-[16px] h-[48px] items-center gap-[12px]`}
+                }  p-[16px] px-[10px] h-[48px] items-center gap-[12px]`}
               >
-                <div className="text-[#0A3421]">
+                <div className="text-[#0A3421] w-full">
                   Sort By: <span className="font-gordita-medium">{sortBy}</span>
+                </div>
+
+                <div>
+                  <IoIosArrowDown />
                 </div>
 
                 {showSort ? (
