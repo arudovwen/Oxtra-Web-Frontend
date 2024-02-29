@@ -53,6 +53,17 @@ input:focus {
   transform: scale(1.2);
 }
 
+/* Chrome, Safari, and Opera */
+.no_scroller::-webkit-scrollbar {
+  width: 0;
+  border-radius: 8px;
+  background-color: transparent;
+}
+
+.no_scroller::-webkit-scrollbar-thumb {
+  background-color: transparent;
+}
+
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
@@ -96,4 +107,47 @@ input[type="date"] {
 .drop-file-input:hover,
 .drop-file-input.dragover {
   opacity: 0.6;
+}
+
+.rmdp-container {
+  width: 100% !important;
+}
+.rmdp-day span {
+  border-radius: 4px !important;
+  font-size: 13px !important;
+}
+.rmdp-day.rmdp-today span {
+  background-color: #d4d6d8 !important;
+}
+
+.rmdp-day.rmdp-selected span:not(.highlight) {
+  background-color: #ee383a !important;
+  box-shadow: none !important;
+}
+.rmdp-day span:hover {
+  background-color: #f9d0cd !important;
+  box-shadow: none !important;
+}
+.rmdp-arrow {
+  border-color: #000 !important;
+}
+.rmdp-arrow-container:hover {
+  background-color: #f9d0cd !important;
+}
+.rmdp-week-day {
+  color: #000 !important;
+  font-weight: normal !important;
+}
+.rmdp-header-values {
+  font-weight: 500 !important;
+}
+.rmdp-input {
+  border: 1px solid #E4E4E4 !important;
+  border-radius: 8px !important;
+  width: 100% !important;
+  font-size: 14px !important;
+  color: #000;
+  cursor: pointer;
+  padding: 16px !important;
+  height: 48px !important;
 }

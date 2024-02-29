@@ -32,8 +32,6 @@ const ForgotPasswordForm = () => {
   
       forgotPassword(user)
         .then((res) => {
-          console.log('res', res);
-          // successAlert(res.data.message);
           setDisable(false);
         })
         .catch((err) => {

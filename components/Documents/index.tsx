@@ -12,8 +12,6 @@ const Documents = () => {
   useEffect(() => {
     getAllVehiclesDocuments(config)
       .then((res) => {
-        console.log('res', res);
-
         setDocuments(res.data);
       })
       .catch((err) => {

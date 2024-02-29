@@ -61,7 +61,6 @@ const SignUpForm = () => {
           successAlert(res.data.message);
           router.push('/login');
           setDisable(false);
-          console.log('res', res);
         })
         .catch((err) => {
           console.log(err);

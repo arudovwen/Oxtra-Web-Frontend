@@ -83,7 +83,6 @@ const BookCars = () => {
   useEffect(() => {
     getVehicles(config)
       .then((res) => {
-        console.log('res', res);
         setVehicles(res.data.data);
       })
       .catch((err) => {

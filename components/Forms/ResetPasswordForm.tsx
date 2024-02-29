@@ -38,7 +38,6 @@ const ResetPasswordForm = () => {
 
       resetPassword(resetThePassword)
         .then((res) => {
-          console.log('res', res);
 
           //  login(res.data.user);
           //  successAlert(res.data.message);

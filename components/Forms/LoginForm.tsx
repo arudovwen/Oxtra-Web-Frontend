@@ -38,7 +38,6 @@ const LoginForm = () => {
     handleCsrf().then((res) => {
       loginUser(user)
         .then((res) => {
-          console.log('res', res);
           setToken(res.data.token);
           login(res.data.user);
           successAlert(res.data.message);

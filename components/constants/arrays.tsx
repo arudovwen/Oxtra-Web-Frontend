@@ -47,6 +47,17 @@ export const sortings = [
   "Low cose rentals",
 ];
 
+export const cars = [
+  "Honda CR-V (2015)",
+  "Toyota Corolla",
+  "Buggati Veyron",
+  "Acura RLX",
+  "Audi S3",
+  "Aston Martin DBX",
+  "Acura MDX",
+  "Audi A4",
+  "Honda Accord",
+];
 export const carAccessories = [
   {
     name: "AC",
@@ -64,4 +75,41 @@ export const carAccessories = [
     name: "Automatic",
     img: "../assets/automatic.jpg",
   },
+];
+
+export const carFeatures = [
+  {
+    name: "AC",
+    img: "../../assets/ac.jpg",
+  },
+  {
+    name: "6 Seater",
+    img: "../../assets/seater.jpg",
+  },
+  {
+    name: "4 Bags",
+    img: "../../assets/bags.jpg",
+  },
+  {
+    name: "Automatic",
+    img: "../../assets/automatic.jpg",
+  },
+  {
+    name: "Bluetooth",
+    img: "../../assets/bluetooth.jpg",
+  },
+  {
+    name: "4 Doors",
+    img: "../../assets/seater.jpg",
+  },
+  {
+    name: "Reverse Camera",
+    img: "../../assets/seater.jpg",
+  },
+];
+
+export const carBenefits = [
+  "Free cancellation up to 48 hours before pick-up",
+  "Unlimited mileage",
+  "Clean cars",
 ];

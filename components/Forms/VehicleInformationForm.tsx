@@ -115,7 +115,6 @@ const VehicleInformationForm = () => {
 
     addVehicle(vehicleInfo, config)
       .then((res) => {
-        console.log('res', res);
         router.push('/register-car/documents');
       })
       .catch((err) => {
