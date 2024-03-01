@@ -10,7 +10,7 @@ import {
 } from "react-icons/io";
 import { IoCheckmarkCircle } from "react-icons/io5";
 import { RiArrowRightDoubleLine } from "react-icons/ri";
-import { FaCheck } from "react-icons/fa";
+import { FaCheck, FaRegCircle } from "react-icons/fa";
 import {
   formatDate,
   formatHour,
@@ -27,7 +27,7 @@ const Bookings = () => {
 
   const router = useRouter();
   const { car_name } = router.query;
-  const [step, setStep] = useState(2);
+  const [step, setStep] = useState(1);
   const ref = useRef();
   const [end, setEnd] = useState(false);
   const [start, setStart] = useState(true);
@@ -77,6 +77,7 @@ const Bookings = () => {
     departureTime: "",
   });
 
+  const [driverType, setDriverType] = useState("I'll drive by myself");
   const [tripType, setTripType] = useState("Daily");
 
   const [startValue, startChange] = useState("");
@@ -199,17 +200,17 @@ const Bookings = () => {
           menuColor="text-brandGreen-300"
         />
 
-        <div className="mt-[72px]">
-          <div className="flex items-center gap-[16px] w-fit font-gordita-medium">
-            <div className={`text-[#444648]`}>Home</div>
+        <div className="mt-[40px] md:mt-[72px]">
+          <div className="flex items-center gap-[16px] w-fit font-gordita-medium text-[12px] md:text-[16px]">
+            <div className={`text-[#444648]`} onClick={() => router.push("/")}>
+              Home
+            </div>
             <div className="mb-[3px]">
               <RiArrowRightDoubleLine />
             </div>
             <div
-              onClick={() => setStep(2)}
-              className={`${
-                step === 2 ? "text-[#444648]" : "text-[#D4D4D4] cursor-pointer"
-              }`}
+              onClick={() => router.push("/rent-a-car")}
+              className="text-[#444648]"
             >
               Find Vehicle
             </div>
@@ -217,17 +218,37 @@ const Bookings = () => {
               <RiArrowRightDoubleLine />
             </div>
             <div
-              onClick={() => setStep(3)}
+              onClick={() => {
+                setStep(2);
+                setAvailability(false);
+              }}
               className={`${
-                step === 3 ? "text-[#444648]" : "text-[#D4D4D4] cursor-pointer"
+                step === 2 ? "text-[#D4D4D4]" : "text-[#444648] cursor-pointer"
               }`}
             >
               {car_name}
             </div>
+            <div className={`${step === 3 ? "flex" : "hidden"} mb-[3px]`}>
+              <RiArrowRightDoubleLine />
+            </div>
+            <div
+              onClick={() => setStep(3)}
+              className={`${
+                step === 3
+                  ? "text-[#D4D4D4] flex"
+                  : "text-[#444648] hidden cursor-pointer"
+              }`}
+            >
+              Booking Details
+            </div>
           </div>
         </div>
 
-        <div className="mt-[24px] flex items-start md:flex-row flex-col gap-[40px]">
+        <div
+          className={`${
+            step === 3 ? "hidden" : "flex"
+          } mt-[24px] flex items-start md:flex-row flex-col gap-[40px]`}
+        >
           <div className="w-full md:w-[496px]">
             <img
               src="/assets/new_car.jpg"
@@ -236,7 +257,7 @@ const Bookings = () => {
 
             <div className="relative mt-[24px]">
               <div
-              /* @ts-ignore */
+                /* @ts-ignore */
                 ref={ref}
                 className="no_scroller flex overflow-x-scroll"
                 style={{
@@ -337,6 +358,7 @@ const Bookings = () => {
               {car_name}
             </div>
 
+            {/* @ts-ignore */}
             <div className="mt-[24px] border border-[#E4E4E4] rounded-[16px] py-[32px] px-[24px]">
               <div className="flex items-center gap-[24px]">
                 {["Daily", "Hourly"].map((item: any, i: any) => (
@@ -546,10 +568,10 @@ const Bookings = () => {
               ) : (
                 ""
               )}
-
+              {console.log(step)}
               <div className="mt-[24px]">
                 <button
-                  onClick={() => (availability ? "" : searching())}
+                  onClick={() => (availability ? setStep(3) : searching())}
                   disabled={loading}
                   className={`${
                     loading ? "cursor-not-allowed" : ""
@@ -565,6 +587,200 @@ const Bookings = () => {
                 </button>
               </div>
             </div>
+          </div>
+        </div>
+
+        <div
+          className={`${
+            step === 3 ? "flex" : "hidden"
+          } flex-col md:flex-row items-start gap-[40px] mt-[32px]`}
+        >
+          <div className="w-full md:w-[496px]">
+            <div className="border border-[#E4E4E4] rounded-[12px] p-[24px]">
+              <div className="text-[#242424] font-gordita-bold">
+                Pick up and Return
+              </div>
+
+              <div className="mt-[16px] flex items-start gap-[16px]">
+                <div className="relative">
+                  <FaRegCircle color="#42864F" size="16px" />
+                  <div className="flex justify-center items-center">
+                    <div className="w-[1px] h-[80px] my-[12px] bg-[#C4C4C4]"></div>
+                  </div>
+                  <FaRegCircle color="#42864F" size="16px" />
+                </div>
+                <div className="flex flex-col gap-[16px]">
+                  <div className="text-[#444444] font-gordita-medium text-[14px]">
+                    Pick-up
+                  </div>
+                  <div className="text-[#646668]">
+                    3 Folake Kamoru Street, Lekki
+                  </div>
+                  <div className="text-[#444648] font-gordita-medium text-[12px]">
+                    Sat, 17 Feb · 10:00
+                  </div>
+                  <div className="mt-[8px] flex items-start gap-[16px]">
+                    <div className="flex flex-col gap-[16px]">
+                      <div className="text-[#444444] font-gordita-medium text-[14px]">
+                        Return
+                      </div>
+                      <div className="text-[#646668]">MM1 Airport</div>
+                      <div className="text-[#444648] font-gordita-medium text-[12px]">
+                        Tue, 20 Feb · 10:00
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                onClick={() => {
+                  setStep(2);
+                  setAvailability(false);
+                }}
+                className="cursor-pointer flex justify-end text-[#214528] mt-[16px] font-gordita-medium text-[12px]"
+              >
+                Change?
+              </div>
+            </div>
+
+            <div className="mt-[20px] flex items-center gap-[16px] border border-[#E4E4E4] rounded-[12px] p-[15px] md:p-[24px] md:pb-0 md:pr-0">
+              <div>
+                <div className="font-gordita-bold text-[#242424]">Vehicle</div>
+
+                <div className="mt-[12px]">
+                  <img
+                    src="/assets/car.jpg"
+                    className="w-[226px] h-[180px] object-contain"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-2">
+                {carFeatures.map((item: any, i: any) => (
+                  <div
+                    key={i}
+                    className={`gap-[8px] mb-[15px] flex items-center`}
+                  >
+                    <img
+                      className="h-[13px] w-[13px] object-contain"
+                      src={item.img}
+                    />
+                    <div className="text-[12px] text-[#646464] font-gordita-medium">
+                      {item.name}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className="w-full md:w-[48%] md:h-[37.5rem] flex flex-col">
+            <div className="border border-[#E4E4E4] rounded-[12px] p-[24px]">
+              <div className="font-gordita-bold text-[#242424]">Driver</div>
+
+              <div className="mt-[16px] flex items-start md:items-center md:flex-row flex-col gap-[24px]">
+                {["I'll drive by myself", "I need a driver"].map(
+                  (item: any, i: any) => (
+                    <div
+                      className="flex items-center gap-[8px] cursor-pointer"
+                      key={i}
+                      onClick={() => setDriverType(item)}
+                    >
+                      <img
+                        className="w-[16px] h-[16px] object-contain mb-[4px]"
+                        src={
+                          i === 0
+                            ? driverType === "I'll drive by myself"
+                              ? "../../assets/yingyang-green.jpg"
+                              : "../../assets/yingyang.jpg"
+                            : driverType === "I need a driver"
+                            ? "../../assets/yingyang-green.jpg"
+                            : "../../assets/yingyang.jpg"
+                        }
+                      />
+                      <div
+                        className={`${
+                          i === 0
+                            ? driverType === "I'll drive by myself"
+                              ? "font-gordita-medium"
+                              : "font-gordita-regular"
+                            : driverType === "I need a driver"
+                            ? "font-gordita-medium"
+                            : "font-gordita-regular"
+                        } font-gordita-medium`}
+                      >
+                        {item}
+                      </div>
+                    </div>
+                  )
+                )}
+              </div>
+
+              <div
+                className={`${
+                  driverType.includes("driver") ? "block" : "hidden"
+                } mt-[18px]`}
+              >
+                <div className="text-#444648] text-[12px] font-gordita-bold">
+                  Add note to driver
+                </div>
+
+                <div>
+                  <input
+                    className="h-[75px] mt-[12px] w-full border border-[#C4C6C8] rounded-[8px] p-[16px] text-[#646668] text-[14px]"
+                    placeholder="Enter any special requests for the order"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-[20px] border border-[#E4E4E4] rounded-[12px] p-[24px]">
+              <div className="font-gordita-bold text-[#242424]">
+                Price Breakdown
+              </div>
+
+              <div
+                className={`flex flex-col ${
+                  driverType.includes("driver")
+                    ? "gap-[24px] md:gap-[18px] mt-[24px] md:mt-[18px]"
+                    : "mt-[24px] gap-[24px]"
+                }`}
+              >
+                <div className="flex items-center justify-between">
+                  <div className="text-[#646464]">Vehicle price per day</div>
+                  <div className="text-[#242424] font-gordita-bold">
+                    ₦12,000
+                  </div>
+                </div>
+
+                <div className="flex items-center justify-between">
+                  <div className="text-[#646464]">No. of days</div>
+                  <div className="text-[#242424] font-gordita-bold">3</div>
+                </div>
+
+                <div className="flex items-center justify-between">
+                  <div className="text-[#646464]">Driver Service</div>
+                  <div className="text-[#242424] font-gordita-bold">
+                    {driverType.includes("driver") ? "₦5,000" : "No"}
+                  </div>
+                </div>
+
+                <div className="h-[1px] w-full bg-[#E4E4E4]"></div>
+
+                <div className="flex items-center justify-between">
+                  <div className="text-[#646464]">Total</div>
+                  <div className="text-[#242424] font-gordita-bold">
+                    {" "}
+                    ₦41,000
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <button className="mt-[22px] md:mt-auto mt-[22px] text-white w-full h-[48px] bg-[#42864F] rounded-[8px]">
+              Proceed to Pay
+            </button>
           </div>
         </div>
       </Container>

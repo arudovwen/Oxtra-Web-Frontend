@@ -195,7 +195,7 @@ const RentVehicle = () => {
                     <div className="par">
                       <div
                         onClick={() =>
-                          router.push(`/rent-a-car/${item}/bookings`)
+                          router.push(`/rent-a-car/${item}/booking`)
                         }
                         className="cursor-pointer bg-[#214528] text-white flex justify-center items-center rounded-full h-[40px] w-[40px]"
                       >
