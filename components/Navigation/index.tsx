@@ -127,7 +127,7 @@ const Navigation = ({
           <div className='hidden lg:flex items-center justify-end gap-x-[40px] z-10'>
             <Typography as='p' font='font-gordita-regular'>
               <Link
-                href='login'
+                href='/login'
                 className={`${color}  pb-1 ${hover} duration-300 ${
                   activePage.toLowerCase() === 'login' &&
                   'font-gordita-bold text-brandGreen-300'
@@ -140,7 +140,7 @@ const Navigation = ({
             <div className={`${buttonText}`}>
               <Button
                 bg={buttonBg}
-                link='signup'
+                link='/signup'
                 hover={buttonHover}
                 width={false}
                 size='text-base'

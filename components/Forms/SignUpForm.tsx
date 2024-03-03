@@ -1,310 +1,327 @@
-import React from 'react';
-import Typography from '../Typography';
-import classNames from 'classnames';
-import Button from '../Button';
-import { AiOutlineEyeInvisible, AiOutlineEye } from 'react-icons/ai';
-import { useState } from 'react';
-import { handleCsrf, registerUser } from '@/services/authservices';
-import { useRouter } from 'next/router';
-import { SyntheticEvent } from 'react';
-import { successAlert, dangerAlert } from '../Toasts';
-import { useAuth } from '@/hooks/useAuth';
-import Loading from '../Loading';
+import React, { useEffect } from "react";
+import classNames from "classnames";
+import { useState } from "react";
+import Select from "react-select";
+import { useRouter } from "next/router";
+import DatePicker from "react-multi-date-picker";
+import { formatNewDate } from "@/helpers/helpers";
+import { IoIosArrowDown } from "react-icons/io";
+import { Form, Formik } from "formik";
+import {
+  initSignupValues,
+  validationSignupSchema,
+} from "@/helpers/validations";
+import AuthInput from "../constants/AuthInput";
+import { countries } from "../constants/arrays";
+import { Button, Grid, GridItem, Radio } from "@chakra-ui/react";
+import Pick_Return from "../constants/Pick_Return";
 
 const labelClasses = classNames(
-  'block text-[14px] leading-[14px] font-gordita-medium text-brandGray-300'
-);
-
-const inputClasses = classNames(
-  `px-2 py-2 h-[40px] border border-[#d4d6d8] rounded-lg mt-3  w-full font-gordita-regular `
+  "text-[12px] leading-[12px] font-gordita-bold text-[#444648]"
 );
 
 const SignUpForm = () => {
   const router = useRouter();
+  const [show, setShow] = useState(false);
 
-  const { disable, setDisable } = useAuth();
+  const [startValue, startChange] = useState("");
+  const startDate = formatNewDate(startValue);
+  const startDateRange = new Date();
 
-  const [enterPasswordHidden, setEnterPasswordHidden] = useState(true);
-  const [errorMessageEmail, setErrorMessageEmail] = useState('');
-  const [errorMessagePassword, setErrorMessagePassword] = useState('');
+  const [tandC, setTandC] = useState(false);
+  const [checkout, setCheckout] = useState(null);
 
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [dob, setDob] = useState('');
-  const [address, setAddress] = useState('');
-  const [state, setState] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [city, setCity] = useState('');
-  const [phoneCode, setPhoneCode] = useState('');
+  useEffect(() => {
+    const checkoutValue = localStorage.getItem("checkout");
+    /* @ts-ignore */
+    setCheckout(checkoutValue);
+  }, []);
 
-  const handleSubmit = async (e: SyntheticEvent) => {
-    e.preventDefault();
-    setDisable(true);
-    const user = {
-      firstName,
-      lastName,
-      email,
-      password,
-      dob,
-      address,
-      state,
-      phoneNumber,
-      city,
-      phoneCode,
-    };
+  const [isLoading, setIsLoading] = useState(false);
 
-  
-      registerUser(user)
-        .then((res) => {
-          successAlert(res.data.message);
-          router.push('/login');
-          setDisable(false);
-        })
-        .catch((err) => {
-          console.log(err);
-          if (err.response.data.message.includes('email')) {
-            const error = err.response.data.message;
-            dangerAlert(error);
-            setDisable(false);
-            setErrorMessageEmail(error);
-          } else if (err.response.data.message.includes('password')) {
-            const error = err.response.data.message;
-            dangerAlert(error);
-            setDisable(false);
-            setErrorMessagePassword(error);
-          }
-        });
-  
+  const handleSubmit = (values = "") => {
+    if (checkout) {
+      setIsLoading(true);
+      {
+        setTimeout(() => {
+          setIsLoading(false);
+          router.push("/checkout");
+        }, 2000);
+      }
+    } else {
+      /* @ts-ignore */
+      const { code, phone, ...rest } = values;
+      const phoneNumber = code?.value + Number(phone);
+      console.log({
+        ...rest,
+        phone: phoneNumber,
+        code: code?.value,
+        dob: startDate,
+      });
+    }
   };
 
+  const codeOption = countries?.map((code) => ({
+    value: `+${code?.code}`,
+    label: `+${code?.code}`,
+  }));
+
+  const customStyles = {
+    control: (provided: any) => ({
+      ...provided,
+      width: "100%",
+      minHeight: "44px",
+      color: "#646668",
+      fontSize: "14px",
+      cursor: "pointer",
+      borderRadius: "8px",
+      border: "1px solid #C4C6C8",
+      background: "unset",
+    }),
+    menu: (provided: any) => ({
+      ...provided,
+      fontSize: "13px",
+      backgroundColor: "#fff",
+    }),
+    option: (provided: any, state: any) => ({
+      ...provided,
+      color: state.isFocused ? "" : "",
+      backgroundColor: state.isFocused ? "#f4f6f8" : "",
+    }),
+  };
+
+  const buttonText =
+    checkout !== null ? "Create account and Pay" : "Create Account";
+
   return (
-    <main className='w-[90%] lg:mx-auto lg:max-w-[500px]'>
-      <div className='mb-4 mt-[40px] text-brandGray-300'>
-        <Typography as='h4' font='font-gordita-medium'>
+    <main className="px-[10px]">
+      <div
+        className={`${
+          checkout === "checkout" ? "flex" : "hidden"
+        } mt-[50px] md:mt-[30px]`}
+      >
+        <Pick_Return />
+      </div>
+
+      <div className="mt-[30px]">
+        <div className="text-center mb-[20px] text-[#444648] font-gordita-bold text-[24px]">
           Sign up
-        </Typography>
-      </div>
-      <div className='text-brandGray-100 mb-8'>
-        <Typography as='p' font='font-gordita-regular'>
-          Please enter your details to proceed
-        </Typography>
+        </div>
       </div>
 
-      <section className='flex-auto'>
-        <div className=''>
-          <form className='mt-6' onSubmit={handleSubmit}>
-            <div className='grid grid-cols-12 gap-y-6 gap-x-4'>
-              <div className='col-span-full'>
-                <label htmlFor='email-address' className={labelClasses}>
-                  First name
-                </label>
-                <div className='mt-1'>
-                  <input
-                    type='text'
-                    placeholder='Enter your first name'
-                    onChange={(e) => setFirstName(e.target.value)}
-                    className={inputClasses}
-                    required
-                  />
-                </div>
-              </div>
-              <div className='col-span-full'>
-                <label htmlFor='email-address' className={labelClasses}>
-                  Last name
-                </label>
-                <div className='mt-1'>
-                  <input
-                    type='text'
-                    placeholder='Enter your last name'
-                    onChange={(e) => setLastName(e.target.value)}
-                    className={inputClasses}
-                    required
-                  />
-                </div>
-              </div>
-
-              <div className='col-span-full'>
-                <label htmlFor='' className={labelClasses}>
-                  Email address
-                </label>
-                <div className='mt-1'>
-                  <input
-                    type='email'
-                    autoComplete='email'
-                    placeholder='Enter your email address'
-                    onChange={(e) => setEmail(e.target.value)}
-                    className={inputClasses}
-                    required
-                  />
-                </div>
-                <p className='text-red-700 text-sm mt-1'>{errorMessageEmail}</p>
-              </div>
-              <div className='col-span-full'>
-                <label htmlFor='email-address' className={labelClasses}>
-                  Enter password
-                </label>
-                <div className='mt-1 relative'>
-                  <input
-                    type={`${enterPasswordHidden ? 'password' : 'text'}`}
-                    placeholder='Enter password'
-                    onChange={(e) => setPassword(e.target.value)}
-                    className={inputClasses}
-                    required
-                  />
-
-                  {enterPasswordHidden ? (
-                    <AiOutlineEye
-                      className='absolute top-[24px] right-[12px]'
-                      onClick={() =>
-                        setEnterPasswordHidden(!enterPasswordHidden)
+      <section className="flex-auto w-[100%]  lg:mx-auto lg:max-w-[500px]">
+        <Formik
+          /* @ts-ignore */
+          onSubmit={handleSubmit}
+          initialValues={initSignupValues}
+          validationSchema={validationSignupSchema}
+        >
+          {({
+            values,
+            errors,
+            touched,
+            handleChange,
+            handleBlur,
+            handleSubmit,
+            setValues,
+            isValid,
+            dirty,
+          }) => (
+            /* @ts-ignore */
+            <Form onSubmit={handleSubmit}>
+              <div className="flex flex-col gap-y-[20px] gap-x-4">
+                <div className="col-span-full">
+                  <label htmlFor="email-address" className={labelClasses}>
+                    Full name
+                  </label>
+                  <div>
+                    <AuthInput
+                      placeholder="Enter your full name"
+                      name="fullName"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values?.fullName}
+                      error={
+                        errors?.fullName &&
+                        touched?.fullName &&
+                        errors?.fullName
                       }
                     />
-                  ) : (
-                    <AiOutlineEyeInvisible
-                      className='absolute top-[24px] right-[12px]'
-                      onClick={() =>
-                        setEnterPasswordHidden(!enterPasswordHidden)
-                      }
-                    />
-                  )}
+                  </div>
                 </div>
 
-                {errorMessagePassword && (
-                  <p className='text-red-700 text-sm mt-1'>
-                    {errorMessagePassword}
+                <div className="col-span-full">
+                  <label htmlFor="" className={labelClasses}>
+                    Email address
+                  </label>
+                  <div>
+                    <AuthInput
+                      placeholder="Enter your email address"
+                      name="email"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values?.email}
+                      error={errors?.email && touched?.email && errors?.email}
+                    />
+                  </div>
+                </div>
+
+                <div className="col-span-full">
+                  <label htmlFor="email-address" className={labelClasses}>
+                    Enter password
+                  </label>
+                  <div className="relative">
+                    <AuthInput
+                      placeholder="Enter password"
+                      value={values?.password}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      name="password"
+                      error={
+                        errors?.password &&
+                        touched?.password &&
+                        errors?.password
+                      }
+                      onClick={() => setShow((prev) => !prev)}
+                      password={show ? false : true}
+                      show
+                      type={show ? "text" : "password"}
+                    />
+                  </div>
+                </div>
+
+                <Grid
+                  templateColumns={{
+                    base: "repeat(2,1fr)",
+                    md: "repeat(7,1fr)",
+                  }}
+                  columnGap="16px"
+                  w="full"
+                >
+                  <GridItem colSpan={{ base: 1, md: 2 }}>
+                    <label htmlFor="expiration-date" className={labelClasses}>
+                      Phone code
+                    </label>
+                    <div className="mt-[5px]">
+                      <Select
+                        styles={customStyles}
+                        placeholder="+234"
+                        /* @ts-ignore */
+                        options={codeOption}
+                        value={values?.code}
+                        defaultValue={values?.code}
+                        onChange={(selectionOption) =>
+                          setValues({
+                            ...values,
+                            /* @ts-ignore */
+                            code: selectionOption,
+                          })
+                        }
+                        components={{
+                          IndicatorSeparator: () => (
+                            <div style={{ display: "none" }}></div>
+                          ),
+                          DropdownIndicator: () => (
+                            <div className="mr-[16px]">
+                              <IoIosArrowDown size="20px" />
+                            </div>
+                          ),
+                        }}
+                      />
+                    </div>
+                  </GridItem>
+
+                  <GridItem colSpan={{ base: 1, md: 3 }}>
+                    <label htmlFor="expiration-date" className={labelClasses}>
+                      Phone number
+                    </label>
+                    <div>
+                      <AuthInput
+                        placeholder="08083594505"
+                        name="phone"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values?.phone}
+                        error={errors?.phone && touched?.phone && errors?.phone}
+                      />
+                    </div>
+                  </GridItem>
+
+                  <GridItem colSpan={{ base: 2, md: 2 }}>
+                    <div className="w-full">
+                      <label htmlFor="pick up Date" className={labelClasses}>
+                        Date of birth
+                      </label>
+
+                      <div className="signup-date font-gordita-regular mt-[4px]">
+                        <DatePicker
+                          placeholder="Select Date"
+                          value={startValue}
+                          minDate={startDateRange}
+                          onChange={(date: any) => {
+                            startChange(date);
+                          }}
+                        />
+                      </div>
+                    </div>
+                  </GridItem>
+                </Grid>
+              </div>
+              <div className="mt-6 flex space-x-2 mb-[35.5px]">
+                <div
+                  onClick={() => {
+                    setTandC((prev) => !prev);
+                  }}
+                  className="cursor-pointer flex gap-2 items-center"
+                >
+                  <Radio
+                    bg="semiBlue"
+                    size="sm"
+                    border="1px solid rgba(36, 99, 235, 0.3)"
+                    /* @ts-ignore */
+                    value={tandC}
+                    isChecked={tandC}
+                    onClick={() => {
+                      setTandC((prev) => !prev);
+                    }}
+                  />
+                  <p className="text-[12px] text-brandGray-300 leading-[12px] font-gordita-regular">
+                    Accept our{" "}
+                    <span className="font-gordita-medium">
+                      Terms and Conditions
+                    </span>{" "}
                   </p>
-                )}
-              </div>
-              <div className='col-span-5 md:col-span-3'>
-                <label htmlFor='expiration-date' className={labelClasses}>
-                  Phone code
-                </label>
-                <div className='mt-1'>
-                  <input
-                    type='tel'
-                    id='phone-code'
-                    name='phone-code'
-                    pattern='[0-9]{3}'
-                    required
-                    placeholder='234'
-                    onChange={(e) => setPhoneCode(e.target.value)}
-                    className={inputClasses}
-                  />
                 </div>
               </div>
+              <Button
+                bg="#438950"
+                _hover={{ opacity: 0.8 }}
+                borderRadius="8px"
+                h="48px"
+                color="#fff"
+                isLoading={isLoading}
+                fontSize="14px"
+                fontWeight={500}
+                _active={{ bg: "#438950" }}
+                _focus={{ bg: "#438950" }}
+                w="full"
+                type="submit"
+                isDisabled={!isValid || !dirty || !startValue || !tandC}
+              >
+                {buttonText}
+              </Button>{" "}
+            </Form>
+          )}
+        </Formik>
 
-              <div className='col-span-7 md:col-span-5'>
-                <label htmlFor='expiration-date' className={labelClasses}>
-                  Phone number
-                </label>
-                <div className='mt-1'>
-                  <input
-                    type='tel'
-                    id='phone'
-                    name='phone'
-                    pattern='[0-9]{11}'
-                    required
-                    placeholder='08083594505'
-                    onChange={(e) => setPhoneNumber(e.target.value)}
-                    className={inputClasses}
-                  />
-                </div>
-              </div>
-
-              <div className='col-span-6 md:col-span-4'>
-                <label htmlFor='pick up Date' className={labelClasses}>
-                  Date of birth
-                </label>
-                <div className='mt-1'>
-                  <input
-                    type='date'
-                    required
-                    onChange={(e) => setDob(e.target.value)}
-                    id='pick up Date'
-                    className={`${inputClasses}, uppercase`}
-                    name='pick up Date'
-                  />
-                </div>
-              </div>
-
-              <div className='col-span-6 md:col-span-full'>
-                <label htmlFor='card-number' className={labelClasses}>
-                  Home address
-                </label>
-                <div className='mt-1'>
-                  <input
-                    type='text'
-                    className={inputClasses}
-                    required
-                    onChange={(e) => setAddress(e.target.value)}
-                    placeholder='Enter your residential address'
-                  />
-                </div>
-              </div>
-
-              <div className='col-span-6'>
-                <label htmlFor='expiration-date' className={labelClasses}>
-                  State
-                </label>
-                <div className='mt-1'>
-                  <input
-                    type='text'
-                    onChange={(e) => setState(e.target.value)}
-                    required
-                    className={inputClasses}
-                  />
-                </div>
-              </div>
-
-              <div className='col-span-6'>
-                <label htmlFor='city' className={labelClasses}>
-                  City
-                </label>
-                <div className='mt-1'>
-                  <input
-                    type='text'
-                    required
-                    onChange={(e) => setCity(e.target.value)}
-                    className={inputClasses}
-                  />
-                </div>
-              </div>
-            </div>
-
-            <div className='mt-6 flex space-x-2 mb-[35.5px]'>
-              <div className='flex h-5 gap-2 items-center'>
-                <input
-                  id='same-as-shipping'
-                  name='same-as-shipping'
-                  type='checkbox'
-                  required
-                  className=''
-                />
-                <p className='text-[12px] text-brandGray-300 leading-[12px] font-gordita-regular'>
-                  Accept our{' '}
-                  <span className='font-gordita-medium'>
-                    Terms and Conditions
-                  </span>{' '}
-                </p>
-              </div>
-            </div>
-            <Button
-              bg={!disable ? 'bg-brandGreen-300' : 'bg-brandGreen-100'}
-              hover='hover:bg-brandGray-200'
-              textColor='text-white'
-              width={true}
-              size='text-sm'
-              type='submit'
-            >
-              {!disable ? (
-                'Create Account'
-              ) : (
-                <Loading type='spin' width={14} height={14} color='#42864F' />
-              )}
-            </Button>
-          </form>
+        <div className="mt-[32px] text-center text-[12px] text-[#444648]">
+          Already have an account ?{" "}
+          <span
+            className="font-gordita-medium text-[#438950] cursor-pointer"
+            onClick={() => router.push("/login")}
+          >
+            Login
+          </span>
         </div>
       </section>
     </main>

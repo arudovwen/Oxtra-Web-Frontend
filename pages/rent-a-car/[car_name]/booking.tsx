@@ -21,6 +21,7 @@ import {
 import DatePicker from "react-multi-date-picker";
 import Select from "react-select";
 import Loading from "@/components/Loading";
+import classNames from "classnames";
 
 const Bookings = () => {
   const activePage = "Rent a car";
@@ -121,7 +122,7 @@ const Bookings = () => {
   const timeArray = generateTimeArrays(endValue);
 
   const customStyles = {
-    control: (provided: any, state: any) => ({
+    control: (provided: any) => ({
       ...provided,
       width: "100%",
       minHeight: "48px",
@@ -185,6 +186,18 @@ const Bookings = () => {
       setLoading(false);
     }, 2000);
   };
+
+  const labelClasses = classNames(
+    "text-[#444648] font-gordita-medium text-[14px]"
+  );
+
+  const dataClasses = classNames("text-[#242424] font-gordita-bold");
+
+  const parClasses = classNames("flex items-center justify-between");
+
+  const inputClasses = classNames(
+    "w-full border border-[#E4E4E4] h-[48px] rounded-[8px] p-[16px]"
+  );
 
   return (
     <div className="font-gordita mb-[108px]">
@@ -397,26 +410,22 @@ const Bookings = () => {
               </div>
 
               <div className="mt-[24px]">
-                <div className="text-[#444648] font-gordita-medium text-[14px]">
-                  Pick-up location
-                </div>
+                <div className={labelClasses}>Pick-up location</div>
 
                 <div className="mt-[12px]">
                   <input
-                    className="w-full border h-[48px] border-[#E4E4E4] rounded-[8px] p-[16px]"
+                    className={inputClasses}
                     placeholder="Enter address or airport"
                   />
                 </div>
               </div>
 
               <div className="my-[24px]">
-                <div className="text-[#444648] font-gordita-medium text-[14px]">
-                  Return location
-                </div>
+                <div className={labelClasses}>Return location</div>
 
                 <div className="mt-[12px]">
                   <input
-                    className="w-full border border-[#E4E4E4] h-[48px] rounded-[8px] p-[16px]"
+                    className={inputClasses}
                     placeholder="Enter address or airport"
                   />
                 </div>
@@ -424,9 +433,7 @@ const Bookings = () => {
 
               <div className="flex items-center flex-col md:flex-row gap-[24px]">
                 <div className="w-full">
-                  <div className="text-[#444648] font-gordita-medium text-[14px]">
-                    Pick up Date
-                  </div>
+                  <div className={labelClasses}>Pick up Date</div>
 
                   <div className="mt-[12px]">
                     <DatePicker
@@ -435,22 +442,13 @@ const Bookings = () => {
                       minDate={startDateRange}
                       onChange={(date: any) => {
                         startChange(date);
-                        if (
-                          start &&
-                          end &&
-                          values?.arrivalTime &&
-                          values?.departureTime
-                        ) {
-                        }
                       }}
                     />
                   </div>
                 </div>
 
                 <div className="w-full">
-                  <div className="mb-[12px] text-[#444648] font-gordita-medium text-[14px]">
-                    Time
-                  </div>
+                  <div className={`mb-[12px] ${labelClasses}`}>Time</div>
                   <Select
                     styles={customStyles}
                     placeholder="Select Time"
@@ -479,9 +477,7 @@ const Bookings = () => {
 
               <div className="my-[24px] flex items-center flex-col md:flex-row gap-[24px]">
                 <div className="w-full">
-                  <div className="text-[#444648] font-gordita-medium text-[14px]">
-                    Return Date
-                  </div>
+                  <div className={labelClasses}>Return Date</div>
 
                   <div className="mt-[12px]">
                     <DatePicker
@@ -496,9 +492,7 @@ const Bookings = () => {
                 </div>
 
                 <div className="w-full">
-                  <div className="mb-[12px] text-[#444648] font-gordita-medium text-[14px]">
-                    Time
-                  </div>
+                  <div className={`mb-[12px] ${labelClasses}`}>Time</div>
                   <Select
                     styles={customStyles}
                     placeholder="Select Time"
@@ -537,15 +531,10 @@ const Bookings = () => {
                 )}
 
               <div>
-                <div className="text-[#444648] font-gordita-medium text-[14px]">
-                  Number of Days
-                </div>
+                <div className={labelClasses}>Number of Days</div>
 
                 <div className="mt-[12px]">
-                  <input
-                    className="h-[48px] w-full border border-[#E4E4E4] rounded-[8px] p-[16px]"
-                    type="number"
-                  />
+                  <input className={inputClasses} type="number" />
                 </div>
               </div>
 
@@ -568,14 +557,14 @@ const Bookings = () => {
               ) : (
                 ""
               )}
-              {console.log(step)}
+
               <div className="mt-[24px]">
                 <button
                   onClick={() => (availability ? setStep(3) : searching())}
                   disabled={loading}
                   className={`${
                     loading ? "cursor-not-allowed" : ""
-                  } bg-[#42864F] text-white rounded-[8px] w-full text-[14px] h-[48px]`}
+                  } hover:opacity-[0.8] bg-[#42864F] text-white rounded-[8px] w-full text-[14px] h-[48px]`}
                 >
                   {loading ? (
                     <Loading type="spin" width={18} height={18} color="#fff" />
@@ -597,9 +586,7 @@ const Bookings = () => {
         >
           <div className="w-full md:w-[496px]">
             <div className="border border-[#E4E4E4] rounded-[12px] p-[24px]">
-              <div className="text-[#242424] font-gordita-bold">
-                Pick up and Return
-              </div>
+              <div className={dataClasses}>Pick up and Return</div>
 
               <div className="mt-[16px] flex items-start gap-[16px]">
                 <div className="relative">
@@ -747,38 +734,39 @@ const Bookings = () => {
                     : "mt-[24px] gap-[24px]"
                 }`}
               >
-                <div className="flex items-center justify-between">
+                <div className={parClasses}>
                   <div className="text-[#646464]">Vehicle price per day</div>
-                  <div className="text-[#242424] font-gordita-bold">
-                    ₦12,000
-                  </div>
+                  <div className={dataClasses}>₦12,000</div>
                 </div>
 
-                <div className="flex items-center justify-between">
+                <div className={parClasses}>
                   <div className="text-[#646464]">No. of days</div>
-                  <div className="text-[#242424] font-gordita-bold">3</div>
+                  <div className={dataClasses}>3</div>
                 </div>
 
-                <div className="flex items-center justify-between">
+                <div className={parClasses}>
                   <div className="text-[#646464]">Driver Service</div>
-                  <div className="text-[#242424] font-gordita-bold">
+                  <div className={dataClasses}>
                     {driverType.includes("driver") ? "₦5,000" : "No"}
                   </div>
                 </div>
 
                 <div className="h-[1px] w-full bg-[#E4E4E4]"></div>
 
-                <div className="flex items-center justify-between">
+                <div className={parClasses}>
                   <div className="text-[#646464]">Total</div>
-                  <div className="text-[#242424] font-gordita-bold">
-                    {" "}
-                    ₦41,000
-                  </div>
+                  <div className={dataClasses}> ₦41,000</div>
                 </div>
               </div>
             </div>
 
-            <button className="mt-[22px] md:mt-auto mt-[22px] text-white w-full h-[48px] bg-[#42864F] rounded-[8px]">
+            <button
+              onClick={() => {
+                localStorage.setItem("checkout", "checkout");
+                router.push("/signup");
+              }}
+              className="hover:opacity-[0.8] mt-[22px] md:mt-auto mt-[22px] text-white w-full h-[48px] bg-[#42864F] rounded-[8px]"
+            >
               Proceed to Pay
             </button>
           </div>

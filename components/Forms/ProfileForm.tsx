@@ -19,7 +19,7 @@ const inputClasses = classNames(
 const ProfileForm = () => {
   const { user, token, disable, setDisable } = useAuth();
 
-  const [address, setAddress] = useState(user?.address as string);
+  // const [address, setAddress] = useState(user?.address as string);
 
   const [phoneNumber, setPhoneNumber] = useState(user?.phoneNumber as string);
 
@@ -30,7 +30,7 @@ const ProfileForm = () => {
     const config = { headers: { Authorization: `Bearer ${token}` } };
 
     const editProfileValues = {
-      address,
+      // address,
       phoneNumber,
       id: user?.id as string,
     };
@@ -50,20 +50,20 @@ const ProfileForm = () => {
       <div className='grid grid-cols-12 gap-y-6 gap-x-6'>
         <div className='col-span-6 md:col-span-4'>
           <label htmlFor='expiration-date' className={labelClasses}>
-            First name
+            Full name
           </label>
           <div className='mt-1'>
             <input
               type='text'
               required
               className={inputClasses}
-              value={user?.firstName}
+              value={user?.fullName}
               readOnly
             />
           </div>
         </div>
 
-        <div className='col-span-6 md:col-span-4'>
+        {/* <div className='col-span-6 md:col-span-4'>
           <label htmlFor='cvc' className={labelClasses}>
             Last name
           </label>
@@ -76,7 +76,7 @@ const ProfileForm = () => {
               readOnly
             />
           </div>
-        </div>
+        </div> */}
         <div className='col-span-full md:col-span-8'>
           <label htmlFor='' className={labelClasses}>
             Email
@@ -114,7 +114,7 @@ const ProfileForm = () => {
           <label htmlFor='card-number' className={labelClasses}>
             Address
           </label>
-          <div className='mt-1'>
+          {/* <div className='mt-1'>
             <input
               type='text'
               className={inputClasses}
@@ -122,7 +122,7 @@ const ProfileForm = () => {
               onChange={(e) => setAddress(e.target.value)}
               placeholder='Enter your residential address'
             />
-          </div>
+          </div> */}
         </div>
         <div className='col-span-full md:col-span-8'>
           {' '}

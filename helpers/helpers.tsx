@@ -9,9 +9,8 @@ export const formatNewDate = (date: any, fallback = "", withTime = false) => {
 
   const hours = formattedDate.getHours().toString().padStart(2, "0");
   const minutes = formattedDate.getMinutes().toString().padStart(2, "0");
-  // const seconds = formattedDate.getSeconds().toString().padStart(2, "0");
 
-  return `${year}-${month}-${day} ${withTime ? `${hours}:${minutes}` : ""}`;
+  return `${year}-${month}-${day}${withTime ? `${hours}:${minutes}` : ""}`;
 };
 
 export const formatHour = (date: any, fallback = "") => {

@@ -142,7 +142,7 @@ input[type="date"] {
   font-weight: 500 !important;
 }
 .rmdp-input {
-  border: 1px solid #E4E4E4 !important;
+  border: 1px solid #e4e4e4 !important;
   border-radius: 8px !important;
   width: 100% !important;
   font-size: 14px !important;
@@ -150,4 +150,14 @@ input[type="date"] {
   cursor: pointer;
   padding: 16px !important;
   height: 48px !important;
+}
+.signup-date .rmdp-input {
+  border: 1px solid #C4C6C8 !important;
+  border-radius: 8px !important;
+  width: 100% !important;
+  font-size: 14px !important;
+  color: #000;
+  cursor: pointer;
+  padding: 16px !important;
+  height: 44px !important;
 }

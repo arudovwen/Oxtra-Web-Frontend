@@ -4,16 +4,11 @@ import { useLocalStorage } from './useLocalStorage';
 import { dangerAlert } from '@/components/Toasts';
 
 export interface User {
-  firstName: string;
-  lastName: string;
+  fullName: string;
   email: string;
   password: string;
   id?: string;
-  dob: string;
-  address: string;
-  state: string;
   phoneNumber: string;
-  city: string;
   phoneCode: string;
 }
 

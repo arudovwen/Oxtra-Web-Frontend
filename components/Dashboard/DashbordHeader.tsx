@@ -18,7 +18,7 @@ const DashbordHeader = () => {
     <div className='mt-[58px]'>
       <div className='mb-4'>
         <Typography as='h4' font='font-gordita-medium'>
-          Hello, {theUser?.firstName}
+          Hello, {theUser?.fullName}
         </Typography>
       </div>
       <p className='text-sm text-[#475467] font-gordita-regular'>
