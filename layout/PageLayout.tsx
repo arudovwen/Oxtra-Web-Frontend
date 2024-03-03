@@ -14,7 +14,16 @@ const AuthLayout = ({ children }: any) => {
           <Box w="30%" pos="sticky" top="135px">
             <SideBar />
           </Box>
-          <Box w="70%">{children}</Box>
+          <Box
+            flexDir="column"
+            border="1px solid #E4E4E4"
+            borderRadius="16px"
+            h="42rem"
+            w="70%"
+            p="24px"
+          >
+            {children}
+          </Box>
         </Flex>
       </Flex>
     </Flex>

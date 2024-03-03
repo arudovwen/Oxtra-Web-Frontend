@@ -15,7 +15,7 @@ export async function loginUser(
   return await post(urls.LOGIN_USER, user, config);
 }
 export async function logOut() {
-  localStorage.removeItem("loggedUser");
+  localStorage.clear();
   window.location.href = "/";
 }
 export async function registerUser(user: User, config = {}) {
