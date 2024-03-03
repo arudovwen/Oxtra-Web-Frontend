@@ -109,7 +109,7 @@ const SignUpForm = () => {
         </div>
       </div>
 
-      <section className="flex-auto w-[100%]  lg:mx-auto lg:max-w-[500px]">
+      <section className="flex-auto w-[100%] lg:mx-auto lg:max-w-[500px]">
         <Formik
           /* @ts-ignore */
           onSubmit={handleSubmit}

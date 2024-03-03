@@ -10,7 +10,7 @@ import Pick_Return from "../constants/Pick_Return";
 import { useRouter } from "next/router";
 
 const labelClasses = classNames(
-  "text-[12px] leading-[12px] font-gordita-bold text-[$444648]",
+  "text-[12px] leading-[12px] font-gordita-bold text-[#444648]"
 );
 
 const LoginForm = () => {
@@ -34,16 +34,22 @@ const LoginForm = () => {
         }, 2000);
       }
     } else {
-      console.log(values);
+      setIsLoading(true);
+      {
+        setTimeout(() => {
+          setIsLoading(false);
+          router.push("/dashboard/rent-a-car");
+          localStorage.setItem("user", "user");
+        }, 2000);
+      }
     }
   };
   const [show, setShow] = useState(false);
 
-  const buttonText =
-    checkout !== null ? "Create account and Pay" : "Create Account";
+  const buttonText = checkout !== null ? "Login and Pay" : "Login";
 
   return (
-    <main>
+    <main className="w-[95%] md:w-[100%]">
       <div
         className={`${
           checkout === "checkout" ? "flex" : "hidden"
@@ -58,7 +64,7 @@ const LoginForm = () => {
         </div>
       </div>
 
-      <section className="flex w-[100%] lg:mx-auto lg:max-w-[500px] flex-col">
+      <section className="flex-auto lg:mx-auto w-full lg:max-w-[500px]">
         <Formik
           /* @ts-ignore */
           onSubmit={handleSubmit}
@@ -82,7 +88,7 @@ const LoginForm = () => {
                   <label htmlFor="" className={labelClasses}>
                     Email address
                   </label>
-                  <div className="mt-1">
+                  <div>
                     <AuthInput
                       placeholder="Enter your email address"
                       name="email"
@@ -97,7 +103,7 @@ const LoginForm = () => {
                   <label htmlFor="email-address" className={labelClasses}>
                     Enter password
                   </label>
-                  <div className="mt-1 relative">
+                  <div>
                     <AuthInput
                       placeholder="Enter password"
                       value={values?.password}

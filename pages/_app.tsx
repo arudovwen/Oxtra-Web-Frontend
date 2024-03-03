@@ -7,6 +7,7 @@ import { customTheme } from "../styles/theme";
 import Fonts from "../styles/Fonts";
 import { ChakraProvider } from "@chakra-ui/react";
 import { QueryClient, QueryClientProvider } from "react-query";
+import Pages from "@/layout/Pages";
 
 export default function App({ Component, pageProps }: AppProps) {
   const queryClient = new QueryClient({
@@ -27,7 +28,10 @@ export default function App({ Component, pageProps }: AppProps) {
           <Fonts />
           <Toaster position="top-right" />
           {/* @ts-ignore */}
-          <Component {...pageProps} />
+          <Pages>
+            {/* @ts-ignore */}
+            <Component {...pageProps} />
+          </Pages>
         </QueryClientProvider>
       </ChakraProvider>
     </AuthProvider>

@@ -114,6 +114,24 @@ export const carBenefits = [
   "Clean cars",
 ];
 
+export const sideBarRoutes = [
+  {
+    name: "Rent a car",
+    route: "/rent-a-car",
+    img: "../../assets/rent-car.svg",
+  },
+  {
+    name: "Courier service",
+    route: "/courier-service",
+    img: "../../assets/courier.svg",
+  },
+
+  { name: "Payments", route: "/payments", img: "../../assets/payment.svg" },
+  { name: "History", route: "/history", img: "../../assets/history.svg" },
+  { name: "Help", route: "/help", img: "../../assets/help.svg" },
+  { name: "Settings", route: "/settings", img: "../../assets/settings.svg" },
+];
+
 export const paymentOptions = ["Card", "Wallet", "Transfer"];
 
 export const countries = [

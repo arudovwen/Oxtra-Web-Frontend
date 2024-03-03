@@ -9,7 +9,7 @@
     "react/no-unescaped-entities": "off",
     "jsx-a11y/anchor-is-valid": "off",
     "react/no-children-prop": "off",
-    "no-empty":"off",
+    "no-empty": "off",
     "no-prototype-builtins": "off",
     "react-hooks/exhaustive-deps": "off",
     "jsx-a11y/label-has-associated-control": "off",
