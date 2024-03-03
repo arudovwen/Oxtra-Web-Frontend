@@ -28,7 +28,7 @@ export const validationSignupSchema = Yup.object().shape({
     .required("Password required")
     .matches(
       passwordRegex,
-      "Must Be More Than 8 Digits And Must Contain One Uppercase, One Lowercase, One Number and One Special Case Character"
+      "Must Be More Than 8 Digits And Must Contain One Uppercase, One Lowercase, One Number and One Special Case Character",
     ),
 });
 
@@ -38,6 +38,6 @@ export const validationLoginSchema = Yup.object().shape({
     .required("Password required")
     .matches(
       passwordRegex,
-      "Must Be More Than 8 Digits And Must Contain One Uppercase, One Lowercase, One Number and One Special Case Character"
+      "Must Be More Than 8 Digits And Must Contain One Uppercase, One Lowercase, One Number and One Special Case Character",
     ),
 });

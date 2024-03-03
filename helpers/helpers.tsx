@@ -56,25 +56,23 @@ export const formatDate = (date: any, fallback = "", withTime = false) => {
   return `${year}-${month}-${day} ${withTime ? `${hours}:${minutes}` : ""}`;
 };
 
-
 export const formatTimeToHHMMSS = (time: any) => {
-    if (!time) {
-      return "";
-    }
-  
-    const [timePart, period] = time.split(" ");
-    let [hours, minutes] = timePart.split(":");
-  
-    if (period === "PM" && hours !== "12") {
-      hours = String(parseInt(hours, 10) + 12);
-    } else if (period === "AM" && hours === "12") {
-      hours = "00";
-    }
-  
-    hours = hours.padStart(2, "0");
-    minutes = minutes.padStart(2, "0");
-  
-    const seconds = "00";
-    return `${hours}:${minutes}:${seconds}`;
-  };
-  
+  if (!time) {
+    return "";
+  }
+
+  const [timePart, period] = time.split(" ");
+  let [hours, minutes] = timePart.split(":");
+
+  if (period === "PM" && hours !== "12") {
+    hours = String(parseInt(hours, 10) + 12);
+  } else if (period === "AM" && hours === "12") {
+    hours = "00";
+  }
+
+  hours = hours.padStart(2, "0");
+  minutes = minutes.padStart(2, "0");
+
+  const seconds = "00";
+  return `${hours}:${minutes}:${seconds}`;
+};

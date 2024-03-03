@@ -163,17 +163,17 @@ const Bookings = () => {
 
   const formattedDate = `${startDate.substr(6, 4)}-${startDate.substr(
     0,
-    2
+    2,
   )}-${startDate.substr(3, 2)}T${formatTimeToHHMMSS(
     /* @ts-ignore */
-    values?.arrivalTime?.value
+    values?.arrivalTime?.value,
   )}.000Z`;
   const formattedDeparture = `${endDate.substr(6, 4)}-${endDate.substr(
     0,
-    2
+    2,
   )}-${endDate.substr(3, 2)}T${formatTimeToHHMMSS(
     /* @ts-ignore */
-    values?.departureTime?.value
+    values?.departureTime?.value,
   )}.000Z`;
 
   const [loading, setLoading] = useState(false);
@@ -188,7 +188,7 @@ const Bookings = () => {
   };
 
   const labelClasses = classNames(
-    "text-[#444648] font-gordita-medium text-[14px]"
+    "text-[#444648] font-gordita-medium text-[14px]",
   );
 
   const dataClasses = classNames("text-[#242424] font-gordita-bold");
@@ -196,7 +196,7 @@ const Bookings = () => {
   const parClasses = classNames("flex items-center justify-between");
 
   const inputClasses = classNames(
-    "w-full border border-[#E4E4E4] h-[48px] rounded-[8px] p-[16px]"
+    "w-full border border-[#E4E4E4] h-[48px] rounded-[8px] p-[16px]",
   );
 
   return (
@@ -388,8 +388,8 @@ const Bookings = () => {
                             ? "../../assets/yingyang-green.jpg"
                             : "../../assets/yingyang.jpg"
                           : tripType === "Hourly"
-                          ? "../../assets/yingyang-green.jpg"
-                          : "../../assets/yingyang.jpg"
+                            ? "../../assets/yingyang-green.jpg"
+                            : "../../assets/yingyang.jpg"
                       }
                     />
                     <div
@@ -399,8 +399,8 @@ const Bookings = () => {
                             ? "font-gordita-medium"
                             : "font-gordita-regular"
                           : tripType === "Hourly"
-                          ? "font-gordita-medium"
-                          : "font-gordita-regular"
+                            ? "font-gordita-medium"
+                            : "font-gordita-regular"
                       } font-gordita-medium`}
                     >
                       {item}
@@ -682,8 +682,8 @@ const Bookings = () => {
                               ? "../../assets/yingyang-green.jpg"
                               : "../../assets/yingyang.jpg"
                             : driverType === "I need a driver"
-                            ? "../../assets/yingyang-green.jpg"
-                            : "../../assets/yingyang.jpg"
+                              ? "../../assets/yingyang-green.jpg"
+                              : "../../assets/yingyang.jpg"
                         }
                       />
                       <div
@@ -693,14 +693,14 @@ const Bookings = () => {
                               ? "font-gordita-medium"
                               : "font-gordita-regular"
                             : driverType === "I need a driver"
-                            ? "font-gordita-medium"
-                            : "font-gordita-regular"
+                              ? "font-gordita-medium"
+                              : "font-gordita-regular"
                         } font-gordita-medium`}
                       >
                         {item}
                       </div>
                     </div>
-                  )
+                  ),
                 )}
               </div>
 

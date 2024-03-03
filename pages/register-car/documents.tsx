@@ -1,9 +1,9 @@
-import React from 'react';
-import PutUpYourVehicleLayout from '@/components/Layouts/PutUpYourVehicleLayout';
-import DocumentForm from '@/components/Forms/DocumentForm';
+import React from "react";
+import PutUpYourVehicleLayout from "@/components/Layouts/PutUpYourVehicleLayout";
+import DocumentForm from "@/components/Forms/DocumentForm";
 
 const Document = () => {
-  const putYourVehicleLayoutActivePage = 'Documents';
+  const putYourVehicleLayoutActivePage = "Documents";
   return (
     <PutUpYourVehicleLayout
       putYourVehicleLayoutActivePage={putYourVehicleLayoutActivePage}

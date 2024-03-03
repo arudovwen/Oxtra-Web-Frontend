@@ -114,11 +114,7 @@ export const carBenefits = [
   "Clean cars",
 ];
 
-export const paymentOptions = [
-  "Card",
-  "Wallet",
-  "Transfer",
-];
+export const paymentOptions = ["Card", "Wallet", "Transfer"];
 
 export const countries = [
   { country: "Afghanistan", code: "93", iso: "AF" },

@@ -174,7 +174,10 @@ const RentVehicle = () => {
                         key={i}
                         className="flex flex-col justify-center items-center"
                       >
-                        <img className="h-[13px] object-contain w-[13px]" src={item.img} />
+                        <img
+                          className="h-[13px] object-contain w-[13px]"
+                          src={item.img}
+                        />
                         <div className="mt-[8px] text-[12px] text-[#646464] font-gordita-medium">
                           {item.name}
                         </div>

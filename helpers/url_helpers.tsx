@@ -1,4 +1,4 @@
-const version = '/api/v1';
+const version = "/api/v1";
 
 export const urls = {
   //Auth urls

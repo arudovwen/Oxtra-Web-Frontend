@@ -10,7 +10,7 @@ import Pick_Return from "../constants/Pick_Return";
 import { useRouter } from "next/router";
 
 const labelClasses = classNames(
-  "text-[12px] leading-[12px] font-gordita-bold text-[$444648]"
+  "text-[12px] leading-[12px] font-gordita-bold text-[$444648]",
 );
 
 const LoginForm = () => {

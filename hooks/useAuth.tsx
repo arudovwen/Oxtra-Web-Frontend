@@ -1,7 +1,7 @@
-import { createContext, useContext, useState } from 'react';
-import { useRouter } from 'next/router';
-import { useLocalStorage } from './useLocalStorage';
-import { dangerAlert } from '@/components/Toasts';
+import { createContext, useContext, useState } from "react";
+import { useRouter } from "next/router";
+import { useLocalStorage } from "./useLocalStorage";
+import { dangerAlert } from "@/components/Toasts";
 
 export interface User {
   fullName: string;
@@ -28,27 +28,27 @@ const AuthContext = createContext<AuthContextValue>({
   user: null,
   disable: false,
   setDisable: () => {},
-  token: '',
+  token: "",
   setToken: () => {},
 });
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-  const [user, setUser] = useLocalStorage('user', null);
-  const [token, setToken] = useLocalStorage('token', '');
+  const [user, setUser] = useLocalStorage("user", null);
+  const [token, setToken] = useLocalStorage("token", "");
 
   const [disable, setDisable] = useState(false);
   const router = useRouter();
 
   const login = async (data: User) => {
     setUser(data);
-    router.push('/dashboard');
+    router.push("/dashboard");
   };
 
   const logout = () => {
     setUser(null);
-    setToken('');
-    dangerAlert('Logged out!');
-    router.push('/login');
+    setToken("");
+    dangerAlert("Logged out!");
+    router.push("/login");
   };
 
   return (

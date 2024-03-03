@@ -1,11 +1,11 @@
-import { dangerAlert } from '@/components/Toasts';
-import axios from 'axios';
+import { dangerAlert } from "@/components/Toasts";
+import axios from "axios";
 
 //pass new generated access token here
 //const token = localStorage.getItem('user-token')
 
 //apply base url for axios
-const API_URL = 'https://oxtra-backend.herokuapp.com';
+const API_URL = "https://oxtra-backend.herokuapp.com";
 
 const axiosApi = axios.create({
   baseURL: API_URL,
@@ -13,8 +13,8 @@ const axiosApi = axios.create({
 
 axiosApi.defaults.withCredentials = true;
 
-axiosApi.defaults.headers.common['Authorization'] = `Bearer`;
-axiosApi.defaults.headers.common['Accept'] = `application/json`;
+axiosApi.defaults.headers.common["Authorization"] = `Bearer`;
+axiosApi.defaults.headers.common["Accept"] = `application/json`;
 
 axiosApi.interceptors.response.use(
   (response) => response,
@@ -26,8 +26,8 @@ axiosApi.interceptors.response.use(
 
     if (
       error.response.status === 401 &&
-      error.code === 'ERR_BAD_REQUEST' &&
-      error.response.data.includes('Microsoft.IdentityModel.Tokens')
+      error.code === "ERR_BAD_REQUEST" &&
+      error.response.data.includes("Microsoft.IdentityModel.Tokens")
     ) {
       // if (localStorage.getItem("loggedUser")) {
       //   toast.info("Your session as expired", {
@@ -40,7 +40,7 @@ axiosApi.interceptors.response.use(
     } else {
       return Promise.reject(error);
     }
-  }
+  },
 );
 
 export async function get(url: string, config = {}) {

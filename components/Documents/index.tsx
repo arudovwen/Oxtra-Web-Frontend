@@ -1,7 +1,7 @@
-import React from 'react';
-import { useAuth } from '@/hooks/useAuth';
-import { getAllVehiclesDocuments } from '@/services/vehicleservices';
-import { useState, useEffect } from 'react';
+import React from "react";
+import { useAuth } from "@/hooks/useAuth";
+import { getAllVehiclesDocuments } from "@/services/vehicleservices";
+import { useState, useEffect } from "react";
 
 const Documents = () => {
   const { token } = useAuth();

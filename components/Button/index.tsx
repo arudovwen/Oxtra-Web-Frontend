@@ -1,6 +1,6 @@
-import React from 'react';
-import classNames from 'classnames';
-import Link from 'next/link';
+import React from "react";
+import classNames from "classnames";
+import Link from "next/link";
 
 interface ButtonProps {
   bg?: string;
@@ -9,19 +9,19 @@ interface ButtonProps {
   children: React.ReactNode;
   textColor?: string;
   width: boolean;
-  type?: 'button' | 'submit' | 'reset';
-  size: 'text-base' | 'text-sm';
+  type?: "button" | "submit" | "reset";
+  size: "text-base" | "text-sm";
   disable?: boolean;
 }
 
 const buttonClasses = classNames(
-  'duration-300 rounded px-[24px]  py-[16px] font-gordita-medium'
+  "duration-300 rounded px-[24px]  py-[16px] font-gordita-medium",
 );
 
 const Button = ({
-  bg = '',
+  bg = "",
   hover,
-  link = '',
+  link = "",
   children,
   textColor,
   width,
@@ -34,14 +34,14 @@ const Button = ({
       <button
         disabled={disable}
         type={type}
-        className={` ${width && 'w-full'} ${disable && 'cursor-no-drop'}`}
+        className={` ${width && "w-full"} ${disable && "cursor-no-drop"}`}
       >
         <a
           className={classNames(
             `${hover} ${buttonClasses} ${size} ${bg} w-full block ${textColor}`,
-            hover === 'hover:bg-brandGreen-300'
-              ? 'hover:text-white'
-              : 'hover:text-brandGray-300'
+            hover === "hover:bg-brandGreen-300"
+              ? "hover:text-white"
+              : "hover:text-brandGray-300",
           )}
         >
           {children}
@@ -50,14 +50,14 @@ const Button = ({
     );
   }
   return (
-    <button className={`${width && 'w-full'}`}>
+    <button className={`${width && "w-full"}`}>
       <Link
         href={link}
         className={classNames(
           `${hover} ${buttonClasses}  ${size} ${bg} w-full block ${textColor}`,
-          hover === 'hover:bg-brandGreen-300'
-            ? 'hover:text-white'
-            : 'hover:text-brandGray-300'
+          hover === "hover:bg-brandGreen-300"
+            ? "hover:text-white"
+            : "hover:text-brandGray-300",
         )}
       >
         {children}

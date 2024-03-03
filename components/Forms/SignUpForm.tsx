@@ -17,7 +17,7 @@ import { Button, Grid, GridItem, Radio } from "@chakra-ui/react";
 import Pick_Return from "../constants/Pick_Return";
 
 const labelClasses = classNames(
-  "text-[12px] leading-[12px] font-gordita-bold text-[#444648]"
+  "text-[12px] leading-[12px] font-gordita-bold text-[#444648]",
 );
 
 const SignUpForm = () => {

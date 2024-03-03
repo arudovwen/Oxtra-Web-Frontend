@@ -1,9 +1,9 @@
-import React from 'react';
-import SenderDetialsForm from '@/components/Forms/SenderDetailsForm';
-import SendPackageLayout from '@/components/Layouts/SendPackageLayout';
+import React from "react";
+import SenderDetialsForm from "@/components/Forms/SenderDetailsForm";
+import SendPackageLayout from "@/components/Layouts/SendPackageLayout";
 
 const SendPackage = () => {
-  const sendPackageLayoutActivePage = 'Sender Details';
+  const sendPackageLayoutActivePage = "Sender Details";
   return (
     <SendPackageLayout
       sendPackageLayoutActivePage={sendPackageLayoutActivePage}

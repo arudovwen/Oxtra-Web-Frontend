@@ -1,9 +1,9 @@
-import { useState } from 'react';
-import { User } from './useAuth';
+import { useState } from "react";
+import { User } from "./useAuth";
 
 export const useLocalStorage = (
   keyName: string,
-  defaultValue: null | User | string
+  defaultValue: null | User | string,
 ) => {
   const [storedValue, setStoredValue] = useState(() => {
     try {

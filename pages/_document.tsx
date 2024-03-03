@@ -7,7 +7,7 @@ export default function Document() {
       <Head />
       <body>
         <Main />
-        { /* @ts-ignore */}
+        {/* @ts-ignore */}
         <NextScript />
       </body>
     </Html>
