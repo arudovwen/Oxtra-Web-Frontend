@@ -1,11 +1,11 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import logoA from "../../../public/assets/logoA.png";
-import logoB from "../../../public/assets/logoB.png";
-import Typography from "../../../components/constants/Typorgraphy";
-import Button from "../../../components/constants/Button";
-import logo2 from "../../../public/assets/Asset 3.png";
+import logoA from "../../public/assets/logoA.png";
+import logoB from "../../public/assets/logoB.png";
+import Typography from "../../components/constants/Typorgraphy";
+import Button from "../../components/constants/Button";
+import logo2 from "../../public/assets/Asset 3.png";
 import { RiMenu3Fill } from "react-icons/ri";
 import { MdClose } from "react-icons/md";
 import { useState, useEffect } from "react";
