@@ -1,12 +1,12 @@
 import React from "react";
 import Typography from "../Typorgraphy";
-import Button from "../../Button";
+import Button from "../Button";
 import classNames from "classnames";
 import { useState } from "react";
 import { forgotPassword, handleCsrf } from "@/services/authservices";
 import Link from "next/link";
 import { useAuth } from "@/hooks/useAuth";
-import Loader from "../../Loader";
+import Loader from "../Loader";
 import { SyntheticEvent } from "react";
 
 const labelClasses = classNames(

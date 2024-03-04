@@ -8,7 +8,7 @@ import { useState } from "react";
 import { useAuth } from "@/hooks/useAuth";
 import { dangerAlert } from "../../../helpers/notifications";
 import Typography from "../Typorgraphy";
-import Loader from "../../Loader/Loader";
+import Loader from "../Loader";
 import Link from "next/link";
 
 const labelClasses = classNames(

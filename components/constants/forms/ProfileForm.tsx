@@ -5,8 +5,8 @@ import { useState } from "react";
 import { useAuth } from "@/hooks/useAuth";
 import { SyntheticEvent } from "react";
 import { updateUserProfile } from "@/services/userservices";
-import Loader from "../../Loader/Loader";
 import { successAlert } from "../../../helpers/notifications";
+import Loader from "../Loader";
 
 const labelClasses = classNames(
   "block text-[14px] leading-[14px] font-gordita-medium text-brandGray-300",

@@ -1,3 +1,4 @@
+import Loader from "@/components/constants/Loader";
 import {
   formatDate,
   formatHour,
@@ -9,7 +10,6 @@ import classNames from "classnames";
 import React, { useState } from "react";
 import { IoIosArrowDown } from "react-icons/io";
 import { IoCheckmarkCircle } from "react-icons/io5";
-import Loading from "react-loading";
 import DatePicker from "react-multi-date-picker";
 import Select from "react-select";
 
@@ -340,7 +340,7 @@ const CarBooking = ({
             } hover:opacity-[0.8] flex items-center justify-center bg-[#42864F] text-white rounded-[8px] w-full text-[14px] h-[48px]`}
           >
             {loading ? (
-              <Loading type="spin" width={18} height={18} color="#fff" />
+              <Loader type="spin" width={18} height={18} color="#fff" />
             ) : availability ? (
               "Proceed"
             ) : (
