@@ -1,8 +1,8 @@
-import Navigation from "@/components/Navigation";
-import Container from "@/components/Container";
+import Navigation from "@/layout/NonAuthLayout/Navigation";
+import Container from "@/layout/NonAuthLayout/Container";
 import React from "react";
-import LoginForm from "@/components/Forms/LoginForm";
-import AlterFooter from "@/components/Footers/AlterFooter";
+import LoginForm from "@/components/constants/forms/LoginForm";
+import AlterFooter from "@/layout/NonAuthLayout/Footers/AlterFooter";
 import { useEffect } from "react";
 import { useAuth } from "@/hooks/useAuth";
 import { useRouter } from "next/router";

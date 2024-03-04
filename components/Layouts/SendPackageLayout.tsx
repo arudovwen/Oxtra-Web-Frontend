@@ -1,7 +1,7 @@
 import React from "react";
-import Navigation from "../Navigation";
-import Container from "../Container";
-import AlterFooter from "../Footers/AlterFooter";
+import Navigation from "../../layout/NonAuthLayout/Navigation";
+import Container from "../../layout/NonAuthLayout/Container";
+import AlterFooter from "../../layout/NonAuthLayout/Footers/AlterFooter";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { useRouter } from "next/router";
 

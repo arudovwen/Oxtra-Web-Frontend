@@ -1,4 +1,4 @@
-import { dangerAlert } from "@/components/Toasts";
+import { dangerAlert } from "@/helpers/notifications";
 import axios from "axios";
 
 //pass new generated access token here

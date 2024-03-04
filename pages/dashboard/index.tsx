@@ -1,11 +1,11 @@
 import React from "react";
 import DashboardLayout from "@/components/Layouts/DashboardLayout";
-import Typography from "@/components/Typography";
+import Typography from "@/components/constants/Typorgraphy";
 import honda from "../../public/assets/honda.png";
 import Image from "next/image";
 import classNames from "classnames";
 import { MdArrowForwardIos } from "react-icons/md";
-import Button from "@/components/Button";
+import Button from "@/components/constants/Button";
 import { useState, useEffect } from "react";
 import { useAuth } from "@/hooks/useAuth";
 import { useRouter } from "next/router";

@@ -1,17 +1,16 @@
-import { Inter } from "next/font/google";
-import Experience from "@/components/Experience";
-import Hero from "@/components/Hero";
-import FindPreferredCar from "@/components/FindPreferredCar";
-import Services from "@/components/Services";
-import Vehicles from "@/components/Vehicles";
-import PassiveIncome from "@/components/PassiveIncome";
-import TrustedPartners from "@/components/TrustedPartners";
-import Footer from "@/components/Footers";
+import Experience from "@/components/data/home/Experience";
+import Hero from "@/components/data/home/Hero";
+import FindPreferredCar from "@/components/data/home/FindPreferredCar";
+import Services from "@/components/data/home/Services";
+import Vehicles from "@/components/data/home/Vehicles";
+import PassiveIncome from "@/components/data/home/PassiveIncome";
+import TrustedPartners from "@/components/data/home/TrustedPartners";
+import Footer from "@/layout/NonAuthLayout/Footers";
 import blue from "../public/assets/blue.png";
 import Image from "next/image";
-import Container from "@/components/Container";
+import Container from "@/layout/NonAuthLayout/Container";
 import pink from "../public/assets/pink.png";
-import MovingCar from "@/components/MovingCar";
+import MovingCar from "@/components/constants/MovingCar";
 
 export default function Home() {
   const activePage = "Home";
@@ -20,7 +19,7 @@ export default function Home() {
   return (
     <div className="overflow-hidden">
       <Hero activePage={activePage} />
-
+ 
       <FindPreferredCar />
 
       <Services />

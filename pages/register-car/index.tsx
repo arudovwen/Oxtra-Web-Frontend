@@ -1,6 +1,6 @@
 import React from "react";
-import LeaseCarSignUp from "@/components/Forms/LeaseCarSignUpForm";
-import PutUpYourVehicleLayout from "@/components/Layouts/PutUpYourVehicleLayout";
+import LeaseCarSignUp from "@/components/data/register-car/LeaseCarSignUpForm";
+import PutUpYourVehicleLayout from "@/components/data/register-car/PutUpYourVehicleLayout";
 
 const PutUpVehicle = () => {
   const putYourVehicleLayoutActivePage = "Basic information";

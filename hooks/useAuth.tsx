@@ -1,7 +1,7 @@
 import { createContext, useContext, useState } from "react";
 import { useRouter } from "next/router";
 import { useLocalStorage } from "./useLocalStorage";
-import { dangerAlert } from "@/components/Toasts";
+import { dangerAlert } from "@/helpers/notifications";
 
 export interface User {
   fullName: string;

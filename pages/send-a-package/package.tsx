@@ -1,5 +1,5 @@
 import SendPackageLayout from "@/components/Layouts/SendPackageLayout";
-import PackageDetailsForm from "@/components/Forms/PackageDetailsForm";
+import PackageDetailsForm from "@/components/constants/forms/PackageDetailsForm";
 
 const Package = () => {
   const sendPackageLayoutActivePage = "Package";

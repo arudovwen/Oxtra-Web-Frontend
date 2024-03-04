@@ -1,6 +1,6 @@
 import React from "react";
 import DashboardLayout from "@/components/Layouts/DashboardLayout";
-import Typography from "@/components/Typography";
+import Typography from "@/components/constants/Typorgraphy";
 import classNames from "classnames";
 import { CiClock2 } from "react-icons/ci";
 import { FiCalendar } from "react-icons/fi";

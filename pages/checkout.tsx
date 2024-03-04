@@ -1,5 +1,5 @@
-import Container from "@/components/Container";
-import Navigation from "@/components/Navigation";
+import Container from "@/layout/NonAuthLayout/Container";
+import Navigation from "@/layout/NonAuthLayout/Navigation";
 import Pick_Return from "@/components/constants/Pick_Return";
 import { paymentOptions } from "@/components/constants/arrays";
 import {

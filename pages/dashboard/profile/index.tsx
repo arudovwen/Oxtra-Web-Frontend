@@ -1,6 +1,6 @@
-import Typography from "@/components/Typography";
+import Typography from "@/components/constants/Typorgraphy";
 import DashboardLayout from "@/components/Layouts/DashboardLayout";
-import ProfileForm from "@/components/Forms/ProfileForm";
+import ProfileForm from "@/components/constants/forms/ProfileForm";
 import { useState, useEffect } from "react";
 import VehiclesCard from "@/components/VehiclesCard";
 import { useRouter } from "next/router";

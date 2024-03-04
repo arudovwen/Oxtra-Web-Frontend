@@ -1,17 +1,9 @@
-import { Flex } from "@chakra-ui/react";
+import React from 'react'
 
-const RentCar = () => {
+const index = () => {
   return (
-    <Flex
-      flexDir="column"
-      border="1px solid #E4E4E4"
-      borderRadius="16px"
-      h="42rem"
-      p="24px"
-    >
-      rent car
-    </Flex>
-  );
-};
+    <div>index</div>
+  )
+}
 
-export default RentCar;
+export default index

@@ -1,9 +1,9 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import Typography from "../Typography";
+import Typography from "../constants/Typorgraphy";
 import logo2 from "../../public/assets/Asset 3.png";
-import Container from "../Container";
+import Container from "../../layout/NonAuthLayout/Container";
 import { BsBellFill } from "react-icons/bs";
 import { CgProfile } from "react-icons/cg";
 import classNames from "classnames";

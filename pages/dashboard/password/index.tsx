@@ -1,7 +1,7 @@
 import React from "react";
 import DashboardLayout from "@/components/Layouts/DashboardLayout";
-import Typography from "@/components/Typography";
-import ChangePasswordForm from "@/components/Forms/ChangePasswordForm";
+import Typography from "@/components/constants/Typorgraphy";
+import ChangePasswordForm from "@/components/constants/forms/ChangePasswordForm";
 import { useEffect } from "react";
 import { useAuth } from "@/hooks/useAuth";
 import { useRouter } from "next/router";

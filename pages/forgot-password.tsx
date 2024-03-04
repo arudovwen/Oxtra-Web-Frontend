@@ -1,12 +1,11 @@
-import Navigation from "@/components/Navigation";
-import Container from "@/components/Container";
 import React from "react";
-import LoginForm from "@/components/Forms/LoginForm";
-import AlterFooter from "@/components/Footers/AlterFooter";
+import Navigation from "@/layout/NonAuthLayout/Navigation";
+import Container from "@/layout/NonAuthLayout/Container";
+import AlterFooter from "@/layout/NonAuthLayout/Footers/AlterFooter";
 import { useEffect } from "react";
 import { useAuth } from "@/hooks/useAuth";
 import { useRouter } from "next/router";
-import ForgotPasswordForm from "@/components/Forms/ForgotPasswordForm";
+import ForgotPasswordForm from "@/components/constants/forms/ForgotPasswordForm";
 
 const ForgotPassword = () => {
   const activePage = "Forgot password";

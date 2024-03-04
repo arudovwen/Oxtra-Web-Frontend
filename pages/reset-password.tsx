@@ -1,11 +1,11 @@
 import React from "react";
-import Navigation from "@/components/Navigation";
-import Container from "@/components/Container";
-import AlterFooter from "@/components/Footers/AlterFooter";
+import Navigation from "@/layout/NonAuthLayout/Navigation";
+import Container from "@/layout/NonAuthLayout/Container";
+import AlterFooter from "@/layout/NonAuthLayout/Footers/AlterFooter";
 import { useEffect } from "react";
 import { useAuth } from "@/hooks/useAuth";
 import { useRouter } from "next/router";
-import ResetPasswordForm from "@/components/Forms/ResetPasswordForm";
+import ResetPasswordForm from "@/components/constants/forms/ResetPasswordForm";
 
 const ResetPassword = () => {
   const activePage = "Reset password";

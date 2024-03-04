@@ -1,5 +1,5 @@
 import React from "react";
-import ReceiverDetailsForm from "@/components/Forms/ReceiverDetailsForm";
+import ReceiverDetailsForm from "@/components/constants/forms/ReceiverDetailsForm";
 import SendPackageLayout from "@/components/Layouts/SendPackageLayout";
 
 const Receiver = () => {

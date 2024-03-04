@@ -1,5 +1,5 @@
 import React from "react";
-import SenderDetialsForm from "@/components/Forms/SenderDetailsForm";
+import SenderDetialsForm from "@/components/constants/forms/SenderDetailsForm";
 import SendPackageLayout from "@/components/Layouts/SendPackageLayout";
 
 const SendPackage = () => {

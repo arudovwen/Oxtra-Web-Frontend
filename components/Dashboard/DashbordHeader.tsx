@@ -1,5 +1,5 @@
 import React from "react";
-import Typography from "../Typography";
+import Typography from "../constants/Typorgraphy";
 import { useAuth } from "@/hooks/useAuth";
 import { User } from "@/hooks/useAuth";
 import { useState, useEffect } from "react";

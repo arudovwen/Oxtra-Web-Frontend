@@ -1,18 +1,18 @@
 import React from "react";
-import CompanyHero from "@/components/CompanyHero";
-import Offer from "@/components/Offer";
-import TrustedPartners from "@/components/TrustedPartners";
-import Team from "@/components/Team";
-import PassiveIncome from "@/components/PassiveIncome";
-import Experience from "@/components/Experience";
-import Footer from "@/components/Footers";
+import CompanyHero from "@/components/data/company/CompanyHero";
+import Offer from "@/components/data/company/Offer";
+import TrustedPartners from "@/components/data/home/TrustedPartners";
+import Team from "@/components/data/company/Team";
+import PassiveIncome from "@/components/data/home/PassiveIncome";
+import Experience from "@/components/data/home/Experience";
+import Footer from "@/layout/NonAuthLayout/Footers";
 import Image from "next/image";
 import pink from "../public/assets/pink.png";
 import blue from "../public/assets/blue.png";
 import halfCar from "../public/assets/heroCar.png";
 import backcar from "../public/assets/Rectangle 100.png";
-import Container from "@/components/Container";
-import MovingCar from "@/components/MovingCar";
+import Container from "@/layout/NonAuthLayout/Container";
+import MovingCar from "@/components/constants/MovingCar";
 
 const Company = () => {
   const activePage = "Company";

@@ -1,3 +1,96 @@
+import car1 from "../../public/assets/Rectangle 13.png";
+import car2 from "../../public/assets/Rectangle 14.png";
+import car5 from "../../public/assets/Rectangle 17.png";
+import veriftyme from "../../public/assets/verifyme.png";
+import wooven from "../../public/assets/wooven.png";
+import paystack from "../../public/assets/paystack.png";
+import nimc from "../../public/assets/nimc.png";
+import { GrFacebook, GrInstagram, GrTwitter } from "react-icons/gr";
+import offerCar from "../../public/assets/offerCar.png";
+import pricing from "../../public/assets/pricing.png";
+
+export const navigation = {
+  company: [
+    { name: "About us", href: "#" },
+    { name: "Company", href: "/company" },
+    { name: "Press", href: "#" },
+    { name: "Blog", href: "#" },
+  ],
+  products: [
+    { name: "Rent a car", href: "/rentVehicle" },
+    { name: "Put your car for rent", href: "#" },
+    { name: "Airport Trips", href: "#" },
+    { name: "Courier", href: "#" },
+  ],
+  business: [
+    { name: "Pricing", href: "#" },
+    { name: "Our Terms", href: "#" },
+    { name: "Privacy Policy", href: "#" },
+    { name: "Insurance Policy", href: "#" },
+  ],
+  contact: [
+    { name: "Info@Oxtra.africa", href: "#" },
+    { name: "Whatsapp Support", href: "#" },
+  ],
+};
+
+export const offers = [
+  {
+    title: "Wide Range of Vehicles",
+    description:
+      "We have a ranged fleet of rental cars to meet your needs and preferences. From economy cars to luxury SUVs, we have the right vehicle for every occasion and budget.",
+    image: offerCar,
+    height: "h-[480px]",
+    linkText: "Check out our cars",
+    link: "/",
+  },
+
+  {
+    title: "Flexible Rental Options",
+    description:
+      "We understand that every customer has unique rental needs, that's why we offer flexible rental options, including hourly and  daily options. We also offer long-term rental options on special request for customers who need a car for an extended period of time.",
+    image: offerCar,
+    height: "h-[528px]",
+    linkText: "Check out our cars",
+    link: "/",
+  },
+
+  {
+    title: "Competitive Pricing",
+    description:
+      "We want you to have the most affordable and stress-free rental experience possible. So why wait? Book your rental with us today and enjoy a fun and affordable road trip with Oxtra!",
+    image: pricing,
+    height: "h-[480px]",
+    linkText: "Check out our cars",
+    link: "/",
+  },
+];
+
+export const socials = [
+  {
+    name: "Facebook",
+    icon: <GrFacebook />,
+  },
+  {
+    name: "Twitter",
+    icon: <GrTwitter />,
+  },
+  {
+    name: "Instagram",
+    icon: <GrInstagram />,
+  },
+];
+
+export const trustedPartners = [
+  {
+    partner: "verfiy me",
+    image: veriftyme,
+  },
+  { partner: "wooven", image: wooven },
+  { partner: "nimc", image: nimc },
+  { partner: "paystack", image: paystack },
+];
+
 export const filters = [
   {
     name: "Location",
@@ -38,6 +131,37 @@ export const filters = [
       { label: "2021", value: "Corolla" },
       { label: "2022", value: "2022" },
     ],
+  },
+];
+
+export const vehicles = [
+  {
+    name: "Sedan",
+  },
+  {
+    name: "Coupe",
+  },
+  {
+    name: "SUV",
+  },
+  {
+    name: "Luxury",
+  },
+  {
+    name: "Haulage",
+  },
+];
+
+export const placeholders = [
+  {
+    car: car1,
+  },
+  {
+    car: car2,
+  },
+
+  {
+    car: car5,
   },
 ];
 
