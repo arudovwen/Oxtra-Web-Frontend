@@ -1,11 +1,10 @@
 import Image from 'next/image';
 import Container from '../Container';
-import logo from '../../../public/assets/Frame 2293.png';
 import Link from 'next/link';
 import Typography from '../../../components/constants/Typorgraphy';
 import classNames from 'classnames';
 import { navigation, socials } from '@/components/constants/arrays';
-import logoGreen from '../../../public/assets/new/oxtra logo-8.png';
+import logoGreen from '../../../public/assets/oxtra logo-8.png';
 
 const headingClasses = classNames('text-brandGray-500 mb-4');
 

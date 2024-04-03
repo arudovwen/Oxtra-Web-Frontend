@@ -7,7 +7,7 @@ const Header = () => {
         <Flex align='center' w='1192px' justifyContent='space-between'>
           <Box>
             <Image
-              src='/assets/new/oxtra logo-8.png'
+              src='/assets/oxtra logo-8.png'
               alt='logo'
               width='142px'
               height='40px'

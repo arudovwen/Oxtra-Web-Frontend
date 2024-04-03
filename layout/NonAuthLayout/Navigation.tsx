@@ -9,8 +9,8 @@ import { useState, useEffect } from 'react';
 import { User } from '@/hooks/useAuth';
 import { Dialog } from '@headlessui/react';
 import { useAuth } from '@/hooks/useAuth';
-import logoWhite from '../../public/assets/new/oxtra logo-8 (1).png';
-import logoGreen from '../../public/assets/new/oxtra logo-8.png';
+import logoWhite from '../../public/assets/oxtra logo-8 (1).png';
+import logoGreen from '../../public/assets/oxtra logo-8.png';
 
 interface NavigationProps {
   color: string;
