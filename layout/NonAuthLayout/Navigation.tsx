@@ -26,7 +26,7 @@ interface NavigationProps {
 
 const navigation = [
   { name: 'Rent a car', href: '/rent-a-car' },
-  { name: 'Sign up as a car owner', href: '/register-car' },
+  { name: 'Car owner sign up', href: '/register-car' },
   { name: 'Company', href: '/company' },
   { name: 'FAQ', href: '/' },
 ];
@@ -60,9 +60,9 @@ const Navigation = ({
             <Image
               src={navBackground === 'green' ? logoWhite : logoGreen}
               alt='logo'
-              width={90}
+              width={120}
               height={30}
-              className='object-cover'
+              className='object-cover h-auto'
             />
           </Link>
         </div>

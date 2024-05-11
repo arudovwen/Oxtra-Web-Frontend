@@ -9,9 +9,9 @@ const MovingCar = () => {
       <Image
         src={car}
         alt="come and experience"
-        className="object-cover hidden lg:block"
-        width={350}
-        height={350}
+        className="object-cover hidden lg:block h-auto"
+        width={100}
+        height={50}
       />
     </Marquee>
   );

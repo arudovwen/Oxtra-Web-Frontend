@@ -1,11 +1,12 @@
 interface ContainerProps {
   children: React.ReactNode;
   marginBottom?: string;
+  className?: string
 }
 
-const Container = ({ children, marginBottom }: ContainerProps) => {
+const Container = ({ children, marginBottom,className }: ContainerProps) => {
   return (
-    <div className={`w-[90%] xl:max-w-[1192px] mx-auto ${marginBottom}`}>
+    <div className={`container max-w-[1280px] mx-auto ${marginBottom} ${className}`}>
       {children}
     </div>
   );

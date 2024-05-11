@@ -26,7 +26,7 @@ const PutUpYourVehicleLayout = ({
   children,
   putYourVehicleLayoutActivePage,
 }: PutUpYourVehicleLayoutProps) => {
-  const activePage = "Sign up as a car owner";
+  const activePage = "Car owner sign up";
 
   const router = useRouter();
 

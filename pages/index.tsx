@@ -10,7 +10,6 @@ import blue from '../public/assets/blue.png';
 import Image from 'next/image';
 import Container from '@/layout/NonAuthLayout/Container';
 import pink from '../public/assets/pink.png';
-import MovingCar from '@/components/constants/MovingCar';
 
 export default function Home() {
   const activePage = 'Home';
@@ -25,7 +24,7 @@ export default function Home() {
       <Services />
       <Vehicles />
       <PassiveIncome marginBottom={margin} />
-      <TrustedPartners marginBottom={margin} />
+      <TrustedPartners marginBottom="mb-[80px]" />
       <Experience marginBottom={margin} />
       <Footer />
 
@@ -54,7 +53,6 @@ export default function Home() {
           />
         </div>
       </Container>
-      <MovingCar />
     </div>
   );
 }

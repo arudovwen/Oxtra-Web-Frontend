@@ -139,13 +139,13 @@ export const vehicles = [
     name: "Sedan",
   },
   {
-    name: "Coupe",
+    name: "Mercedes",
   },
   {
     name: "SUV",
   },
   {
-    name: "Luxury",
+    name: "Toyota",
   },
   {
     name: "Haulage",
@@ -153,6 +153,16 @@ export const vehicles = [
 ];
 
 export const placeholders = [
+  {
+    car: car1,
+  },
+  {
+    car: car2,
+  },
+
+  {
+    car: car5,
+  },
   {
     car: car1,
   },
