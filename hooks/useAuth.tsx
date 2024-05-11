@@ -1,19 +1,14 @@
-import { createContext, useContext, useState } from 'react';
-import { useRouter } from 'next/router';
-import { useLocalStorage } from './useLocalStorage';
-import { dangerAlert } from '@/components/Toasts';
+import { createContext, useContext, useState } from "react";
+import { useRouter } from "next/router";
+import { useLocalStorage } from "./useLocalStorage";
+import { dangerAlert } from "@/helpers/notifications";
 
 export interface User {
-  firstName: string;
-  lastName: string;
+  fullName: string;
   email: string;
   password: string;
   id?: string;
-  dob: string;
-  address: string;
-  state: string;
   phoneNumber: string;
-  city: string;
   phoneCode: string;
 }
 
@@ -33,28 +28,27 @@ const AuthContext = createContext<AuthContextValue>({
   user: null,
   disable: false,
   setDisable: () => {},
-  token: '',
+  token: "",
   setToken: () => {},
 });
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-  const [user, setUser] = useLocalStorage('user', null);
-  const [token, setToken] = useState('');
-
-  console.log(token);
+  const [user, setUser] = useLocalStorage("user", null);
+  const [token, setToken] = useLocalStorage("token", "");
 
   const [disable, setDisable] = useState(false);
   const router = useRouter();
 
   const login = async (data: User) => {
     setUser(data);
-    router.push('/dashboard');
+    router.push("/dashboard");
   };
 
   const logout = () => {
     setUser(null);
-    dangerAlert('Logged out!');
-    router.push('/login');
+    setToken("");
+    dangerAlert("Logged out!");
+    router.push("/login");
   };
 
   return (
