@@ -5,8 +5,7 @@ import { useState } from "react";
 import { useAuth } from "@/hooks/useAuth";
 import { SyntheticEvent } from "react";
 import { rentVehicle } from "@/services/vehicleservices";
-// @ts-ignore 
-import DatePickerInput from "@/components/DatePicker/index";
+import DatePickerInput from "@/components/Datepicker";
 
 const inputClasses = classNames(
   "px-2 py-2 border rounded border-[#d4d6d8] mt-3  w-full h-[40px]"
