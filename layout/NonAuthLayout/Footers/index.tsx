@@ -10,7 +10,7 @@ const headingClasses = classNames("text-brandGray-500 mb-4");
 
 const Footer = () => {
   return (
-    <footer className="pb-3">
+    <footer className="pb-6">
       <Container>
         <div className="flex gap-y-8 lg:gap-y-0 md:gap-x-8 lg:gap-x-28 flex-col md:flex-row">
           <div className="w-full md:max-w-[300px] lg:max-w-[400px]">
