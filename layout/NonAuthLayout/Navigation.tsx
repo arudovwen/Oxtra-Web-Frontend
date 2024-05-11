@@ -28,7 +28,7 @@ const navigation = [
   { name: 'Rent a car', href: '/rent-a-car' },
   { name: 'Car owner sign up', href: '/register-car' },
   { name: 'Company', href: '/company' },
-  { name: 'FAQ', href: '/' },
+  // { name: 'FAQ', href: '/' },
 ];
 
 const Navigation = ({
