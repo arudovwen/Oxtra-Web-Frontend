@@ -1,6 +1,7 @@
-import urls from '../helpers/url_helpers';
-import { post, get } from '../helpers/api_helpers';
-import { User } from '@/hooks/useAuth';
+/* @ts-ignore */
+import urls from "../helpers/url_helpers";
+import { post, get } from "../helpers/api_helpers";
+import { User } from "@/hooks/useAuth";
 
 //Authentication
 export async function handleCsrf() {
@@ -9,13 +10,13 @@ export async function handleCsrf() {
 
 export async function loginUser(
   user: { email: string; password: string },
-  config = {}
+  config = {},
 ) {
   return await post(urls.LOGIN_USER, user, config);
 }
 export async function logOut() {
-  localStorage.removeItem('loggedUser');
-  window.location.href = '/';
+  localStorage.clear();
+  window.location.href = "/";
 }
 export async function registerUser(user: User, config = {}) {
   return await post(urls.REGISTER, user, config);
@@ -27,14 +28,14 @@ export async function changePassword(
     newPassword: string;
     newPassword_confirmation: string;
   },
-  config = {}
+  config = {},
 ) {
   return await post(urls.CHANGE_PASSWORD, user, config);
 }
 
 export async function resetPassword(
   user: { password: string; password_confirmation: string },
-  config = {}
+  config = {},
 ) {
   return await post(urls.RESET_PASSWORD, user, config);
 }

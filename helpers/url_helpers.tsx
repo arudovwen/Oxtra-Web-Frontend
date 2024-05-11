@@ -1,6 +1,6 @@
-const version = '/api/v1';
+const version = "/api/v1";
 
-const urls = {
+export const urls = {
   //Auth urls
   LOGIN_USER: `${version}/login`,
   REGISTER: `${version}/register`,
@@ -11,5 +11,14 @@ const urls = {
 
   // User urls
   UPDATE_USER_PROFILE: `${version}/user`,
+
+  // Vehicles urls
+  GET_ALL_VEHICLE_DOCUMENTS: `${version}/vehicle-documents`,
+  //  GET_VEHICLE_DOCUMENTS: `${version}/vehicle-documents/1`,
+  ADD_VEHICLES: `${version}/vehicles`,
+  ADD_VEHICLE_DOCUMENTS: `${version}/vehicle-documents`,
+  RENT_VEHICLE: `${version}/rents`,
+  GET_VEHICLES: `${version}/vehicles`,
 };
-export default urls;
+
+export const cookiesExpiry = new Date(new Date().getTime() + 5 * 60 * 1000);
