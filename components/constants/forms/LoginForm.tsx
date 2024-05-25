@@ -8,6 +8,8 @@ import AuthInput from "../AuthInput";
 import { Button } from "@chakra-ui/react";
 import Pick_Return from "../Pick_Return";
 import { useRouter } from "next/router";
+import useCustomToast from "@/utils/notifications";
+import { useLogin } from "@/services/query/auth";
 
 const labelClasses = classNames(
   "text-[12px] leading-[12px] font-gordita-bold text-[#444648]"
@@ -24,6 +26,21 @@ const LoginForm = () => {
     setCheckout(checkoutValue);
   }, []);
 
+  const { successToast, errorToast } = useCustomToast();
+
+  const { mutate, isLoading: isLogging } = useLogin({
+    onSuccess: (res: any) => {
+      successToast(res?.message);
+      router.push("/dashboard/rent-a-car");
+      localStorage.setItem("user", JSON.stringify(res));
+    },
+    onError: (err: any) => {
+      errorToast(
+        err?.response?.data?.message || err?.message || "An Error occurred"
+      );
+    },
+  });
+
   const handleSubmit = (values = "") => {
     if (checkout) {
       setIsLoading(true);
@@ -34,12 +51,10 @@ const LoginForm = () => {
         }, 2000);
       }
     } else {
-      setIsLoading(true);
+      mutate(values);
       {
         setTimeout(() => {
-          setIsLoading(false);
           router.push("/dashboard/rent-a-car");
-          localStorage.setItem("user", "user");
         }, 2000);
       }
     }
@@ -139,7 +154,7 @@ const LoginForm = () => {
                 color="#fff"
                 fontSize="14px"
                 fontWeight={500}
-                isLoading={isLoading}
+                isLoading={isLoading || isLogging}
                 w="full"
                 type="submit"
                 _active={{ bg: "#438950" }}

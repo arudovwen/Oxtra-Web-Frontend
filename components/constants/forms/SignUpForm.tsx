@@ -4,32 +4,50 @@ import { useState } from "react";
 import Select from "react-select";
 import { useRouter } from "next/router";
 import DatePicker from "react-multi-date-picker";
-import { formatNewDate } from "@/helpers/helpers";
+import { formatDate, formatNewDate } from "@/helpers/helpers";
 import { IoIosArrowDown } from "react-icons/io";
 import { Form, Formik } from "formik";
-import {
-  initSignupValues,
-  validationSignupSchema,
-} from "@/helpers/validations";
 import AuthInput from "../AuthInput";
 import { countries } from "../arrays";
-import { Button, Grid, GridItem, Radio } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Flex,
+  Grid,
+  GridItem,
+  Radio,
+  Text,
+} from "@chakra-ui/react";
 import Pick_Return from "../Pick_Return";
+import { signUpValues, validateSignupSchema } from "@/utils/validation";
+import { useRegisterUser } from "@/services/query/auth";
+import useCustomToast from "@/utils/notifications";
 
 const labelClasses = classNames(
-  "text-[12px] leading-[12px] font-gordita-bold text-[#444648]",
+  "text-[12px] leading-[12px] font-gordita-bold text-[#444648]"
 );
 
 const SignUpForm = () => {
   const router = useRouter();
   const [show, setShow] = useState(false);
 
-  const [startValue, startChange] = useState("");
-  const startDate = formatNewDate(startValue);
-  const startDateRange = new Date();
-
   const [tandC, setTandC] = useState(false);
   const [checkout, setCheckout] = useState(null);
+
+  const { successToast, errorToast } = useCustomToast();
+
+  const { mutate, isLoading: isRegister } = useRegisterUser({
+    onSuccess: (res: any) => {
+      successToast(res?.message);
+      router.push("/dashboard/rent-a-car");
+      localStorage.setItem("user", JSON.stringify(res));
+    },
+    onError: (err: any) => {
+      errorToast(
+        err?.response?.data?.message || err?.message || "An Error occurred"
+      );
+    },
+  });
 
   useEffect(() => {
     const checkoutValue = localStorage.getItem("checkout");
@@ -50,13 +68,11 @@ const SignUpForm = () => {
       }
     } else {
       /* @ts-ignore */
-      const { code, phone, ...rest } = values;
-      const phoneNumber = code?.value + Number(phone);
-      console.log({
+      const { phoneCode, dob, phone, ...rest } = values;
+      mutate({
         ...rest,
-        phone: phoneNumber,
-        code: code?.value,
-        dob: startDate,
+        phoneCode: phoneCode?.value,
+        dob: formatDate(dob),
       });
     }
   };
@@ -113,8 +129,8 @@ const SignUpForm = () => {
         <Formik
           /* @ts-ignore */
           onSubmit={handleSubmit}
-          initialValues={initSignupValues}
-          validationSchema={validationSignupSchema}
+          initialValues={signUpValues}
+          validationSchema={validateSignupSchema}
         >
           {({
             values,
@@ -130,25 +146,41 @@ const SignUpForm = () => {
             /* @ts-ignore */
             <Form onSubmit={handleSubmit}>
               <div className="flex flex-col gap-y-[20px] gap-x-4">
-                <div className="col-span-full">
-                  <label htmlFor="email-address" className={labelClasses}>
-                    Full name
-                  </label>
-                  <div>
+                <Flex w="full" align="center" gap="20px">
+                  <Box w="full">
+                    <Text className={labelClasses}>First name</Text>
                     <AuthInput
-                      placeholder="Enter your full name"
-                      name="fullName"
+                      placeholder="Enter your first name"
+                      name="firstName"
+                      mt
                       onChange={handleChange}
                       onBlur={handleBlur}
-                      value={values?.fullName}
+                      value={values?.firstName}
                       error={
-                        errors?.fullName &&
-                        touched?.fullName &&
-                        errors?.fullName
+                        errors?.firstName &&
+                        touched?.firstName &&
+                        errors?.firstName
                       }
                     />
-                  </div>
-                </div>
+                  </Box>
+
+                  <Box w="full">
+                    <Text className={labelClasses}>Last name</Text>
+                    <AuthInput
+                      placeholder="Enter your last name"
+                      name="lastName"
+                      mt
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values?.lastName}
+                      error={
+                        errors?.lastName &&
+                        touched?.lastName &&
+                        errors?.lastName
+                      }
+                    />
+                  </Box>
+                </Flex>
 
                 <div className="col-span-full">
                   <label htmlFor="" className={labelClasses}>
@@ -208,13 +240,13 @@ const SignUpForm = () => {
                         placeholder="+234"
                         /* @ts-ignore */
                         options={codeOption}
-                        value={values?.code}
-                        defaultValue={values?.code}
+                        value={values?.phoneCode}
+                        defaultValue={values?.phoneCode}
                         onChange={(selectionOption) =>
                           setValues({
                             ...values,
                             /* @ts-ignore */
-                            code: selectionOption,
+                            phoneCode: selectionOption,
                           })
                         }
                         components={{
@@ -238,11 +270,25 @@ const SignUpForm = () => {
                     <div>
                       <AuthInput
                         placeholder="08083594505"
-                        name="phone"
-                        onChange={handleChange}
+                        name="phoneNumber"
+                        onChange={(e) => {
+                          const inputPhone = e.target.value
+                            .replace(/\D/g, "")
+                            .slice(0, 11);
+                          handleChange({
+                            target: {
+                              name: "phoneNumber",
+                              value: `${inputPhone}`,
+                            },
+                          });
+                        }}
                         onBlur={handleBlur}
-                        value={values?.phone}
-                        error={errors?.phone && touched?.phone && errors?.phone}
+                        value={values?.phoneNumber}
+                        error={
+                          errors?.phoneNumber &&
+                          touched?.phoneNumber &&
+                          errors?.phoneNumber
+                        }
                       />
                     </div>
                   </GridItem>
@@ -256,10 +302,9 @@ const SignUpForm = () => {
                       <div className="signup-date font-gordita-regular mt-[4px]">
                         <DatePicker
                           placeholder="Select Date"
-                          value={startValue}
-                          minDate={startDateRange}
+                          value={values?.dob}
                           onChange={(date: any) => {
-                            startChange(date);
+                            setValues({ ...values, dob: date });
                           }}
                         />
                       </div>
@@ -299,14 +344,14 @@ const SignUpForm = () => {
                 borderRadius="8px"
                 h="48px"
                 color="#fff"
-                isLoading={isLoading}
+                isLoading={isLoading || isRegister}
                 fontSize="14px"
                 fontWeight={500}
                 _active={{ bg: "#438950" }}
                 _focus={{ bg: "#438950" }}
                 w="full"
                 type="submit"
-                isDisabled={!isValid || !dirty || !startValue || !tandC}
+                isDisabled={!isValid || !dirty || !tandC}
               >
                 {buttonText}
               </Button>{" "}

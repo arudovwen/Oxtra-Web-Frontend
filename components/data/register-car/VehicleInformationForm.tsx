@@ -1,549 +1,478 @@
-import React, { useState, useRef } from "react";
-import Typography from "../../constants/Typorgraphy";
+import React, { useState } from "react";
+import { Flex, Box, Text, Input, Checkbox, Button } from "@chakra-ui/react";
+import Select from "react-select";
 import classNames from "classnames";
-import Button from "../../constants/Button";
+import { brands, colorTypes, model } from "@/components/constants/arrays";
 import { useRouter } from "next/router";
-import { AiOutlineCloudUpload } from "react-icons/ai";
-import { addVehicle } from "@/services/vehicleservices";
-import { useAuth } from "@/hooks/useAuth";
-
-const labelClasses = classNames(
-  "block text-[14px] leading-[14px] font-gordita-medium text-brandGray-300",
-);
-
-const inputClasses = classNames(
-  `px-2  h-[40px] py-2 border border-[#d4d6d8] rounded-lg mt-3  w-full font-gordita-regular`,
-);
-
-const dragAndDropClasses = classNames(
-  `font-gordita-medium my-2 text-[10px] text-[#41454C] `,
-);
-
-const typeDocClasses = classNames(
-  `text-[#797980] font-gordita-regular text-[12px] leading-[17px] `,
-);
 
 const VehicleInformationForm = () => {
+  const labelClasses = classNames(
+    "text-[12px] text-[#4c4c4c] font-gordita-medium"
+  );
+
+  const [values, setValues] = useState({
+    brand: "",
+    model: "",
+    year: "",
+    transmission: "",
+    color: "",
+    doors: "",
+    power: "",
+    no_of_seats: "",
+    boot_capacity: "",
+    plate_number: "",
+    extras: [],
+  });
+
+  const handleToggleExtra = (name: any) => {
+    // @ts-ignore
+    setValues((values) => {
+      // @ts-ignore
+      const newExtras = values.extras.includes(name)
+        ? values.extras.filter((extra) => extra !== name)
+        : [...values.extras, name];
+
+      return {
+        ...values,
+        extras: newExtras,
+      };
+    });
+  };
+
+  const customStyles = {
+    control: (provided: any, state: any) => ({
+      ...provided,
+      width: "100%",
+      minHeight: "44px",
+      color: "#666666",
+      fontSize: "16px",
+      marginTop: "12px",
+      cursor: "pointer",
+      borderRadius: "8px",
+      border: "1px solid #cccccc",
+      paddingRight: "16px",
+      background: "unset",
+    }),
+    menu: (provided: any) => ({
+      ...provided,
+      fontSize: "15px",
+      backgroundColor: "#fff",
+    }),
+    option: (provided: any, state: any) => ({
+      ...provided,
+      color: state.isFocused ? "" : "",
+      backgroundColor: state.isFocused ? "#f4f6f8" : "",
+    }),
+  };
+
+  const brandOptions = brands.map((item) => ({
+    label: item,
+    value: item,
+  }));
+
+  const modelOptions = model.map((item) => ({
+    label: item,
+    value: item,
+  }));
+
+  const seatOptions = ["1", "2", "3", "4", "5"].map((item) => ({
+    label: item,
+    value: item,
+  }));
+
+  const colorOptions = colorTypes.map((color) => ({
+    value: color.color,
+    label: color.label,
+  }));
+
+  const getOptionLabel = (option: any) => (
+    <Flex gap="8px" align="center">
+      <Box
+        width="28px"
+        height="20px"
+        backgroundColor={option.value}
+        borderRadius="4px"
+      />
+      {option.label}
+    </Flex>
+  );
+
+  const [menuIsOpen, setMenuIsOpen] = useState(false);
+  const getOptionValue = (option: any) => option.value;
+
+  const ColorOption = ({ data }: any) => (
+    <Flex
+      mt="-5px"
+      onClick={() => {
+        setValues({ ...values, color: data });
+        setMenuIsOpen(false);
+      }}
+      px="10px"
+      cursor="pointer"
+      _hover={{ bg: "#f4f6f8" }}
+      gap="8px"
+      align="center"
+      h="40px"
+    >
+      <Flex
+        width="28px"
+        height="20px"
+        backgroundColor={data?.value}
+        borderRadius="4px"
+      ></Flex>
+      {data?.label}
+    </Flex>
+  );
+
+  const ColorOptio = ({ data }: any) => (
+    <Flex mt="-30px" gap="8px" align="center" h="40px">
+      <Flex
+        width="28px"
+        height="20px"
+        backgroundColor={data?.value}
+        borderRadius="4px"
+      ></Flex>
+      {data?.label}
+    </Flex>
+  );
+
+  const transmissionOptions = ["Automatic", "Manual"].map((item) => ({
+    label: item,
+    value: item,
+  }));
+
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
+  const inputClasses = classNames(
+    "mt-[12px] text-[14px]  text-[#666666] rounded-[8px] py-[14px] px-[16px] border border-[#cccccc]"
+  );
 
-  const [exteriorFront, setExteriorFront] = useState<{ name: string } | null>();
-  const [exteriorBack, setExteriorBack] = useState<{ name: string } | null>();
-  const [exteriorLeftSide, setExteriorLeftSide] = useState<{
-    name: string;
-  } | null>();
-
-  const [exteriorRightSide, setExteriorRightSide] = useState<{
-    name: string;
-  } | null>();
-
-  const [interiorBack, setInteriorBack] = useState<{
-    name: string;
-  } | null>();
-
-  const [interiorFront, setInteriorFront] = useState<{
-    name: string;
-  } | null>();
-
-  const [doorHandleFrontRight, setDoorHandleFrontRight] = useState<{
-    name: string;
-  } | null>();
-
-  const [doorHandleFrontLeft, setDoorHandleFrontLeft] = useState<{
-    name: string;
-  } | null>();
-
-  const [doorHandleBackRight, setDoorHandleBackRight] = useState<{
-    name: string;
-  } | null>();
-
-  const [doorHandleBackLeft, setDoorHandleBackLeft] = useState<{
-    name: string;
-  } | null>();
-
-  const [brand, setBrand] = useState("");
-  const [model, setModel] = useState("");
-  const [year, setYear] = useState("");
-  const [transmission, setTransmission] = useState("Automatic");
-  const [color, setColor] = useState("");
-  const [plate_number, setPlateNumber] = useState("");
-  const { token } = useAuth();
-
-  const carImages = [
-    doorHandleBackLeft,
-    doorHandleBackRight,
-    doorHandleFrontLeft,
-    doorHandleFrontRight,
-    interiorBack,
-    interiorFront,
-    exteriorBack,
-    exteriorFront,
-    exteriorLeftSide,
-    exteriorRightSide,
-  ];
-
-  const [extras, setExtras] = useState([
-    { id: 1, name: "Ac conditioning", available: false },
-    { id: 2, name: "Air bags", available: false },
-    { id: 3, name: "Air suspension", available: false },
-  ]);
-
-  const handleCheckboxChange = (itemId: number) => {
-    setExtras((prevItems) =>
-      prevItems.map((item) =>
-        item.id === itemId ? { ...item, available: !item.available } : item,
-      ),
-    );
+  const action = () => {
+    setLoading(true);
+    // @ts-ignore
+    sessionStorage.setItem("vehicles", JSON.stringify(values));
+    setTimeout(() => {
+      setLoading(false);
+      router.push("/register-car/images");
+    }, 2000);
   };
 
-  const wrapperRef = useRef(null);
-
-  const vehicleInfo = {
-    brand,
-    model,
-    year,
-    transmission,
-    color,
-    plate_number,
-    carImages,
-    extras,
-  };
-
-  const config = { headers: { Authorization: `Bearer ${token}` } };
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    addVehicle(vehicleInfo, config)
-      .then((res) => {
-        router.push("/register-car/documents");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+  const subClasses = classNames("text-[14px] text-[#344054]");
 
   return (
-    <main className="w-[90%] lg:mx-auto lg:max-w-[500px]">
-      <div className="mb-4  text-brandGray-300">
-        <Typography as="h4" font="font-gordita-medium">
-          Vehicle information
-        </Typography>
-      </div>
-      <div className="text-brandGray-100 mb-8">
-        <Typography as="p" font="font-gordita-regular">
-          Please enter the required details to get started
-        </Typography>
-      </div>
+    <Box mt="-30px">
+      <Text color="#444648" fontWeight={500} fontSize="24px">
+        Vehicle Information
+      </Text>
+      <Text mt="16px" color="#646668" fontSize="14px">
+        Please enter the required details to get started
+      </Text>
 
-      <section className="flex-auto">
-        <div className="">
-          <form className="mt-6" onSubmit={handleSubmit}>
-            <div className="grid grid-cols-12 gap-y-6 gap-x-4">
-              <div className="col-span-full md:col-span-6">
-                <label htmlFor="expiration-date" className={labelClasses}>
-                  Brand
-                </label>
-                <div className="mt-1">
-                  <input
-                    type="text"
-                    placeholder="Toyota"
-                    className={inputClasses}
-                    onChange={(e) => setBrand(e.target.value)}
-                    required
-                  />
-                </div>
-              </div>
+      <Flex flexDir="column" w="full" gap="32px" mt="32px">
+        <Flex w="full" align="center" gap="24px">
+          <Box w="full">
+            <Text className={labelClasses}>Brand</Text>
+            <Select
+              styles={customStyles}
+              components={{
+                IndicatorSeparator: () => (
+                  <div style={{ display: "none" }}></div>
+                ),
+              }}
+              value={values?.brand}
+              onChange={(selectedOption) => {
+                setValues({
+                  ...values,
+                  // @ts-ignore
+                  brand: selectedOption,
+                });
+              }}
+              // @ts-ignore
+              options={brandOptions}
+            />
+          </Box>
 
-              <div className="col-span-full  md:col-span-6">
-                <label htmlFor="cvc" className={labelClasses}>
-                  Model
-                </label>
-                <div className="mt-1">
-                  <input
-                    type="text"
-                    placeholder="Camry"
-                    className={inputClasses}
-                    onChange={(e) => setModel(e.target.value)}
-                    required
-                  />
-                </div>
-              </div>
+          <Box w="full">
+            <Text className={labelClasses}>Model</Text>
+            <Select
+              styles={customStyles}
+              components={{
+                IndicatorSeparator: () => (
+                  <div style={{ display: "none" }}></div>
+                ),
+              }}
+              value={values?.model}
+              onChange={(selectedOption) => {
+                setValues({
+                  ...values,
+                  // @ts-ignore
+                  model: selectedOption,
+                });
+              }}
+              // @ts-ignore
+              options={modelOptions}
+            />
+          </Box>
+        </Flex>
 
-              <div className="col-span-6">
-                <label htmlFor="cvc" className={labelClasses}>
-                  Year
-                </label>
-                <div className="mt-1">
-                  <input
-                    type="number"
-                    required
-                    className={inputClasses}
-                    onChange={(e) => setYear(e.target.value)}
-                  />
-                </div>
-              </div>
-              <div className="col-span-6">
-                <label htmlFor="cvc" className={labelClasses}>
-                  Transmision
-                </label>
+        <Flex w="full" align="center" gap="24px">
+          <Box w="full">
+            <Text className={labelClasses}>Year</Text>
 
-                <div className="mt-1">
-                  <select
-                    className={inputClasses}
-                    onChange={(e) => setTransmission(e.target.value)}
-                  >
-                    <option label="Automatic">Automatic</option>
-                    <option label="Manual">Manual</option>
-                  </select>
-                </div>
-              </div>
+            <Input
+              h="44px"
+              className={inputClasses}
+              value={values?.year}
+              onChange={(e) => {
+                setValues({
+                  ...values,
+                  year: e.target.value,
+                });
+              }}
+              type="number"
+            />
+          </Box>
 
-              <div className="col-span-6">
-                <label htmlFor="cvc" className={labelClasses}>
-                  Color
-                </label>
-                <div className="mt-1">
-                  <input
-                    type="text"
-                    required
-                    className={inputClasses}
-                    onChange={(e) => setColor(e.target.value)}
-                  />
-                </div>
-              </div>
+          <Box w="full">
+            <Text className={labelClasses}>Transmission</Text>
+            <Select
+              styles={customStyles}
+              components={{
+                IndicatorSeparator: () => (
+                  <div style={{ display: "none" }}></div>
+                ),
+              }}
+              value={values?.transmission}
+              onChange={(selectedOption) => {
+                setValues({
+                  ...values,
+                  // @ts-ignore
+                  transmission: selectedOption,
+                });
+              }}
+              // @ts-ignore
+              options={transmissionOptions}
+            />
+          </Box>
+        </Flex>
 
-              <div className="col-span-6">
-                <label htmlFor="cvc" className={labelClasses}>
-                  Plate number
-                </label>
-                <div className="mt-1">
-                  <input
-                    type="number"
-                    required
-                    className={inputClasses}
-                    onChange={(e) => setPlateNumber(e.target.value)}
-                  />
-                </div>
-              </div>
-            </div>
+        <Flex w="full" align="center" gap="24px">
+          <Box w="full">
+            <Text className={labelClasses}>Seats</Text>
+            <Select
+              styles={customStyles}
+              components={{
+                IndicatorSeparator: () => (
+                  <div style={{ display: "none" }}></div>
+                ),
+              }}
+              value={values?.no_of_seats}
+              onChange={(selectedOption) => {
+                setValues({
+                  ...values,
+                  // @ts-ignore
+                  no_of_seats: selectedOption,
+                });
+              }}
+              // @ts-ignore
+              options={seatOptions}
+            />
+          </Box>
+          <Box w="full">
+            <Text className={labelClasses}>Color</Text>
+            <Select
+              styles={customStyles}
+              onMenuOpen={() => setMenuIsOpen(true)}
+              menuIsOpen={menuIsOpen}
+              onMenuClose={() => setMenuIsOpen(false)}
+              components={{
+                SingleValue: ColorOptio,
+                Option: ColorOption,
+                IndicatorSeparator: () => (
+                  <div style={{ display: "none" }}></div>
+                ),
+              }}
+              value={values?.color}
+              onChange={(selectedOption) => {
+                setValues({
+                  ...values,
+                  // @ts-ignore
+                  color: selectedOption,
+                });
+              }}
+              // @ts-ignore
+              options={colorOptions}
+              // @ts-ignore
+              getOptionLabel={getOptionLabel}
+              getOptionValue={getOptionValue}
+            />
+          </Box>
+        </Flex>
 
-            <div className="flex h-5 gap-[21px] my-8 items-center">
-              {extras.map((ex) => {
-                return (
-                  <div key={ex.id} className="flex h-5 gap-[8px] items-center">
-                    <input
-                      type="checkbox"
-                      checked={ex.available}
-                      onChange={() => handleCheckboxChange(ex.id)}
-                    />
-                    <span className="text-[12px]  leading-[20px] text-brandGray-300 font-gordita-regular">
-                      {ex.name}
-                    </span>
-                  </div>
-                );
-              })}
-            </div>
+        <Flex w="full" align="center" gap="24px">
+          <Box w="full">
+            <Text className={labelClasses}>Plate number</Text>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-[32px]">
-              {/* first row */}
-              <div
-                ref={wrapperRef}
-                className="drop-file-input bg-[#f9fafb]
-                "
-              >
-                <span className="">
-                  <AiOutlineCloudUpload className="w-7 h-7" />
-                </span>
+            <Input
+              h="44px"
+              className={inputClasses}
+              value={values?.plate_number}
+              onChange={(e) => {
+                setValues({
+                  ...values,
+                  plate_number: e.target.value,
+                });
+              }}
+            />
+          </Box>
 
-                <div className={dragAndDropClasses}>
-                  Drag and drop or Choose file to upload
-                </div>
-                <span className={typeDocClasses}>
-                  {exteriorFront?.name || "Exterior front (with headlights on)"}
-                </span>
-                <input
-                  multiple={false}
-                  type="file"
-                  required
-                  onChange={(e) => {
-                    if (!e.target.files) {
-                      return;
-                    }
-                    setExteriorFront(e.target.files[0]);
-                  }}
-                />
-              </div>
+          <Box w="full">
+            <Text className={labelClasses}>Boot capacity (Bags)</Text>
+            <Select
+              styles={customStyles}
+              components={{
+                IndicatorSeparator: () => (
+                  <div style={{ display: "none" }}></div>
+                ),
+              }}
+              value={values?.boot_capacity}
+              onChange={(selectedOption) => {
+                setValues({
+                  ...values,
+                  // @ts-ignore
+                  boot_capacity: selectedOption,
+                });
+              }}
+              // @ts-ignore
+              options={seatOptions}
+            />
+          </Box>
+        </Flex>
 
-              <div
-                ref={wrapperRef}
-                className="drop-file-input bg-[#f9fafb]
-                "
-              >
-                <span className="">
-                  <AiOutlineCloudUpload className="w-7 h-7" />
-                </span>
+        <Flex w="full" align="center" gap="24px">
+          <Box w="full">
+            <Text className={labelClasses}>Doors</Text>
+            <Select
+              styles={customStyles}
+              components={{
+                IndicatorSeparator: () => (
+                  <div style={{ display: "none" }}></div>
+                ),
+              }}
+              value={values?.doors}
+              onChange={(selectedOption) => {
+                setValues({
+                  ...values,
+                  // @ts-ignore
+                  doors: selectedOption,
+                });
+              }}
+              // @ts-ignore
+              options={seatOptions}
+            />
+          </Box>
 
-                <div className={dragAndDropClasses}>
-                  Drag and drop or Choose file to upload
-                </div>
-                <span className={typeDocClasses}>
-                  {exteriorBack?.name ||
-                    "Exterior back (with reverse light on)"}
-                </span>
-                <input
-                  type="file"
-                  required
-                  onChange={(e) => {
-                    if (!e.target.files) {
-                      return;
-                    }
-                    setExteriorBack(e.target.files[0]);
-                  }}
-                />
-              </div>
+          <Box w="full">
+            <Text className={labelClasses}>Power</Text>
+            <Select
+              styles={customStyles}
+              components={{
+                IndicatorSeparator: () => (
+                  <div style={{ display: "none" }}></div>
+                ),
+              }}
+              value={values?.power}
+              onChange={(selectedOption) => {
+                setValues({
+                  ...values,
+                  // @ts-ignore
+                  power: selectedOption,
+                });
+              }}
+              // @ts-ignore
+              options={transmissionOptions}
+            />
+          </Box>
+        </Flex>
 
-              {/* second row */}
+        <Flex align="center" gap="20px" justifyContent="space-between">
+          <Flex
+            align="center"
+            gap="8px"
+            cursor="pointer"
+            onClick={() => handleToggleExtra("Reverse Camera")}
+          >
+            <Checkbox
+              // @ts-ignore
+              isChecked={values.extras.includes("Reverse Camera")}
+              onChange={() => handleToggleExtra("Reverse Camera")}
+            />
+            <Text className={subClasses}>Reverse Camera</Text>
+          </Flex>
 
-              <div
-                ref={wrapperRef}
-                className="drop-file-input bg-[#f9fafb]
-                "
-              >
-                <span className="">
-                  <AiOutlineCloudUpload className="w-7 h-7" />
-                </span>
+          <Flex
+            align="center"
+            gap="8px"
+            cursor="pointer"
+            onClick={() => handleToggleExtra("Bluetooth Radio")}
+          >
+            <Checkbox
+              // @ts-ignore
+              isChecked={values.extras.includes("Bluetooth Radio")}
+              onChange={() => handleToggleExtra("Bluetooth Radio")}
+            />
+            <Text className={subClasses}>Bluetooth Radio</Text>
+          </Flex>
 
-                <div className={dragAndDropClasses}>
-                  Drag and drop or Choose file to upload
-                </div>
-                <span className={typeDocClasses}>
-                  {exteriorLeftSide?.name ||
-                    "Exterior left side (with parking lights on)"}
-                </span>
-                <input
-                  multiple={false}
-                  type="file"
-                  required
-                  onChange={(e) => {
-                    if (!e.target.files) {
-                      return;
-                    }
-                    setExteriorLeftSide(e.target.files[0]);
-                  }}
-                />
-              </div>
+          <Flex
+            align="center"
+            gap="8px"
+            cursor="pointer"
+            onClick={() => handleToggleExtra("Air Bags")}
+          >
+            <Checkbox
+              // @ts-ignore
+              isChecked={values.extras.includes("Air Bags")}
+              onChange={() => handleToggleExtra("Air Bags")}
+            />
+            <Text className={subClasses}>Air Bags</Text>
+          </Flex>
 
-              <div
-                ref={wrapperRef}
-                className="drop-file-input bg-[#f9fafb]
-                "
-              >
-                <span className="">
-                  <AiOutlineCloudUpload className="w-7 h-7" />
-                </span>
+          <Flex
+            align="center"
+            gap="8px"
+            cursor="pointer"
+            onClick={() => handleToggleExtra("AC")}
+          >
+            <Checkbox
+              // @ts-ignore
+              isChecked={values.extras.includes("AC")}
+              onChange={() => handleToggleExtra("AC")}
+            />
+            <Text className={subClasses}>AC</Text>
+          </Flex>
+        </Flex>
 
-                <div className={dragAndDropClasses}>
-                  Drag and drop or Choose file to upload
-                </div>
-                <span className={typeDocClasses}>
-                  {exteriorRightSide?.name ||
-                    "Exterior right side (with parking lights on)"}
-                </span>
-                <input
-                  type="file"
-                  required
-                  onChange={(e) => {
-                    if (!e.target.files) {
-                      return;
-                    }
-                    setExteriorRightSide(e.target.files[0]);
-                  }}
-                />
-              </div>
-
-              {/* third row */}
-              <div
-                ref={wrapperRef}
-                className="drop-file-input bg-[#f9fafb]
-                "
-              >
-                <span className="">
-                  <AiOutlineCloudUpload className="w-7 h-7" />
-                </span>
-
-                <div className={dragAndDropClasses}>
-                  Drag and drop or Choose file to upload
-                </div>
-                <span className={typeDocClasses}>
-                  {interiorBack?.name || "Interior back"}
-                </span>
-                <input
-                  multiple={false}
-                  type="file"
-                  required
-                  onChange={(e) => {
-                    if (!e.target.files) {
-                      return;
-                    }
-                    setInteriorBack(e.target.files[0]);
-                  }}
-                />
-              </div>
-
-              <div
-                ref={wrapperRef}
-                className="drop-file-input bg-[#f9fafb]
-                "
-              >
-                <span className="">
-                  <AiOutlineCloudUpload className="w-7 h-7" />
-                </span>
-
-                <div className={dragAndDropClasses}>
-                  Drag and drop or Choose file to upload
-                </div>
-                <span className={typeDocClasses}>
-                  {interiorFront?.name || "Interior front"}
-                </span>
-                <input
-                  type="file"
-                  required
-                  onChange={(e) => {
-                    if (!e.target.files) {
-                      return;
-                    }
-                    setInteriorFront(e.target.files[0]);
-                  }}
-                />
-              </div>
-
-              {/* forth row */}
-              <div
-                ref={wrapperRef}
-                className="drop-file-input bg-[#f9fafb]
-                "
-              >
-                <span className="">
-                  <AiOutlineCloudUpload className="w-7 h-7" />
-                </span>
-
-                <div className={dragAndDropClasses}>
-                  Drag and drop or Choose file to upload
-                </div>
-                <span className={typeDocClasses}>
-                  {doorHandleFrontRight?.name || "Door handle front right"}
-                </span>
-                <input
-                  multiple={false}
-                  type="file"
-                  required
-                  onChange={(e) => {
-                    if (!e.target.files) {
-                      return;
-                    }
-                    setDoorHandleFrontRight(e.target.files[0]);
-                  }}
-                />
-              </div>
-
-              <div
-                ref={wrapperRef}
-                className="drop-file-input bg-[#f9fafb]
-                "
-              >
-                <span className="">
-                  <AiOutlineCloudUpload className="w-7 h-7" />
-                </span>
-
-                <div className={dragAndDropClasses}>
-                  Drag and drop or Choose file to upload
-                </div>
-                <span className={typeDocClasses}>
-                  {doorHandleFrontLeft?.name || "Door handle front left"}
-                </span>
-                <input
-                  type="file"
-                  required
-                  onChange={(e) => {
-                    if (!e.target.files) {
-                      return;
-                    }
-                    setDoorHandleFrontLeft(e.target.files[0]);
-                  }}
-                />
-              </div>
-
-              {/* fifth row */}
-              <div
-                ref={wrapperRef}
-                className="drop-file-input mb-8 bg-[#f9fafb]
-                "
-              >
-                <span className="">
-                  <AiOutlineCloudUpload className="w-7 h-7" />
-                </span>
-
-                <div className={dragAndDropClasses}>
-                  Drag and drop or Choose file to upload
-                </div>
-                <span className={typeDocClasses}>
-                  {doorHandleBackRight?.name || "Door handle back right"}
-                </span>
-                <input
-                  multiple={false}
-                  type="file"
-                  required
-                  onChange={(e) => {
-                    if (!e.target.files) {
-                      return;
-                    }
-                    setDoorHandleBackRight(e.target.files[0]);
-                  }}
-                />
-              </div>
-
-              <div
-                ref={wrapperRef}
-                className="drop-file-input mb-8 bg-[#f9fafb]
-                "
-              >
-                <span className="">
-                  <AiOutlineCloudUpload className="w-7 h-7" />
-                </span>
-
-                <div className={dragAndDropClasses}>
-                  Drag and drop or Choose file to upload
-                </div>
-                <span className={typeDocClasses}>
-                  {doorHandleBackLeft?.name || "Door handle back left"}
-                </span>
-                <input
-                  type="file"
-                  required
-                  onChange={(e) => {
-                    if (!e.target.files) {
-                      return;
-                    }
-                    setDoorHandleBackLeft(e.target.files[0]);
-                  }}
-                />
-              </div>
-            </div>
-
-            <Button
-              bg="bg-brandGreen-300"
-              hover="hover:bg-brandGray-200"
-              textColor="text-white"
-              width={true}
-              size="text-sm"
-              type="submit"
-            >
-              Next
-            </Button>
-          </form>
-        </div>
-      </section>
-    </main>
+        <Flex align="center" gap="24px">
+          <Button
+            bg="transparent"
+            border="1px solid #646464"
+            color="#646464"
+            w="40%"
+            h="48px"
+            _hover={{ bg: "transparent" }}
+            _active={{ bg: "transparent" }}
+            onClick={() => router.push("/register-car/images")}
+            _focus={{ bg: "transparent" }}
+          >
+            Skip
+          </Button>
+          <Button onClick={action} isLoading={loading} w="60%" h="48px">
+            Next
+          </Button>
+        </Flex>
+      </Flex>
+    </Box>
   );
 };
 
