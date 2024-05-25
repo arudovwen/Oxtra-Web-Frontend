@@ -9,6 +9,10 @@ import { GrFacebook, GrInstagram, GrTwitter } from "react-icons/gr";
 import offerCar from "../../public/assets/offerCar.png";
 import pricing from "../../public/assets/pricing.png";
 
+
+export const brands = ["Toyota", "Chevrolet", "Ferrari"];
+export const model = ["Camry", "Buggati", "X2"];
+
 export const navigation = {
   company: [
     { name: "About us", href: "#" },
@@ -510,4 +514,62 @@ export const countries = [
   { country: "Yemen", code: "967", iso: "YE" },
   { country: "Zambia", code: "260", iso: "ZM" },
   { country: "Zimbabwe", code: "263", iso: "ZW" },
+];
+
+
+export const colorTypes = [
+  { value: "Blue", label: "Blue", color: "#00629F", fontColor: "#FFFFFF" },
+  {
+    value: "Maroon",
+    label: "Maroon",
+    color: "#6D191B",
+    fontColor: "#FFFFFF",
+  },
+  {
+    value: "Yellow",
+    label: "Yellow",
+    color: "#FFEE36",
+    fontColor: "#000000",
+  },
+  {
+    value: "Silver",
+    label: "Silver",
+    color: "#D1D2D1",
+    fontColor: "#000000",
+  },
+  {
+    value: "Purple",
+    label: "Purple",
+    color: "#683276",
+    fontColor: "#FFFFFF",
+  },
+  {
+    value: "Orange",
+    label: "Orange",
+    color: "#E86D34",
+    fontColor: "#FFFFFF",
+  },
+  { value: "Green", label: "Green", color: "#00744E", fontColor: "#FFFFFF" },
+  { value: "Gray", label: "Gray", color: "#7C7C7C", fontColor: "#FFFFFF" },
+  { value: "Pink", label: "Pink", color: "#EA7B88", fontColor: "#000000" },
+  { value: "Tan", label: "Tan", color: "#BE9A6D", fontColor: "#000000" },
+  { value: "Brown", label: "Brown", color: "#3C271C", fontColor: "#FFFFFF" },
+  { value: "Black", label: "Black", color: "#000000", fontColor: "#FFFFFF" },
+  { value: "Red", label: "Red", color: "#AB1A30", fontColor: "#FFFFFF" },
+  { value: "Gold", label: "Gold", color: "#D1A631", fontColor: "#000000" },
+  { value: "Beige", label: "Beige", color: "#EADBBA", fontColor: "#000000" },
+  { value: "White", label: "White", color: "#FFFFFF", fontColor: "#000000" },
+  {
+    value: "Claret",
+    label: "Claret",
+    color: "#7f1734",
+    fontColor: "#FFFFFF",
+  },
+  {
+    value: "Copper",
+    label: "Copper",
+    color: "#b87333",
+    fontColor: "#FFFFFF",
+  },
+  { value: "Cream", label: "Cream", color: "#fffdd0", fontColor: "#000000" },
 ];
