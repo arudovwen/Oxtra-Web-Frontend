@@ -1,5 +1,4 @@
 import Container from '@/layout/NonAuthLayout/Container';
-import Navigation from '@/layout/NonAuthLayout/Navigation';
 import React, { useEffect, useState } from 'react';
 import { RiSearchLine } from 'react-icons/ri';
 import { IoIosArrowDown } from 'react-icons/io';
@@ -29,16 +28,6 @@ const RentVehicle = () => {
   return (
     <div className='font-gordita mb-[154px]'>
       <Container>
-        {/* <Navigation
-          color="text-brandGray-300"
-          hover="hover:text-brandGreen-300"
-          buttonBg="bg-brandGreen-300"
-          buttonText="text-white"
-          buttonHover="hover:bg-white"
-          activePage={activePage}
-          navBackground="white"
-          menuColor="text-brandGreen-300"
-        /> */}
         <div className='mt-[40px] text-center text-[#214528] font-gordita-bold text-[48px] leading-[48px]'>
           Find the right car for you
         </div>
