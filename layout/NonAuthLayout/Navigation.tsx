@@ -25,11 +25,11 @@ interface NavigationProps {
 }
 
 const navigation = [
-  { name: 'Rent a vehicle', href: '/rent-a-car' },
-  { name: 'Sign up as a car owner', href: '/register-car' },
-  { name: 'Company', href: '/company' },
-  { name: 'Blog', href: '/' },
-  { name: 'Login', href: '/' },
+  { name: 'Rent a vehicle', href: '/rent-a-car', path: 'rentvehicle' },
+  { name: 'Sign up as a car owner', href: '/register-car', path: 'putupvehicle' },
+  { name: 'Company', href: '/company', path: 'company' },
+  { name: 'Blog', href: '/', path: 'rentavehicle' },
+  { name: 'Login', href: '/login', path: 'login' },
 ];
 
 const Navigation = ({
@@ -74,7 +74,7 @@ const Navigation = ({
                 <Link
                   href={item.href}
                   className={`${color}  pb-1 ${hover} duration-300 ${
-                    activePage.toLowerCase() === item.name.toLocaleLowerCase() &&
+                    activePage.toLowerCase() === item.path.toLocaleLowerCase() &&
                     'font-gordita-bold text-brandGreen-300'
                   }`}
                 >
