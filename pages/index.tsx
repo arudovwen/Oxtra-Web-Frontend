@@ -2,14 +2,13 @@ import Experience from '@/components/data/home/Experience';
 import Hero from '@/components/data/home/Hero';
 import FindPreferredCar from '@/components/data/home/FindPreferredCar';
 import Services from '@/components/data/home/Services';
-import Vehicles from '@/components/data/home/Vehicles';
 import PassiveIncome from '@/components/data/home/PassiveIncome';
-import TrustedPartners from '@/components/data/home/TrustedPartners';
 import Footer from '@/layout/NonAuthLayout/Footers';
 import blue from '../public/assets/blue.png';
 import Image from 'next/image';
 import Container from '@/layout/NonAuthLayout/Container';
 import pink from '../public/assets/pink.png';
+import Faq from '@/components/data/home/Faq';
 
 export default function Home() {
   const activePage = 'Home';
@@ -18,16 +17,12 @@ export default function Home() {
   return (
     <div className='overflow-hidden'>
       <Hero activePage={activePage} />
-
       <FindPreferredCar />
-
       <Services />
-      <Vehicles />
-      <PassiveIncome marginBottom={margin} />
-      <TrustedPartners marginBottom="mb-[80px]" />
+      <PassiveIncome />
+      <Faq />
       <Experience marginBottom={margin} />
       <Footer />
-
       <Container>
         <div className='relative'>
           <Image

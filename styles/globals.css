@@ -72,13 +72,13 @@ input::-webkit-inner-spin-button {
 }
 
 /* Firefox */
-input[type="number"] {
+input[type='number'] {
   -moz-appearance: textfield;
 }
 
-input[type="datetime-local"],
-input[type="time"],
-input[type="date"] {
+input[type='datetime-local'],
+input[type='time'],
+input[type='date'] {
   -webkit-appearance: none;
 }
 
@@ -163,5 +163,9 @@ input[type="date"] {
 }
 
 .react-datepicker-wrapper {
-  width:100%;
+  width: 100%;
+}
+
+.no-wrap {
+  white-space: nowrap;
 }

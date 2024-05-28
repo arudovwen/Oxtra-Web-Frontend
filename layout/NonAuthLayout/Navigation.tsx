@@ -25,10 +25,11 @@ interface NavigationProps {
 }
 
 const navigation = [
-  { name: 'Rent a car', href: '/rent-a-car' },
-  { name: 'Register as car owner', href: '/register-car' },
+  { name: 'Rent a vehicle', href: '/rent-a-car' },
+  { name: 'Sign up as a car owner', href: '/register-car' },
   { name: 'Company', href: '/company' },
-  // { name: 'FAQ', href: '/' },
+  { name: 'Blog', href: '/' },
+  { name: 'Login', href: '/' },
 ];
 
 const Navigation = ({
@@ -58,7 +59,7 @@ const Navigation = ({
         <div className='flex lg:flex-1'>
           <Link href='/' className=' z-10 '>
             <Image
-              src={navBackground === 'green' ? logoWhite : logoGreen}
+              src={logoGreen}
               alt='logo'
               width={120}
               height={30}
@@ -69,7 +70,7 @@ const Navigation = ({
         <div className='hidden lg:flex lg:gap-x-[40px] z-10 mr-[40px]'>
           {navigation.map((item) => {
             return (
-              <Typography as='p' key={item.name} font='font-gordita-regular' className="!capitalize">
+              <Typography as='p' key={item.name} font='font-gordita-regular'>
                 <Link
                   href={item.href}
                   className={`${color}  pb-1 ${hover} duration-300 ${
