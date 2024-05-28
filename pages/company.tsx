@@ -27,24 +27,24 @@ const Company = () => {
       <Experience marginBottom={margin} />
       <Footer />
 
-      <Container>
+      {/*    <Container>
         <div className='relative'>
-          {/* <Image
+          <Image
             src={blue}
             width={1400}
             height={1400}
             alt='blue'
             className='bottom-[3216px]  absolute left-[-736px] opacity-70'
-          /> */}
+          />
           <Image
             src={backcar}
             width={750}
             height={750}
             alt='car'
-            className='bottom-[3484px] hidden xl:block absolute left-[-670px]'
+            className='bottom-[3335px] hidden xl:block absolute left-[-670px]'
           />
 
-          {/* <Image
+          <Image
             src={blue}
             width={750}
             height={750}
@@ -52,38 +52,39 @@ const Company = () => {
             className='bottom-[2400px]
           absolute right-[-352px] opacity-70 hidden xl:block'
           />
+
           <Image
             src={blue}
             width={750}
             height={750}
             alt='pink'
             className='bottom-[1248px] hidden xl:block absolute right-[-304px] opacity-70'
-          /> */}
+          />
 
-          {/* <Image
+         <Image
             src={blue}
             width={750}
             height={750}
             alt='blue'
             className='bottom-[1602px] hidden xl:block absolute left-[-304px] opacity-70'
-          /> */}
+          /> 
 
           <Image
             src={pump}
             width={500}
             height={500}
             alt='pump'
-            className='top-[-3963px] hidden xl:block absolute right-[-300px]'
+            className='top-[-3822px] hidden xl:block absolute right-[-300px]'
           />
-          {/* <Image
+          <Image
             src={blue}
             width={750}
             height={750}
             alt='pink'
             className='top-[-4576px] absolute right-[-320px] opacity-70'
-          /> */}
+          />
         </div>
-      </Container>
+      </Container>*/}
       <MovingCar />
     </div>
   );

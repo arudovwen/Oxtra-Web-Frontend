@@ -54,6 +54,7 @@ module.exports = {
         brandGreen: {
           100: '#8ce99a',
           300: '#42864F',
+          400: '#0A3421',
         },
         brandGray: {
           100: '#646668',
