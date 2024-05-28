@@ -41,7 +41,7 @@ const Company = () => {
             width={750}
             height={750}
             alt='car'
-            className='bottom-[3481px] hidden xl:block absolute left-[-670px]'
+            className='bottom-[3484px] hidden xl:block absolute left-[-670px]'
           />
 
           {/* <Image
@@ -73,7 +73,7 @@ const Company = () => {
             width={500}
             height={500}
             alt='pump'
-            className='top-[-3923px] hidden xl:block absolute right-[-300px]'
+            className='top-[-3963px] hidden xl:block absolute right-[-300px]'
           />
           {/* <Image
             src={blue}

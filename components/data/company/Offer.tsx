@@ -8,9 +8,9 @@ import { offers } from '@/components/constants/arrays';
 
 const Offer = () => {
   return (
-    <div className=' bg-[#F8FCF9] '>
-      <Container className=''>
-        <div className='mt-[234px]  mb-[200px]'>
+    <div className='bg-[#F8FCF9] py-[120px] my-[200px]'>
+      <Container>
+        <div className=''>
           <div className='text-brandGray-300 text-center mb-[48px] font-gordita-bold text-[56px] leading-[56px]'>
             What we stand for
           </div>

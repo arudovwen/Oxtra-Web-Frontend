@@ -19,13 +19,6 @@ const Commitment = ({ marginBottom }: { marginBottom: string }) => {
           Oxtra’s Green Plan is an initiative aimed at reducing the environmental impact of its
           operations and promoting sustainability. The main components of our Green Plan include
         </div>
-
-        <div>
-          Through these efforts, Oxtra aims to significantly reduce its carbon footprint, support
-          the transition to electric vehicles, and promote sustainable transportation solutions.
-          Additionally, Oxtra seeks to make urban transportation more sustainable and reduce its
-          overall environmental impact.
-        </div>
       </div>
     </Container>
   );
