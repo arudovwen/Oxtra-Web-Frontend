@@ -3,29 +3,40 @@ import Container from '../../../layout/NonAuthLayout/Container';
 import Typography from '../../constants/Typorgraphy';
 import Image from 'next/image';
 import person1 from '../../../public/assets/pic1.png';
-import person2 from '../../../public/assets/pic2.png';
-import person4 from '../../../public/assets/pic4.png';
+import { GoArrowUpRight } from 'react-icons/go';
+
 import person3 from '../../../public/assets/pic3.png';
+import samuel from '../../../public/assets/founders/samuel.png';
+import success from '../../../public/assets/founders/success.jpeg';
+import { link } from 'fs';
 
 const team = [
   {
     name: 'Obinna Chidiebere',
     position: 'Co-founder & CEO',
     image: person1,
-    linkedin: '',
+    linkedin:
+      'https://www.linkedin.com/in/ndukwu-chidiebere-obinna-813a27117?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app',
   },
   {
     name: 'Samuel Umoru',
     position: 'Co-Founder - Product and R&D',
-    image: person4,
-    linkedin: '',
+    image: samuel,
+    linkedin: 'LinkedIn.com/in/samuelumoru',
   },
-  { name: 'Omotola Dorcas', position: 'Co-Founder and CMO', image: person3 },
+  {
+    name: 'Omotola Dorcas',
+    position: 'Co-Founder and CMO',
+    image: person3,
+    linkedin:
+      'https://www.linkedin.com/in/omotoladorcas?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app',
+  },
   {
     name: 'Ahon Success',
     position: 'Co-founder and CTO',
-    image: person2,
-    linkedin: '',
+    image: success,
+    linkedin:
+      'https://www.linkedin.com/in/success-ahon?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app',
   },
 ];
 
@@ -34,7 +45,7 @@ const Team = ({ marginBottom }: { marginBottom: string }) => {
     <Container marginBottom={marginBottom}>
       <div className='text-brandGray-300'>
         <div className=' mb-6 text-center'>
-          <Typography as='h2' font='font-gordita-bold'>
+          <Typography as='h2' font='font-gordita-ultra'>
             Founding Team
           </Typography>
         </div>
@@ -48,7 +59,7 @@ const Team = ({ marginBottom }: { marginBottom: string }) => {
                   alt={individual.name}
                   width={274}
                   height={240}
-                  className='mb-4'
+                  className='mb-4 w-[274px] h-[240px]  rounded-[16px]'
                 />
                 <div className='mb-3'>
                   <Typography as='p' font='font-gordita-regular'>
@@ -61,14 +72,18 @@ const Team = ({ marginBottom }: { marginBottom: string }) => {
                   </Typography>
                 </div>
                 <a
-                  href='http://'
+                  href={individual.linkedin}
                   target='_blank'
                   rel='noopener noreferrer'
-                  className='text-brandGreen-300 '
+                  className='text-brandGreen-300 flex  items-center gap-[4px] '
                 >
-                  <Typography as='p' font='font-gordita-bold'>
-                    Linkedin
-                  </Typography>
+                  <div className='text-brandGreen-300 flex  items-center gap-[4px] '>
+                    {' '}
+                    <Typography as='p' font='font-gordita-bold'>
+                      Linkedin
+                    </Typography>
+                    <GoArrowUpRight className='font-semibold w-[20px] h-[20px]' />
+                  </div>
                 </a>
               </div>
             );

@@ -14,7 +14,7 @@ const CompanyHero = ({ activePage }: CompanyHeroProps) => {
       <div className='text-brandGray-300 relative'>
         <div className='text-center mt-[166px]'>
           <div className=' mb-6 '>
-            <Typography as='h2' font='font-gordita-bold'>
+            <Typography as='h2' font='font-gordita-ultra'>
               Guiding the shift towards <br /> eco-friendly travel in Africa
             </Typography>
           </div>

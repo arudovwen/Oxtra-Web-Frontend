@@ -44,7 +44,7 @@ const Commitment = ({ marginBottom }: { marginBottom: string }) => {
     <Container marginBottom={marginBottom}>
       <div className='text-brandGray-300'>
         <div className='text-brandGreen-400 mb-6'>
-          <Typography as='h2' font='font-gordita-bold'>
+          <Typography as='h2' font='font-gordita-ultra'>
             Our Commitment
           </Typography>
         </div>
@@ -67,7 +67,9 @@ const Commitment = ({ marginBottom }: { marginBottom: string }) => {
             {commitments.map((commit, i) => (
               <li
                 key={commit.title}
-                className={`col-span-1 flex flex-col  divide-gray-200 rounded-lg bg-white shadow ${i === 0 ? 'bg-brandGreen-400' : 'bg-white'}`}
+                className={`col-span-1 flex flex-col divide-gray-200 rounded-lg shadow ${
+                  i === 0 ? 'bg-brandGreen-400' : 'bg-white'
+                }`}
               >
                 <div className='flex flex-1 flex-col p-[16px]'>
                   <div

@@ -5,12 +5,27 @@ import veriftyme from '../../public/assets/verifyme.png';
 import wooven from '../../public/assets/wooven.png';
 import paystack from '../../public/assets/paystack.png';
 import nimc from '../../public/assets/nimc.png';
-import { GrFacebook, GrInstagram, GrSnapchat, GrLinkedin } from 'react-icons/gr';
+import { GrInstagram, GrSnapchat, GrLinkedin } from 'react-icons/gr';
 import { BsTwitterX } from 'react-icons/bs';
 import { FaFacebookF } from 'react-icons/fa';
 import mission from '../../public/assets/mission.png';
 import vission from '../../public/assets/vission.png';
 import values from '../../public/assets/values.png';
+import TermsOfUse from '@/components/LegalContent/terms-of-use.mdx';
+import PrivacyPolicy from '@/components/LegalContent/privacy-policy.mdx';
+import NonDiscriminationPolicy from '@/components/LegalContent/non-discrimination-policy.mdx';
+import OxtraAndRenters from '@/components/LegalContent/oxtra-and-renters.mdx';
+import OxtraAndVehicleOwners from '@/components/LegalContent/oxtra-and-vehicle-owners.mdx';
+
+type ContentMapType = {
+  [key: string]: {
+    content: React.ReactElement;
+  };
+};
+
+type TocMapType = {
+  [key: string]: string[];
+};
 
 export const navigation = {
   company: [
@@ -20,19 +35,23 @@ export const navigation = {
     { name: 'Blog', href: '#' },
   ],
   products: [
-    { name: 'Rent a car', href: '/rentVehicle' },
+    { name: 'Rent a car', href: '/rent-a-car' },
     { name: 'Vehicle owners', href: '#' },
     { name: 'Courier', href: '#' },
   ],
   business: [
-    { name: 'Our Terms', href: '#' },
-    { name: 'Our Policies', href: '#' },
-    { name: 'Oxtra and Renters', href: '#' },
-    { name: 'Oxtra and Vehicle Owners', href: '#' },
+    { name: 'Our Terms', href: '/legal-and-compliance' },
+    { name: 'Our Policies', href: '/legal-and-compliance' },
+    { name: 'Oxtra and Renters', href: '/legal-and-compliance' },
+    { name: 'Oxtra and Vehicle Owners', href: '/legal-and-compliance' },
   ],
   contact: [
     { name: 'hello@Oxtra.africa', title: 'Enquiries', href: '#' },
-    { name: '08167329144', title: 'Call or Text', href: '#' },
+    {
+      name: '08167329144',
+      title: 'Call or Text',
+      href: '#',
+    },
   ],
 };
 
@@ -62,22 +81,27 @@ export const socials = [
   {
     name: 'Facebook',
     icon: <FaFacebookF color='#080891' />,
+    href: 'https://www.facebook.com/profile.php?id=61557476565691&mibextid=ZbWKwL',
   },
   {
     name: 'Twitter',
     icon: <BsTwitterX color='#00000' />,
+    href: 'https://twitter.com/oxtraafrica',
   },
   {
     name: 'Instagram',
     icon: <GrInstagram color='#C30098' />,
+    href: 'https://www.instagram.com/oxtraafrica',
   },
   {
     name: 'Snapchat',
     icon: <GrSnapchat color='#B2B200' />,
+    href: 'https://www.snapchat.com/add/oxtraafrica?share_id=Ce4biuz4wA0&locale=en-US',
   },
   {
     name: 'Linkedin',
     icon: <GrLinkedin color='#080891' />,
+    href: 'https://www.linkedin.com/company/oxtra-africa/',
   },
 ];
 
@@ -505,4 +529,282 @@ export const countries = [
   { country: 'Yemen', code: '967', iso: 'YE' },
   { country: 'Zambia', code: '260', iso: 'ZM' },
   { country: 'Zimbabwe', code: '263', iso: 'ZW' },
+];
+
+export const contentMap: ContentMapType = {
+  'Terms of Use': {
+    content: <TermsOfUse />,
+  },
+  'Privacy Policy': {
+    content: <PrivacyPolicy />,
+  },
+  'Non-discrimination Policy': {
+    content: <NonDiscriminationPolicy />,
+  },
+  'Oxtra and Renters': {
+    content: <OxtraAndRenters />,
+  },
+  'Oxtra and Vehicle Owners': {
+    content: <OxtraAndVehicleOwners />,
+  },
+};
+
+export const tocMap: TocMapType = {
+  'Terms of Use': [
+    '1. OUR SERVICES',
+    '2. INTELLECTUAL PROPERTY RIGHTS',
+    '3. USER REPRESENTATIONS',
+    '4. USER REGISTRATION',
+    '5. VEHICLE AND IDENTITY VERIFICATION',
+    '6. PAYMENTS',
+    '7. PROHIBITED ACTIVITIES',
+    '8. USER GENERATED CONTRIBUTIONS',
+    '9. GUIDELINES FOR REVIEWS',
+    '10. MOBILE APPLICATION LICENSE',
+    '11. SOCIAL MEDIA',
+    '12. SERVICES MANAGEMENT',
+    '13. PRIVACY POLICY',
+    '14. COPYRIGHT INFRINGEMENTS',
+    '15. TERMS AND TERMINATIONS',
+    '16. MODIFICATIONS AND INTERRUPTIONS',
+    '17. GOVERNING LAW',
+    '18. DISPUTE RESOLUTION',
+    '20. DISCLAIMER',
+    '21. LIMITATIONS OF LIABILITY',
+    '22. INDEMNIFICATION',
+    '23. USER DATA',
+    '24. ELECTRONIC COMMUNICATIONS, TRANSACTIONS, AND SIGNATURES',
+    '25. MISCELLANEOUS',
+    '26. LIABILITY',
+    '27. CONTACT US AND CUSTOMER SUPPORT',
+  ],
+  'Privacy Policy': [
+    '1. OUR COMMITMENT TO YOUR PRIVACY',
+    '2. WHO WE ARE',
+    '3. CONTACT DETAILS',
+    '4. WHY WE COLLECT YOUR PERSONAL DATA',
+    '5. SOURCES WE COLLECT YOUR PERSONAL DATA FROM',
+    '6. INFORMATION WE COLLECT ABOUT YOU',
+    '7. HOW WE USE YOUR PERSONAL DATA',
+    '8. COOKIES AND OTHER TECHNOLOGIES',
+    '9. WHO DO WE SHARE YOUR PERSONAL DATA WITH?',
+    '10. DATA SECURITY',
+    '11. DATA RETENTION',
+    '12. YOUR RIGHTS',
+    '13. RIGHT TO COMPLAINT',
+    '14. UPDATING PERSONAL DATA ABOUT YOU',
+    '15. CHANGES TO OUR PRIVACY NOTICE',
+  ],
+  'Non-discrimination Policy': [
+    '1. INFORMATION ON THE FEATURES OF LISTING',
+    '2. STATEMENT OF PREFERENCE',
+    '3. DECLINE OR CANCELLATION',
+    '4. DIFFERENT TERMS AND CONDITIONS',
+    '5. RESERVATION BASED ON AGE/PREGNANCY / FAMILY STATUS',
+    '6. WHAT WILL NOT AMOUNT TO DECLINE OR CANCELLATION',
+    '7. ASSUMPTIONS',
+    '8. DISABILITY',
+    '9. STATEMENT ON DISABILITY',
+  ],
+  'Oxtra and Renters': [
+    '1. INTRODUCTION',
+    '2. DESCRIPTION OF SERVICE',
+    '3. ACCEPTANCE OF TERMS',
+    '4. USER ELIGIBILITY',
+    '5. REGISTERING AN ACCOUNT',
+    '6. WHAT WILL NOT AMOUNT TO DECLINE OR CANCELLATION',
+    '7. BOOKING A VEHICLE',
+    '8. STANDARD RENTAL TERMS',
+    '9. VERIFICATION OF RENTERS IDENTITY',
+    '10. VEHICLE OWNER CANCELLATION',
+    '11. TRIPS CANCELED BY OXTRA',
+    '12. COMPLIMENTARY RIDE',
+    '13. EXTRA CHARGES',
+    '14. AIRPORT PICK-UP AND DROP-OFF',
+    '15. MONTHLY BOOKING',
+    '16. CONDITION OF VEHICLES BOOKED',
+    '17. USE OF THE RENTED VEHICLE',
+    '18. PAYMENT OF PARKING FEES AND FINES',
+    '19. RETURN OF VEHICLE',
+    '20. REPOSSESSION',
+    '21. CHARGES AND PAYMENTS',
+    '22. ACCEPTANCE OF TERMS THROUGH PAYMENT ',
+    '23. TAXES',
+    '24. YOUR COMMITMENTS',
+    '25. COMMUNICATIONS WITH YOU',
+    '26. GOVERNING LAW',
+    '27. DISPUTE RESOLUTION',
+    '28. SEVERABILITY',
+    '29. VARIATION AND MODIFICATION OF TERMS',
+    '30. CONCLUSION',
+  ],
+  'Oxtra and Vehicle Owners': [
+    '1. INTRODUCTION',
+    '2. ACCEPTANCE OF TERMS',
+    '3. USER ELIGIBILITY',
+    '4. REGISTERING AN ACCOUNT',
+    '5. LISTING YOUR VEHICLE',
+    '6. VEHICLE OWNERS VERIFICATION',
+    '7. CONDITION OF VEHICLES LISTED',
+    '8. VEHICLE AVAILABILITY',
+    '9. PAYMENT AND FEES',
+    '10. TAXES',
+    '11. YOUR COMMITMENTS',
+    '12. ACCOUNT ACTIVITY',
+    '13. PROHIBITED ACTIVITIES',
+    '14. YOUR CONTENT',
+    '15. COMMUNICATIONS WITH YOU',
+    '16. GOVERNING LAW',
+    '17. DISPUTE RESOLUTION',
+    '18. SEVERABILITY',
+    '19. VARIATION AND MODIFICATION OF TERMS',
+  ],
+};
+
+export const topics = [
+  'Terms of Use',
+  'Privacy Policy',
+  'Non-discrimination Policy',
+  'Oxtra and Renters',
+  'Oxtra and Vehicle Owners',
+];
+
+export const category = [
+  {
+    id: 0,
+    name: 'Requirements',
+    questions: [
+      {
+        question: 'What are the age requirements to rent a car?',
+        answer:
+          'We have partnered with Paystack to give our customers as many payment options as possible to promote flexibility',
+      },
+
+      {
+        question: 'What methods of payment do you accept?',
+        answer:
+          'We have partnered with Paystack to give our customers as many payment options as possible to promote flexibility',
+      },
+      {
+        question: 'Do I need to refill the gas tank before returning the car?',
+        answer:
+          'We have partnered with Paystack to give our customers as many payment options as possible to promote flexibility',
+      },
+
+      {
+        question: 'What are your cancellation policies?',
+        answer:
+          'We have partnered with Paystack to give our customers as many payment options as possible to promote flexibility',
+      },
+
+      {
+        question: 'What happens if I need to extend my rental period?',
+        answer:
+          'We have partnered with Paystack to give our customers as many payment options as possible to promote flexibility',
+      },
+    ],
+  },
+  {
+    id: 1,
+    name: 'Vehicles',
+    questions: [
+      {
+        question: 'What are the age requirements to rent a car?',
+        answer:
+          'We have partnered with Paystack to give our customers as many payment options as possible to promote flexibility',
+      },
+
+      {
+        question: 'What methods of payment do you accept?',
+        answer:
+          'We have partnered with Paystack to give our customers as many payment options as possible to promote flexibility',
+      },
+      {
+        question: 'Do I need to refill the gas tank before returning the car?',
+        answer:
+          'We have partnered with Paystack to give our customers as many payment options as possible to promote flexibility',
+      },
+
+      {
+        question: 'What are your cancellation policies?',
+        answer:
+          'We have partnered with Paystack to give our customers as many payment options as possible to promote flexibility',
+      },
+
+      {
+        question: 'What happens if I need to extend my rental period?',
+        answer:
+          'We have partnered with Paystack to give our customers as many payment options as possible to promote flexibility',
+      },
+    ],
+  },
+  {
+    id: 2,
+    name: 'Payments',
+    questions: [
+      {
+        question: 'What are the age requirements to rent a car?',
+        answer:
+          'We have partnered with Paystack to give our customers as many payment options as possible to promote flexibility',
+      },
+
+      {
+        question: 'What methods of payment do you accept?',
+        answer:
+          'We have partnered with Paystack to give our customers as many payment options as possible to promote flexibility',
+      },
+      {
+        question: 'Do I need to refill the gas tank before returning the car?',
+        answer:
+          'We have partnered with Paystack to give our customers as many payment options as possible to promote flexibility',
+      },
+
+      {
+        question: 'What are your cancellation policies?',
+        answer:
+          'We have partnered with Paystack to give our customers as many payment options as possible to promote flexibility',
+      },
+
+      {
+        question: 'What happens if I need to extend my rental period?',
+        answer:
+          'We have partnered with Paystack to give our customers as many payment options as possible to promote flexibility',
+      },
+    ],
+  },
+  {
+    id: 3,
+    name: 'How to book?',
+
+    questions: [
+      {
+        question: 'What are the age requirements to rent a car?',
+        answer:
+          'We have partnered with Paystack to give our customers as many payment options as possible to promote flexibility',
+      },
+
+      {
+        question: 'What methods of payment do you accept?',
+        answer:
+          'We have partnered with Paystack to give our customers as many payment options as possible to promote flexibility',
+      },
+      {
+        question: 'Do I need to refill the gas tank before returning the car?',
+        answer:
+          'We have partnered with Paystack to give our customers as many payment options as possible to promote flexibility',
+      },
+
+      {
+        question: 'What are your cancellation policies?',
+        answer:
+          'We have partnered with Paystack to give our customers as many payment options as possible to promote flexibility',
+      },
+
+      {
+        question: 'What happens if I need to extend my rental period?',
+        answer:
+          'We have partnered with Paystack to give our customers as many payment options as possible to promote flexibility',
+      },
+    ],
+  },
 ];
