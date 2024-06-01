@@ -10,8 +10,6 @@ const RentVehicle = () => {
   const [sortBy, setSortBy] = useState(sortings[0]);
   const [showSort, setShowSort] = useState(false);
 
-  const activePage = 'Rent a car';
-
   useEffect(() => {
     const handleClickOutside = (event: any) => {
       if (event.target.closest('.box') === null) {

@@ -2,36 +2,13 @@ import React from 'react';
 import Image from 'next/image';
 import Container from '@/layout/NonAuthLayout/Container';
 import Typography from '@/components/constants/Typorgraphy';
-import Navigation from '@/layout/NonAuthLayout/Navigation';
-import heroBackground from '../../../public/assets/herobackground.png';
 import heroCar from '../../../public/assets/heroCar.png';
 import heroCarHalf from '../../../public/assets/heroCarHalf.png';
 
-interface HeroProps {
-  activePage: string;
-}
-
-const Hero = ({ activePage }: HeroProps) => {
+const Hero = () => {
   return (
     <div className='relative isolate overflow-hidden bg-custom-gradient'>
-      {/* <Image
-        src={heroBackground}
-        alt='backgorund image'
-        className='absolute inset-0 -z-10 h-full w-full object-cover'
-        fill
-      /> */}
       <Container>
-        {/* <Navigation
-          color='text-white'
-          hover='hover:text-brandGreen-100'
-          buttonBg='bg-white'
-          buttonHover='hover:bg-brandGreen-300'
-          buttonText='text-brandGray-300'
-          activePage={activePage}
-          navBackground='green'
-          menuColor='text-white'
-        /> */}
-
         <div className='text-white text-center xl:text-left pb-[204px] mt-[110px]'>
           <div className='xl:max-w-[608px] mb-6'>
             <Typography as='h2' font='font-gordita-medium'>
