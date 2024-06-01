@@ -11,12 +11,10 @@ import pink from '../public/assets/pink.png';
 import Faq from '@/components/data/home/Faq';
 
 export default function Home() {
-  const activePage = 'Home';
-
   const margin = 'mb-[120px]';
   return (
     <div className='overflow-hidden'>
-      <Hero activePage={activePage} />
+      <Hero />
       <FindPreferredCar />
       <Services />
       <PassiveIncome />
