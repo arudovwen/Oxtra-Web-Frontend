@@ -9,6 +9,7 @@ import Image from 'next/image';
 import Container from '@/layout/NonAuthLayout/Container';
 import pink from '../public/assets/pink.png';
 import Faq from '@/components/data/home/Faq';
+import HowToRentaCar from '@/components/data/home/how-to-rent-a-car';
 
 export default function Home() {
   const margin = 'mb-[120px]';
@@ -16,6 +17,7 @@ export default function Home() {
     <div className='overflow-hidden'>
       <Hero />
       <FindPreferredCar />
+      <HowToRentaCar />
       <Services />
       <PassiveIncome />
       <Faq />

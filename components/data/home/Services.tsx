@@ -5,7 +5,6 @@ import { MdPhoneAndroid } from 'react-icons/md';
 import { IoPersonSharp } from 'react-icons/io5';
 import classNames from 'classnames';
 import Container from '../../../layout/NonAuthLayout/Container';
-import car from '../../../public/assets/Frame.png';
 import Image from 'next/image';
 import flutterwave from '../../../public/assets/flutterwave.png';
 import paystack from '../../../public/assets/paystack.png';
@@ -67,18 +66,7 @@ const sponsors = [
 const Services = () => {
   return (
     <div className='relative'>
-      <Image
-        data-aos='slide-right'
-        src={car}
-        width={140}
-        height={100}
-        alt='car'
-        className='top-20 hidden xl:block absolute left-20 h-auto'
-      />
-      <Container
-        marginBottom='mb-[120px]'
-        className='relative pt-[521px] sm:pt-[528px] lg:pt-[260px] xl:pt-[200px]'
-      >
+      <Container marginBottom='mb-[120px]' className='relative'>
         <div
           className='text-center text-brandGray-300 mb-12'
           data-aos='fade-up'
