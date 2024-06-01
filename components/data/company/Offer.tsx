@@ -11,7 +11,7 @@ const Offer = () => {
     <div className='bg-[#F8FCF9] py-[120px] my-[200px]'>
       <Container>
         <div className=''>
-          <div className='text-brandGray-300 text-center mb-[48px] font-gordita-bold text-[56px] leading-[56px]'>
+          <div className='text-brandGray-300 text-center mb-[48px] font-gordita-ultra text-[56px] leading-[56px]'>
             What we stand for
           </div>
           <div className='flex flex-col lg:flex-row gap-10 items-center '>
@@ -31,7 +31,8 @@ const Offer = () => {
                       {offer.title}
                     </Typography>
                   </div>
-                  <div className='mb-6 text-[14px] leading-[21px] font-gordita-regular text-brandGray-100'>
+
+                  <div className=' text-[16px] leading-[24px] font-gordita-regular'>
                     {offer.description}
                   </div>
                 </div>

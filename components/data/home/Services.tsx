@@ -75,7 +75,10 @@ const Services = () => {
         alt='car'
         className='top-20 hidden xl:block absolute left-20 h-auto'
       />
-      <Container marginBottom='mb-[120px]' className='relative pt-[350px] md:pt-[200px]'>
+      <Container
+        marginBottom='mb-[120px]'
+        className='relative pt-[521px] sm:pt-[528px] lg:pt-[260px] xl:pt-[200px]'
+      >
         <div
           className='text-center text-brandGray-300 mb-12'
           data-aos='fade-up'

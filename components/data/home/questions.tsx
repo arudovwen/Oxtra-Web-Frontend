@@ -12,7 +12,7 @@ interface QuestionProps {
 
 const Questions = ({ question, isOpen, handleToggle }: QuestionProps) => {
   return (
-    <div className='bg-white shadow-lg w-[781px] mb-[16px] px-[24px] py-[26px] rounded-[8px]'>
+    <div className='bg-white shadow-lg lg:w-[781px] mb-[16px] px-[24px] py-[26px] rounded-[8px]'>
       <div className='flex justify-between'>
         <div className='md:text-[20px] leading-[30px] font-gordita-medium'>{question.question}</div>
 

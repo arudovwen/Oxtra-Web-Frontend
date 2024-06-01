@@ -74,7 +74,7 @@ const Footer = () => {
                   return (
                     <li key={item.name} className='mb-3 text-brandGray-100 no-wrap'>
                       <Typography as='p' font='font-gordita-regular' className='!text-sm'>
-                        <Link href={item.href}> {item.name}</Link>
+                        <Link href={item.href}> {item.name} </Link>
                       </Typography>
                     </li>
                   );
@@ -90,17 +90,18 @@ const Footer = () => {
               <ul>
                 {navigation.contact.map((item) => {
                   return (
-                    <li
-                      key={item.name}
+                    <div
+                      key={item.title}
                       className='mb-3 flex gap-2 items-center text-brandGray-100 no-wrap'
                     >
                       <Typography as='h6' font='font-gordita-bold' className='!text-sm text-black'>
                         {item.title}:
                       </Typography>
+
                       <Typography as='p' font='font-gordita-regular' className='!text-sm'>
-                        <Link href={item.href}>{item.name}</Link>
+                        {item.name}
                       </Typography>
-                    </li>
+                    </div>
                   );
                 })}
               </ul>
@@ -111,7 +112,9 @@ const Footer = () => {
                 {socials.map((item) => {
                   return (
                     <li key={item.name} className='mb-3'>
-                      {item.icon}
+                      <a href={item.href} target='_blank' rel='noopener noreferrer'>
+                        {item.icon}
+                      </a>
                     </li>
                   );
                 })}

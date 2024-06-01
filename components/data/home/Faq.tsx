@@ -7,146 +7,7 @@ import { useState } from 'react';
 import bubble from '../../../public/assets/bubble.png';
 import Questions from './questions';
 import Image from 'next/image';
-
-const category = [
-  {
-    id: 0,
-    name: 'Requirements',
-    questions: [
-      {
-        question: 'What are the age requirements to rent a car?',
-        answer:
-          'We have partnered with Paystack to give our customers as many payment options as possible to promote flexibility',
-      },
-
-      {
-        question: 'What methods of payment do you accept?',
-        answer:
-          'We have partnered with Paystack to give our customers as many payment options as possible to promote flexibility',
-      },
-      {
-        question: 'Do I need to refill the gas tank before returning the car?',
-        answer:
-          'We have partnered with Paystack to give our customers as many payment options as possible to promote flexibility',
-      },
-
-      {
-        question: 'What are your cancellation policies?',
-        answer:
-          'We have partnered with Paystack to give our customers as many payment options as possible to promote flexibility',
-      },
-
-      {
-        question: 'What happens if I need to extend my rental period?',
-        answer:
-          'We have partnered with Paystack to give our customers as many payment options as possible to promote flexibility',
-      },
-    ],
-  },
-  {
-    id: 1,
-    name: 'Vehicles',
-    questions: [
-      {
-        question: 'What are the age requirements to rent a car?',
-        answer:
-          'We have partnered with Paystack to give our customers as many payment options as possible to promote flexibility',
-      },
-
-      {
-        question: 'What methods of payment do you accept?',
-        answer:
-          'We have partnered with Paystack to give our customers as many payment options as possible to promote flexibility',
-      },
-      {
-        question: 'Do I need to refill the gas tank before returning the car?',
-        answer:
-          'We have partnered with Paystack to give our customers as many payment options as possible to promote flexibility',
-      },
-
-      {
-        question: 'What are your cancellation policies?',
-        answer:
-          'We have partnered with Paystack to give our customers as many payment options as possible to promote flexibility',
-      },
-
-      {
-        question: 'What happens if I need to extend my rental period?',
-        answer:
-          'We have partnered with Paystack to give our customers as many payment options as possible to promote flexibility',
-      },
-    ],
-  },
-  {
-    id: 2,
-    name: 'Payments',
-    questions: [
-      {
-        question: 'What are the age requirements to rent a car?',
-        answer:
-          'We have partnered with Paystack to give our customers as many payment options as possible to promote flexibility',
-      },
-
-      {
-        question: 'What methods of payment do you accept?',
-        answer:
-          'We have partnered with Paystack to give our customers as many payment options as possible to promote flexibility',
-      },
-      {
-        question: 'Do I need to refill the gas tank before returning the car?',
-        answer:
-          'We have partnered with Paystack to give our customers as many payment options as possible to promote flexibility',
-      },
-
-      {
-        question: 'What are your cancellation policies?',
-        answer:
-          'We have partnered with Paystack to give our customers as many payment options as possible to promote flexibility',
-      },
-
-      {
-        question: 'What happens if I need to extend my rental period?',
-        answer:
-          'We have partnered with Paystack to give our customers as many payment options as possible to promote flexibility',
-      },
-    ],
-  },
-  {
-    id: 3,
-    name: 'How to book?',
-
-    questions: [
-      {
-        question: 'What are the age requirements to rent a car?',
-        answer:
-          'We have partnered with Paystack to give our customers as many payment options as possible to promote flexibility',
-      },
-
-      {
-        question: 'What methods of payment do you accept?',
-        answer:
-          'We have partnered with Paystack to give our customers as many payment options as possible to promote flexibility',
-      },
-      {
-        question: 'Do I need to refill the gas tank before returning the car?',
-        answer:
-          'We have partnered with Paystack to give our customers as many payment options as possible to promote flexibility',
-      },
-
-      {
-        question: 'What are your cancellation policies?',
-        answer:
-          'We have partnered with Paystack to give our customers as many payment options as possible to promote flexibility',
-      },
-
-      {
-        question: 'What happens if I need to extend my rental period?',
-        answer:
-          'We have partnered with Paystack to give our customers as many payment options as possible to promote flexibility',
-      },
-    ],
-  },
-];
+import { category } from '@/components/constants/arrays';
 
 const Faq = () => {
   const [index, setIndex] = useState(0);
@@ -163,11 +24,11 @@ const Faq = () => {
     <div>
       <Container
         marginBottom='mb-[120px]'
-        className='pt-[350px] items-center gap-[40px] flex md:pt-[200px]'
+        className='xl:items-center gap-[40px] flex-col flex  xl:flex-row pt-[40px] md:pt-[200px]'
       >
         <div>
           <div className=' text-brandGray-300 mb-[16px]'>
-            <Typography as='h3' font='font-gordita-bold'>
+            <Typography as='h3' font='font-gordita-ultra'>
               Frequently Asked Questions
             </Typography>
           </div>
@@ -176,12 +37,12 @@ const Faq = () => {
             We are here to answer any questions you may have
           </div>
 
-          <div className='flex gap-[16px] mb-[40px]'>
+          <div className='flex  md:gap-[16px] mb-[40px] overflow-scroll md:overflow-auto'>
             {category.map((category) => (
               <div
                 key={category.name}
                 onClick={() => setIndex(category.id)}
-                className={`py-[14px] cursor-pointer rounded-[24px] px-[24px] ${
+                className={`py-[14px] no-wrap cursor-pointer rounded-[24px] px-[24px] ${
                   category.id === index ? 'bg-brandGreen-300 text-white' : 'bg-white text-black'
                 }`}
               >
