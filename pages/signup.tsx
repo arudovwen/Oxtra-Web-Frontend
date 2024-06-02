@@ -1,39 +1,25 @@
-import React from "react";
-import Navigation from "@/layout/NonAuthLayout/Navigation";
-import Container from "@/layout/NonAuthLayout/Container";
-import SignUpForm from "@/components/constants/forms/SignUpForm";
-import AlterFooter from "@/layout/NonAuthLayout/Footers/AlterFooter";
-import { useRouter } from "next/router";
-import { useAuth } from "@/hooks/useAuth";
-import { useEffect } from "react";
+import React from 'react';
+import SignUpForm from '@/components/constants/forms/SignUpForm';
+import AlterFooter from '@/layout/NonAuthLayout/Footers/AlterFooter';
+import { useRouter } from 'next/router';
+import { useAuth } from '@/hooks/useAuth';
+import { useEffect } from 'react';
 
 const SignUp = () => {
-  const activePage = "";
+  const activePage = '';
 
   const router = useRouter();
   const { user } = useAuth();
 
   useEffect(() => {
-    user ? router.push("/") : router.push("/signup");
+    user ? router.push('/') : router.push('/signup');
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
-    <div className="h-screen flex flex-col">
-      <Container>
-        <Navigation
-          color="text-brandGray-300"
-          hover="hover:text-brandGreen-300"
-          buttonBg="bg-brandGreen-300"
-          buttonText="text-white"
-          buttonHover="hover:bg-white"
-          activePage={activePage}
-          navBackground="white"
-          menuColor="text-brandGreen-300"
-        />{" "}
-      </Container>
-      <div className="flex-1 flex justify-center items-center">
-        <SignUpForm />{" "}
+    <div className='h-screen flex flex-col'>
+      <div className='flex-1 flex justify-center items-center'>
+        <SignUpForm />{' '}
       </div>
 
       <AlterFooter />
