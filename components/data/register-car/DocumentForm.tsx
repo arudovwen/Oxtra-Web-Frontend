@@ -175,7 +175,7 @@ const DocumentForm = () => {
       const storedVehicles =
         // @ts-ignore
         JSON.parse(sessionStorage.getItem("vehicleId")) || [];
-        setVehicleId(storedVehicles);
+      setVehicleId(storedVehicles);
     }
   }, []);
 
@@ -709,7 +709,7 @@ const DocumentForm = () => {
       </Box>
 
       <Flex align="center" mt="40px" gap="24px">
-        <Button
+        {/* <Button
           bg="transparent"
           border="1px solid #646464"
           color="#646464"
@@ -721,8 +721,13 @@ const DocumentForm = () => {
           _focus={{ bg: "transparent" }}
         >
           Skip
-        </Button>
-        <Button onClick={action} isLoading={isLoading} w="60%" h="48px">
+        </Button> */}
+        <Button
+          onClick={action}
+          isLoading={isLoading}
+          w={{ base: "100%", md: "60%" }}
+          h="48px"
+        >
           Next
         </Button>
       </Flex>

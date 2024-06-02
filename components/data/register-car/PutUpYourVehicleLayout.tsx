@@ -28,7 +28,7 @@ const PutUpYourVehicleLayout = ({
   children,
   putYourVehicleLayoutActivePage,
 }: PutUpYourVehicleLayoutProps) => {
-  const activePage = "Put up your car";
+  const activePage = "Sign up as a car owner";
 
   const router = useRouter();
 
@@ -40,17 +40,6 @@ const PutUpYourVehicleLayout = ({
   return (
     <Box pb="50px">
       <Container>
-        <Navigation
-          color="text-brandGray-300"
-          hover="hover:text-brandGreen-300"
-          buttonBg="bg-brandGreen-300"
-          buttonText="text-white"
-          buttonHover="hover:bg-white"
-          activePage={activePage}
-          navBackground="white"
-          menuColor="text-brandGreen-300"
-        />
-
         {router.pathname === "/register-car" ? (
           <div className="mt-[70px]"> {children}</div>
         ) : (
@@ -84,7 +73,12 @@ const PutUpYourVehicleLayout = ({
                 >
                   {["Vehicle Information", "Images", "Documents"].map(
                     (item: any, i: any) => (
-                      <Flex key={i} w="50%" align="center" gap="12px">
+                      <Flex
+                        key={i}
+                        w={{ base: "50%", md: "unset" }}
+                        align="center"
+                        gap="12px"
+                      >
                         <Flex
                           justifyContent="center"
                           align="center"

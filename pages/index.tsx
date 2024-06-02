@@ -2,32 +2,39 @@ import Experience from '@/components/data/home/Experience';
 import Hero from '@/components/data/home/Hero';
 import FindPreferredCar from '@/components/data/home/FindPreferredCar';
 import Services from '@/components/data/home/Services';
-import Vehicles from '@/components/data/home/Vehicles';
 import PassiveIncome from '@/components/data/home/PassiveIncome';
-import TrustedPartners from '@/components/data/home/TrustedPartners';
 import Footer from '@/layout/NonAuthLayout/Footers';
 import blue from '../public/assets/blue.png';
 import Image from 'next/image';
 import Container from '@/layout/NonAuthLayout/Container';
 import pink from '../public/assets/pink.png';
+import Faq from '@/components/data/home/Faq';
+import HowToRentaCar from '@/components/data/home/how-to-rent-a-car';
+import { useAuth } from '@/hooks/useAuth';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 
 export default function Home() {
-  const activePage = 'Home';
-
   const margin = 'mb-[120px]';
+const router = useRouter()
+
+  const { user } = useAuth();
+
+  // useEffect(() => {
+  //   user ? router.push("/dashboard/rent-a-car") : router.push("/");
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
+
   return (
     <div className='overflow-hidden'>
-      <Hero activePage={activePage} />
-
+      <Hero />
       <FindPreferredCar />
-
+      <HowToRentaCar />
       <Services />
-      <Vehicles />
-      <PassiveIncome marginBottom={margin} />
-      <TrustedPartners marginBottom="mb-[80px]" />
+      <PassiveIncome />
+      <Faq />
       <Experience marginBottom={margin} />
       <Footer />
-
       <Container>
         <div className='relative'>
           <Image

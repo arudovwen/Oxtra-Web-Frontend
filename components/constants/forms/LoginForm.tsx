@@ -52,11 +52,6 @@ const LoginForm = () => {
       }
     } else {
       mutate(values);
-      {
-        setTimeout(() => {
-          router.push("/dashboard/rent-a-car");
-        }, 2000);
-      }
     }
   };
   const [show, setShow] = useState(false);
