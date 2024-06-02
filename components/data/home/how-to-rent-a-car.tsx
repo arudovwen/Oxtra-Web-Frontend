@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import Container from '@/layout/NonAuthLayout/Container';
-import imageone from '../../../public/assets/hero-animation/image-one.png';
-import imageTwo from '../../../public/assets/hero-animation/image-two.png';
-import imageThree from '../../../public/assets/hero-animation/image-three.png';
-import pay from '../../../public/assets/hero-animation/pay.png';
+import imageone from '../../../public/assets/home-animation-images/image-one.png';
+import imageTwo from '../../../public/assets/home-animation-images/image-two.png';
+import imageThree from '../../../public/assets/home-animation-images/image-three.png';
+import pay from '../../../public/assets/home-animation-images/pay.png';
+import dates from '../../../public/assets/home-animation-images/dates.png';
+import car from '../../../public/assets/home-animation-images/car.png';
 import Typography from '@/components/constants/Typorgraphy';
 import { BsArrowRight } from 'react-icons/bs';
-import car from '../../../public/assets/Frame.png';
 import Button from '@/components/constants/Button';
+import animatedCar from '../../../public/assets/Frame.png';
 import Image from 'next/image';
 
 const procedures = [
@@ -16,14 +18,14 @@ const procedures = [
     image1: imageone,
     content:
       'Our book module allows you to pick your preferred trip dates to get vehicles available for your schedule.',
-    image2: pay,
+    image2: dates,
   },
   {
     name: 'Select preferred vehicle',
     image1: imageTwo,
     content:
       'Your desired vehicle awaits you to ride in style and comfort to your destination. Choose from our fleet.',
-    image2: pay,
+    image2: car,
   },
   {
     name: 'Pay and get your car',
@@ -40,7 +42,7 @@ const HowToRentaCar = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % procedures.length);
-    }, 1800);
+    }, 2000);
 
     return () => clearInterval(interval);
   }, []);
@@ -53,21 +55,21 @@ const HowToRentaCar = () => {
     >
       <Image
         data-aos='slide-right'
-        src={car}
+        src={animatedCar}
         width={140}
         height={100}
         alt='car'
         className='top-20 hidden xl:block absolute left-20 h-auto'
       />
-      <div className='text-center text-brandGray-300 mb-12'>
+      <div className='text-center text-brandGray-300 mb-[44px] md:mb-[9rem]'>
         <Typography as='h3' font='font-gordita-bold'>
           How to rent a car on Oxtra
         </Typography>
       </div>
-      <div className='flex items-center justify-center gap-8'>
-        <div className=' flex gap-[24px]'>
-          <Image src={currentItem.image1} alt={currentItem.name} />
-          <div className='w-[360px] '>
+      <div className='flex flex-col md:flex-row items-center md:h-[408px] justify-center gap-8 mb-[24px] md:mb-[154px]'>
+        <div className='flex items-center gap-[24px]'>
+          <Image src={currentItem.image1} alt={currentItem.name} priority />
+          <div className='md:w-[360px] '>
             <div className='mb-[16px]'>
               <Typography as='h5' font='font-gordita-bold'>
                 {currentItem.name}
@@ -79,7 +81,9 @@ const HowToRentaCar = () => {
           </div>
         </div>
 
-        <Image src={currentItem.image2} alt={currentItem.name} width={400} height={512} />
+        <div className='w-[560px] hidden md:block '>
+          <Image priority src={currentItem.image2} alt={currentItem.name} />
+        </div>
       </div>
 
       <div className='flex justify-center'>
