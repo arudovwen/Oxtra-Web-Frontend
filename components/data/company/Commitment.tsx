@@ -42,7 +42,7 @@ const commitments = [
 const Commitment = ({ marginBottom }: { marginBottom: string }) => {
   return (
     <Container marginBottom={marginBottom}>
-      <div className='text-brandGray-300'>
+      <div className='text-brandGray-300 pt-[64px] md:pt-[160px]'>
         <div className='text-brandGreen-400 mb-6'>
           <Typography as='h2' font='font-gordita-ultra'>
             Our Commitment

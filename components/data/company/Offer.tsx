@@ -1,17 +1,15 @@
 import React from 'react';
 import Typography from '../../constants/Typorgraphy';
-import { BsArrowRight } from 'react-icons/bs';
-import Link from 'next/link';
 import Image from 'next/image';
 import Container from '../../../layout/NonAuthLayout/Container';
 import { offers } from '@/components/constants/arrays';
 
 const Offer = () => {
   return (
-    <div className='bg-[#F8FCF9] py-[120px] my-[200px]'>
+    <div className='bg-[#F8FCF9] py-[120px] mt-[200px]'>
       <Container>
         <div className=''>
-          <div className='text-brandGray-300 text-center mb-[48px] font-gordita-ultra text-[56px] leading-[56px]'>
+          <div className='text-brandGray-300 text-center mb-[48px] font-gordita-ultra text-[32px] md:text-[56px] leading-[56px]'>
             What we stand for
           </div>
           <div className='flex flex-col lg:flex-row gap-10 items-center '>
