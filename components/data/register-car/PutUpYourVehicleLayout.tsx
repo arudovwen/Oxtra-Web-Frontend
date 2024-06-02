@@ -71,14 +71,20 @@ const PutUpYourVehicleLayout = ({
             <Flex flexDir="column" justifyContent="center" align="center">
               <Flex
                 flexDir="column"
-                w="45%"
+                w={{ base: "100%", md: "45%" }}
                 justifyContent="center"
                 align="flex-start"
               >
-                <Flex mt="-28px" justifyContent="space-between" w="full">
+                <Flex
+                  mt={{ base: "10px", md: "-28px" }}
+                  justifyContent="space-between"
+                  w="full"
+                  gap={{ base: "15px", md: "unset" }}
+                  flexDir={{ base: "column", md: "row" }}
+                >
                   {["Vehicle Information", "Images", "Documents"].map(
                     (item: any, i: any) => (
-                      <Flex key={i} align="center" gap="12px">
+                      <Flex key={i} w="50%" align="center" gap="12px">
                         <Flex
                           justifyContent="center"
                           align="center"

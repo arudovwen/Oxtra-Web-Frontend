@@ -1,9 +1,18 @@
 import { useMutation } from "react-query";
-import { addVehicle } from "../api/vehicles";
+import { addVehicle, addVehicleDocs } from "../api/vehicles";
 
 export const useAddVehicle = (options = {}) => {
   const { mutate, isLoading } = useMutation(addVehicle, {
-    mutationKey: "LOGIN",
+    mutationKey: "addVehicle",
+    ...options,
+  });
+
+  return { mutate, isLoading };
+};
+
+export const useAddVehicleDocs = (options = {}) => {
+  const { mutate, isLoading } = useMutation(addVehicleDocs, {
+    mutationKey: "addVehicleDocs",
     ...options,
   });
 

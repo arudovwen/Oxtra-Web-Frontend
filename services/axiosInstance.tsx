@@ -11,6 +11,14 @@ const axiosInstance = axios.create({
   },
 });
 
+export const uploadInstance = axios.create({
+  baseURL,
+  headers: {
+    "Content-Type": "multipart/form-data",
+    Accept: "application/json, text/plain, */*",
+  },
+});
+
 const onRequest = (request: any) => {
   // @ts-ignore
   const user = JSON.parse(localStorage.getItem("user"));
@@ -40,5 +48,7 @@ const onResponseError = async (error: any) => {
 // https://axios-http.com/docs/interceptors
 axiosInstance.interceptors.request.use(onRequest, onRequestError);
 axiosInstance.interceptors.response.use(onResponse, onResponseError);
+uploadInstance.interceptors.request.use(onRequest, onRequestError);
+uploadInstance.interceptors.response.use(onResponse, onResponseError);
 
 export default axiosInstance;

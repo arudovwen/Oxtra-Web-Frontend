@@ -395,7 +395,12 @@ const VehicleInformationForm = () => {
           </Box>
         </Flex>
 
-        <Flex align="center" gap="20px" justifyContent="space-between">
+        <Flex
+          align="center"
+          gap="20px"
+          flexWrap={{ base: "wrap", md: "nowrap" }}
+          justifyContent={{ base: "flex-start", md: "space-between" }}
+        >
           <Flex
             align="center"
             gap="8px"
