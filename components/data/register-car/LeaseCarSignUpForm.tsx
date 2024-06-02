@@ -192,7 +192,7 @@ const LeaseCarSignUpForm = () => {
                       <AuthInput
                         placeholder="08083594505"
                         name="phoneNumber"
-                        onChange={(e) => {
+                        onChange={(e: any) => {
                           const inputPhone = e.target.value
                             .replace(/\D/g, "")
                             .slice(0, 11);

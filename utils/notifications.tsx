@@ -65,6 +65,7 @@ const useCustomToast = () => {
 
   const successToast = (successMsg = "Operation successful", pos = "top") => {
     return toast({
+      //  @ts-ignore
       position: pos,
       isClosable: true,
       duration: 5000,
@@ -73,6 +74,7 @@ const useCustomToast = () => {
   };
   const errorToast = (errorMessage = "Error occurred", pos = "top") => {
     return toast({
+      //  @ts-ignore
       position: pos,
       isClosable: true,
       duration: 5000,
@@ -81,6 +83,7 @@ const useCustomToast = () => {
   };
   const warningToast = (warningMessage = "Warning", pos = "top") => {
     return toast({
+      //  @ts-ignore
       position: pos,
       isClosable: true,
       duration: 4000,
@@ -89,6 +92,7 @@ const useCustomToast = () => {
   };
   const infoToast = (infoMessage = "Info", pos = "top") => {
     return toast({
+      //  @ts-ignore
       position: pos,
       isClosable: true,
       duration: 5000,

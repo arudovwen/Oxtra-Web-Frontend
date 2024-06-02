@@ -3,10 +3,12 @@ import { Box, Button, Flex, Image, Text } from "@chakra-ui/react";
 import { FaRegDotCircle } from "react-icons/fa";
 import { IoIosArrowForward } from "react-icons/io";
 import { useRouter } from "next/router";
+import { useAuth } from "@/hooks/useAuth";
 
 const index = () => {
   const [tab, setTab] = useState("Active");
   const router = useRouter();
+
   return (
     <Flex
       border="1px solid #E4E4E4"

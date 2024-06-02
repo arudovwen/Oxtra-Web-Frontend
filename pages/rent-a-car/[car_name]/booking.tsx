@@ -1,5 +1,4 @@
 import Container from '@/layout/NonAuthLayout/Container';
-import Navigation from '@/layout/NonAuthLayout/Navigation';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { RiArrowRightDownLine } from 'react-icons/ri';
@@ -26,17 +25,6 @@ const Bookings = () => {
   return (
     <div className='font-gordita mb-[108px]'>
       <Container>
-        <Navigation
-          color='text-brandGray-300'
-          hover='hover:text-brandGreen-300'
-          buttonBg='bg-brandGreen-300'
-          buttonText='text-white'
-          buttonHover='hover:bg-white'
-          activePage={activePage}
-          navBackground='white'
-          menuColor='text-brandGreen-300'
-        />
-
         <div className='mt-[40px] md:mt-[72px]'>
           <div className='flex items-center gap-[16px] w-fit font-gordita-medium text-[12px] md:text-[16px]'>
             <div className={`text-[#444648]`} onClick={() => router.push('/')}>
