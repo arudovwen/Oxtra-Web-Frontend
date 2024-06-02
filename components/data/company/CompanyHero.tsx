@@ -2,6 +2,7 @@ import React from 'react';
 import Container from '../../../layout/NonAuthLayout/Container';
 import Typography from '../../constants/Typorgraphy';
 import { BsArrowRight } from 'react-icons/bs';
+
 import backcar from '../../../public/assets/Rectangle 100.png';
 import pump from '../../../public/assets/pump.png';
 import Button from '../../constants/Button';
@@ -11,7 +12,7 @@ const CompanyHero = () => {
   return (
     <Container className='relative'>
       <div className='text-brandGray-300 relative'>
-        <div className='text-center mt-[166px] z-50 relative'>
+        <div className='text-center  mt-[68px] md:mt-[166px] z-50 relative'>
           <div className=' mb-6 '>
             <Typography as='h2' font='font-gordita-ultra'>
               Guiding the shift towards <br /> eco-friendly travel in Africa
@@ -51,7 +52,7 @@ const CompanyHero = () => {
         width={500}
         height={500}
         alt='pump'
-        className='top-[7rem] hidden xl:block absolute right-[-11rem]'
+        className='top-[120px] hidden xl:block absolute right-[-15rem]'
       />
     </Container>
   );

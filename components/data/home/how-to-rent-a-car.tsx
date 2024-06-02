@@ -10,6 +10,7 @@ import Typography from '@/components/constants/Typorgraphy';
 import { BsArrowRight } from 'react-icons/bs';
 import Button from '@/components/constants/Button';
 import animatedCar from '../../../public/assets/Frame.png';
+import green from '../../../public/assets/blue.png';
 import Image from 'next/image';
 
 const procedures = [
@@ -51,7 +52,7 @@ const HowToRentaCar = () => {
   return (
     <Container
       marginBottom='mb-[120px]'
-      className='relative pt-[521px] sm:pt-[528px] lg:pt-[260px] xl:pt-[200px]'
+      className='relative pt-[452px] sm:pt-[521px]  lg:pt-[260px] xl:pt-[200px]'
     >
       <Image
         data-aos='slide-right'
@@ -106,6 +107,22 @@ const HowToRentaCar = () => {
           </div>
         </Button>
       </div>
+
+      <Image
+        src={green}
+        width={1000}
+        height={1000}
+        alt='pink'
+        className='right-[44rem]  hidden xl:block top-[17rem] absolute opacity-70'
+      />
+
+      <Image
+        src={green}
+        width={1000}
+        height={1000}
+        alt='pink'
+        className='right-[-36rem]  hidden xl:block top-[-14rem] absolute opacity-70'
+      />
     </Container>
   );
 };
