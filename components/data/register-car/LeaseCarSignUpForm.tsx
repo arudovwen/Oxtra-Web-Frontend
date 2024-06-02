@@ -78,7 +78,7 @@ const LeaseCarSignUpForm = () => {
 
   return (
     <Flex align="center" gap="52px">
-      <Box>
+      <Box display={{ base: "none", md: "block" }}>
         <Image
           src="/assets/car-key.jpg"
           w="534px"
