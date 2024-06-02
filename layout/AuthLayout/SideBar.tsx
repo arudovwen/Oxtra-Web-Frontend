@@ -1,10 +1,25 @@
 import { sideBarRoutes } from "@/components/constants/arrays";
+import { useGetUser } from "@/services/query/auth";
 import { Box, Flex, Image, Spinner, Text } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const SideBar = () => {
   const router = useRouter();
+  const [user, setUser] = useState("");
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const storedUser =
+        // @ts-ignore
+        JSON.parse(localStorage.getItem("user"));
+      setUser(storedUser);
+    }
+  }, []);
+
+  // @ts-ignore
+  const { data: userData } = useGetUser(user?.user?.id);
+
   const [logginOut, setLogginOut] = useState(false);
 
   const action = () => {
@@ -13,6 +28,7 @@ const SideBar = () => {
       setLogginOut(false);
       router.push("/login");
       localStorage.removeItem("user");
+      localStorage.removeItem("id");
     }, 2000);
   };
 
@@ -38,10 +54,11 @@ const SideBar = () => {
 
             <Flex color="#E9F6EC" flexDir="column" gap="12px">
               <Text color="#fff" fontWeight={700}>
-                Samuel Umoru
+                {userData?.data?.firstName || ""}{" "}
+                {userData?.data?.lastName || ""}
               </Text>
               <Text fontSize="10px" fontWeight={500}>
-                Sammyfish007@gmail.com
+                {userData?.data?.email}
               </Text>
               <Text fontSize="12px" fontWeight={500} textDecor="underline">
                 View Profile
