@@ -15,6 +15,7 @@ const NonAuthLayout = ({ children, page }: any) => {
             activePage={page}
             navBackground='green'
             menuColor={`${page === 'Home' ? 'text-white' : 'text-brandGreen-300'}`}
+            page={page}
           />
         </Container>
       </div>
