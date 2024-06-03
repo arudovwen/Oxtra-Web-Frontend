@@ -16,12 +16,12 @@ import { useEffect } from 'react';
 
 export default function Home() {
   const margin = 'mb-[120px]';
-const router = useRouter()
+  const router = useRouter();
 
   const { user } = useAuth();
 
   // useEffect(() => {
-  //   user ? router.push("/dashboard/rent-a-car") : router.push("/");
+  //   user ? router.push('/dashboard/rent-a-car') : router.push('/');
   //   // eslint-disable-next-line react-hooks/exhaustive-deps
   // }, []);
 
