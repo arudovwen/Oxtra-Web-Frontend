@@ -63,7 +63,7 @@ const Navigation = ({
         <div className='flex lg:flex-1'>
           <Link href='/' className=' z-10 '>
             <Image
-              src={page === 'home' ? logoWhite : logoGreen}
+              src={logoGreen}
               alt='logo'
               width={120}
               height={30}
