@@ -10,9 +10,21 @@ import Container from '@/layout/NonAuthLayout/Container';
 import pink from '../public/assets/pink.png';
 import Faq from '@/components/data/home/Faq';
 import HowToRentaCar from '@/components/data/home/how-to-rent-a-car';
+import { useAuth } from '@/hooks/useAuth';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 
 export default function Home() {
   const margin = 'mb-[120px]';
+const router = useRouter()
+
+  const { user } = useAuth();
+
+  // useEffect(() => {
+  //   user ? router.push("/dashboard/rent-a-car") : router.push("/");
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
+
   return (
     <div className='overflow-hidden'>
       <Hero />
