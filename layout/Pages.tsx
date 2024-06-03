@@ -9,11 +9,11 @@ const Pages = ({ children }: any) => {
 
   const router = useRouter();
 
-  useEffect(() => {
-    const userValue = localStorage.getItem('user');
-    /* @ts-ignore */
-    setUser(userValue);
-  }, [router.pathname]);
+  // useEffect(() => {
+  //   const userValue = localStorage.getItem('user');
+  //   /* @ts-ignore */
+  //   setUser(userValue);
+  // }, [router.pathname]);
 
   return user === null || user === 'null' ? (
     <NonAuthLayout page={page}>{children}</NonAuthLayout>
