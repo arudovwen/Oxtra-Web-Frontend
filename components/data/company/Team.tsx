@@ -4,17 +4,16 @@ import Typography from '../../constants/Typorgraphy';
 import Image from 'next/image';
 import person1 from '../../../public/assets/pic1.png';
 import { GoArrowUpRight } from 'react-icons/go';
-
-import person3 from '../../../public/assets/pic3.png';
+import obinna from '../../../public/assets/founders/obinna.jpeg';
 import samuel from '../../../public/assets/founders/samuel.png';
 import success from '../../../public/assets/founders/success.jpeg';
-import { link } from 'fs';
+import omotola from '../../../public/assets/founders/omotola.jpg';
 
 const team = [
   {
     name: 'Obinna Chidiebere',
     position: 'Co-founder & CEO',
-    image: person1,
+    image: obinna,
     linkedin:
       'https://www.linkedin.com/in/ndukwu-chidiebere-obinna-813a27117?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app',
   },
@@ -27,12 +26,12 @@ const team = [
   {
     name: 'Omotola Dorcas',
     position: 'Co-Founder and CMO',
-    image: person3,
+    image: omotola,
     linkedin:
       'https://www.linkedin.com/in/omotoladorcas?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app',
   },
   {
-    name: 'Ahon Success',
+    name: 'Success Ahon',
     position: 'Co-founder and CTO',
     image: success,
     linkedin:
@@ -59,7 +58,7 @@ const Team = ({ marginBottom }: { marginBottom: string }) => {
                   alt={individual.name}
                   width={274}
                   height={240}
-                  className='mb-4 w-[274px] h-[240px]  rounded-[16px]'
+                  className='mb-4 w-[274px] h-[240px] object-cover  rounded-[16px]'
                 />
                 <div className='mb-3'>
                   <Typography as='p' font='font-gordita-regular'>
