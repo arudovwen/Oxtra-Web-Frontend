@@ -57,10 +57,10 @@ const sponsors = [
     name: 'Venus',
     image: versus,
   },
-  {
-    name: 'Taxi',
-    image: taxi,
-  },
+  // {
+  //   name: 'Taxi',
+  //   image: taxi,
+  // },
 ];
 
 const Services = () => {
