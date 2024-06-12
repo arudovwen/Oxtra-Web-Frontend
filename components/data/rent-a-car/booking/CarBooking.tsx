@@ -6,6 +6,7 @@ import {
   formatTimeMinute,
   formatTimeToHHMMSS,
 } from "@/helpers/helpers";
+import { Image } from "@chakra-ui/react";
 import classNames from "classnames";
 import React, { useState } from "react";
 import { IoIosArrowDown } from "react-icons/io";
@@ -19,8 +20,6 @@ const CarBooking = ({
   setAvailability,
   setStep,
 }: any) => {
-  const [tripType, setTripType] = useState("Daily");
-
   const [startValue, startChange] = useState("");
   const [endValue, endChange] = useState("");
 
@@ -140,48 +139,12 @@ const CarBooking = ({
 
   return (
     <div className="w-full md:w-[48%]">
-      <div className="text-[#242424] font-gordita-bold text-[30px] md:text-[40px]">
+      <div className="text-[#242424] capitalize font-gordita-bold text-[30px] md:text-[40px]">
         {car_name}
       </div>
 
       {/* @ts-ignore */}
       <div className="mt-[24px] border border-[#E4E4E4] rounded-[16px] py-[32px] px-[24px]">
-        <div className="flex items-center gap-[24px]">
-          {["Daily", "Hourly"].map((item: any, i: any) => (
-            <div
-              className="flex items-center gap-[8px] cursor-pointer"
-              key={i}
-              onClick={() => setTripType(item)}
-            >
-              <img
-                className="w-[16px] h-[16px] object-contain mb-[4px]"
-                src={
-                  i === 0
-                    ? tripType === "Daily"
-                      ? "../../assets/yingyang-green.jpg"
-                      : "../../assets/yingyang.jpg"
-                    : tripType === "Hourly"
-                      ? "../../assets/yingyang-green.jpg"
-                      : "../../assets/yingyang.jpg"
-                }
-              />
-              <div
-                className={`${
-                  i === 0
-                    ? tripType === "Daily"
-                      ? "font-gordita-medium"
-                      : "font-gordita-regular"
-                    : tripType === "Hourly"
-                      ? "font-gordita-medium"
-                      : "font-gordita-regular"
-                } font-gordita-medium`}
-              >
-                {item}
-              </div>
-            </div>
-          ))}
-        </div>
-
         <div className="mt-[24px]">
           <div className={labelClasses}>Pick-up location</div>
 
@@ -193,18 +156,7 @@ const CarBooking = ({
           </div>
         </div>
 
-        <div className="my-[24px]">
-          <div className={labelClasses}>Return location</div>
-
-          <div className="mt-[12px]">
-            <input
-              className={inputClasses}
-              placeholder="Enter address or airport"
-            />
-          </div>
-        </div>
-
-        <div className="flex items-center flex-col md:flex-row gap-[24px]">
+        <div className="my-[24px] flex items-center flex-col md:flex-row gap-[24px]">
           <div className="w-full">
             <div className={labelClasses}>Pick up Date</div>
 
@@ -240,7 +192,12 @@ const CarBooking = ({
                 ),
                 DropdownIndicator: () => (
                   <div className="mr-[16px]">
-                    <IoIosArrowDown size="20px" />
+                    <Image
+                      src="/clock.svg"
+                      w="20px"
+                      h="20px"
+                      objectFit="contain"
+                    />
                   </div>
                 ),
               }}
@@ -248,46 +205,16 @@ const CarBooking = ({
           </div>
         </div>
 
-        <div className="my-[24px] flex items-center flex-col md:flex-row gap-[24px]">
-          <div className="w-full">
-            <div className={labelClasses}>Return Date</div>
+        <div className="w-full mb-[24px]">
+          <div className={labelClasses}>Drop-off Date</div>
 
-            <div className="mt-[12px]">
-              <DatePicker
-                placeholder="Select Date"
-                value={endValue}
-                minDate={formatDate(startValue)}
-                onChange={(date: any) => {
-                  endChange(date);
-                }}
-              />
-            </div>
-          </div>
-
-          <div className="w-full">
-            <div className={`mb-[12px] ${labelClasses}`}>Time</div>
-            <Select
-              styles={customStyles}
-              placeholder="Select Time"
-              isDisabled={!values?.arrivalTime}
-              /* @ts-ignore */
-              options={timeOption}
-              value={values?.departureTime}
-              defaultValue={values?.departureTime}
-              onChange={(selectedOption: any) => {
-                handleSelectChange(selectedOption, {
-                  name: "departureTime",
-                });
-              }}
-              components={{
-                IndicatorSeparator: () => (
-                  <div style={{ display: "none" }}></div>
-                ),
-                DropdownIndicator: () => (
-                  <div className="mr-[16px]">
-                    <IoIosArrowDown size="20px" />
-                  </div>
-                ),
+          <div className="mt-[12px]">
+            <DatePicker
+              placeholder="Select Date"
+              value={endValue}
+              minDate={formatDate(startValue)}
+              onChange={(date: any) => {
+                endChange(date);
               }}
             />
           </div>
@@ -307,7 +234,7 @@ const CarBooking = ({
           <div className={labelClasses}>Number of Days</div>
 
           <div className="mt-[12px]">
-            <input className={inputClasses} type="number" />
+            <input readOnly className={inputClasses} type="number" />
           </div>
         </div>
 
