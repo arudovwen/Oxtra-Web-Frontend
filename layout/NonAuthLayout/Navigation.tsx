@@ -78,7 +78,7 @@ const Navigation = ({
                 <Link
                   href={item.href}
                   className={`${color}  pb-1 ${hover} duration-300 ${
-                    activePage.toLowerCase() === item.path.toLocaleLowerCase() &&
+                    activePage?.toLowerCase() === item.path.toLocaleLowerCase() &&
                     'font-gordita-bold text-brandGreen-300'
                   }`}
                 >
@@ -94,7 +94,7 @@ const Navigation = ({
               <Link
                 href='/login'
                 className={`${color}  pb-1 ${hover} duration-300 ${
-                  activePage.toLowerCase() === 'login' && 'font-gordita-bold text-brandGreen-300'
+                  activePage?.toLowerCase() === 'login' && 'font-gordita-bold text-brandGreen-300'
                 }`}
               >
                 Login

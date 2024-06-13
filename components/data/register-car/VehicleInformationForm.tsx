@@ -4,6 +4,7 @@ import Select from "react-select";
 import classNames from "classnames";
 import { brands, colorTypes, model } from "@/components/constants/arrays";
 import { useRouter } from "next/router";
+import { useGetBrands } from "@/services/query/vehicle";
 
 const VehicleInformationForm = () => {
   const labelClasses = classNames(
@@ -64,6 +65,8 @@ const VehicleInformationForm = () => {
       backgroundColor: state.isFocused ? "#f4f6f8" : "",
     }),
   };
+
+  const { data: brandss, isLoading: isBrand } = useGetBrands();
 
   const brandOptions = brands.map((item) => ({
     label: item,
