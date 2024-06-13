@@ -1,65 +1,180 @@
 import React from "react";
-import { carAccessories, cars } from "@/components/constants/arrays";
 import { HiArrowLongRight } from "react-icons/hi2";
 import { useRouter } from "next/router";
+import {
+  Box,
+  Flex,
+  Grid,
+  GridItem,
+  Image,
+  Skeleton,
+  Text,
+} from "@chakra-ui/react";
 
-const CarList = () => {
+const CarList = ({ data, isLoading }: any) => {
   const router = useRouter();
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-[32px] mt-[24px]">
-      {cars.map((item: any, index) => (
-        <div
-          className="border overflow-x-hidden rounded-[6px] py-[24px] px-[16px] pare"
-          key={index}
+    <Grid
+      gap="32px"
+      mt="24px"
+      templateColumns={{
+        base: "repeat(1,1fr)",
+        md: isLoading ? "repeat(1,1fr)" : "repeat(3,1fr)",
+      }}
+    >
+      {isLoading ? (
+        <Grid
+          gap="32px"
+          mt="24px"
+          templateColumns={{ base: "repeat(1,1fr)", md: "repeat(3,1fr)" }}
         >
-          <div className="font-gordita-bold text-[20px] text-[#242424]">
-            {item}
-          </div>
-          <div className="mt-[12px] text-[10px] text-[#646464]">
-            or any similar SUV
-          </div>
+          <Skeleton h="27.5rem" w="100%" borderRadius="6px" />
+          <Skeleton h="27.5rem" w="100%" borderRadius="6px" />
+          <Skeleton h="27.5rem" w="100%" borderRadius="6px" />
+        </Grid>
+      ) : (
+        data?.data?.map((item: any, index: any) => (
+          <GridItem
+            className="pare"
+            border="1px solid #E4E4E4"
+            borderRadius="6px"
+            py="24px"
+            fontFamily="Gordita"
+            px="16px"
+            overflowX="hidden"
+            key={index}
+          >
+            <Flex align="flex-end" justifyContent="space-between" w="full">
+              <Box>
+                <Text
+                  fontWeight={700}
+                  textTransform="capitalize"
+                  fontSize="20px"
+                  color="#242424"
+                >
+                  {item?.brand} {item?.model} {`(${item?.year})`}
+                </Text>
+                <Text mt="12px" fontSize="12px" color="#646464">
+                  or any similar SUV
+                </Text>
+              </Box>
+              <Image cursor="pointer" src="/share.svg" w="20px" h="20px" objectFit="contain" />
+            </Flex>
 
-          <div>
-            <img src="../assets/car.jpg" className="my-[16px] w-full car" />
-          </div>
-
-          <div className="flex items-center  justify-between">
-            {carAccessories.map((item: any, i: any) => (
-              <div
-                key={i}
-                className="flex flex-col justify-center items-center"
+            <Box>
+              <Image
+                src="../assets/car.jpg"
+                my="16px"
+                w="full"
+                className="car"
+              />
+            </Box>
+            <Flex align="center" justifyContent="space-between">
+              <Flex
+                display={
+                  JSON.parse(item?.extras)?.find(
+                    (item: any) => item === "AC"
+                  ) === "AC"
+                    ? "flex"
+                    : "hidden"
+                }
+                flexDir="column"
+                justifyContent="center"
+                align="center"
               >
-                <img
-                  className="h-[13px] object-contain w-[13px]"
-                  src={item.img}
+                <Image
+                  h="13px"
+                  objectFit="contain"
+                  w="13px"
+                  src="../assets/ac.jpg"
                 />
-                <div className="mt-[8px] text-[12px] text-[#646464] font-gordita-medium">
-                  {item.name}
-                </div>
-              </div>
-            ))}
-          </div>
+                <Text mt="8px" fontSize="12px" color="#646464" fontWeight={500}>
+                  AC
+                </Text>
+              </Flex>
 
-          <div className="mt-[24px] flex justify-between items-center">
-            <div className="text-[#242424] w-full">
-              <div className="font-gordita-bold text-[20px]">₦15,000 / day</div>
-              <div className="mt-[16px] font-gordita-medium text-[14px]">
-                ₦45,000 Total
-              </div>
-            </div>
+              <Flex flexDir="column" justifyContent="center" align="center">
+                <Image
+                  h="13px"
+                  objectFit="contain"
+                  w="13px"
+                  src="../assets/seater.jpg"
+                />
+                <Text mt="8px" fontSize="12px" color="#646464" fontWeight={500}>
+                  {item?.no_of_seats} Seater
+                </Text>
+              </Flex>
 
-            <div className="par">
-              <div
-                onClick={() => router.push(`/rent-a-car/${item}/booking`)}
-                className="cursor-pointer bg-[#214528] text-white flex justify-center items-center rounded-full h-[40px] w-[40px]"
-              >
-                <HiArrowLongRight className="arrow" />
-              </div>
-            </div>
-          </div>
-        </div>
-      ))}
-    </div>
+              <Flex flexDir="column" justifyContent="center" align="center">
+                <Image
+                  h="13px"
+                  objectFit="contain"
+                  w="13px"
+                  src="../assets/bags.jpg"
+                />
+                <Text mt="8px" fontSize="12px" color="#646464" fontWeight={500}>
+                  {item?.boot_capacity} Bags
+                </Text>
+              </Flex>
+
+              <Flex flexDir="column" justifyContent="center" align="center">
+                <Image
+                  h="13px"
+                  objectFit="contain"
+                  w="13px"
+                  src="../assets/automatic.jpg"
+                />
+                <Text
+                  mt="8px"
+                  fontSize="12px"
+                  textTransform="capitalize"
+                  color="#646464"
+                  fontWeight={500}
+                >
+                  {item?.transmission}
+                </Text>
+              </Flex>
+            </Flex>
+
+            <Flex
+              align="center"
+              justifyContent="space-between"
+              mt="24px"
+              className="mt-[24px] flex justify-between items-center"
+            >
+              <Box color="#242424" w="full">
+                <Text fontWeight={700} fontSize="20px">
+                  ₦15,000 / day
+                </Text>
+                <Text mt="16px" fontWeight={500} fontSize="14px">
+                  ₦45,000 Total
+                </Text>
+              </Box>
+
+              <Box className="par">
+                <Flex
+                  align="center"
+                  justifyContent="center"
+                  bg="#214528"
+                  cursor="pointer"
+                  color="#fff"
+                  h="40px"
+                  w="40px"
+                  rounded="full"
+                  onClick={() =>
+                    router.push(
+                      `/rent-a-car/${item?.brand} ${item?.model}/booking`
+                    )
+                  }
+                >
+                  <HiArrowLongRight className="arrow" />
+                </Flex>
+              </Box>
+            </Flex>
+          </GridItem>
+        ))
+      )}
+    </Grid>
   );
 };
 
