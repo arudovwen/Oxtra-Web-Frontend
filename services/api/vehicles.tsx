@@ -1,4 +1,3 @@
-import axios from "axios";
 import * as API from "../url";
 import axiosInstance from "../axiosInstance";
 
@@ -22,7 +21,25 @@ export const getBrands = async () => {
   return response.data;
 };
 
-export const getNonUserVehicles = async () => {
-  const response = await axiosInstance.get(API.NON_USER_VEHICLES);
-  return response.data;
+export const getNonUserVehicles = async ({ queryKey }: any) => {
+  const [, filters] = queryKey;
+  const params = new URLSearchParams();
+
+  Object.entries(filters).forEach(([key, value]) => {
+    if (value) {
+      params.append(key, value as string);
+    }
+  });
+
+  const queryString = params.toString();
+  const url = `${API.NON_USER_VEHICLES}${queryString ? `?${queryString}` : ""}`;
+
+  const res = await axiosInstance.get(url);
+  return res.data;
+};
+
+export const getNonUserVehicle = async ({ queryKey }: any) => {
+  const [, id] = queryKey;
+  const res = await axiosInstance.get(`${API.NON_USER_VEHICLE}/${id}`);
+  return res.data;
 };

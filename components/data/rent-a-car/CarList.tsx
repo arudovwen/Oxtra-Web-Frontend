@@ -11,7 +11,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 
-const CarList = ({ data, isLoading }: any) => {
+const CarList = ({ data, values, isLoading }: any) => {
   const router = useRouter();
   return (
     <Grid
@@ -28,7 +28,6 @@ const CarList = ({ data, isLoading }: any) => {
           mt="24px"
           templateColumns={{ base: "repeat(1,1fr)", md: "repeat(3,1fr)" }}
         >
-          <Skeleton h="27.5rem" w="100%" borderRadius="6px" />
           <Skeleton h="27.5rem" w="100%" borderRadius="6px" />
           <Skeleton h="27.5rem" w="100%" borderRadius="6px" />
         </Grid>
@@ -54,11 +53,7 @@ const CarList = ({ data, isLoading }: any) => {
                 >
                   {item?.brand} {item?.model} {`(${item?.year})`}
                 </Text>
-                <Text mt="12px" fontSize="12px" color="#646464">
-                  or any similar SUV
-                </Text>
               </Box>
-              <Image cursor="pointer" src="/share.svg" w="20px" h="20px" objectFit="contain" />
             </Flex>
 
             <Box>
@@ -144,32 +139,43 @@ const CarList = ({ data, isLoading }: any) => {
             >
               <Box color="#242424" w="full">
                 <Text fontWeight={700} fontSize="20px">
-                  ₦15,000 / day
-                </Text>
-                <Text mt="16px" fontWeight={500} fontSize="14px">
-                  ₦45,000 Total
+                  ₦{Number(item?.price_per_day)?.toLocaleString()} / day
                 </Text>
               </Box>
 
-              <Box className="par">
-                <Flex
-                  align="center"
-                  justifyContent="center"
-                  bg="#214528"
+              <Flex align="center" pr="20px" gap="16px">
+                <Image
                   cursor="pointer"
-                  color="#fff"
-                  h="40px"
-                  w="40px"
-                  rounded="full"
-                  onClick={() =>
-                    router.push(
-                      `/rent-a-car/${item?.brand} ${item?.model}/booking`
-                    )
-                  }
-                >
-                  <HiArrowLongRight className="arrow" />
-                </Flex>
-              </Box>
+                  src="/share.svg"
+                  w="24px"
+                  h="24px"
+                  objectFit="contain"
+                />
+
+                <Box className="par">
+                  <Flex
+                    align="center"
+                    justifyContent="center"
+                    bg="#214528"
+                    cursor="pointer"
+                    color="#fff"
+                    h="40px"
+                    w="40px"
+                    rounded="full"
+                    onClick={() => {
+                      router.push(
+                        `/rent-a-car/${item?.brand} ${item?.model}/${item?.id}/booking`
+                      );
+                      sessionStorage.setItem(
+                        "rent_values",
+                        JSON.stringify(values)
+                      );
+                    }}
+                  >
+                    <HiArrowLongRight className="arrow" />
+                  </Flex>
+                </Box>
+              </Flex>
             </Flex>
           </GridItem>
         ))

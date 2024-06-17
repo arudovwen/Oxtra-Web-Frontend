@@ -1,10 +1,18 @@
-import React, { useState } from "react";
-import { Flex, Box, Text, Input, Checkbox, Button } from "@chakra-ui/react";
+import React, { useEffect, useState } from "react";
+import {
+  Flex,
+  Box,
+  Text,
+  Input,
+  Checkbox,
+  Button,
+  Spinner,
+} from "@chakra-ui/react";
 import Select from "react-select";
 import classNames from "classnames";
-import { brands, colorTypes, model } from "@/components/constants/arrays";
+import { colorTypes } from "@/components/constants/arrays";
 import { useRouter } from "next/router";
-import { useGetBrands } from "@/services/query/vehicle";
+import { useGetBrands, useGetModels } from "@/services/query/vehicle";
 
 const VehicleInformationForm = () => {
   const labelClasses = classNames(
@@ -22,6 +30,8 @@ const VehicleInformationForm = () => {
     no_of_seats: "",
     boot_capacity: "",
     plate_number: "",
+    vehicle_type: "",
+    price_per_day: "",
     extras: [],
   });
 
@@ -41,7 +51,7 @@ const VehicleInformationForm = () => {
   };
 
   const customStyles = {
-    control: (provided: any, state: any) => ({
+    control: (provided: any) => ({
       ...provided,
       width: "100%",
       minHeight: "44px",
@@ -66,19 +76,32 @@ const VehicleInformationForm = () => {
     }),
   };
 
-  const { data: brandss, isLoading: isBrand } = useGetBrands();
+  const { data: brands, isLoading: isBrand } = useGetBrands();
+  const { mutate, data: models, isLoading: isModel } = useGetModels();
 
-  const brandOptions = brands.map((item) => ({
-    label: item,
-    value: item,
+  useEffect(() => {
+    if (values?.brand) {
+      // @ts-ignore
+      mutate(values?.brand?.value);
+    }
+  }, [values?.brand]);
+
+  const brandOptions = brands?.map((item: any) => ({
+    label: item?.brand,
+    value: item?.id,
   }));
 
-  const modelOptions = model.map((item) => ({
-    label: item,
-    value: item,
+  const modelOptions = models?.map((item: any) => ({
+    label: item?.model,
+    value: item?.id,
   }));
 
   const seatOptions = ["1", "2", "3", "4", "5"].map((item) => ({
+    label: item,
+    value: item,
+  }));
+
+  const typeOptions = ["Regular", "Electric"].map((item) => ({
     label: item,
     value: item,
   }));
@@ -177,10 +200,13 @@ const VehicleInformationForm = () => {
             <Text className={labelClasses}>Brand</Text>
             <Select
               styles={customStyles}
+              isDisabled={!brands?.length || isBrand}
               components={{
                 IndicatorSeparator: () => (
                   <div style={{ display: "none" }}></div>
                 ),
+                // @ts-ignore
+                DropdownIndicator: () => (isBrand ? <Spinner size="sm" /> : ""),
               }}
               value={values?.brand}
               onChange={(selectedOption) => {
@@ -199,10 +225,13 @@ const VehicleInformationForm = () => {
             <Text className={labelClasses}>Model</Text>
             <Select
               styles={customStyles}
+              isDisabled={!values?.brand || isModel}
               components={{
                 IndicatorSeparator: () => (
                   <div style={{ display: "none" }}></div>
                 ),
+                // @ts-ignore
+                DropdownIndicator: () => (isModel ? <Spinner size="sm" /> : ""),
               }}
               value={values?.model}
               onChange={(selectedOption) => {
@@ -394,6 +423,47 @@ const VehicleInformationForm = () => {
               }}
               // @ts-ignore
               options={transmissionOptions}
+            />
+          </Box>
+        </Flex>
+
+        <Flex w="full" align="center" gap="24px">
+          <Box w="full">
+            <Text className={labelClasses}>Vehicle Type</Text>
+            <Select
+              styles={customStyles}
+              components={{
+                IndicatorSeparator: () => (
+                  <div style={{ display: "none" }}></div>
+                ),
+              }}
+              value={values?.vehicle_type}
+              onChange={(selectedOption) => {
+                setValues({
+                  ...values,
+                  // @ts-ignore
+                  vehicle_type: selectedOption,
+                });
+              }}
+              // @ts-ignore
+              options={typeOptions}
+            />
+          </Box>
+
+          <Box w="full">
+            <Text className={labelClasses}>Price Per Day</Text>
+
+            <Input
+              h="44px"
+              className={inputClasses}
+              type="number"
+              value={values?.price_per_day}
+              onChange={(e) => {
+                setValues({
+                  ...values,
+                  price_per_day: e.target.value,
+                });
+              }}
             />
           </Box>
         </Flex>

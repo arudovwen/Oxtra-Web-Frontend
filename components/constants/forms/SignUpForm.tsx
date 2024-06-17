@@ -4,7 +4,12 @@ import { useState } from "react";
 import Select from "react-select";
 import { useRouter } from "next/router";
 import DatePicker from "react-multi-date-picker";
-import { formatDate, formatNewDate } from "@/helpers/helpers";
+import {
+  formatDate,
+  formatNewDate,
+  formatTime,
+  formatt,
+} from "@/helpers/helpers";
 import { IoIosArrowDown } from "react-icons/io";
 import { Form, Formik } from "formik";
 import AuthInput from "../AuthInput";
@@ -22,6 +27,7 @@ import Pick_Return from "../Pick_Return";
 import { signUpValues, validateSignupSchema } from "@/utils/validation";
 import { useRegisterUser } from "@/services/query/auth";
 import useCustomToast from "@/utils/notifications";
+import { useRentCar } from "@/services/query/rent";
 
 const labelClasses = classNames(
   "text-[12px] leading-[12px] font-gordita-bold text-[#444648]"
@@ -36,11 +42,21 @@ const SignUpForm = () => {
 
   const { successToast, errorToast } = useCustomToast();
 
-  const { mutate, isLoading: isRegister } = useRegisterUser({
+  const [rentValues, setRentValues] = useState({});
+
+  useEffect(() => {
+    const checkoutValue = localStorage.getItem("checkout");
+    /* @ts-ignore */
+    const rent_values = JSON.parse(sessionStorage.getItem("rent-values"));
+    setRentValues(rent_values);
+    /* @ts-ignore */
+    setCheckout(checkoutValue);
+  }, []);
+
+  const { mutate: rentMutate, isLoading: isRent } = useRentCar({
     onSuccess: (res: any) => {
       successToast(res?.message);
       router.push("/dashboard/rent-a-car");
-      localStorage.setItem("user", JSON.stringify(res));
     },
     onError: (err: any) => {
       errorToast(
@@ -49,32 +65,49 @@ const SignUpForm = () => {
     },
   });
 
-  useEffect(() => {
-    const checkoutValue = localStorage.getItem("checkout");
-    /* @ts-ignore */
-    setCheckout(checkoutValue);
-  }, []);
+  const handleRent = () => {
+    rentMutate({
+      // @ts-ignore
+      vehicle_id: rentValues?.vehicle_id,
+      // @ts-ignore
+      price: rentValues?.price,
+      // @ts-ignore
+      notes: rentValues?.note,
+      // @ts-ignore
+      pickup_time: formatTime(rentValues?.rent_values?.pickUp),
+      // @ts-ignore
+      pickup_date: formatt(rentValues?.rent_values?.pickUp),
+      // @ts-ignore
+      pickup_location: rentValues?.rent_values?.pickup_location,
+      trip_type: "1",
+    });
+  };
 
-  const [isLoading, setIsLoading] = useState(false);
+  const { mutate, isLoading } = useRegisterUser({
+    onSuccess: (res: any) => {
+      localStorage.setItem("user", JSON.stringify(res));
+      if (checkout) {
+        handleRent();
+      } else {
+        successToast(res?.message);
+        router.push("/dashboard/rent-a-car");
+      }
+    },
+    onError: (err: any) => {
+      errorToast(
+        err?.response?.data?.message || err?.message || "An Error occurred"
+      );
+    },
+  });
 
   const handleSubmit = (values = "") => {
-    if (checkout) {
-      setIsLoading(true);
-      {
-        setTimeout(() => {
-          setIsLoading(false);
-          router.push("/checkout");
-        }, 2000);
-      }
-    } else {
-      /* @ts-ignore */
-      const { phoneCode, dob, phone, ...rest } = values;
-      mutate({
-        ...rest,
-        phoneCode: phoneCode?.value,
-        dob: formatDate(dob),
-      });
-    }
+    /* @ts-ignore */
+    const { phoneCode, dob, phone, ...rest } = values;
+    mutate({
+      ...rest,
+      phoneCode: phoneCode?.value,
+      dob: formatDate(dob),
+    });
   };
 
   const codeOption = countries?.map((code) => ({
@@ -293,7 +326,10 @@ const SignUpForm = () => {
                     </div>
                   </GridItem>
 
-                  <GridItem colSpan={{ base: 2, md: 2 }}>
+                  <GridItem
+                    mt={{ base: "16px", md: "unset" }}
+                    colSpan={{ base: 2, md: 2 }}
+                  >
                     <div className="w-full">
                       <label htmlFor="pick up Date" className={labelClasses}>
                         Date of birth
@@ -344,7 +380,7 @@ const SignUpForm = () => {
                 borderRadius="8px"
                 h="48px"
                 color="#fff"
-                isLoading={isLoading || isRegister}
+                isLoading={isLoading || isRent}
                 fontSize="14px"
                 fontWeight={500}
                 _active={{ bg: "#438950" }}
