@@ -10,6 +10,8 @@ import Pick_Return from "../Pick_Return";
 import { useRouter } from "next/router";
 import useCustomToast from "@/utils/notifications";
 import { useLogin } from "@/services/query/auth";
+import { formatt, formatTime } from "@/helpers/helpers";
+import { useRentCar } from "@/services/query/rent";
 
 const labelClasses = classNames(
   "text-[12px] leading-[12px] font-gordita-bold text-[#444648]"
@@ -18,21 +20,58 @@ const labelClasses = classNames(
 const LoginForm = () => {
   const [checkout, setCheckout] = useState(null);
   const router = useRouter();
-  const [isLoading, setIsLoading] = useState(false);
+  const [rentValues, setRentValues] = useState({});
 
   useEffect(() => {
     const checkoutValue = localStorage.getItem("checkout");
+    /* @ts-ignore */
+    const rent_values = JSON.parse(sessionStorage.getItem("rent-values"));
+    setRentValues(rent_values);
     /* @ts-ignore */
     setCheckout(checkoutValue);
   }, []);
 
   const { successToast, errorToast } = useCustomToast();
 
-  const { mutate, isLoading: isLogging } = useLogin({
+  const { mutate: rentMutate, isLoading: isRent } = useRentCar({
     onSuccess: (res: any) => {
       successToast(res?.message);
       router.push("/dashboard/rent-a-car");
+    },
+    onError: (err: any) => {
+      errorToast(
+        err?.response?.data?.message || err?.message || "An Error occurred"
+      );
+    },
+  });
+
+  const handleRent = () => {
+    rentMutate({
+      // @ts-ignore
+      vehicle_id: rentValues?.vehicle_id,
+      // @ts-ignore
+      price: rentValues?.price,
+      // @ts-ignore
+      notes: rentValues?.note,
+      // @ts-ignore
+      pickup_time: formatTime(rentValues?.rent_values?.pickUp),
+      // @ts-ignore
+      pickup_date: formatt(rentValues?.rent_values?.pickUp),
+      // @ts-ignore
+      pickup_location: rentValues?.rent_values?.pickup_location,
+      trip_type: "2",
+    });
+  };
+
+  const { mutate, isLoading } = useLogin({
+    onSuccess: (res: any) => {
       localStorage.setItem("user", JSON.stringify(res));
+      if (checkout) {
+        handleRent();
+      } else {
+        successToast(res?.message);
+        router.push("/dashboard/rent-a-car");
+      }
     },
     onError: (err: any) => {
       errorToast(
@@ -42,18 +81,9 @@ const LoginForm = () => {
   });
 
   const handleSubmit = (values = "") => {
-    if (checkout) {
-      setIsLoading(true);
-      {
-        setTimeout(() => {
-          setIsLoading(false);
-          router.push("/checkout");
-        }, 2000);
-      }
-    } else {
-      mutate(values);
-    }
+    mutate(values);
   };
+
   const [show, setShow] = useState(false);
 
   const buttonText = checkout !== null ? "Login and Pay" : "Login";
@@ -149,7 +179,7 @@ const LoginForm = () => {
                 color="#fff"
                 fontSize="14px"
                 fontWeight={500}
-                isLoading={isLoading || isLogging}
+                isLoading={isLoading || isRent}
                 w="full"
                 type="submit"
                 _active={{ bg: "#438950" }}
