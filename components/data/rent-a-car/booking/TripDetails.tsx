@@ -1,81 +1,179 @@
-import { carFeatures } from "@/components/constants/arrays";
 import React from "react";
+import { formatDat, formatTime } from "@/helpers/helpers";
+import { Box, Flex, Grid, Image, Text } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 import { FaRegCircle } from "react-icons/fa";
+import { IoIosArrowDown } from "react-icons/io";
 
-const TripDetails = ({ setAvailability, setStep, dataClasses }: any) => {
+const TripDetails = ({
+  data,
+  values,
+  calculateDayDifference,
+  dataClasses,
+}: any) => {
+  const router = useRouter();
+
   return (
-    <div className="w-full md:w-[496px]">
-      <div className="border border-[#E4E4E4] rounded-[12px] p-[24px]">
-        <div className={dataClasses}>Pick up and Return</div>
+    <Box fontFamily="gordita" w={{ base: "100%", md: "496px" }}>
+      <Box border="1px solid #e4e4e4" borderRadius="12px" p="24px">
+        <Text className={dataClasses}>Pick up</Text>
 
-        <div className="mt-[16px] flex items-start gap-[16px]">
-          <div className="relative">
+        <Box mt="16px">
+          <Flex align="flex-start" gap="16px">
             <FaRegCircle color="#42864F" size="16px" />
-            <div className="flex justify-center items-center">
-              <div className="w-[1px] h-[80px] my-[12px] bg-[#C4C4C4]"></div>
-            </div>
-            <FaRegCircle color="#42864F" size="16px" />
-          </div>
-          <div className="flex flex-col gap-[16px]">
-            <div className="text-[#444444] font-gordita-medium text-[14px]">
-              Pick-up
-            </div>
-            <div className="text-[#646668]">3 Folake Kamoru Street, Lekki</div>
-            <div className="text-[#444648] font-gordita-medium text-[12px]">
-              Sat, 17 Feb · 10:00
-            </div>
-            <div className="mt-[8px] flex items-start gap-[16px]">
-              <div className="flex flex-col gap-[16px]">
-                <div className="text-[#444444] font-gordita-medium text-[14px]">
-                  Return
-                </div>
-                <div className="text-[#646668]">MM1 Airport</div>
-                <div className="text-[#444648] font-gordita-medium text-[12px]">
-                  Tue, 20 Feb · 10:00
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
 
-        <div
-          onClick={() => {
-            setStep(2);
-            setAvailability(false);
-          }}
-          className="cursor-pointer flex justify-end text-[#214528] mt-[16px] font-gordita-medium text-[12px]"
+            <Flex flexDir="column" gap="16px">
+              <Text color="#444444" fontWeight={500} fontSize="14px">
+                Pick-up
+              </Text>
+              <Text color="#646668">
+                {values?.rent_values?.pickup_location}
+              </Text>
+              <Text color="#444648" fontWeight={500} fontSize="12px">
+                {formatDat(values?.rent_values?.pickUp)} ·{" "}
+                {formatTime(values?.rent_values?.pickUp)}
+              </Text>
+            </Flex>
+          </Flex>
+
+          <Box mt="15px">
+            <Text mb="8px" color="#444648" fontWeight={500} fontSize="14px">
+              Number of Days
+            </Text>
+
+            <Flex
+              align="center"
+              justifyContent="space-between"
+              border="1px solid #d4d6d8"
+              borderRadius="3px"
+              p="10px"
+            >
+              <Text color="#646668">
+                {calculateDayDifference(
+                  values?.rent_values?.pickUp,
+                  values?.rent_values?.dropOff
+                )}
+              </Text>
+              <IoIosArrowDown size="16px" />
+            </Flex>
+          </Box>
+        </Box>
+
+        <Text
+          cursor="pointer"
+          textAlign="end"
+          color="#214528"
+          mt="16px"
+          fontWeight={500}
+          fontSize="12px"
+          onClick={() => router.back()}
         >
           Change?
-        </div>
-      </div>
+        </Text>
+      </Box>
 
-      <div className="mt-[20px] flex items-center gap-[16px] border border-[#E4E4E4] rounded-[12px] p-[15px] md:p-[24px] md:pb-0 md:pr-0">
-        <div>
-          <div className="font-gordita-bold text-[#242424]">Vehicle</div>
+      <Flex
+        align="center"
+        gap="16px"
+        mt="20px"
+        border="1px solid #e4e4e4"
+        borderRadius="12px"
+        p={{ base: "15px", md: "24px" }}
+        pb={{ base: "15px", md: "0" }}
+        pr={{ base: "15px", md: "0" }}
+      >
+        <Box>
+          <Text color="#242424" fontWeight={700}>
+            Vehicle
+          </Text>
 
-          <div className="mt-[12px]">
-            <img
+          <Box mt="12px" className="mt-[12px]">
+            <Image
+              w="226px"
+              h="180px"
+              objectFit="contain"
               src="/assets/car.jpg"
-              className="w-[226px] h-[180px] object-contain"
             />
-          </div>
-        </div>
+          </Box>
+        </Box>
 
-        <div className="grid grid-cols-2">
-          {carFeatures.map((item: any, i: any) => (
-            <div key={i} className={`gap-[8px] mb-[15px] flex items-center`}>
-              <img
-                className="h-[13px] w-[13px] object-contain"
-                src={item.img}
-              />
-              <div className="text-[12px] text-[#646464] font-gordita-medium">
-                {item.name}
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
+        <Grid templateColumns="repeat(2,1fr)">
+          <Flex
+            display={
+              data?.data?.extras?.find((item: any) => item === "AC") === "AC"
+                ? "flex"
+                : "hidden"
+            }
+            align="center"
+            mb="15px"
+            gap="8px"
+          >
+            <Image h="13px" w="13px" objectFit="contain" src="/assets/ac.jpg" />
+            <Text color="#646464" fontSize="12px" fontWeight={500}>
+              AC
+            </Text>
+          </Flex>
+
+          <Flex align="center" mb="15px" gap="8px">
+            <Image
+              h="13px"
+              w="13px"
+              objectFit="contain"
+              src="/assets/seater.jpg"
+            />
+            <Text color="#646464" fontSize="12px" fontWeight={500}>
+              {data?.data?.no_of_seats} Seater
+            </Text>
+          </Flex>
+
+          <Flex align="center" mb="15px" gap="8px">
+            <Image
+              h="13px"
+              w="13px"
+              objectFit="contain"
+              src="/assets/bags.jpg"
+            />
+            <Text color="#646464" fontSize="12px" fontWeight={500}>
+              {data?.data?.boot_capacity} Bags
+            </Text>
+          </Flex>
+
+          <Flex align="center" mb="15px" gap="8px">
+            <Image
+              h="13px"
+              w="13px"
+              objectFit="contain"
+              src="/assets/automatic.jpg"
+            />
+            <Text
+              color="#646464"
+              textTransform="capitalize"
+              fontSize="12px"
+              fontWeight={500}
+            >
+              {data?.data?.transmission}
+            </Text>
+          </Flex>
+
+          <Flex align="center" mb="15px" gap="8px">
+            <Image
+              h="13px"
+              w="13px"
+              objectFit="contain"
+              src="/assets/seater.jpg"
+            />
+            <Text
+              color="#646464"
+              textTransform="capitalize"
+              fontSize="12px"
+              fontWeight={500}
+            >
+              {data?.data?.doors} Doors
+            </Text>
+          </Flex>
+        </Grid>
+      </Flex>
+    </Box>
   );
 };
 

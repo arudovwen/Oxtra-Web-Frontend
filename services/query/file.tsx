@@ -1,5 +1,4 @@
 import { useMutation } from "react-query";
-import { addVehicle } from "../api/vehicles";
 import { uploadFile } from "../api/file";
 
 export const useUploadFile = (options = {}) => {

@@ -9,6 +9,7 @@
     "jsx-a11y/no-noninteractive-element-interactions": "off",
     "react/no-unescaped-entities": "off",
     "jsx-a11y/anchor-is-valid": "off",
+    "no-case-declarations": "off",
     "jsx-a11y/no-redundant-roles": "off",
     "react/no-children-prop": "off",
     "no-empty": "off",
