@@ -238,31 +238,31 @@ export const carAccessories = [
 export const carFeatures = [
   {
     name: 'AC',
-    img: '../../assets/ac.jpg',
+    img: '/assets/ac.jpg',
   },
   {
     name: '6 Seater',
-    img: '../../assets/seater.jpg',
+    img: '/assets/seater.jpg',
   },
   {
     name: '4 Bags',
-    img: '../../assets/bags.jpg',
+    img: '/assets/bags.jpg',
   },
   {
     name: 'Automatic',
-    img: '../../assets/automatic.jpg',
+    img: '/assets/automatic.jpg',
   },
   {
     name: 'Bluetooth',
-    img: '../../assets/bluetooth.jpg',
+    img: '/assets/bluetooth.jpg',
   },
   {
     name: '4 Doors',
-    img: '../../assets/seater.jpg',
+    img: '/assets/seater.jpg',
   },
   {
     name: 'Reverse Camera',
-    img: '../../assets/seater.jpg',
+    img: '/assets/seater.jpg',
   },
 ];
 

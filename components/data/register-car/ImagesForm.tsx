@@ -160,9 +160,13 @@ const ImagesForm = () => {
   const action = () => {
     mutate({
       // @ts-ignore
-      brand: vehicles?.brand?.value,
+      vehicle_type: vehicles?.vehicle_type?.label,
       // @ts-ignore
-      model: vehicles?.model?.value,
+      price_per_day: vehicles?.price_per_day,
+      // @ts-ignore
+      brand: vehicles?.brand?.label,
+      // @ts-ignore
+      model: vehicles?.model?.label,
       // @ts-ignore
       year: vehicles?.year,
       // @ts-ignore

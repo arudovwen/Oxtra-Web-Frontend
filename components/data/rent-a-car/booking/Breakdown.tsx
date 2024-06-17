@@ -1,120 +1,149 @@
+import {
+  Box,
+  Button,
+  Flex,
+  Image,
+  Input,
+  Text,
+  Textarea,
+} from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import React from "react";
 
 const Breakdown = ({
-  setDriverType,
-  driverType,
   dataClasses,
+  values,
+  data,
+  setValues,
+  calculateDayDifference,
   parClasses,
 }: any) => {
   const router = useRouter();
   return (
-    <div className="w-full md:w-[48%] md:h-[37.5rem] flex flex-col">
-      <div className="border border-[#E4E4E4] rounded-[12px] p-[24px]">
-        <div className="font-gordita-bold text-[#242424]">Driver</div>
-
-        <div className="mt-[16px] flex items-start md:items-center md:flex-row flex-col gap-[24px]">
-          {["I'll drive by myself", "I need a driver"].map(
-            (item: any, i: any) => (
-              <div
-                className="flex items-center gap-[8px] cursor-pointer"
-                key={i}
-                onClick={() => setDriverType(item)}
-              >
-                <img
-                  className="w-[16px] h-[16px] object-contain mb-[4px]"
-                  src={
-                    i === 0
-                      ? driverType === "I'll drive by myself"
-                        ? "../../assets/yingyang-green.jpg"
-                        : "../../assets/yingyang.jpg"
-                      : driverType === "I need a driver"
-                        ? "../../assets/yingyang-green.jpg"
-                        : "../../assets/yingyang.jpg"
-                  }
-                />
-                <div
-                  className={`${
-                    i === 0
-                      ? driverType === "I'll drive by myself"
-                        ? "font-gordita-medium"
-                        : "font-gordita-regular"
-                      : driverType === "I need a driver"
-                        ? "font-gordita-medium"
-                        : "font-gordita-regular"
-                  } font-gordita-medium`}
-                >
-                  {item}
-                </div>
-              </div>
-            )
-          )}
-        </div>
-
-        <div
-          className={`${
-            driverType.includes("driver") ? "block" : "hidden"
-          } mt-[18px]`}
-        >
-          <div className="text-#444648] text-[12px] font-gordita-bold">
+    <Flex
+      flexDir="column"
+      fontFamily="gordita"
+      w={{ base: "full", md: "48%" }}
+      h={{ base: "unset", md: "37.5rem" }}
+    >
+      <Box>
+        <Box>
+          <Text mb="8px" color="#444648" fontSize="12px" fontWeight={700}>
             Add note to driver
-          </div>
+          </Text>
 
-          <div>
-            <input
-              className="h-[75px] mt-[12px] w-full border border-[#C4C6C8] rounded-[8px] p-[16px] text-[#646668] text-[14px]"
-              placeholder="Enter any special requests for the order"
-            />
-          </div>
-        </div>
-      </div>
+          <Textarea
+            h="75px"
+            border="1px solid #c4c6c8"
+            bg="transparent"
+            p="16px"
+            value={values?.note}
+            onChange={(e) => setValues({ ...values, note: e.target.value })}
+            borderRadius="8px"
+            fontSize="14px"
+            color="#646668"
+            placeholder="Enter any special requests for the order"
+          />
+        </Box>
 
-      <div className="mt-[20px] border border-[#E4E4E4] rounded-[12px] p-[24px]">
-        <div className="font-gordita-bold text-[#242424]">Price Breakdown</div>
+        <Box mt="20px">
+          <Text mb="8px" color="#444648" fontSize="14px" fontWeight={500}>
+            Area where you plan to use the rental
+          </Text>
 
-        <div
-          className={`flex flex-col ${
-            driverType.includes("driver")
-              ? "gap-[24px] md:gap-[18px] mt-[24px] md:mt-[18px]"
-              : "mt-[24px] gap-[24px]"
-          }`}
+          <Input
+            h="48px"
+            border="1px solid #c4c6c8"
+            bg="transparent"
+            p="16px"
+            borderRadius="3px"
+            fontSize="14px"
+            color="#646668"
+          />
+        </Box>
+
+        <Text mt="8px" color="#0A3421" fontWeight={500} fontSize="12px">
+          Please note that outskirt locations attract extra charges on the
+          booking.
+        </Text>
+      </Box>
+
+      <Box mt="20px" border="1px solid #e4e4e4" borderRadius="12px" p="24px">
+        <Text color="#242424" fontWeight={700}>
+          Price Breakdown
+        </Text>
+
+        <Flex
+          flexDir="column"
+          gap={{ base: "24px", md: "18px" }}
+          mt={{ base: "24px", md: "18px" }}
         >
-          <div className={parClasses}>
-            <div className="text-[#646464]">Vehicle price per day</div>
-            <div className={dataClasses}>₦12,000</div>
-          </div>
+          <Box className={parClasses}>
+            <Text color="#646464">Vehicle price per day</Text>
+            <Text className={dataClasses}>
+              ₦{Number(data?.data?.price_per_day)?.toLocaleString()}
+            </Text>
+          </Box>
 
-          <div className={parClasses}>
-            <div className="text-[#646464]">No. of days</div>
-            <div className={dataClasses}>3</div>
-          </div>
+          <Box className={parClasses}>
+            <Text color="#646464">No. of days</Text>
+            <Text className={dataClasses}>
+              {calculateDayDifference(
+                values?.rent_values?.pickUp,
+                values?.rent_values?.dropOff
+              )}
+            </Text>
+          </Box>
 
-          <div className={parClasses}>
-            <div className="text-[#646464]">Driver Service</div>
-            <div className={dataClasses}>
-              {driverType.includes("driver") ? "₦5,000" : "No"}
-            </div>
-          </div>
+          <Box h="1px" w="full" bg="#e4e4e4" />
 
-          <div className="h-[1px] w-full bg-[#E4E4E4]"></div>
+          <Box className={parClasses}>
+            <Text color="#646464">Total</Text>
+            <Text className={dataClasses}>
+              {" "}
+              ₦
+              {Number(
+                Number(data?.data?.price_per_day) *
+                  calculateDayDifference(
+                    values?.rent_values?.pickUp,
+                    values?.rent_values?.dropOff
+                  )
+              )?.toLocaleString()}
+            </Text>
+          </Box>
+        </Flex>
+      </Box>
 
-          <div className={parClasses}>
-            <div className="text-[#646464]">Total</div>
-            <div className={dataClasses}> ₦41,000</div>
-          </div>
-        </div>
-      </div>
+      <Flex mt="24px" cursor="pointer" align="center" gap="8px">
+        <Image
+          cursor="pointer"
+          src="/share.svg"
+          w="24px"
+          h="24px"
+          objectFit="contain"
+        />
 
-      <button
+        <Text color="#646464" fontWeight={500} fontSize="12px">
+          Share vehicle and booking
+        </Text>
+      </Flex>
+      <Button
         onClick={() => {
           localStorage.setItem("checkout", "checkout");
+          sessionStorage.setItem("rent-values", JSON.stringify(values));
           router.push("/signup");
         }}
-        className="hover:opacity-[0.8] mt-[22px] md:mt-auto mt-[22px] text-white w-full h-[48px] bg-[#42864F] rounded-[8px]"
+        _hover={{ opacity: 0.8 }}
+        mt={{ base: "22px", md: "auto" }}
+        color="#fff"
+        w="full"
+        h="48px"
+        bg="#42864F"
+        borderRadius="8px"
       >
         Proceed to Pay
-      </button>
-    </div>
+      </Button>
+    </Flex>
   );
 };
 

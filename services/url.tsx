@@ -8,4 +8,6 @@ export const VEHICLE_DOC = "vehicle-documents";
 export const BRAND = "get-car-brands";
 export const MODELS = (id = "") => `get-car-models/${id}`;
 export const UPLOAD = "upload";
+export const RENT_CAR = "rents";
 export const NON_USER_VEHICLES = "get-vehicles";
+export const NON_USER_VEHICLE = "get-vehicle";

@@ -5,6 +5,7 @@ import {
   getBrands,
   getModels,
   getNonUserVehicles,
+  getNonUserVehicle,
 } from "../api/vehicles";
 
 export const useAddVehicle = (options = {}) => {
@@ -26,12 +27,12 @@ export const useAddVehicleDocs = (options = {}) => {
 };
 
 export const useGetModels = (options = {}) => {
-  const { mutate, isLoading } = useMutation(getModels, {
+  const { mutate, isLoading, data } = useMutation(getModels, {
     mutationKey: "getModels",
     ...options,
   });
 
-  return { mutate, isLoading };
+  return { mutate, isLoading, data };
 };
 
 export const useGetBrands = (options = {}) => {
@@ -42,10 +43,22 @@ export const useGetBrands = (options = {}) => {
   return { isLoading, data, refetch };
 };
 
-export const useGetNonUserVehicles = (options = {}) => {
+export const useGetNonUserVehicles = (filters = {}, options = {}) => {
   const { isLoading, data, refetch } = useQuery(
-    "getNonUserVehicles",
+    ["getNonUserVehicles", filters],
     getNonUserVehicles,
+    {
+      ...options,
+    }
+  );
+
+  return { isLoading, data, refetch };
+};
+
+export const useGetNonUserVehicle = (id = "", options = {}) => {
+  const { isLoading, data, refetch } = useQuery(
+    ["getNonUserVehicle", id],
+    getNonUserVehicle,
     {
       ...options,
     }
