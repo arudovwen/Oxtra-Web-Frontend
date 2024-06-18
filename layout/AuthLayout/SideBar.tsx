@@ -27,8 +27,8 @@ const SideBar = () => {
     setTimeout(() => {
       setLogginOut(false);
       router.push("/login");
-      localStorage.removeItem("user");
-      localStorage.removeItem("id");
+      localStorage.clear();
+      sessionStorage.clear();
     }, 2000);
   };
 
