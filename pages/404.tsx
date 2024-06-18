@@ -13,7 +13,7 @@ const Custom404 = () => {
       router.replace("/login");
     } else {
       // Redirect to dashboard if user is authenticated
-      router.replace("/dashboard/rent-a-car");
+      router.replace("/dashboard/rent-a-car/requests");
     }
   }, []);
 
