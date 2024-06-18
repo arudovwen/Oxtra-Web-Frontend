@@ -1,172 +1,221 @@
-import React from "react";
+import React, { useState } from "react";
 import classNames from "classnames";
-import Button from "../Button";
-import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
-import { SyntheticEvent } from "react";
-import { handleCsrf, resetPassword } from "@/services/authservices";
-import { useState } from "react";
-import { useAuth } from "@/hooks/useAuth";
-import { dangerAlert } from "../../../helpers/notifications";
-import Typography from "../Typorgraphy";
-import Loader from "../Loader";
-import Link from "next/link";
+import { Form, Formik } from "formik";
+import { resetPassValue, validatePassSchema } from "@/helpers/validations";
+import AuthInput from "../AuthInput";
+import { Box, Button, Flex, Radio, Text } from "@chakra-ui/react";
+import { useRouter } from "next/router";
+import useCustomToast from "@/utils/notifications";
+import { useResetPassword } from "@/services/query/auth";
 
 const labelClasses = classNames(
-  "block text-[14px] leading-[14px] font-gordita-medium text-brandGray-300 ",
-);
-
-const inputClasses = classNames(
-  `px-2 py-2 h-[40px] border border-[#d4d6d8] rounded-lg mt-3  w-full font-gordita-regular bg-brandGray-200 text-brandGray-100 text-base`,
+  "text-[12px] leading-[12px] font-gordita-bold text-[#444648]"
 );
 
 const ResetPasswordForm = () => {
-  const [enterPasswordHidden, setEnterPasswordHidden] = useState(true);
-  const [confirmPasswordHidden, setConfirmPasswordHidden] = useState(true);
-  const { disable, setDisable } = useAuth();
-  const [password, setPassword] = useState("");
-  const [password_confirmation, setPassword_confirmation] = useState("");
-  const [errorMessagePassword, setErrorMessagePassword] = useState("");
+  const router = useRouter();
+  const { token } = router.query;
 
-  const handleSubmit = (e: SyntheticEvent) => {
-    e.preventDefault();
-    setDisable(true);
-    const resetThePassword = {
-      password,
-      password_confirmation,
+  const { successToast, errorToast } = useCustomToast();
+
+  const [passwordValidations, setPasswordValidations] = useState({
+    length: false,
+    uppercase: false,
+    lowercase: false,
+    number: false,
+    specialChar: false,
+  });
+
+  const handlePasswordChange = (e: any) => {
+    const newPassword = e.target.value;
+
+    const validations = {
+      length: newPassword.length >= 8,
+      uppercase: /[A-Z]/.test(newPassword),
+      lowercase: /[a-z]/.test(newPassword),
+      number: /\d/.test(newPassword),
+      specialChar: /[!@#\$%\^&]/.test(newPassword),
     };
 
-    resetPassword(resetThePassword)
-      .then((res) => {
-        //  login(res.data.user);
-        //  successAlert(res.data.message);
-        setDisable(false);
-      })
-      .catch((err) => {
-        console.log(err);
-        setErrorMessagePassword(err?.data?.message);
-        dangerAlert(err?.data?.message);
-        setDisable(false);
-      });
+    setPasswordValidations(validations);
   };
 
+  const { mutate, isLoading } = useResetPassword({
+    onSuccess: (res: any) => {
+      successToast(res?.message);
+      router.push("/login");
+    },
+    onError: (err: any) => {
+      errorToast(
+        err?.response?.data?.message || err?.message || "An Error occurred"
+      );
+    },
+  });
+
+  const handleSubmit = (values = "") => {
+    mutate({
+      token,
+      // @ts-ignore
+      ...values,
+    });
+  };
+
+  const [show, setShow] = useState(false);
+  const [showNew, setShowNew] = useState(false);
+
   return (
-    <main className="w-[90%] lg:mx-auto lg:max-w-[500px]">
-      <div className="mb-4 mt-[40px] text-brandGray-300">
-        <Typography as="h4" font="font-gordita-medium">
-          Reset Password?
-        </Typography>
-      </div>
-      <div className="text-brandGray-100 mb-8">
-        <p className="font-gordita-regular text-[16px]">
-          You requested for a password reset. Please enter a new password and
-          confirm.
-        </p>
-      </div>
+    <Box fontFamily="gordita" w={{ base: "95%", md: "100%" }}>
+      <Flex mt="30px" justifyContent="center" w="100%" align="center">
+        <Box
+          border="1px solid #EAEAEA"
+          w="30rem"
+          borderRadius="10px"
+          py="28px"
+          px="20px"
+        >
+          <Box>
+            <Text color="#444648" fontWeight={700} fontSize="24px">
+              Reset Password?
+            </Text>
+            <Text color="#646668" mt="5px">
+              You requested for a password reset. Please enter a new password
+              and confirm.
+            </Text>
+          </Box>
 
-      <section className="flex-auto">
-        <div className="">
-          <form className="mt-6" onSubmit={handleSubmit}>
-            <div className="grid grid-cols-12 gap-y-6 gap-x-4 mb-7">
-              <div className="col-span-full">
-                <label htmlFor="email-address" className={labelClasses}>
-                  Enter new password
-                </label>
-                <div className="mt-1 relative">
-                  <input
-                    type={`${enterPasswordHidden ? "password" : "text"}`}
-                    placeholder="Enter password"
-                    onChange={(e) => setPassword(e.target.value)}
-                    className={inputClasses}
-                    required
-                  />
-
-                  {enterPasswordHidden ? (
-                    <AiOutlineEye
-                      className="absolute top-[24px] right-[12px]"
-                      onClick={() =>
-                        setEnterPasswordHidden(!enterPasswordHidden)
-                      }
-                    />
-                  ) : (
-                    <AiOutlineEyeInvisible
-                      className="absolute top-[24px] right-[12px]"
-                      onClick={() =>
-                        setEnterPasswordHidden(!enterPasswordHidden)
-                      }
-                    />
-                  )}
-                </div>
-
-                {errorMessagePassword && (
-                  <p className="text-red-700 text-sm mt-1">
-                    {errorMessagePassword}
-                  </p>
-                )}
-              </div>{" "}
-              <div className="col-span-full ">
-                <label htmlFor="email-address" className={labelClasses}>
-                  Confirm new password
-                </label>
-                <div className="mt-1 relative">
-                  <input
-                    type={`${confirmPasswordHidden ? "password" : "text"}`}
-                    placeholder="Enter password"
-                    onChange={(e) => setPassword_confirmation(e.target.value)}
-                    className={inputClasses}
-                    required
-                  />
-
-                  {confirmPasswordHidden ? (
-                    <AiOutlineEye
-                      className="absolute top-[24px] right-[12px]"
-                      onClick={() =>
-                        setConfirmPasswordHidden(!confirmPasswordHidden)
-                      }
-                    />
-                  ) : (
-                    <AiOutlineEyeInvisible
-                      className="absolute top-[24px] right-[12px]"
-                      onClick={() =>
-                        setConfirmPasswordHidden(!confirmPasswordHidden)
-                      }
-                    />
-                  )}
-                </div>
-
-                {errorMessagePassword && (
-                  <p className="text-red-700 text-sm mt-1">
-                    {errorMessagePassword}
-                  </p>
-                )}
-              </div>{" "}
-            </div>
-
-            <Button
-              bg={!disable ? "bg-brandGreen-300" : "bg-brandGreen-100"}
-              hover="hover:bg-brandGray-200"
-              textColor="text-white"
-              width={true}
-              size="text-sm"
-              type="submit"
+          <Box w="full" maxW="500px" mt="32px">
+            <Formik
+              /* @ts-ignore */
+              onSubmit={handleSubmit}
+              initialValues={resetPassValue}
+              validationSchema={validatePassSchema}
             >
-              {!disable ? (
-                "Reset Password"
-              ) : (
-                <Loader type="spin" width={14} height={14} color="#42864F" />
+              {({
+                values,
+                errors,
+                touched,
+                handleChange,
+                handleBlur,
+                handleSubmit,
+                isValid,
+                dirty,
+              }) => (
+                /* @ts-ignore */
+                <Form onSubmit={handleSubmit}>
+                  <Flex flexDirection="column" rowGap={6}>
+                    <Box>
+                      <Text className={labelClasses}>Enter new password</Text>
+
+                      <AuthInput
+                        placeholder="Enter password"
+                        value={values?.password}
+                        onChange={(e: any) => {
+                          handlePasswordChange(e);
+                          handleChange(e);
+                        }}
+                        onBlur={handleBlur}
+                        name="password"
+                        error={
+                          errors?.password &&
+                          touched?.password &&
+                          errors?.password
+                        }
+                        onClick={() => setShow((prev) => !prev)}
+                        password={show ? false : true}
+                        show
+                        type={show ? "text" : "password"}
+                      />
+                    </Box>
+
+                    <Box>
+                      <Text className={labelClasses}>Confirm new password</Text>
+
+                      <AuthInput
+                        placeholder="Enter password"
+                        value={values?.password_confirmation}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        name="password_confirmation"
+                        error={
+                          errors?.password_confirmation &&
+                          touched?.password_confirmation &&
+                          errors?.password_confirmation
+                        }
+                        onClick={() => setShowNew((prev) => !prev)}
+                        password={showNew ? false : true}
+                        show
+                        type={showNew ? "text" : "password"}
+                      />
+                    </Box>
+                  </Flex>
+                  <Box mt="22px" mb="32px">
+                    <Flex align="flex-start" gap="8px">
+                      <Radio
+                        isChecked={passwordValidations.length}
+                        isReadOnly
+                        bg="semiBlue"
+                        size="sm"
+                        border="1px solid rgba(36, 99, 235, 0.3)"
+                      />
+                      <Text color="#4e4e4e" fontSize="10px" fontWeight={500}>
+                        Be at least 8 characters or more
+                      </Text>
+                    </Flex>
+
+                    <Flex align="flex-start" mt="8px" gap="8px">
+                      <Radio
+                        isChecked={
+                          passwordValidations.uppercase &&
+                          passwordValidations.lowercase &&
+                          passwordValidations.number &&
+                          passwordValidations.specialChar
+                        }
+                        isReadOnly
+                        bg="semiBlue"
+                        size="sm"
+                        border="1px solid rgba(36, 99, 235, 0.3)"
+                      />
+                      <Text color="#4e4e4e" fontSize="10px" fontWeight={500}>
+                        Password must include an UPPERCASE, a number and special
+                        character (e.g: !@#$%&*?)
+                      </Text>
+                    </Flex>
+                  </Box>
+                  <Button
+                    bg="#438950"
+                    _hover={{ opacity: 0.8 }}
+                    borderRadius="8px"
+                    h="48px"
+                    color="#fff"
+                    fontSize="14px"
+                    fontWeight={500}
+                    isLoading={isLoading}
+                    w="full"
+                    type="submit"
+                    _active={{ bg: "#438950" }}
+                    _focus={{ bg: "#438950" }}
+                    isDisabled={!isValid || !dirty}
+                  >
+                    Reset Password
+                  </Button>{" "}
+                </Form>
               )}
-            </Button>
-            <div className="text-center mt-[32px]">
-              <span className="text-[12px] text-brandGray-300 leading-[12px] font-gordita-medium">
-                I did not make the reset request{" "}
-                <Link href="/" className="text-brandGreen-300 ">
-                  Report here
-                </Link>
-              </span>
-            </div>
-          </form>
-        </div>
-      </section>
-    </main>
+            </Formik>
+            <Box
+              fontSize="12px"
+              color="brandGray-300"
+              lineHeight="12px"
+              fontWeight={500}
+              textAlign="center"
+              mt="32px"
+            >
+              I did not make this request{" "}
+              <span className="text-brandGreen-300 ">Report here</span>
+            </Box>
+          </Box>
+        </Box>
+      </Flex>
+    </Box>
   );
 };
 

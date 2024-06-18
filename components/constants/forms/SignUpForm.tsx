@@ -1,12 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import classNames from "classnames";
-import { useState } from "react";
 import Select from "react-select";
 import { useRouter } from "next/router";
 import DatePicker from "react-multi-date-picker";
 import {
   formatDate,
-  formatNewDate,
   formatTime,
   formatt,
 } from "@/helpers/helpers";
@@ -143,269 +141,278 @@ const SignUpForm = () => {
     checkout !== null ? "Create account and Pay" : "Create Account";
 
   return (
-    <main className="px-[10px]">
-      <div
-        className={`${
-          checkout === "checkout" ? "flex" : "hidden"
-        } mt-[50px] md:mt-[30px]`}
+    <Box px="10px" w="100%" fontFamily="gordita">
+      <Box
+        mt={{ base: "50px", md: "30px" }}
+        display={checkout === "checkout" ? "flex" : "none"}
       >
         <Pick_Return />
-      </div>
+      </Box>
 
-      <div className="mt-[30px]">
-        <div className="text-center mb-[20px] text-[#444648] font-gordita-bold text-[24px]">
-          Sign up
-        </div>
-      </div>
-
-      <section className="flex-auto w-[100%] lg:mx-auto lg:max-w-[500px]">
-        <Formik
-          /* @ts-ignore */
-          onSubmit={handleSubmit}
-          initialValues={signUpValues}
-          validationSchema={validateSignupSchema}
+      <Flex mt="30px" justifyContent="center" w="100%" align="center">
+        <Box
+          border="1px solid #EAEAEA"
+          w="30rem"
+          borderRadius="10px"
+          py="28px"
+          px="20px"
         >
-          {({
-            values,
-            errors,
-            touched,
-            handleChange,
-            handleBlur,
-            handleSubmit,
-            setValues,
-            isValid,
-            dirty,
-          }) => (
-            /* @ts-ignore */
-            <Form onSubmit={handleSubmit}>
-              <div className="flex flex-col gap-y-[20px] gap-x-4">
-                <Flex w="full" align="center" gap="20px">
-                  <Box w="full">
-                    <Text className={labelClasses}>First name</Text>
-                    <AuthInput
-                      placeholder="Enter your first name"
-                      name="firstName"
-                      mt
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      value={values?.firstName}
-                      error={
-                        errors?.firstName &&
-                        touched?.firstName &&
-                        errors?.firstName
-                      }
-                    />
-                  </Box>
+          <Box>
+            {" "}
+            <Text color="#444648" fontWeight={700} fontSize="24px">
+              Sign up
+            </Text>
+          </Box>
 
-                  <Box w="full">
-                    <Text className={labelClasses}>Last name</Text>
-                    <AuthInput
-                      placeholder="Enter your last name"
-                      name="lastName"
-                      mt
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      value={values?.lastName}
-                      error={
-                        errors?.lastName &&
-                        touched?.lastName &&
-                        errors?.lastName
-                      }
-                    />
-                  </Box>
-                </Flex>
-
-                <div className="col-span-full">
-                  <label htmlFor="" className={labelClasses}>
-                    Email address
-                  </label>
-                  <div>
-                    <AuthInput
-                      placeholder="Enter your email address"
-                      name="email"
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      value={values?.email}
-                      error={errors?.email && touched?.email && errors?.email}
-                    />
-                  </div>
-                </div>
-
-                <div className="col-span-full">
-                  <label htmlFor="email-address" className={labelClasses}>
-                    Enter password
-                  </label>
-                  <div className="relative">
-                    <AuthInput
-                      placeholder="Enter password"
-                      value={values?.password}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      name="password"
-                      error={
-                        errors?.password &&
-                        touched?.password &&
-                        errors?.password
-                      }
-                      onClick={() => setShow((prev) => !prev)}
-                      password={show ? false : true}
-                      show
-                      type={show ? "text" : "password"}
-                    />
-                  </div>
-                </div>
-
-                <Grid
-                  templateColumns={{
-                    base: "repeat(2,1fr)",
-                    md: "repeat(7,1fr)",
-                  }}
-                  columnGap="16px"
-                  w="full"
-                >
-                  <GridItem colSpan={{ base: 1, md: 2 }}>
-                    <label htmlFor="expiration-date" className={labelClasses}>
-                      Phone code
-                    </label>
-                    <div className="mt-[5px]">
-                      <Select
-                        styles={customStyles}
-                        placeholder="+234"
-                        /* @ts-ignore */
-                        options={codeOption}
-                        value={values?.phoneCode}
-                        defaultValue={values?.phoneCode}
-                        onChange={(selectionOption) =>
-                          setValues({
-                            ...values,
-                            /* @ts-ignore */
-                            phoneCode: selectionOption,
-                          })
-                        }
-                        components={{
-                          IndicatorSeparator: () => (
-                            <div style={{ display: "none" }}></div>
-                          ),
-                          DropdownIndicator: () => (
-                            <div className="mr-[16px]">
-                              <IoIosArrowDown size="20px" />
-                            </div>
-                          ),
-                        }}
-                      />
-                    </div>
-                  </GridItem>
-
-                  <GridItem colSpan={{ base: 1, md: 3 }}>
-                    <label htmlFor="expiration-date" className={labelClasses}>
-                      Phone number
-                    </label>
-                    <div>
-                      <AuthInput
-                        placeholder="08083594505"
-                        name="phoneNumber"
-                        onChange={(e: any) => {
-                          const inputPhone = e.target.value
-                            .replace(/\D/g, "")
-                            .slice(0, 11);
-                          handleChange({
-                            target: {
-                              name: "phoneNumber",
-                              value: `${inputPhone}`,
-                            },
-                          });
-                        }}
-                        onBlur={handleBlur}
-                        value={values?.phoneNumber}
-                        error={
-                          errors?.phoneNumber &&
-                          touched?.phoneNumber &&
-                          errors?.phoneNumber
-                        }
-                      />
-                    </div>
-                  </GridItem>
-
-                  <GridItem
-                    mt={{ base: "16px", md: "unset" }}
-                    colSpan={{ base: 2, md: 2 }}
-                  >
-                    <div className="w-full">
-                      <label htmlFor="pick up Date" className={labelClasses}>
-                        Date of birth
-                      </label>
-
-                      <div className="signup-date font-gordita-regular mt-[4px]">
-                        <DatePicker
-                          placeholder="Select Date"
-                          value={values?.dob}
-                          onChange={(date: any) => {
-                            setValues({ ...values, dob: date });
-                          }}
+          <Box w="full" maxW="500px" mt="32px">
+            <Formik
+              /* @ts-ignore */
+              onSubmit={handleSubmit}
+              initialValues={signUpValues}
+              validationSchema={validateSignupSchema}
+            >
+              {({
+                values,
+                errors,
+                touched,
+                handleChange,
+                handleBlur,
+                handleSubmit,
+                setValues,
+                isValid,
+                dirty,
+              }) => (
+                /* @ts-ignore */
+                <Form onSubmit={handleSubmit}>
+                  <Flex flexDir="column" rowGap="20px" columnGap={4}>
+                    <Flex w="full" align="center" gap="20px">
+                      <Box w="full">
+                        <Text className={labelClasses}>First name</Text>
+                        <AuthInput
+                          placeholder="Enter your first name"
+                          name="firstName"
+                          mt
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          value={values?.firstName}
+                          error={
+                            errors?.firstName &&
+                            touched?.firstName &&
+                            errors?.firstName
+                          }
                         />
-                      </div>
-                    </div>
-                  </GridItem>
-                </Grid>
-              </div>
-              <div className="mt-6 flex space-x-2 mb-[35.5px]">
-                <div
-                  onClick={() => {
-                    setTandC((prev) => !prev);
-                  }}
-                  className="cursor-pointer flex gap-2 items-center"
-                >
-                  <Radio
-                    bg="semiBlue"
-                    size="sm"
-                    border="1px solid rgba(36, 99, 235, 0.3)"
-                    /* @ts-ignore */
-                    value={tandC}
-                    isChecked={tandC}
-                    onClick={() => {
-                      setTandC((prev) => !prev);
-                    }}
-                  />
-                  <p className="text-[12px] text-brandGray-300 leading-[12px] font-gordita-regular">
-                    Accept our{" "}
-                    <span className="font-gordita-medium">
-                      Terms and Conditions
-                    </span>{" "}
-                  </p>
-                </div>
-              </div>
-              <Button
-                bg="#438950"
-                _hover={{ opacity: 0.8 }}
-                borderRadius="8px"
-                h="48px"
-                color="#fff"
-                isLoading={isLoading || isRent}
-                fontSize="14px"
-                fontWeight={500}
-                _active={{ bg: "#438950" }}
-                _focus={{ bg: "#438950" }}
-                w="full"
-                type="submit"
-                isDisabled={!isValid || !dirty || !tandC}
-              >
-                {buttonText}
-              </Button>{" "}
-            </Form>
-          )}
-        </Formik>
+                      </Box>
 
-        <div className="mt-[32px] text-center text-[12px] text-[#444648]">
-          Already have an account ?{" "}
-          <span
-            className="font-gordita-medium text-[#438950] cursor-pointer"
-            onClick={() => router.push("/login")}
-          >
-            Login
-          </span>
-        </div>
-      </section>
-    </main>
+                      <Box w="full">
+                        <Text className={labelClasses}>Last name</Text>
+                        <AuthInput
+                          placeholder="Enter your last name"
+                          name="lastName"
+                          mt
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          value={values?.lastName}
+                          error={
+                            errors?.lastName &&
+                            touched?.lastName &&
+                            errors?.lastName
+                          }
+                        />
+                      </Box>
+                    </Flex>
+
+                    <Box>
+                      <Text className={labelClasses}>Email address</Text>
+
+                      <AuthInput
+                        placeholder="Enter your email address"
+                        name="email"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values?.email}
+                        error={errors?.email && touched?.email && errors?.email}
+                      />
+                    </Box>
+
+                    <Box>
+                      <Text className={labelClasses}>
+                        Enter password
+                      </Text>
+
+                      <AuthInput
+                        placeholder="Enter password"
+                        value={values?.password}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        name="password"
+                        error={
+                          errors?.password &&
+                          touched?.password &&
+                          errors?.password
+                        }
+                        onClick={() => setShow((prev) => !prev)}
+                        password={show ? false : true}
+                        show
+                        type={show ? "text" : "password"}
+                      />
+                    </Box>
+
+                    <Grid
+                      templateColumns={{
+                        base: "repeat(2,1fr)",
+                        md: "repeat(7,1fr)",
+                      }}
+                      columnGap="16px"
+                      w="full"
+                    >
+                      <GridItem colSpan={{ base: 1, md: 2 }}>
+                        <Text className={labelClasses}>Phone code</Text>
+                        <Box mt="5px">
+                          <Select
+                            styles={customStyles}
+                            placeholder="+234"
+                            /* @ts-ignore */
+                            options={codeOption}
+                            value={values?.phoneCode}
+                            defaultValue={values?.phoneCode}
+                            onChange={(selectionOption) =>
+                              setValues({
+                                ...values,
+                                /* @ts-ignore */
+                                phoneCode: selectionOption,
+                              })
+                            }
+                            components={{
+                              IndicatorSeparator: () => (
+                                <div style={{ display: "none" }}></div>
+                              ),
+                              DropdownIndicator: () => (
+                                <div className="mr-[16px]">
+                                  <IoIosArrowDown size="20px" />
+                                </div>
+                              ),
+                            }}
+                          />
+                        </Box>
+                      </GridItem>
+
+                      <GridItem colSpan={{ base: 1, md: 3 }}>
+                        <Text className={labelClasses}>Phone number</Text>
+
+                        <AuthInput
+                          placeholder="08083594505"
+                          name="phoneNumber"
+                          onChange={(e: any) => {
+                            const inputPhone = e.target.value
+                              .replace(/\D/g, "")
+                              .slice(0, 11);
+                            handleChange({
+                              target: {
+                                name: "phoneNumber",
+                                value: `${inputPhone}`,
+                              },
+                            });
+                          }}
+                          onBlur={handleBlur}
+                          value={values?.phoneNumber}
+                          error={
+                            errors?.phoneNumber &&
+                            touched?.phoneNumber &&
+                            errors?.phoneNumber
+                          }
+                        />
+                      </GridItem>
+
+                      <GridItem
+                        mt={{ base: "16px", md: "unset" }}
+                        colSpan={{ base: 2, md: 2 }}
+                      >
+                        <Box w="full">
+                          <Text className={labelClasses}>Date of birth</Text>
+
+                          <Box mt="4px" className="signup-date">
+                            <DatePicker
+                              placeholder="Select Date"
+                              value={values?.dob}
+                              onChange={(date: any) => {
+                                setValues({ ...values, dob: date });
+                              }}
+                            />
+                          </Box>
+                        </Box>
+                      </GridItem>
+                    </Grid>
+                  </Flex>
+                  <Flex
+                    mt={6}
+                    mb="35.5px"
+                    // className="mt-6 flex space-x-2 mb-[35.5px]"
+                  >
+                    <Flex
+                      align="center"
+                      gap="2"
+                      cursor="pointer"
+                      onClick={() => {
+                        setTandC((prev) => !prev);
+                      }}
+                    >
+                      <Radio
+                        bg="semiBlue"
+                        size="sm"
+                        border="1px solid rgba(36, 99, 235, 0.3)"
+                        /* @ts-ignore */
+                        value={tandC}
+                        isChecked={tandC}
+                        onClick={() => {
+                          setTandC((prev) => !prev);
+                        }}
+                      />
+                      <Text
+                        fontSize="12px"
+                        color="brandGray-300"
+                        lineHeight="12px"
+                      >
+                        Accept our{" "}
+                        <span style={{ fontWeight: 500 }}>
+                          Terms and Conditions
+                        </span>{" "}
+                      </Text>
+                    </Flex>
+                  </Flex>
+                  <Button
+                    bg="#438950"
+                    _hover={{ opacity: 0.8 }}
+                    borderRadius="8px"
+                    h="48px"
+                    color="#fff"
+                    isLoading={isLoading || isRent}
+                    fontSize="14px"
+                    fontWeight={500}
+                    _active={{ bg: "#438950" }}
+                    _focus={{ bg: "#438950" }}
+                    w="full"
+                    type="submit"
+                    isDisabled={!isValid || !dirty || !tandC}
+                  >
+                    {buttonText}
+                  </Button>{" "}
+                </Form>
+              )}
+            </Formik>
+
+            <Text textAlign="center" color="#444648" fontSize="12px" mt="32px">
+              Already have an account ?{" "}
+              <span
+                style={{ fontWeight: 500, color: "#438950", cursor: "pointer" }}
+                onClick={() => router.push("/login")}
+              >
+                Login
+              </span>
+            </Text>
+          </Box>
+        </Box>
+      </Flex>
+    </Box>
   );
 };
 
