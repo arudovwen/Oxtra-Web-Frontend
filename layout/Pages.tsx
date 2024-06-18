@@ -24,7 +24,7 @@ const Pages = ({ children }: any) => {
       // User is authenticated
       if (isNonAuthRoute) {
         // Redirect to dashboard if trying to access a non-auth route
-        router.replace("/dashboard/rent-a-car");
+        router.replace("/dashboard/rent-a-car/requests");
       }
     }
   }, [router.pathname]);

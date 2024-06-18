@@ -11,6 +11,7 @@
     "jsx-a11y/anchor-is-valid": "off",
     "no-case-declarations": "off",
     "jsx-a11y/no-redundant-roles": "off",
+    "no-useless-escape": "off",
     "react/no-children-prop": "off",
     "no-empty": "off",
     "no-prototype-builtins": "off",
