@@ -21,6 +21,17 @@ input {
   outline: none;
 }
 
+textarea {
+  box-sizing: border-box;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  outline: none;
+}
+
+textarea:focus {
+  border: 1px solid #42864f;
+}
+
 input:focus {
   border: 1px solid #42864f;
 }
