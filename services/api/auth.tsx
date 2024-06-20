@@ -12,6 +12,16 @@ export const login = async (body: any) => {
   return response.data;
 };
 
+export const forgotPassword = async (body: any) => {
+  const response = await axios.post(API.FORGOT_PASSWORD, body);
+  return response.data;
+};
+
+export const resetPassword = async (body: any) => {
+  const response = await axios.post(API.RESET_PASSWORD, body);
+  return response.data;
+};
+
 export const getUser = async ({ queryKey }: any) => {
   const [, id] = queryKey;
   const apiUrl = `${API.GET_USER}/${id}`;
