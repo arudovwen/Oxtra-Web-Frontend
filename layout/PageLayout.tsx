@@ -39,11 +39,13 @@ const AuthLayout = ({ children }: any) => {
         <Flex align="flex-start" pos="relative" w="1192px" gap="36px">
           <Box
             display={
-              isLoading || router.pathname === "/client/vehicles/[id]"
-                ? "block"
-                : isMobile || !isSideBarRouteActive()
-                  ? "none"
-                  : "block"
+              isMobile
+                ? "none"
+                : isLoading || router.pathname === "/client/vehicles/[id]"
+                  ? "block"
+                  : !isSideBarRouteActive()
+                    ? "none"
+                    : "block"
             }
             w="30%"
             pos="sticky"
@@ -53,16 +55,18 @@ const AuthLayout = ({ children }: any) => {
           </Box>
           <Box
             w={
-              router.pathname === "/client/vehicles/[id]"
-                ? "70%"
-                : isMobile || !isSideBarRouteActive()
-                  ? "100%"
-                  : "70%"
+              isMobile
+                ? "100%"
+                : router.pathname === "/client/vehicles/[id]"
+                  ? "70%"
+                  : !isSideBarRouteActive()
+                    ? "100%"
+                    : "70%"
             }
             px={
-              router.pathname === "/client/vehicles/[id]"
+              isMobile
                 ? "20px"
-                : isMobile
+                : router.pathname === "/client/vehicles/[id]"
                   ? "20px"
                   : !isSideBarRouteActive()
                     ? "0"

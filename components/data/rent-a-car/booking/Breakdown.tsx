@@ -94,7 +94,7 @@ const Breakdown = ({
             <Text className={dataClasses}>
               {calculateDayDifference(
                 values?.rent_values?.pickUp,
-                values?.rent_values?.dropOff
+                values?.rent_values?.dropOff,
               )}
             </Text>
           </Box>
@@ -110,8 +110,8 @@ const Breakdown = ({
                 Number(data?.data?.price_per_day) *
                   calculateDayDifference(
                     values?.rent_values?.pickUp,
-                    values?.rent_values?.dropOff
-                  )
+                    values?.rent_values?.dropOff,
+                  ),
               )?.toLocaleString()}
             </Text>
           </Box>

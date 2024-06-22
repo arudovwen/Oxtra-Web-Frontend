@@ -72,7 +72,7 @@ export const formatDate = (date: any, fallback = "", withTime = false) => {
 export const formatNewDates = (
   date: Date,
   options?: any,
-  hasTime?: boolean
+  hasTime?: boolean,
 ) => {
   const optionsWithTime = hasTime
     ? {

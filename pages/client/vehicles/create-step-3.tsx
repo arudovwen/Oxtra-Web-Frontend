@@ -6,7 +6,7 @@ import DocumentForm from "@/components/data/register-car/DocumentForm";
 const step3 = () => {
   return (
     <Box mt="-50px">
-      <PutUpYourVehicleLayout activePage="Images">
+      <PutUpYourVehicleLayout activePage="Documents">
         <DocumentForm />
       </PutUpYourVehicleLayout>
     </Box>

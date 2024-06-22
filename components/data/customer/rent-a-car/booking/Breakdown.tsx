@@ -31,7 +31,7 @@ const Breakdown = ({
     },
     onError: (err: any) => {
       errorToast(
-        err?.response?.data?.message || err?.message || "An Error occurred"
+        err?.response?.data?.message || err?.message || "An Error occurred",
       );
     },
   });
@@ -57,7 +57,7 @@ const Breakdown = ({
         // @ts-ignore
         values?.rent_values?.pickUp,
         // @ts-ignore
-        values?.rent_values?.dropOff
+        values?.rent_values?.dropOff,
       ),
       // @ts-ignore
       pickup_location: values?.rent_values?.pickup_location,
@@ -140,7 +140,7 @@ const Breakdown = ({
             <Text className={dataClasses}>
               {calculateDayDifference(
                 values?.rent_values?.pickUp,
-                values?.rent_values?.dropOff
+                values?.rent_values?.dropOff,
               )}
             </Text>
           </Box>
@@ -156,8 +156,8 @@ const Breakdown = ({
                 Number(data?.data?.price_per_day) *
                   calculateDayDifference(
                     values?.rent_values?.pickUp,
-                    values?.rent_values?.dropOff
-                  )
+                    values?.rent_values?.dropOff,
+                  ),
               )?.toLocaleString()}
             </Text>
           </Box>

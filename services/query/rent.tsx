@@ -16,7 +16,7 @@ export const useGetUsersRent = (filters = {}, options = {}) => {
     getUsersRent,
     {
       ...options,
-    }
+    },
   );
 
   return { isLoading, data, refetch };
@@ -28,7 +28,7 @@ export const useGetSingleRent = (id = "", options = {}) => {
     () => getSingleRent(id),
     {
       ...options,
-    }
+    },
   );
   return { isLoading, data, refetch };
 };

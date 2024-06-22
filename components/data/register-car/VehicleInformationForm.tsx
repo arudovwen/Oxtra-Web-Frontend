@@ -16,7 +16,7 @@ import { useGetBrands, useGetModels } from "@/services/query/vehicle";
 
 const VehicleInformationForm = () => {
   const labelClasses = classNames(
-    "text-[12px] text-[#4c4c4c] font-gordita-medium"
+    "text-[12px] text-[#4c4c4c] font-gordita-medium",
   );
 
   const [values, setValues] = useState({
@@ -170,7 +170,7 @@ const VehicleInformationForm = () => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const inputClasses = classNames(
-    "mt-[12px] text-[14px]  text-[#666666] rounded-[8px] py-[14px] px-[16px] border border-[#cccccc]"
+    "mt-[12px] text-[14px]  text-[#666666] rounded-[8px] py-[14px] px-[16px] border border-[#cccccc]",
   );
 
   const [user, setUser] = useState("");
@@ -183,7 +183,6 @@ const VehicleInformationForm = () => {
       setUser(storedUser);
     }
   }, []);
-  console.log(user);
 
   const action = () => {
     setLoading(true);
