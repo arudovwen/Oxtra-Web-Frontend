@@ -24,7 +24,7 @@ import useCustomToast from "@/utils/notifications";
 import { useRentCar } from "@/services/query/rent";
 
 const labelClasses = classNames(
-  "text-[12px] leading-[12px] font-gordita-bold text-[#444648]"
+  "text-[12px] leading-[12px] font-gordita-bold text-[#444648]",
 );
 
 const SignUpForm = () => {
@@ -56,7 +56,7 @@ const SignUpForm = () => {
     },
     onError: (err: any) => {
       errorToast(
-        err?.response?.data?.message || err?.message || "An Error occurred"
+        err?.response?.data?.message || err?.message || "An Error occurred",
       );
     },
   });
@@ -97,7 +97,7 @@ const SignUpForm = () => {
         // @ts-ignore
         rentValues?.rent_values?.pickUp,
         // @ts-ignore
-        rentValues?.rent_values?.dropOff
+        rentValues?.rent_values?.dropOff,
       ),
       // @ts-ignore
       pickup_location: rentValues?.rent_values?.pickup_location,
@@ -117,7 +117,7 @@ const SignUpForm = () => {
     },
     onError: (err: any) => {
       errorToast(
-        err?.response?.data?.message || err?.message || "An Error occurred"
+        err?.response?.data?.message || err?.message || "An Error occurred",
       );
     },
   });

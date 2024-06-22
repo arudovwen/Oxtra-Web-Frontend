@@ -18,7 +18,7 @@ const Custom404 = () => {
   }, []);
 
   const [user, setUser] = useState<string | null>(null);
-  
+
   useEffect(() => {
     const userValue = localStorage.getItem("user");
     setUser(userValue);

@@ -63,11 +63,16 @@ export const getUserVehicles = async ({ queryKey }: any) => {
 
 export const getUserVehicle = async ({ queryKey }: any) => {
   const [, id] = queryKey;
-  const res = await axiosInstance.get(`${API.USER_VEHICLE}/${id}`);
+  const res = await axiosInstance.get(`${API.USER_VEHICLES}/${id}`);
   return res.data;
 };
 
 export const getOwnerVehicles = async () => {
   const res = await axiosInstance.get(API.OWNER_VEHICLES);
+  return res.data;
+};
+
+export const deleteOwnerVehicle = async (query: any) => {
+  const res = await axiosInstance.delete(API.DEL_USER_VEHICLES(query));
   return res.data;
 };

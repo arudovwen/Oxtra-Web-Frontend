@@ -42,7 +42,7 @@ const index = () => {
           </Text>
 
           <Flex align="center" gap="24px">
-            {["Rent a car", "Put up my car"].map((item, i) => (
+            {["Rent a car", "Put up my car"].map((item: any, i: any) => (
               <Flex w="100%" h={isLoading ? "15vh" : ""}>
                 <Flex
                   flexDir="column"

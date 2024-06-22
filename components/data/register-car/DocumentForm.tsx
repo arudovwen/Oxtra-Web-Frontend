@@ -23,17 +23,17 @@ import VehicleSuccess from "@/components/modals/VehicleSuccess";
 
 const DocumentForm = () => {
   const inputClasses = classNames(
-    "mt-[12px] text-[14px]  text-[#666666] rounded-[8px] py-[14px] px-[16px] border border-[#cccccc]"
+    "mt-[12px] text-[14px]  text-[#666666] rounded-[8px] py-[14px] px-[16px] border border-[#cccccc]",
   );
 
   const labelClasses = classNames("mt-auto text-[#797980] text-[10px]");
 
   const boxClasses = classNames(
-    "bg-[#F9FAFB] h-[138px] text-[10px] rounded-[12px] p-[16px]"
+    "bg-[#F9FAFB] h-[138px] text-[10px] rounded-[12px] p-[16px]",
   );
 
   const holderClasses = classNames(
-    "text-[#41454C] text-[10px] font-gordita-medium"
+    "text-[#41454C] text-[10px] font-gordita-medium",
   );
 
   const [values, setValues] = useState({
@@ -45,7 +45,7 @@ const DocumentForm = () => {
 
   const { successToast, errorToast } = useCustomToast();
 
-  const currentFileInfo = useRef({ name: "" });
+  const currentFileInfo = useRef({ name: "", url: "" });
 
   const [files, setFiles] = useState({
     certificate: "",
@@ -77,7 +77,7 @@ const DocumentForm = () => {
     },
     onError: (err: any) => {
       errorToast(
-        err?.response?.data?.message || err?.message || "An Error occurred"
+        err?.response?.data?.message || err?.message || "An Error occurred",
       );
     },
   });
@@ -109,7 +109,7 @@ const DocumentForm = () => {
     },
     onError: (err: any) => {
       errorToast(
-        err?.response?.data?.message || err?.message || "An Error occurred"
+        err?.response?.data?.message || err?.message || "An Error occurred",
       );
     },
   });
@@ -126,6 +126,7 @@ const DocumentForm = () => {
     }
 
     const fileSizeInBytes = newFile.size;
+    const newFileURL = URL.createObjectURL(newFile);
     const formData = new FormData();
     formData.append("file", newFile);
 
@@ -135,7 +136,7 @@ const DocumentForm = () => {
       setCurrentInfo(name);
     } else {
       setFileLimit(false);
-      currentFileInfo.current = { name };
+      currentFileInfo.current = { name, url: newFileURL };
       setCurrentInfo(name);
       uploadMutate(formData);
       setCurrentImage(name);
@@ -155,7 +156,7 @@ const DocumentForm = () => {
   const handleRemove = (nameToRemove: any) => {
     const indexToRemove = newFiles.findIndex(
       // @ts-ignore
-      (file) => file?.label === toWords(nameToRemove)
+      (file) => file?.label === toWords(nameToRemove),
     );
 
     if (indexToRemove !== -1) {
@@ -201,7 +202,7 @@ const DocumentForm = () => {
       driver_type: values?.driver_type,
 
       // @ts-ignore
-      document_images: newFiles?.map((item) => item?.url),
+      document_images: newFiles,
     });
   };
 
