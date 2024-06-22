@@ -29,12 +29,18 @@ const ImagesForm = () => {
   const labelClasses = classNames("mt-auto text-[#797980] text-[10px]");
   const [vehicles, setVehicles] = useState("");
 
+  const [user, setUser] = useState("");
+
   useEffect(() => {
     if (typeof window !== "undefined") {
+      const storedUser =
+        // @ts-ignore
+        JSON.parse(localStorage.getItem("user"));
       const storedVehicles =
         // @ts-ignore
         JSON.parse(sessionStorage.getItem("vehicles")) || [];
       setVehicles(storedVehicles);
+      setUser(storedUser);
     }
   }, []);
 
@@ -95,7 +101,11 @@ const ImagesForm = () => {
   const { mutate, isLoading } = useAddVehicle({
     onSuccess: (res: any) => {
       successToast(res?.message);
-      router.push("/register-car/documents");
+      if (user) {
+        router.push("/client/vehicles/create-step-3");
+      } else {
+        router.push("/register-car/documents");
+      }
       sessionStorage.setItem("vehicleId", res?.data);
       sessionStorage.removeItem("vehicles");
     },
@@ -1122,7 +1132,7 @@ const ImagesForm = () => {
         <Button
           onClick={action}
           isLoading={isLoading}
-          w={{ base: "100%", md: "60%" }}
+          w="100%"
           h="48px"
         >
           Next

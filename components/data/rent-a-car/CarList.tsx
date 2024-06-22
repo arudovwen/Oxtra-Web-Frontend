@@ -71,7 +71,7 @@ const CarList = ({ data, values, isLoading }: any) => {
                     (item: any) => item === "AC"
                   ) === "AC"
                     ? "flex"
-                    : "hidden"
+                    : "none"
                 }
                 flexDir="column"
                 justifyContent="center"

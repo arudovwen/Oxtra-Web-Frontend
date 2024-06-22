@@ -1,4 +1,4 @@
-import { sideBarRoutes } from "@/components/constants/arrays";
+import { carOwnerRoutes, sideBarRoutes } from "@/components/constants/arrays";
 import { useGetUser } from "@/services/query/auth";
 import { Box, Flex, Image, Spinner, Text } from "@chakra-ui/react";
 import { useRouter } from "next/router";
@@ -32,8 +32,13 @@ const SideBar = () => {
     }, 2000);
   };
 
+  const isRouteActive = (route: any, pathname: any) => {
+    const cleanRoute = route.replace(/\[.*?\]/g, ""); // remove [id] parts
+    return pathname.startsWith(cleanRoute);
+  };
+
   return (
-    <Box>
+    <Box w="full">
       <Flex
         flexDir="column"
         border="1px solid #E4E4E4"
@@ -67,18 +72,27 @@ const SideBar = () => {
           </Flex>
 
           <Flex flexDir="column" gap="16px" mt="24px">
-            {sideBarRoutes.map((item: any, i: any) => (
+            {(userData?.data?.user_type === 0
+              ? sideBarRoutes
+              : carOwnerRoutes
+            ).map((item: any, i: any) => (
               <Flex
                 key={i}
                 align="center"
                 gap="12px"
-                onClick={() => router.push(`/dashboard/${item.route}`)}
+                onClick={() => router.push(`/${item.route}`)}
                 cursor="pointer"
                 _hover={{ border: "1px solid #0A3421", color: "#0A3421" }}
                 transition=".3s ease-in-out"
-                bg={router.pathname.includes(item.route) ? "#DDEEE0" : "unset"}
+                bg={
+                  isRouteActive(item.route, router.pathname)
+                    ? "#DDEEE0"
+                    : "unset"
+                }
                 color={
-                  router.pathname.includes(item.route) ? "##102214" : "#666666"
+                  isRouteActive(item.route, router.pathname)
+                    ? "#102214"
+                    : "#666666"
                 }
                 py="10px"
                 px="12px"
