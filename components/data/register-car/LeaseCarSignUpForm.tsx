@@ -66,6 +66,7 @@ const LeaseCarSignUpForm = () => {
     const { phoneCode, dob, phone, ...rest } = values;
     mutate({
       ...rest,
+      user_type: 1,
       phoneCode: phoneCode?.value,
       dob: formatDate(dob),
     });

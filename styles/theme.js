@@ -18,6 +18,48 @@ export const customTheme = extendTheme({
           },
         },
       },
+    },
+    Switch: {
+      variants: {
+        primary: {
+          container: {
+            border: "2px solid #C4C6C8",
+            rounded: "full",
+            _checked: {
+              border: "2px solid #0A3421",
+            },
+          },
+          thumb: {
+            bg: "#C4C6C8",
+            _checked: {
+              bg: "#0A3421",
+            },
+          },
+          track: {
+            bg: "transparent",
+          },
+        },
+
+        adminPrimary: {
+          container: {
+            border: "2px solid #C4C6C8",
+            rounded: "full",
+            _checked: {
+              border: "2px solid #0D0718",
+            },
+          },
+          thumb: {
+            bg: "#C4C6C8",
+            _checked: {
+              bg: "#0D0718",
+            },
+          },
+          track: {
+            bg: "transparent",
+          },
+        },
+      },
+
       defaultProps: {
         variant: "primary",
       },

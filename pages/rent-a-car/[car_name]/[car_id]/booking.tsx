@@ -29,7 +29,8 @@ const Bookings = () => {
     rent_values: "",
     vehicle_id: "",
     price: "",
-    note: "",
+    notes: "",
+    area_of_usage: "",
   });
 
   const calculateDayDifference = (startDate: any, endDate: any) => {
