@@ -20,7 +20,7 @@ const RentDetails = () => {
   const parClasses = classNames("flex items-center justify-between");
 
   const dataClasses = classNames(
-    "text-[#242424] text-[14px] font-gordita-bold"
+    "text-[#242424] text-[14px] font-gordita-bold",
   );
 
   const router = useRouter();
@@ -113,7 +113,7 @@ const RentDetails = () => {
                     display={
                       data &&
                       JSON.parse(data?.vehicle?.extras)?.find(
-                        (item: any) => item === "Reverse Camera"
+                        (item: any) => item === "Reverse Camera",
                       ) === "Reverse Camera"
                         ? "flex"
                         : "none"
@@ -177,7 +177,7 @@ const RentDetails = () => {
                     display={
                       data &&
                       JSON.parse(data?.vehicle?.extras)?.find(
-                        (item: any) => item === "AC"
+                        (item: any) => item === "AC",
                       ) === "AC"
                         ? "flex"
                         : "none"
@@ -218,7 +218,7 @@ const RentDetails = () => {
                     display={
                       data &&
                       JSON.parse(data?.vehicle?.extras)?.find(
-                        (item: any) => item === "Bluetooth Radio"
+                        (item: any) => item === "Bluetooth Radio",
                       ) === "Bluetooth Radio"
                         ? "flex"
                         : "none"
@@ -380,7 +380,7 @@ const RentDetails = () => {
                 <Text className={dataClasses}>
                   ₦
                   {Number(
-                    Number(data?.price) * Number(data?.days)
+                    Number(data?.price) * Number(data?.days),
                   )?.toLocaleString()}
                 </Text>
               </Box>
@@ -393,7 +393,7 @@ const RentDetails = () => {
                   {" "}
                   ₦
                   {Number(
-                    Number(data?.price) * Number(data?.days)
+                    Number(data?.price) * Number(data?.days),
                   )?.toLocaleString()}
                 </Text>
               </Box>

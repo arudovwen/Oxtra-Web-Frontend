@@ -51,7 +51,7 @@ const TripDetails = ({
               <Text color="#646668">
                 {calculateDayDifference(
                   values?.rent_values?.pickUp,
-                  values?.rent_values?.dropOff
+                  values?.rent_values?.dropOff,
                 )}
               </Text>
               <IoIosArrowDown size="16px" />
@@ -103,7 +103,7 @@ const TripDetails = ({
             colSpan={2}
             display={
               data?.data?.extras?.find(
-                (item: any) => item === "Reverse Camera"
+                (item: any) => item === "Reverse Camera",
               ) === "Reverse Camera"
                 ? "flex"
                 : "none"
@@ -199,7 +199,7 @@ const TripDetails = ({
           <Flex
             display={
               data?.data?.extras?.find(
-                (item: any) => item === "Bluetooth Radio"
+                (item: any) => item === "Bluetooth Radio",
               ) === "Bluetooth Radio"
                 ? "flex"
                 : "none"
