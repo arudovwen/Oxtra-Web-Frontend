@@ -37,8 +37,8 @@ const Breakdown = ({
             border="1px solid #c4c6c8"
             bg="transparent"
             p="16px"
-            value={values?.note}
-            onChange={(e) => setValues({ ...values, note: e.target.value })}
+            value={values?.notes}
+            onChange={(e) => setValues({ ...values, notes: e.target.value })}
             borderRadius="8px"
             fontSize="14px"
             color="#646668"
@@ -57,6 +57,10 @@ const Breakdown = ({
             bg="transparent"
             p="16px"
             borderRadius="3px"
+            value={values?.area_of_usage}
+            onChange={(e) =>
+              setValues({ ...values, area_of_usage: e.target.value })
+            }
             fontSize="14px"
             color="#646668"
           />
@@ -131,7 +135,7 @@ const Breakdown = ({
         onClick={() => {
           localStorage.setItem("checkout", "checkout");
           sessionStorage.setItem("rent-values", JSON.stringify(values));
-          router.push("/signup");
+          router.push("/signup/0");
         }}
         _hover={{ opacity: 0.8 }}
         mt={{ base: "22px", md: "auto" }}
@@ -141,7 +145,7 @@ const Breakdown = ({
         bg="#42864F"
         borderRadius="8px"
       >
-        Proceed to Pay
+        Submit
       </Button>
     </Flex>
   );

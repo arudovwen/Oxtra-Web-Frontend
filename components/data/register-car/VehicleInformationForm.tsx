@@ -173,13 +173,29 @@ const VehicleInformationForm = () => {
     "mt-[12px] text-[14px]  text-[#666666] rounded-[8px] py-[14px] px-[16px] border border-[#cccccc]"
   );
 
+  const [user, setUser] = useState("");
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const storedUser =
+        // @ts-ignore
+        JSON.parse(localStorage.getItem("user"));
+      setUser(storedUser);
+    }
+  }, []);
+  console.log(user);
+
   const action = () => {
     setLoading(true);
     // @ts-ignore
     sessionStorage.setItem("vehicles", JSON.stringify(values));
     setTimeout(() => {
       setLoading(false);
-      router.push("/register-car/images");
+      if (user) {
+        router.push("/client/vehicles/create-step-2");
+      } else {
+        router.push("/register-car/images");
+      }
     }, 2000);
   };
 
