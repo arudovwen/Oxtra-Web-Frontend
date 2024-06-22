@@ -14,5 +14,5 @@ export const RENT_CAR = "rents";
 export const NON_USER_VEHICLES = "get-vehicles";
 export const NON_USER_VEHICLE = "get-vehicle";
 export const USER_VEHICLES = "vehicles";
-export const USER_VEHICLE = "vehicle";
+export const DEL_USER_VEHICLES = (id = "") => `vehicles/${id}`;
 export const OWNER_VEHICLES = "get-user-vehicles";

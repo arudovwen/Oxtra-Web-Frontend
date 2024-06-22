@@ -102,7 +102,7 @@ const Filters = ({ filterss, setFilters }: any) => {
       </Text>
 
       <Box mt="16px">
-        {filters.map((item, i) => (
+        {filters.map((item: any, i: any) => (
           <div key={i} className="mb-[24px]">
             <Select
               // @ts-ignore

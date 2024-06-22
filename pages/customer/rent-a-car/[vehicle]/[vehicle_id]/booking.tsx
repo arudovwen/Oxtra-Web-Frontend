@@ -65,8 +65,8 @@ const Bookings = () => {
             // @ts-ignore
             values?.rent_values?.pickUp,
             // @ts-ignore
-            values?.rent_values?.dropOff
-          )
+            values?.rent_values?.dropOff,
+          ),
       ),
     });
   }, [data]);

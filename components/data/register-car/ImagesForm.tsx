@@ -19,11 +19,11 @@ import { MdClose } from "react-icons/md";
 
 const ImagesForm = () => {
   const boxClasses = classNames(
-    "bg-[#F9FAFB] h-[138px] text-[10px] rounded-[12px] p-[16px]"
+    "bg-[#F9FAFB] h-[138px] text-[10px] rounded-[12px] p-[16px]",
   );
 
   const holderClasses = classNames(
-    "text-[#41454C] text-[10px] font-gordita-medium"
+    "text-[#41454C] text-[10px] font-gordita-medium",
   );
 
   const labelClasses = classNames("mt-auto text-[#797980] text-[10px]");
@@ -91,7 +91,7 @@ const ImagesForm = () => {
     },
     onError: (err: any) => {
       errorToast(
-        err?.response?.data?.message || err?.message || "An Error occurred"
+        err?.response?.data?.message || err?.message || "An Error occurred",
       );
     },
   });
@@ -111,7 +111,7 @@ const ImagesForm = () => {
     },
     onError: (err: any) => {
       errorToast(
-        err?.response?.data?.message || err?.message || "An Error occurred"
+        err?.response?.data?.message || err?.message || "An Error occurred",
       );
     },
   });
@@ -202,7 +202,7 @@ const ImagesForm = () => {
   const handleRemove = (nameToRemove: any) => {
     const indexToRemove = newFiles.findIndex(
       // @ts-ignore
-      (file) => file?.label === toWords(nameToRemove)
+      (file) => file?.label === toWords(nameToRemove),
     );
 
     if (indexToRemove !== -1) {
@@ -1129,12 +1129,7 @@ const ImagesForm = () => {
         >
           Skip
         </Button> */}
-        <Button
-          onClick={action}
-          isLoading={isLoading}
-          w="100%"
-          h="48px"
-        >
+        <Button onClick={action} isLoading={isLoading} w="100%" h="48px">
           Next
         </Button>
       </Flex>

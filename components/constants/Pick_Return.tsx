@@ -17,7 +17,7 @@ const Pick_Return = () => {
     rentValues?.vehicle_id,
     {
       refetchOnWindowFocus: true,
-    }
+    },
   );
 
   useEffect(() => {

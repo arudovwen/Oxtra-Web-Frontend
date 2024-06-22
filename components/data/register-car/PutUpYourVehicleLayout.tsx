@@ -114,7 +114,7 @@ const PutUpYourVehicleLayout = ({
                           {item}
                         </Text>
                       </Flex>
-                    )
+                    ),
                   )}
                 </Flex>
 

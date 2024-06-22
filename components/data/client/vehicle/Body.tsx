@@ -44,7 +44,7 @@ const Body = ({ item }: any) => {
                 display={
                   item &&
                   JSON.parse(item?.extras)?.find(
-                    (item: any) => item === "AC"
+                    (item: any) => item === "AC",
                   ) === "AC"
                     ? "flex"
                     : "none"
@@ -108,7 +108,7 @@ const Body = ({ item }: any) => {
                 display={
                   item &&
                   JSON.parse(item?.extras)?.find(
-                    (item: any) => item === "Bluetooth Radio"
+                    (item: any) => item === "Bluetooth Radio",
                   ) === "Bluetooth Radio"
                     ? "flex"
                     : "none"
@@ -155,7 +155,7 @@ const Body = ({ item }: any) => {
                 display={
                   item &&
                   JSON.parse(item?.extras)?.find(
-                    (item: any) => item === "Reverse Camera"
+                    (item: any) => item === "Reverse Camera",
                   ) === "Reverse Camera"
                     ? "flex"
                     : "none"
