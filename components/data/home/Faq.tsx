@@ -24,7 +24,7 @@ const Faq = () => {
     <div>
       <Container
         marginBottom='mb-[120px]'
-        className='xl:items-center gap-[40px] flex-col flex  xl:flex-row pt-[40px] md:pt-[200px]'
+        className='xl:items-center justify-between flex-col flex  xl:flex-row pt-[40px] md:pt-[200px]'
       >
         <div>
           <div className=' text-brandGray-300 mb-[16px]'>
@@ -37,12 +37,12 @@ const Faq = () => {
             We are here to answer any questions you may have
           </div>
 
-          <div className='flex  md:gap-[16px] mb-[40px] overflow-scroll md:overflow-auto'>
+          <div className='flex  md:gap-[16px] mb-[40px] overflow-scroll min-[500px]:overflow-visible'>
             {category.map((category) => (
               <div
                 key={category.name}
                 onClick={() => setIndex(category.id)}
-                className={`py-[14px] no-wrap cursor-pointer rounded-[24px] px-[24px] ${
+                className={`py-[14px] no-wrap cursor-pointer rounded-[24px] px-[24px] shadow-md ${
                   category.id === index ? 'bg-brandGreen-300 text-white' : 'bg-white text-black'
                 }`}
               >
