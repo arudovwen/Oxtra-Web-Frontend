@@ -13,6 +13,7 @@ const Company = () => {
 
   return (
     <div className="overflow-hidden">
+      <div className="z-[2] relative">
       <CompanyHero />
       <Offer />
       <Commitment marginBottom={margin} />
@@ -22,9 +23,10 @@ const Company = () => {
       <Footer />
 
       <MovingCar />
+      </div>
 
-      <div className="bg-[url('/oxtraleft.png')] w-[300px] h-[464px] absolute left-0 top-[5%] bg-contain bg-no-repeat" />
-      <div className="bg-[url('/oxtraright.png')] w-[500px] h-[640px] absolute right-0 top-0 bg-cover bg-no-repeat" />
+      <div className="bg-[url('/oxtraleft.png')] w-[300px] h-[464px] absolute left-0 top-[5%] bg-contain bg-no-repeat z-[1]" />
+      <div className="bg-[url('/oxtraright.png')] w-[500px] h-[640px] absolute right-0 top-0 bg-cover bg-no-repeat z-[1]" />
 
     </div>
   );
