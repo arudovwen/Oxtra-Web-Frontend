@@ -13,7 +13,7 @@ import { formatt, formatTime } from "@/helpers/helpers";
 import { useRentCar } from "@/services/query/rent";
 
 const labelClasses = classNames(
-  "text-[12px] leading-[12px] font-gordita-bold text-[#444648]"
+  "text-[12px] leading-[12px] font-gordita-bold text-[#444648]",
 );
 
 const LoginForm = () => {
@@ -35,14 +35,31 @@ const LoginForm = () => {
   const { mutate: rentMutate, isLoading: isRent } = useRentCar({
     onSuccess: (res: any) => {
       successToast(res?.message);
-      router.push("/dashboard/rent-a-car/requests");
+      router.push("/customer/rent-a-car/requests");
+      sessionStorage.removeItem("rent_values");
+      sessionStorage.removeItem("rent-values");
     },
     onError: (err: any) => {
       errorToast(
-        err?.response?.data?.message || err?.message || "An Error occurred"
+        err?.response?.data?.message || err?.message || "An Error occurred",
       );
     },
   });
+
+  const calculateDayDifference = (startDate: any, endDate: any) => {
+    const start = new Date(startDate);
+    const end = new Date(endDate);
+
+    start.setHours(0, 0, 0, 0);
+    end.setHours(0, 0, 0, 0);
+
+    // @ts-ignore
+    const differenceInTime = end - start;
+
+    const differenceInDays = differenceInTime / (1000 * 3600 * 24);
+
+    return differenceInDays;
+  };
 
   const handleRent = () => {
     rentMutate({
@@ -51,11 +68,22 @@ const LoginForm = () => {
       // @ts-ignore
       price: rentValues?.price,
       // @ts-ignore
-      notes: rentValues?.note,
+      notes: rentValues?.notes,
+      // @ts-ignore
+      area_of_usage: rentValues?.area_of_usage,
       // @ts-ignore
       pickup_time: formatTime(rentValues?.rent_values?.pickUp),
       // @ts-ignore
       pickup_date: formatt(rentValues?.rent_values?.pickUp),
+      // @ts-ignore
+      drop_off: formatt(rentValues?.rent_values?.dropOff),
+      // @ts-ignore
+      days: calculateDayDifference(
+        // @ts-ignore
+        rentValues?.rent_values?.pickUp,
+        // @ts-ignore
+        rentValues?.rent_values?.dropOff,
+      ),
       // @ts-ignore
       pickup_location: rentValues?.rent_values?.pickup_location,
       trip_type: "2",
@@ -69,12 +97,12 @@ const LoginForm = () => {
         handleRent();
       } else {
         successToast(res?.message);
-        router.push("/dashboard/rent-a-car/requests");
+        router.push("/customer/rent-a-car/requests");
       }
     },
     onError: (err: any) => {
       errorToast(
-        err?.response?.data?.message || err?.message || "An Error occurred"
+        err?.response?.data?.message || err?.message || "An Error occurred",
       );
     },
   });

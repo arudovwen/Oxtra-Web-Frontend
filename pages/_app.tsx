@@ -1,17 +1,17 @@
-import { useEffect } from 'react';
-import '@/styles/globals.css';
-import type { AppProps } from 'next/app';
-import '../styles/fonts.css';
-import { AuthProvider } from '@/hooks/useAuth';
-import { Toaster } from 'react-hot-toast';
-import { customTheme } from '../styles/theme';
-import Fonts from '../styles/Fonts';
-import { ChakraProvider } from '@chakra-ui/react';
-import { QueryClient, QueryClientProvider } from 'react-query';
-import Pages from '@/layout/Pages';
+import { useEffect } from "react";
+import "@/styles/globals.css";
+import type { AppProps } from "next/app";
+import "../styles/fonts.css";
+import { AuthProvider } from "@/hooks/useAuth";
+import { Toaster } from "react-hot-toast";
+import { customTheme } from "../styles/theme";
+import Fonts from "../styles/Fonts";
+import { ChakraProvider } from "@chakra-ui/react";
+import { QueryClient, QueryClientProvider } from "react-query";
+import Pages from "@/layout/Pages";
 // @ts-ignore
-import AOS from 'aos';
-import 'aos/dist/aos.css';
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 export default function App({ Component, pageProps }: AppProps) {
   const queryClient = new QueryClient({
@@ -27,7 +27,7 @@ export default function App({ Component, pageProps }: AppProps) {
   });
   useEffect(() => {
     AOS.init({
-      easing: 'ease-in-sine',
+      easing: "ease-in-sine",
     });
   }, []);
   return (
@@ -35,7 +35,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <ChakraProvider theme={customTheme}>
         <QueryClientProvider client={queryClient}>
           <Fonts />
-          <Toaster position='top-right' />
+          <Toaster position="top-right" />
           <Pages>
             {/* @ts-ignore */}
             <Component {...pageProps} />

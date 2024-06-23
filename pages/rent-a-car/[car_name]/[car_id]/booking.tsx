@@ -29,7 +29,8 @@ const Bookings = () => {
     rent_values: "",
     vehicle_id: "",
     price: "",
-    note: "",
+    notes: "",
+    area_of_usage: "",
   });
 
   const calculateDayDifference = (startDate: any, endDate: any) => {
@@ -64,8 +65,8 @@ const Bookings = () => {
             // @ts-ignore
             values?.rent_values?.pickUp,
             // @ts-ignore
-            values?.rent_values?.dropOff
-          )
+            values?.rent_values?.dropOff,
+          ),
       ),
     });
   }, [data]);

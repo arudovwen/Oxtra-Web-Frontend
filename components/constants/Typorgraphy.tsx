@@ -35,7 +35,7 @@ interface Props {
   looksLike?: Type;
   font?: Font;
   transform?: Transforms;
-  className?: string
+  className?: string;
 }
 
 const Typography = ({
@@ -44,7 +44,7 @@ const Typography = ({
   looksLike = as,
   font,
   transform = "none",
-  className
+  className,
 }: Props) => {
   const TagName = as as keyof JSX.IntrinsicElements;
   return (

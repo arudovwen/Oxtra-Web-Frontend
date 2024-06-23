@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import { Box, Flex, Grid, GridItem, Image, Text } from "@chakra-ui/react";
-import { carAccessories } from "./arrays";
+import { Box, Flex, Image, Text } from "@chakra-ui/react";
 import { formatDat, formatTime } from "@/helpers/helpers";
 import { useGetNonUserVehicle } from "@/services/query/vehicle";
 
@@ -18,7 +17,7 @@ const Pick_Return = () => {
     rentValues?.vehicle_id,
     {
       refetchOnWindowFocus: true,
-    }
+    },
   );
 
   useEffect(() => {
@@ -100,7 +99,7 @@ const Pick_Return = () => {
                       data?.data?.extras?.find((item: any) => item === "AC") ===
                       "AC"
                         ? "flex"
-                        : "hidden"
+                        : "none"
                     }
                     flexDir="column"
                     justifyContent="center"

@@ -6,6 +6,10 @@ import {
   getModels,
   getNonUserVehicles,
   getNonUserVehicle,
+  getUserVehicles,
+  getUserVehicle,
+  getOwnerVehicles,
+  deleteOwnerVehicle,
 } from "../api/vehicles";
 
 export const useAddVehicle = (options = {}) => {
@@ -35,10 +39,31 @@ export const useGetModels = (options = {}) => {
   return { mutate, isLoading, data };
 };
 
+export const useDeleteOwnerVehicle = (options = {}) => {
+  const { mutate, isLoading, data } = useMutation(deleteOwnerVehicle, {
+    mutationKey: "deleteOwnerVehicle",
+    ...options,
+  });
+
+  return { mutate, isLoading, data };
+};
+
 export const useGetBrands = (options = {}) => {
   const { isLoading, data, refetch } = useQuery("getBrands", getBrands, {
     ...options,
   });
+
+  return { isLoading, data, refetch };
+};
+
+export const useGetOwnerVehicles = (options = {}) => {
+  const { isLoading, data, refetch } = useQuery(
+    "getOwnerVehicles",
+    getOwnerVehicles,
+    {
+      ...options,
+    },
+  );
 
   return { isLoading, data, refetch };
 };
@@ -49,7 +74,7 @@ export const useGetNonUserVehicles = (filters = {}, options = {}) => {
     getNonUserVehicles,
     {
       ...options,
-    }
+    },
   );
 
   return { isLoading, data, refetch };
@@ -61,7 +86,31 @@ export const useGetNonUserVehicle = (id = "", options = {}) => {
     getNonUserVehicle,
     {
       ...options,
-    }
+    },
+  );
+
+  return { isLoading, data, refetch };
+};
+
+export const useGetUserVehicles = (filters = {}, options = {}) => {
+  const { isLoading, data, refetch } = useQuery(
+    ["getUserVehicles", filters],
+    getUserVehicles,
+    {
+      ...options,
+    },
+  );
+
+  return { isLoading, data, refetch };
+};
+
+export const useGetUserVehicle = (id = "", options = {}) => {
+  const { isLoading, data, refetch } = useQuery(
+    ["getUserVehicle", id],
+    getUserVehicle,
+    {
+      ...options,
+    },
   );
 
   return { isLoading, data, refetch };

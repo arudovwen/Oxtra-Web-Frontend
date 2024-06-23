@@ -34,7 +34,7 @@ const AuthInput = ({
   password,
 }: any) => {
   return (
-    <FormControl mt={mt ? "12px" :"5px" }id={id} isInvalid={error}>
+    <FormControl mt={mt ? "12px" : "5px"} id={id} isInvalid={error}>
       <InputGroup
         width="full"
         color={error ? "red" : value ? "#7B47CC" : "#BDBDBD"}
