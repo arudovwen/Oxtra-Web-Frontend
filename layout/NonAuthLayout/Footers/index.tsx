@@ -13,7 +13,7 @@ const Footer = () => {
     <footer className='pb-6'>
       <Container>
         <div className='flex gap-y-8 lg:gap-y-0 md:gap-x-8  flex-col md:flex-row'>
-          <div className='w-full md:max-w-[300px] lg:max-w-[320px]'>
+          <div className='w-full md:max-w-[300px] lg:max-w-[320px] xl:mr-[3rem]'>
             <Image src={logoGreen} alt='logo' height={120} width={150} className='mb-4 h-auto' />
 
             <div className='text-brandGray-100 text-sm font-gordita-regular leading-normal mb-[16px]'>

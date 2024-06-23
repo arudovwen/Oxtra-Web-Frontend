@@ -67,19 +67,13 @@ const Commitment = ({ marginBottom }: { marginBottom: string }) => {
             {commitments.map((commit, i) => (
               <li
                 key={commit.title}
-                className={`col-span-1 flex flex-col divide-gray-200 rounded-lg shadow ${
-                  i === 0 ? 'bg-brandGreen-400' : 'bg-white'
-                }`}
+                className='col-span-1 flex flex-col divide-gray-200 rounded-lg shadow hover:bg-brandGreen-400 text-brandGreen-400 hover:text-white'
               >
-                <div className='flex flex-1 flex-col p-[16px]'>
-                  <div
-                    className={` mb-[16px] text-base leading-[21px] font-bold ${i === 0 ? 'text-white' : 'text-brandGreen-400'}`}
-                  >
+                <div className='flex flex-1 flex-col p-[20px]'>
+                  <div className='mb-[16px] text-base leading-[21px] font-bold '>
                     {commit.title}
                   </div>
-                  <div
-                    className={`mt-1 leading-[18px] flex flex-grow flex-col text-xs justify-between  ${i === 0 ? 'text-white' : 'text-brandGreen-400'}`}
-                  >
+                  <div className='mt-1 leading-[18px] flex flex-grow flex-col text-xs justify-between'>
                     {commit.body}
                   </div>
                 </div>
