@@ -147,7 +147,7 @@ const RentVehicle = () => {
                 borderRadius="16px"
                 p="6px"
               >
-                {["Regular", "Electric"].map((item, i) => (
+                {["Regular", "Electric"].map((item: any, i: any) => (
                   <Flex
                     key={i}
                     bg={

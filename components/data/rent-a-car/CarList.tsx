@@ -68,10 +68,10 @@ const CarList = ({ data, values, isLoading }: any) => {
               <Flex
                 display={
                   JSON.parse(item?.extras)?.find(
-                    (item: any) => item === "AC"
+                    (item: any) => item === "AC",
                   ) === "AC"
                     ? "flex"
-                    : "hidden"
+                    : "none"
                 }
                 flexDir="column"
                 justifyContent="center"
@@ -164,11 +164,11 @@ const CarList = ({ data, values, isLoading }: any) => {
                     rounded="full"
                     onClick={() => {
                       router.push(
-                        `/rent-a-car/${item?.brand} ${item?.model}/${item?.id}/booking`
+                        `/rent-a-car/${item?.brand} ${item?.model}/${item?.id}/booking`,
                       );
                       sessionStorage.setItem(
                         "rent_values",
-                        JSON.stringify(values)
+                        JSON.stringify(values),
                       );
                     }}
                   >

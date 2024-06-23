@@ -19,22 +19,28 @@ import { MdClose } from "react-icons/md";
 
 const ImagesForm = () => {
   const boxClasses = classNames(
-    "bg-[#F9FAFB] h-[138px] text-[10px] rounded-[12px] p-[16px]"
+    "bg-[#F9FAFB] h-[138px] text-[10px] rounded-[12px] p-[16px]",
   );
 
   const holderClasses = classNames(
-    "text-[#41454C] text-[10px] font-gordita-medium"
+    "text-[#41454C] text-[10px] font-gordita-medium",
   );
 
   const labelClasses = classNames("mt-auto text-[#797980] text-[10px]");
   const [vehicles, setVehicles] = useState("");
 
+  const [user, setUser] = useState("");
+
   useEffect(() => {
     if (typeof window !== "undefined") {
+      const storedUser =
+        // @ts-ignore
+        JSON.parse(localStorage.getItem("user"));
       const storedVehicles =
         // @ts-ignore
         JSON.parse(sessionStorage.getItem("vehicles")) || [];
       setVehicles(storedVehicles);
+      setUser(storedUser);
     }
   }, []);
 
@@ -85,7 +91,7 @@ const ImagesForm = () => {
     },
     onError: (err: any) => {
       errorToast(
-        err?.response?.data?.message || err?.message || "An Error occurred"
+        err?.response?.data?.message || err?.message || "An Error occurred",
       );
     },
   });
@@ -95,13 +101,17 @@ const ImagesForm = () => {
   const { mutate, isLoading } = useAddVehicle({
     onSuccess: (res: any) => {
       successToast(res?.message);
-      router.push("/register-car/documents");
+      if (user) {
+        router.push("/client/vehicles/create-step-3");
+      } else {
+        router.push("/register-car/documents");
+      }
       sessionStorage.setItem("vehicleId", res?.data);
       sessionStorage.removeItem("vehicles");
     },
     onError: (err: any) => {
       errorToast(
-        err?.response?.data?.message || err?.message || "An Error occurred"
+        err?.response?.data?.message || err?.message || "An Error occurred",
       );
     },
   });
@@ -192,7 +202,7 @@ const ImagesForm = () => {
   const handleRemove = (nameToRemove: any) => {
     const indexToRemove = newFiles.findIndex(
       // @ts-ignore
-      (file) => file?.label === toWords(nameToRemove)
+      (file) => file?.label === toWords(nameToRemove),
     );
 
     if (indexToRemove !== -1) {
@@ -1119,12 +1129,7 @@ const ImagesForm = () => {
         >
           Skip
         </Button> */}
-        <Button
-          onClick={action}
-          isLoading={isLoading}
-          w={{ base: "100%", md: "60%" }}
-          h="48px"
-        >
+        <Button onClick={action} isLoading={isLoading} w="100%" h="48px">
           Next
         </Button>
       </Flex>

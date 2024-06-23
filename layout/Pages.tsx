@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import NonAuthLayout from "../layout/NonAuthLayout";
 import AuthLayout from "./PageLayout";
 import { useRouter } from "next/router";
-import { authRoutes, nonAuthRoutes } from "../utils/routes";
+import { customerRoutes, clientRoutes, nonAuthRoutes } from "../utils/routes";
 
 const Pages = ({ children }: any) => {
   const [user, setUser] = useState<string | null>(null);
@@ -10,24 +10,29 @@ const Pages = ({ children }: any) => {
 
   useEffect(() => {
     const userValue = localStorage.getItem("user");
+    // @ts-ignore
+    const user = JSON.parse(userValue);
     setUser(userValue);
 
-    const isAuthRoute = authRoutes.includes(router.pathname);
+    const isCustomerRoute = customerRoutes.includes(router.pathname);
+    const isClientRoute = clientRoutes.includes(router.pathname);
     const isNonAuthRoute = nonAuthRoutes.includes(router.pathname);
+    const userType = user?.user?.user_type;
 
-    if (userValue === null || userValue === "null") {
-      if (isAuthRoute) {
-        // Redirect to login page if trying to access an auth route
+    if (!user) {
+      if (isCustomerRoute) {
         router.replace("/login");
       }
-    } else {
-      // User is authenticated
-      if (isNonAuthRoute) {
-        // Redirect to dashboard if trying to access a non-auth route
-        router.replace("/dashboard/rent-a-car/requests");
+    } else if (userType === 1) {
+      if (isCustomerRoute || isNonAuthRoute) {
+        router.replace("/client/rentals");
+      }
+    } else if (userType === 0) {
+      if (isClientRoute || isNonAuthRoute) {
+        router.replace("/customer/rent-a-car/requests");
       }
     }
-  }, [router.pathname]);
+  }, [router.pathname, user]);
 
   return user === null || user === "null" ? (
     // @ts-ignore
