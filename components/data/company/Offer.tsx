@@ -12,30 +12,30 @@ const Offer = () => {
           <div className="text-brandGray-300 text-center mb-[48px] font-gordita-ultra text-[32px] md:text-[56px] leading-[56px]">
             What we stand for
           </div>
-          <div className="flex flex-col lg:flex-row gap-10 items-center ">
+          <div className="grid grid-cols-1 lg:grid-cols-3  gap-8 items-center ">
             {offers.map((offer) => {
               return (
                 <div
                   key={offer.title}
-                  className="z-50 w-full  rounded-[4px] p-6  bg-[#E4F2E6]"
+                  className="z-50 w-full  rounded-[6px] p-6  bg-[#E4F2E6] h-full"
                 >
                   <Image
                     src={offer.image}
                     alt={offer.title}
                     width={48}
                     height={48}
-                    className="rounded-xl "
+                    className="rounded-xl mb-6"
                   />
 
-                  <div className="my-[20px] text-brandGray-300">
-                    <Typography as="h6" font="font-gordita-medium">
+                  <div className="mb-2 text-brandGray-300">
+                    <h6 className="font-bold">
                       {offer.title}
-                    </Typography>
+                    </h6>
                   </div>
 
-                  <div className=" text-[16px] leading-[24px] font-gordita-regular">
+                  <p className=" text-[16px] leading-[24px] font-gordita-regular">
                     {offer.description}
-                  </div>
+                  </p>
                 </div>
               );
             })}
