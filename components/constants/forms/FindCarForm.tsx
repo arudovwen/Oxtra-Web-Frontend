@@ -95,7 +95,7 @@ const FindCarForm = () => {
             dateFormat="MMMM d, yyyy h:mm aa"
           />
         </div>
-        <div className="max-w-[150px] lg:max-w-[100px]">
+        <div className="lg:max-w-[100px]">
           <label htmlFor="Pick up location" className={labelClasses}>
             Days
           </label>
