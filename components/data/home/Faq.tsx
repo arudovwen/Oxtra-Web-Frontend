@@ -23,10 +23,10 @@ const Faq = () => {
   };
 
   return (
-    <div>
+    <div className="bg-[url('/oxtrabg.png')] bg-no-repeat bg-cover pt-[120px] pb-[120px]">
       <Container
-        marginBottom="mb-[120px]"
-        className="xl:items-center gap-[40px] flex-col flex  xl:flex-row pt-[40px] md:pt-[200px]"
+      
+        className="xl:items-center gap-[40px] flex-col flex  xl:flex-row "
       >
         <div>
           <div className=" text-brandGray-300 mb-[16px]">
@@ -39,7 +39,7 @@ const Faq = () => {
             We are here to answer any questions you may have
           </div>
 
-          <div className="flex  md:gap-[16px] mb-[40px] overflow-scroll md:overflow-auto">
+          <div className="flex  md:gap-[16px] mb-[40px] gap-x-4 overflow-scroll md:overflow-auto">
             {category.map((category) => (
               <div
                 key={category.name}

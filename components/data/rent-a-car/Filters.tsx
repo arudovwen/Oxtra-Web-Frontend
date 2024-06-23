@@ -96,7 +96,7 @@ const Filters = ({ filterss, setFilters }: any) => {
   ];
 
   return (
-    <Box display={{ base: "none", md: "block" }} w="18%">
+    <Box display={{ base: "none", md: "block" }} w="18%" mt={20}>
       <Text fontWeight={500} color="#242424">
         Filters
       </Text>

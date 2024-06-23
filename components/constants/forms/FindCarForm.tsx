@@ -62,7 +62,7 @@ const FindCarForm = () => {
     setValue(newValue);
   };
   return (
-    <form className="flex items-center flex-col lg:flex-row gap-[20px]">
+    <form className="flex items-center flex-col lg:flex-row gap-[16px]">
       <div className="flex-1 flex flex-col lg:flex-row gap-y-5 lg:gap-y-0 lg:gap-x-5 w-full lg:w-auto">
         <div className="flex-1">
           <label htmlFor="Pick up location" className={labelClasses}>
@@ -95,9 +95,9 @@ const FindCarForm = () => {
             dateFormat="MMMM d, yyyy h:mm aa"
           />
         </div>
-        <div className="flex-1">
+        <div className="max-w-[150px] lg:max-w-[100px]">
           <label htmlFor="Pick up location" className={labelClasses}>
-            Number of days
+            Days
           </label>
           <input type="number" placeholder="2" className={inputClasses} />
         </div>

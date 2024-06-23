@@ -46,7 +46,7 @@ const RentVehicle = () => {
         <Flex
           flexDir={{ base: "column", md: "row" }}
           align={{ base: "flex-start", md: "center" }}
-          mt="40px"
+          mt="80px"
           gap={{ base: "30px", md: "unset" }}
           justifyContent="space-between"
         >
@@ -54,13 +54,14 @@ const RentVehicle = () => {
             <Text
               color="#214528"
               fontWeight={700}
-              fontSize={{ base: "30px", md: "48px" }}
+              fontSize={{ base: "30px", md: "40px" }}
               lineHeight={{ base: "30px", md: "48px" }}
+              mb={1}
             >
               Find the right car for you
             </Text>
             <Text
-              my={{ base: "13px", md: "24px" }}
+              mb={{ base: "13px", md: "24px" }}
               fontSize={{ base: "14px", md: "16px" }}
               color="#444444"
               lineHeight="21.76px"
@@ -78,7 +79,7 @@ const RentVehicle = () => {
                   px="16px"
                   _placeholder={{ color: "646668" }}
                   bg="#f4f6f8"
-                  placeholder="search by car name"
+                  placeholder="Search by car name"
                   borderRadius="8px"
                 />
                 <InputRightElement>
@@ -135,10 +136,10 @@ const RentVehicle = () => {
           </Flex>
         </Flex>
 
-        <Flex align="flex-start" gap="32px" mt="40px">
+        <Flex align="flex-start" columnGap={8} mt="40px">
           <Filters filterss={filters} setFilters={setFilters} />
 
-          <Box w={{ base: "100%", md: "82%" }}>
+          <Box flex={1}>
             <Flex align="center" justifyContent="flex-end">
               <Flex
                 border="1px solid #DDEEE0"
