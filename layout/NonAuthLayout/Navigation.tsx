@@ -60,7 +60,7 @@ const Navigation = ({
   return (
     <header>
       <nav
-        className="flex items-center pt-6 justify-between"
+        className="flex items-center pt-4 pb-4 justify-between"
         aria-label="Global"
       >
         <div className="flex lg:flex-1">
