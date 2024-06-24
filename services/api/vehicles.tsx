@@ -43,3 +43,36 @@ export const getNonUserVehicle = async ({ queryKey }: any) => {
   const res = await axiosInstance.get(`${API.NON_USER_VEHICLE}/${id}`);
   return res.data;
 };
+
+export const getUserVehicles = async ({ queryKey }: any) => {
+  const [, filters] = queryKey;
+  const params = new URLSearchParams();
+
+  Object.entries(filters).forEach(([key, value]) => {
+    if (value) {
+      params.append(key, value as string);
+    }
+  });
+
+  const queryString = params.toString();
+  const url = `${API.USER_VEHICLES}${queryString ? `?${queryString}` : ""}`;
+
+  const res = await axiosInstance.get(url);
+  return res.data;
+};
+
+export const getUserVehicle = async ({ queryKey }: any) => {
+  const [, id] = queryKey;
+  const res = await axiosInstance.get(`${API.USER_VEHICLES}/${id}`);
+  return res.data;
+};
+
+export const getOwnerVehicles = async () => {
+  const res = await axiosInstance.get(API.OWNER_VEHICLES);
+  return res.data;
+};
+
+export const deleteOwnerVehicle = async (query: any) => {
+  const res = await axiosInstance.delete(API.DEL_USER_VEHICLES(query));
+  return res.data;
+};

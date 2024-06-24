@@ -48,15 +48,16 @@ const CarList = ({ data, values, isLoading }: any) => {
                 <Text
                   fontWeight={700}
                   textTransform="capitalize"
-                  fontSize="20px"
+                  fontSize="18px"
                   color="#242424"
+                  className="truncate max-w-[285px]"
                 >
                   {item?.brand} {item?.model} {`(${item?.year})`}
                 </Text>
               </Box>
             </Flex>
 
-            <Box>
+            <Box minH={166}>
               <Image
                 src="../assets/car.jpg"
                 my="16px"
@@ -68,10 +69,10 @@ const CarList = ({ data, values, isLoading }: any) => {
               <Flex
                 display={
                   JSON.parse(item?.extras)?.find(
-                    (item: any) => item === "AC"
+                    (item: any) => item === "AC",
                   ) === "AC"
                     ? "flex"
-                    : "hidden"
+                    : "none"
                 }
                 flexDir="column"
                 justifyContent="center"
@@ -138,19 +139,19 @@ const CarList = ({ data, values, isLoading }: any) => {
               className="mt-[24px] flex justify-between items-center"
             >
               <Box color="#242424" w="full">
-                <Text fontWeight={700} fontSize="20px">
+                <Text fontWeight={600} fontSize="16px">
                   ₦{Number(item?.price_per_day)?.toLocaleString()} / day
                 </Text>
               </Box>
 
               <Flex align="center" pr="20px" gap="16px">
-                <Image
+                {/* <Image
                   cursor="pointer"
                   src="/share.svg"
                   w="24px"
                   h="24px"
                   objectFit="contain"
-                />
+                /> */}
 
                 <Box className="par">
                   <Flex
@@ -164,11 +165,11 @@ const CarList = ({ data, values, isLoading }: any) => {
                     rounded="full"
                     onClick={() => {
                       router.push(
-                        `/rent-a-car/${item?.brand} ${item?.model}/${item?.id}/booking`
+                        `/rent-a-car/${item?.brand} ${item?.model}/${item?.id}/booking`,
                       );
                       sessionStorage.setItem(
                         "rent_values",
-                        JSON.stringify(values)
+                        JSON.stringify(values),
                       );
                     }}
                   >

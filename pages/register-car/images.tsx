@@ -3,11 +3,8 @@ import PutUpYourVehicleLayout from "@/components/data/register-car/PutUpYourVehi
 import ImagesForm from "@/components/data/register-car/ImagesForm";
 
 const Images = () => {
-  const putYourVehicleLayoutActivePage = "Images";
   return (
-    <PutUpYourVehicleLayout
-      putYourVehicleLayoutActivePage={putYourVehicleLayoutActivePage}
-    >
+    <PutUpYourVehicleLayout>
       <ImagesForm />
     </PutUpYourVehicleLayout>
   );

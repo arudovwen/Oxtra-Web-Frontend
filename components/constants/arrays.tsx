@@ -1,10 +1,3 @@
-import car1 from "../../public/assets/Rectangle 13.png";
-import car2 from "../../public/assets/Rectangle 14.png";
-import car5 from "../../public/assets/Rectangle 17.png";
-import veriftyme from "../../public/assets/verifyme.png";
-import wooven from "../../public/assets/wooven.png";
-import paystack from "../../public/assets/paystack.png";
-import nimc from "../../public/assets/nimc.png";
 import { GrInstagram, GrSnapchat, GrLinkedin } from "react-icons/gr";
 import { BsTwitterX } from "react-icons/bs";
 import { FaFacebookF } from "react-icons/fa";
@@ -109,16 +102,6 @@ export const socials = [
   },
 ];
 
-export const trustedPartners = [
-  {
-    partner: "verfiy me",
-    image: veriftyme,
-  },
-  { partner: "wooven", image: wooven },
-  { partner: "nimc", image: nimc },
-  { partner: "paystack", image: paystack },
-];
-
 export const filters = [
   {
     name: "Location",
@@ -177,29 +160,6 @@ export const vehicles = [
   },
   {
     name: "Haulage",
-  },
-];
-
-export const placeholders = [
-  {
-    car: car1,
-  },
-  {
-    car: car2,
-  },
-
-  {
-    car: car5,
-  },
-  {
-    car: car1,
-  },
-  {
-    car: car2,
-  },
-
-  {
-    car: car5,
   },
 ];
 
@@ -279,19 +239,61 @@ export const carBenefits = [
 export const sideBarRoutes = [
   {
     name: "Rent a car",
-    route: "/rent-a-car/requests",
-    img: "../../assets/rent-car.svg",
+    route: "/customer/rent-a-car/requests",
+    img: "/assets/rent-car.svg",
   },
   {
     name: "Courier service",
-    route: "/courier-service",
-    img: "../../assets/courier.svg",
+    route: "/customer/courier-service",
+    img: "/assets/courier.svg",
   },
 
-  { name: "Payments", route: "/payments", img: "../../assets/payment.svg" },
-  { name: "History", route: "/history", img: "../../assets/history.svg" },
-  { name: "Help", route: "/help", img: "../../assets/help.svg" },
-  { name: "Settings", route: "/settings", img: "../../assets/settings.svg" },
+  {
+    name: "Payments",
+    route: "/customer/payments",
+    img: "/assets/payment.svg",
+  },
+  {
+    name: "History",
+    route: "/customer/history",
+    img: "/assets/history.svg",
+  },
+  { name: "Help", route: "/customer/help", img: "/assets/help.svg" },
+  {
+    name: "Settings",
+    route: "/customer/settings",
+    img: "/assets/settings.svg",
+  },
+];
+
+export const carOwnerRoutes = [
+  {
+    name: "Car Rental Requests",
+    route: "/client/rentals",
+    img: "/assets/rent-car.svg",
+  },
+  {
+    name: "Vehicles",
+    route: "/client/vehicles",
+    img: "/assets/courier.svg",
+  },
+
+  {
+    name: "Payments",
+    route: "/client/payments",
+    img: "/assets/payment.svg",
+  },
+  {
+    name: "History",
+    route: "/client/history",
+    img: "/assets/history.svg",
+  },
+  { name: "Help", route: "/client/help", img: "/assets/help.svg" },
+  {
+    name: "Promos",
+    route: "/client/promos",
+    img: "/assets/settings.svg",
+  },
 ];
 
 export const paymentOptions = ["Card", "Wallet", "Transfer"];

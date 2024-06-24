@@ -1,8 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import Typography from "../../constants/Typorgraphy";
 import classNames from "classnames";
-import { TbPointFilled, TbPoint } from "react-icons/tb";
-import { AiOutlineCloudUpload } from "react-icons/ai";
 import {
   Box,
   RadioGroup,
@@ -15,26 +12,28 @@ import {
   GridItem,
   Image,
   Spinner,
+  useDisclosure,
 } from "@chakra-ui/react";
 import useCustomToast from "@/utils/notifications";
 import { useAddVehicleDocs } from "@/services/query/vehicle";
 import { useRouter } from "next/router";
 import { useUploadFile } from "@/services/query/file";
 import { MdClose } from "react-icons/md";
+import VehicleSuccess from "@/components/modals/VehicleSuccess";
 
 const DocumentForm = () => {
   const inputClasses = classNames(
-    "mt-[12px] text-[14px]  text-[#666666] rounded-[8px] py-[14px] px-[16px] border border-[#cccccc]"
+    "mt-[12px] text-[14px]  text-[#666666] rounded-[8px] py-[14px] px-[16px] border border-[#cccccc]",
   );
 
   const labelClasses = classNames("mt-auto text-[#797980] text-[10px]");
 
   const boxClasses = classNames(
-    "bg-[#F9FAFB] h-[138px] text-[10px] rounded-[12px] p-[16px]"
+    "bg-[#F9FAFB] h-[138px] text-[10px] rounded-[12px] p-[16px]",
   );
 
   const holderClasses = classNames(
-    "text-[#41454C] text-[10px] font-gordita-medium"
+    "text-[#41454C] text-[10px] font-gordita-medium",
   );
 
   const [values, setValues] = useState({
@@ -46,7 +45,7 @@ const DocumentForm = () => {
 
   const { successToast, errorToast } = useCustomToast();
 
-  const currentFileInfo = useRef({ name: "" });
+  const currentFileInfo = useRef({ name: "", url: "" });
 
   const [files, setFiles] = useState({
     certificate: "",
@@ -78,7 +77,7 @@ const DocumentForm = () => {
     },
     onError: (err: any) => {
       errorToast(
-        err?.response?.data?.message || err?.message || "An Error occurred"
+        err?.response?.data?.message || err?.message || "An Error occurred",
       );
     },
   });
@@ -87,15 +86,30 @@ const DocumentForm = () => {
 
   const router = useRouter();
 
+  const [user, setUser] = useState("");
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const storedUser =
+        // @ts-ignore
+        JSON.parse(localStorage.getItem("user"));
+      setUser(storedUser);
+    }
+  }, []);
+  const { isOpen, onClose, onOpen } = useDisclosure();
   const { mutate, isLoading } = useAddVehicleDocs({
     onSuccess: (res: any) => {
       successToast(res?.message);
-      router.push("/login");
+      if (user) {
+        onOpen();
+      } else {
+        router.push("/login");
+      }
       sessionStorage.removeItem("vehicleId");
     },
     onError: (err: any) => {
       errorToast(
-        err?.response?.data?.message || err?.message || "An Error occurred"
+        err?.response?.data?.message || err?.message || "An Error occurred",
       );
     },
   });
@@ -112,6 +126,7 @@ const DocumentForm = () => {
     }
 
     const fileSizeInBytes = newFile.size;
+    const newFileURL = URL.createObjectURL(newFile);
     const formData = new FormData();
     formData.append("file", newFile);
 
@@ -121,7 +136,7 @@ const DocumentForm = () => {
       setCurrentInfo(name);
     } else {
       setFileLimit(false);
-      currentFileInfo.current = { name };
+      currentFileInfo.current = { name, url: newFileURL };
       setCurrentInfo(name);
       uploadMutate(formData);
       setCurrentImage(name);
@@ -141,7 +156,7 @@ const DocumentForm = () => {
   const handleRemove = (nameToRemove: any) => {
     const indexToRemove = newFiles.findIndex(
       // @ts-ignore
-      (file) => file?.label === toWords(nameToRemove)
+      (file) => file?.label === toWords(nameToRemove),
     );
 
     if (indexToRemove !== -1) {
@@ -187,12 +202,13 @@ const DocumentForm = () => {
       driver_type: values?.driver_type,
 
       // @ts-ignore
-      document_images: newFiles?.map((item) => item?.url),
+      document_images: newFiles,
     });
   };
 
   return (
     <Box mt="-30px">
+      <VehicleSuccess isOpen={isOpen} onClose={onClose} />
       <Text color="#444648" fontWeight={500} fontSize="24px">
         Documents
       </Text>
@@ -239,7 +255,7 @@ const DocumentForm = () => {
             align="center"
             gap="32px"
           >
-            <Radio size="sm" value={"assigned"}>
+            <Radio size="sm" value={"assigned"} colorScheme="green">
               <Text
                 pt="3px"
                 color={
@@ -251,7 +267,7 @@ const DocumentForm = () => {
                 Oxtra can provide driver
               </Text>
             </Radio>
-            <Radio size="sm" value={"self"}>
+            <Radio size="sm" value={"self"} colorScheme="green">
               <Text
                 pt="3px"
                 color={values?.driver_type === "self" ? "#438950" : "#444648"}

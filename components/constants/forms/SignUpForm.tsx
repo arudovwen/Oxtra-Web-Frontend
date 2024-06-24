@@ -3,11 +3,7 @@ import classNames from "classnames";
 import Select from "react-select";
 import { useRouter } from "next/router";
 import DatePicker from "react-multi-date-picker";
-import {
-  formatDate,
-  formatTime,
-  formatt,
-} from "@/helpers/helpers";
+import { formatDate, formatTime, formatt } from "@/helpers/helpers";
 import { IoIosArrowDown } from "react-icons/io";
 import { Form, Formik } from "formik";
 import AuthInput from "../AuthInput";
@@ -28,7 +24,7 @@ import useCustomToast from "@/utils/notifications";
 import { useRentCar } from "@/services/query/rent";
 
 const labelClasses = classNames(
-  "text-[12px] leading-[12px] font-gordita-bold text-[#444648]"
+  "text-[12px] leading-[12px] font-gordita-bold text-[#444648]",
 );
 
 const SignUpForm = () => {
@@ -54,14 +50,31 @@ const SignUpForm = () => {
   const { mutate: rentMutate, isLoading: isRent } = useRentCar({
     onSuccess: (res: any) => {
       successToast(res?.message);
-      router.push("/dashboard/rent-a-car");
+      router.push("/customer/rent-a-car/requests");
+      sessionStorage.removeItem("rent_values");
+      sessionStorage.removeItem("rent-values");
     },
     onError: (err: any) => {
       errorToast(
-        err?.response?.data?.message || err?.message || "An Error occurred"
+        err?.response?.data?.message || err?.message || "An Error occurred",
       );
     },
   });
+
+  const calculateDayDifference = (startDate: any, endDate: any) => {
+    const start = new Date(startDate);
+    const end = new Date(endDate);
+
+    start.setHours(0, 0, 0, 0);
+    end.setHours(0, 0, 0, 0);
+
+    // @ts-ignore
+    const differenceInTime = end - start;
+
+    const differenceInDays = differenceInTime / (1000 * 3600 * 24);
+
+    return differenceInDays;
+  };
 
   const handleRent = () => {
     rentMutate({
@@ -70,14 +83,25 @@ const SignUpForm = () => {
       // @ts-ignore
       price: rentValues?.price,
       // @ts-ignore
-      notes: rentValues?.note,
+      notes: rentValues?.notes,
+      // @ts-ignore
+      area_of_usage: rentValues?.area_of_usage,
       // @ts-ignore
       pickup_time: formatTime(rentValues?.rent_values?.pickUp),
       // @ts-ignore
       pickup_date: formatt(rentValues?.rent_values?.pickUp),
       // @ts-ignore
+      drop_off: formatt(rentValues?.rent_values?.dropOff),
+      // @ts-ignore
+      days: calculateDayDifference(
+        // @ts-ignore
+        rentValues?.rent_values?.pickUp,
+        // @ts-ignore
+        rentValues?.rent_values?.dropOff,
+      ),
+      // @ts-ignore
       pickup_location: rentValues?.rent_values?.pickup_location,
-      trip_type: "1",
+      trip_type: "2",
     });
   };
 
@@ -88,12 +112,12 @@ const SignUpForm = () => {
         handleRent();
       } else {
         successToast(res?.message);
-        router.push("/dashboard/rent-a-car");
+        router.push("/customer/rent-a-car/requests");
       }
     },
     onError: (err: any) => {
       errorToast(
-        err?.response?.data?.message || err?.message || "An Error occurred"
+        err?.response?.data?.message || err?.message || "An Error occurred",
       );
     },
   });
@@ -103,6 +127,7 @@ const SignUpForm = () => {
     const { phoneCode, dob, phone, ...rest } = values;
     mutate({
       ...rest,
+      user_type: Number(router.query?.id),
       phoneCode: phoneCode?.value,
       dob: formatDate(dob),
     });
@@ -235,9 +260,7 @@ const SignUpForm = () => {
                     </Box>
 
                     <Box>
-                      <Text className={labelClasses}>
-                        Enter password
-                      </Text>
+                      <Text className={labelClasses}>Enter password</Text>
 
                       <AuthInput
                         placeholder="Enter password"

@@ -1,35 +1,18 @@
 import React from "react";
-import Navigation from "../../../layout/NonAuthLayout/Navigation";
 import Container from "../../../layout/NonAuthLayout/Container";
-import AlterFooter from "../../../layout/NonAuthLayout/Footers/AlterFooter";
-import { AiOutlineArrowLeft } from "react-icons/ai";
 import { useRouter } from "next/router";
 import { Box, Flex, Text } from "@chakra-ui/react";
 import { IoArrowBack } from "react-icons/io5";
 
 interface PutUpYourVehicleLayoutProps {
   children: React.ReactNode;
-  putYourVehicleLayoutActivePage: string;
+  activePage?: string;
 }
-
-const nav = [
-  {
-    name: "Basic information",
-  },
-  {
-    name: "Vehicle",
-  },
-  {
-    name: "Documents",
-  },
-];
 
 const PutUpYourVehicleLayout = ({
   children,
-  putYourVehicleLayoutActivePage,
+  activePage,
 }: PutUpYourVehicleLayoutProps) => {
-  const activePage = "Sign up as a car owner";
-
   const router = useRouter();
 
   const parts = router.pathname.split("/");
@@ -83,7 +66,13 @@ const PutUpYourVehicleLayout = ({
                           justifyContent="center"
                           align="center"
                           bg={
-                            item.toLowerCase().includes(partAfterSecondSlash)
+                            item
+                              .toLowerCase()
+                              // @ts-ignore
+                              .includes(partAfterSecondSlash.toLowerCase()) ||
+                            item
+                              ?.toLowerCase()
+                              .includes(activePage?.toLowerCase())
                               ? "#438950"
                               : "#B3B3B3"
                           }
@@ -100,12 +89,24 @@ const PutUpYourVehicleLayout = ({
                         <Text
                           fontSize="14px"
                           fontWeight={
-                            item.toLowerCase().includes(partAfterSecondSlash)
+                            item
+                              .toLowerCase()
+                              // @ts-ignore
+                              .includes(partAfterSecondSlash.toLowerCase()) ||
+                            item
+                              ?.toLowerCase()
+                              .includes(activePage?.toLowerCase())
                               ? 500
                               : 400
                           }
                           color={
-                            item.toLowerCase().includes(partAfterSecondSlash)
+                            item
+                              .toLowerCase()
+                              // @ts-ignore
+                              .includes(partAfterSecondSlash.toLowerCase()) ||
+                            item
+                              ?.toLowerCase()
+                              .includes(activePage?.toLowerCase())
                               ? "#438950"
                               : "#666666"
                           }
@@ -113,7 +114,7 @@ const PutUpYourVehicleLayout = ({
                           {item}
                         </Text>
                       </Flex>
-                    )
+                    ),
                   )}
                 </Flex>
 

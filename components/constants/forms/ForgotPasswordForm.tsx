@@ -10,7 +10,7 @@ import useCustomToast from "@/utils/notifications";
 import { useForgotPassword } from "@/services/query/auth";
 
 const labelClasses = classNames(
-  "text-[12px] leading-[12px] font-gordita-bold text-[#444648]"
+  "text-[12px] leading-[12px] font-gordita-bold text-[#444648]",
 );
 
 const ForgotPasswordForm = () => {
@@ -24,7 +24,7 @@ const ForgotPasswordForm = () => {
     },
     onError: (err: any) => {
       errorToast(
-        err?.response?.data?.message || err?.message || "An Error occurred"
+        err?.response?.data?.message || err?.message || "An Error occurred",
       );
     },
   });

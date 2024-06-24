@@ -15,7 +15,7 @@ interface ButtonProps {
 }
 
 const buttonClasses = classNames(
-  "duration-300 rounded px-[24px]  py-[16px] font-gordita-medium",
+  "duration-300 rounded px-[24px]  py-[12px] font-gordita-medium",
 );
 
 const Button = ({

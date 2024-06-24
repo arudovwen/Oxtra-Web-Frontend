@@ -15,7 +15,7 @@ import { formatDate } from "@/helpers/helpers";
 
 const LeaseCarSignUpForm = () => {
   const labelClasses = classNames(
-    "text-[12px] text-[#4c4c4c] font-gordita-medium"
+    "text-[12px] text-[#4c4c4c] font-gordita-medium",
   );
   const router = useRouter();
 
@@ -31,7 +31,7 @@ const LeaseCarSignUpForm = () => {
     },
     onError: (err: any) => {
       errorToast(
-        err?.response?.data?.message || err?.message || "An Error occurred"
+        err?.response?.data?.message || err?.message || "An Error occurred",
       );
     },
   });
@@ -66,6 +66,7 @@ const LeaseCarSignUpForm = () => {
     const { phoneCode, dob, phone, ...rest } = values;
     mutate({
       ...rest,
+      user_type: 1,
       phoneCode: phoneCode?.value,
       dob: formatDate(dob),
     });
@@ -77,7 +78,7 @@ const LeaseCarSignUpForm = () => {
   }));
 
   return (
-    <Flex align="center" gap="52px">
+    <Flex align="center" gap="52px" maxW={1100} mx="auto">
       <Box display={{ base: "none", md: "block" }}>
         <Image
           src="/assets/car-key.jpg"
@@ -242,19 +243,6 @@ const LeaseCarSignUpForm = () => {
                     password={show ? false : true}
                     show
                     type={show ? "text" : "password"}
-                  />{" "}
-                </Box>
-
-                <Box>
-                  <Text mb="4px" className={labelClasses}>
-                    Date of birth
-                  </Text>
-                  <DatePicker
-                    placeholder="Select Date"
-                    value={values?.dob}
-                    onChange={(date: any) => {
-                      setValues({ ...values, dob: date });
-                    }}
                   />{" "}
                 </Box>
               </Flex>
