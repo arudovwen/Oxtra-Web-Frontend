@@ -16,7 +16,7 @@ import { useGetBrands, useGetModels } from "@/services/query/vehicle";
 
 const VehicleInformationForm = () => {
   const labelClasses = classNames(
-    "text-[12px] text-[#4c4c4c] font-gordita-medium"
+    "text-[12px] text-[#4c4c4c] font-gordita-medium",
   );
 
   const [values, setValues] = useState({
@@ -170,8 +170,19 @@ const VehicleInformationForm = () => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const inputClasses = classNames(
-    "mt-[12px] text-[14px]  text-[#666666] rounded-[8px] py-[14px] px-[16px] border border-[#cccccc]"
+    "mt-[12px] text-[14px]  text-[#666666] rounded-[8px] py-[14px] px-[16px] border border-[#cccccc]",
   );
+
+  const [user, setUser] = useState("");
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const storedUser =
+        // @ts-ignore
+        JSON.parse(localStorage.getItem("user"));
+      setUser(storedUser);
+    }
+  }, []);
 
   const action = () => {
     setLoading(true);
@@ -179,7 +190,11 @@ const VehicleInformationForm = () => {
     sessionStorage.setItem("vehicles", JSON.stringify(values));
     setTimeout(() => {
       setLoading(false);
-      router.push("/register-car/images");
+      if (user) {
+        router.push("/client/vehicles/create-step-2");
+      } else {
+        router.push("/register-car/images");
+      }
     }, 2000);
   };
 

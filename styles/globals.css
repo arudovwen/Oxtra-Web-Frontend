@@ -65,6 +65,18 @@ input:focus {
 }
 
 /* Chrome, Safari, and Opera */
+.rent_scroll::-webkit-scrollbar {
+  width: 6px;
+  border-radius: 8px;
+  background-color: rgb(213, 213, 213);
+}
+
+.rent_scroll::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  background-color: #438950;
+}
+
+/* Chrome, Safari, and Opera */
 .no_scroller::-webkit-scrollbar {
   width: 0;
   border-radius: 8px;

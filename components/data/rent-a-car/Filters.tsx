@@ -96,13 +96,13 @@ const Filters = ({ filterss, setFilters }: any) => {
   ];
 
   return (
-    <Box display={{ base: "none", md: "block" }} w="18%">
+    <Box display={{ base: "none", md: "block" }} w="18%" mt={20}>
       <Text fontWeight={500} color="#242424">
         Filters
       </Text>
 
       <Box mt="16px">
-        {filters.map((item, i) => (
+        {filters.map((item: any, i: any) => (
           <div key={i} className="mb-[24px]">
             <Select
               // @ts-ignore
