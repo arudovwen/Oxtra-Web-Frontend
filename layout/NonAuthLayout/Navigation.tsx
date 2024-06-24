@@ -141,7 +141,7 @@ const Navigation = ({
           >
             <span className="sr-only">Open main menu</span>
             <RiMenu3Fill
-              className={`${menuColor} h-9 w-9`}
+              className={`${menuColor} !text-white h-9 w-9`}
               aria-hidden="true"
             />
           </button>
