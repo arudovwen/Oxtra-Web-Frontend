@@ -1,4 +1,4 @@
-// @ts-nocheck 
+// @ts-nocheck
 import React, { useState, useEffect } from "react";
 import DatePicker, { CalendarContainer } from "react-datepicker";
 import { FaCalendar, FaRegCalendarAlt } from "react-icons/fa";
@@ -18,8 +18,8 @@ interface DatePickerProps {
   placeholder?: string;
   id?: string;
   dateFormat?: string;
-  disabled?: boolean
-  showTimeSelect?: boolean
+  disabled?: boolean;
+  showTimeSelect?: boolean;
 }
 
 const DatePickerInput: React.FC<DatePickerProps> = ({
@@ -33,13 +33,13 @@ const DatePickerInput: React.FC<DatePickerProps> = ({
   clearErrors,
   trigger,
   placeholder = "yyyy/mm/dd",
-  dateFormat  = "dd/MM/yyyy",
+  dateFormat = "dd/MM/yyyy",
   id,
   disabled,
-  showTimeSelect
+  showTimeSelect,
 }: DatePickerProps) => {
   const [date, setDate] = useState<Date | null>(
-    defaultValue ? new Date(defaultValue) : null
+    defaultValue ? new Date(defaultValue) : null,
   );
 
   useEffect(() => {
@@ -58,17 +58,18 @@ const DatePickerInput: React.FC<DatePickerProps> = ({
   }) => (
     <div
       style={{
-       
         background: "#ffffff",
         color: "#fff",
         borderRadius: "4px",
         boxShadow: "0px 4px 8px 0px rgba(5, 27, 68, 0.08)",
-        width:"100%",
-        borderColor:"#d4d6d8"
+        width: "100%",
+        borderColor: "#d4d6d8",
       }}
     >
       <CalendarContainer className={`w-full ${className}`}>
-        <div style={{ position: "relative" }} className="w-full">{children}</div>
+        <div style={{ position: "relative" }} className="w-full">
+          {children}
+        </div>
       </CalendarContainer>
     </div>
   );
@@ -84,11 +85,11 @@ const DatePickerInput: React.FC<DatePickerProps> = ({
           selected={date}
           showTimeSelect={showTimeSelect}
           onChange={(date) => {
-           if(disabled) return
-           handleChange(date);
-           setDate(date);
-           clearErrors && clearErrors(inputName);
-           trigger && trigger(inputName);
+            if (disabled) return;
+            handleChange(date);
+            setDate(date);
+            clearErrors && clearErrors(inputName);
+            trigger && trigger(inputName);
           }}
           calendarContainer={MyContainer}
           minDate={minDate}

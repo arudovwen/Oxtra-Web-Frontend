@@ -1,5 +1,3 @@
-import Container from "@/layout/NonAuthLayout/Container";
-import Navigation from "@/layout/NonAuthLayout/Navigation";
 import Pick_Return from "@/components/constants/Pick_Return";
 import { paymentOptions } from "@/components/constants/arrays";
 import {
@@ -82,19 +80,6 @@ const checkout = () => {
 
   return (
     <div className="mb-[71px]">
-      <Container>
-        <Navigation
-          color="text-brandGray-300"
-          hover="hover:text-brandGreen-300"
-          buttonBg="bg-brandGreen-300"
-          buttonText="text-white"
-          buttonHover="hover:bg-white"
-          activePage=""
-          navBackground="white"
-          menuColor="text-brandGreen-300"
-        />{" "}
-      </Container>
-
       <Flex flexDir="column" justifyContent="center" align="center">
         <Box mt={{ base: "50px", md: "30px" }}>
           <Pick_Return />

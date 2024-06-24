@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Navigation from "@/layout/NonAuthLayout/Navigation";
 import Container from "@/layout/NonAuthLayout/Container";
 import Typography from "@/components/constants/Typorgraphy";
 import { AiOutlineArrowLeft } from "react-icons/ai";
@@ -117,17 +116,6 @@ const SingleCar = () => {
   return (
     <div>
       <Container>
-        <Navigation
-          color="text-brandGray-300"
-          hover="hover:text-brandGreen-300"
-          buttonBg="bg-brandGreen-300"
-          buttonText="text-white"
-          buttonHover="hover:bg-white"
-          activePage={activePage}
-          navBackground="white"
-          menuColor="text-brandGreen-300"
-        />
-
         <div
           className="text-brandGray-500 flex items-center mb-5 gap-[399px] mt-8
 "

@@ -1,27 +1,50 @@
-import { Box, Flex, Grid, GridItem, Image, Text } from "@chakra-ui/react";
-import { carAccessories } from "./arrays";
+import { useEffect, useState } from "react";
+import { Box, Flex, Image, Text } from "@chakra-ui/react";
+import { formatDat, formatTime } from "@/helpers/helpers";
+import { useGetNonUserVehicle } from "@/services/query/vehicle";
 
 const Pick_Return = () => {
+  const [rentValues, setRentValues] = useState({});
+
+  useEffect(() => {
+    // @ts-ignore
+    const rent_values = JSON.parse(sessionStorage.getItem("rent-values"));
+    setRentValues(rent_values);
+  }, []);
+
+  const { data, refetch } = useGetNonUserVehicle(
+    // @ts-ignore
+    rentValues?.vehicle_id,
+    {
+      refetchOnWindowFocus: true,
+    },
+  );
+
+  useEffect(() => {
+    refetch();
+  }, []);
+
   return (
     <Flex flexDir="column" justifyContent="center" align="center" w="full">
       <Flex
         flexDir="column"
         justifyContent="center"
         align="center"
-        w={{ base: "full", md: "1032px" }}
+        w={{ base: "full", md: "932px" }}
       >
-        <Grid
+        <Flex
+          justifyContent="space-between"
           border="1px solid #E4E4E4"
           borderRadius="12px"
           py="16px"
+          align={{ base: "flex-start", md: "center" }}
+          flexDir={{ base: "column", md: "row" }}
           w="100%"
           px="24px"
-          pr={{ base: "24px", md: "0" }}
-          templateColumns={{ base: "repeat(1,1fr)", md: "repeat(7,1fr)" }}
           gap="24px"
         >
-          <GridItem
-            colSpan={{ base: 1, md: 2 }}
+          <Box
+            w={{ base: "100%", md: "50%" }}
             display={"flex"}
             flexDir="column"
             gap="16px"
@@ -29,66 +52,131 @@ const Pick_Return = () => {
             <Text color="#444444" fontSize="14px" fontWeight={500}>
               Pick-up
             </Text>
-            <Text color="#646668">3 Folake Kamoru Street, Lekki</Text>
-            <Text fontSize="12px" color="#444648" fontWeight={500}>
-              Sat, 17 Feb · 10:00
+            <Text color="#646668">
+              {/* @ts-ignore */}
+              {rentValues?.rent_values?.pickup_location}
             </Text>
-          </GridItem>
+            <Text fontSize="12px" color="#444648" fontWeight={500}>
+              {/* @ts-ignore */}
+              {formatDat(rentValues?.rent_values?.pickUp)} · {/* @ts-ignore */}
+              {formatTime(rentValues?.rent_values?.pickUp)}
+            </Text>
+          </Box>
 
-          <GridItem colSpan={{ base: 1, md: 2 }}>
-            <Flex w="full" flexDir="column" gap="16px">
-              <Text color="#444444" fontSize="14px" fontWeight={500}>
-                Return
-              </Text>
-              <Text color="#646668">MM1 Airport</Text>
-              <Text fontSize="12px" color="#444648" fontWeight={500}>
-                Tue, 20 Feb · 10:00
-              </Text>
-            </Flex>
-          </GridItem>
-
-          <GridItem colSpan={{ base: 1, md: 3 }}>
-            <Flex align="center" gap="16px">
+          <Box
+            w={{ base: "full", md: "unset" }}
+            display={data?.data ? "block" : "none"}
+          >
+            <Flex
+              align={{ base: "flex-start", md: "center" }}
+              flexDir={{ base: "column", md: "row" }}
+              gap="16px"
+            >
               <Image
                 src="../assets/car.jpg"
                 w="100px"
                 h="80px"
                 objectFit="contain"
               />
-              <Box>
-                <Text fontSize="14px" fontWeight={500} mb="16px">
-                  Honda CR-V (2015)
+              <Box w={{ base: "full", md: "unset" }}>
+                <Text
+                  fontSize="14px"
+                  textTransform="capitalize"
+                  fontWeight={500}
+                  mb="16px"
+                >
+                  {data?.data?.brand} {data?.data?.model}{" "}
+                  {`(${data?.data?.year})`}
                 </Text>
 
-                <Flex align="center" gap="16px">
-                  {carAccessories.map((item: any, i: any) => (
-                    <Flex
-                      flexDir="column"
-                      justifyContent="center"
-                      align="center"
-                      key={i}
+                <Flex
+                  align="center"
+                  justifyContent={{ base: "space-between", md: "unset" }}
+                  gap={{ base: "unset", md: "16px" }}
+                >
+                  <Flex
+                    display={
+                      data?.data?.extras?.find((item: any) => item === "AC") ===
+                      "AC"
+                        ? "flex"
+                        : "none"
+                    }
+                    flexDir="column"
+                    justifyContent="center"
+                    align="center"
+                  >
+                    <Image
+                      h="13px"
+                      objectFit="contain"
+                      w="13px"
+                      src="../assets/ac.jpg"
+                    />
+                    <Text
+                      mt="8px"
+                      fontSize="12px"
+                      color="#646464"
+                      fontWeight={500}
                     >
-                      <Image
-                        h="13px"
-                        w="13px"
-                        objectFit="contain"
-                        src={item.img}
-                      />
-                      <Text
-                        mt="8px"
-                        fontSize="12px"
-                        color="#646464"
-                        fontWeight={500}
-                      >
-                        {item.name}
-                      </Text>
-                    </Flex>
-                  ))}
+                      AC
+                    </Text>
+                  </Flex>
+
+                  <Flex flexDir="column" justifyContent="center" align="center">
+                    <Image
+                      h="13px"
+                      objectFit="contain"
+                      w="13px"
+                      src="../assets/seater.jpg"
+                    />
+                    <Text
+                      mt="8px"
+                      fontSize="12px"
+                      color="#646464"
+                      fontWeight={500}
+                    >
+                      {data?.data?.no_of_seats} Seater
+                    </Text>
+                  </Flex>
+
+                  <Flex flexDir="column" justifyContent="center" align="center">
+                    <Image
+                      h="13px"
+                      objectFit="contain"
+                      w="13px"
+                      src="../assets/bags.jpg"
+                    />
+                    <Text
+                      mt="8px"
+                      fontSize="12px"
+                      color="#646464"
+                      fontWeight={500}
+                    >
+                      {data?.data?.boot_capacity} Bags
+                    </Text>
+                  </Flex>
+
+                  <Flex flexDir="column" justifyContent="center" align="center">
+                    <Image
+                      h="13px"
+                      objectFit="contain"
+                      w="13px"
+                      src="../assets/automatic.jpg"
+                    />
+                    <Text
+                      mt="8px"
+                      fontSize="12px"
+                      textTransform="capitalize"
+                      color="#646464"
+                      fontWeight={500}
+                    >
+                      {data?.data?.transmission}
+                    </Text>
+                  </Flex>
                 </Flex>
               </Box>
             </Flex>
-          </GridItem>
-        </Grid>
+          </Box>
+        </Flex>
       </Flex>
     </Flex>
   );

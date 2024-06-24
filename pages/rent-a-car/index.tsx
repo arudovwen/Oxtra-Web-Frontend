@@ -1,106 +1,184 @@
 import Container from "@/layout/NonAuthLayout/Container";
-import Navigation from "@/layout/NonAuthLayout/Navigation";
 import React, { useEffect, useState } from "react";
 import { RiSearchLine } from "react-icons/ri";
-import { IoIosArrowDown } from "react-icons/io";
-import { sortings } from "@/components/constants/arrays";
 import Filters from "@/components/data/rent-a-car/Filters";
 import CarList from "@/components/data/rent-a-car/CarList";
+import { useGetNonUserVehicles } from "@/services/query/vehicle";
+import {
+  Box,
+  Flex,
+  Input,
+  InputGroup,
+  InputRightElement,
+  Text,
+} from "@chakra-ui/react";
+import DateTimePicker from "@/components/constants/DateTimePicker";
 
 const RentVehicle = () => {
-  const [sortBy, setSortBy] = useState(sortings[0]);
-  const [showSort, setShowSort] = useState(false);
+  const [filters, setFilters] = useState({
+    brand: "",
+    year: "",
+    model: "",
+    vehicle_type: "Regular",
+    price_min: "",
+    search: "",
+    price_max: "",
+  });
 
-  const activePage = "Rent a car";
+  const [values, setValues] = useState({
+    pickUp: new Date(),
+    dropOff: new Date(),
+    pickup_location: "",
+  });
+
+  const { data, isLoading, refetch } = useGetNonUserVehicles(filters, {
+    refetchOnWindowFocus: true,
+  });
 
   useEffect(() => {
-    const handleClickOutside = (event: any) => {
-      if (event.target.closest(".box") === null) {
-        setShowSort(false);
-      }
-    };
-
-    document.addEventListener("click", handleClickOutside);
-    return () => {
-      document.removeEventListener("click", handleClickOutside);
-    };
+    refetch();
+    sessionStorage.removeItem("rent_values");
   }, []);
 
   return (
-    <div className="font-gordita mb-[154px]">
+    <Box fontFamily="gordita" mb="154px">
       <Container>
-        <Navigation
-          color="text-brandGray-300"
-          hover="hover:text-brandGreen-300"
-          buttonBg="bg-brandGreen-300"
-          buttonText="text-white"
-          buttonHover="hover:bg-white"
-          activePage={activePage}
-          navBackground="white"
-          menuColor="text-brandGreen-300"
-        />
-        <div className="mt-[40px] text-center text-[#214528] font-gordita-bold text-[48px] leading-[48px]">
-          Find the right car for you
-        </div>
-        <div className="mt-[24px] text-[#242424] text-center leading-[21.76px]">
-          You can find popular cars and the best offers at the top or filter/
-          <br />
-          search for your preferred car.
-        </div>
-        <div className="mt-[40px] flex w-full justify-center items-center">
-          <div className="flex w-full md:w-[45%] p-[16px] pl-0 bg-[#f4f6f8] h-[48px] rounded-[8px] justify-center items-center">
-            <input
-              className="new_input bg-[unset] w-full px-[16px] placeholder:text-[#646668] h-[48px] rounded-[8px]"
-              placeholder="search by car name"
-            />
-            <RiSearchLine />
-          </div>
-        </div>
+        <Flex
+          flexDir={{ base: "column", md: "row" }}
+          align={{ base: "flex-start", md: "center" }}
+          mt="80px"
+          gap={{ base: "30px", md: "unset" }}
+          justifyContent="space-between"
+        >
+          <Box>
+            <Text
+              color="#214528"
+              fontWeight={700}
+              fontSize={{ base: "30px", md: "40px" }}
+              lineHeight={{ base: "30px", md: "48px" }}
+              mb={1}
+            >
+              Find the right car for you
+            </Text>
+            <Text
+              mb={{ base: "13px", md: "24px" }}
+              fontSize={{ base: "14px", md: "16px" }}
+              color="#444444"
+              lineHeight="21.76px"
+            >
+              Find the best cars available for your preferred date
+            </Text>
+            <Box>
+              <InputGroup w="100%">
+                <Input
+                  value={filters?.search}
+                  onChange={(e) =>
+                    setFilters({ ...filters, search: e.target.value })
+                  }
+                  h="48px"
+                  px="16px"
+                  _placeholder={{ color: "646668" }}
+                  bg="#f4f6f8"
+                  placeholder="Search by car name"
+                  borderRadius="8px"
+                />
+                <InputRightElement>
+                  <RiSearchLine />
+                </InputRightElement>
+              </InputGroup>
+            </Box>
+          </Box>
 
-        <div className="flex items-start gap-[32px]">
-          <Filters />
+          <Flex flexDir="column" gap="24px" w={{ base: "100%", md: "35%" }}>
+            <Box>
+              <Text fontSize="14px" mb="8px" color="#444648" fontWeight={500}>
+                Pick-up Location
+              </Text>
+              <Input
+                border="1px solid #D4D6D8"
+                placeholder="Enter address or airport"
+                color="#000"
+                _placeholder={{ color: "#646668" }}
+                h="45px"
+                value={values?.pickup_location}
+                onChange={(e) =>
+                  setValues({ ...values, pickup_location: e.target.value })
+                }
+              />
+            </Box>
 
-          <div className="w-full md:w-[82%] mt-[20px]">
-            <div className="flex w-full justify-end">
-              <div
-                onClick={() => setShowSort((prev) => !prev)}
-                className={`bg-[#E3F2E6] cursor-pointer w-full md:w-[30%] relative box flex  ${
-                  showSort ? "rounded-[8px] rounded-b-none" : "rounded-[8px]"
-                }  p-[16px] px-[10px] h-[48px] items-center gap-[12px]`}
+            <Flex align="center" gap="20px" w="100%">
+              <Box w="100%">
+                <Text fontSize="14px" mb="8px" color="#444648" fontWeight={500}>
+                  Pick-up Date
+                </Text>
+                <DateTimePicker
+                  selectedDate={values?.pickUp}
+                  onChange={(date: any) => {
+                    setValues({ ...values, pickUp: date });
+                  }}
+                  hasTime
+                />
+              </Box>
+
+              <Box w="100%">
+                <Text fontSize="14px" mb="8px" color="#444648" fontWeight={500}>
+                  Drop-off Date
+                </Text>
+                <DateTimePicker
+                  selectedDate={values?.dropOff}
+                  onChange={(date: any) => {
+                    setValues({ ...values, dropOff: date });
+                  }}
+                />
+              </Box>
+            </Flex>
+          </Flex>
+        </Flex>
+
+        <Flex align="flex-start" columnGap={8} mt="40px">
+          <Filters filterss={filters} setFilters={setFilters} />
+
+          <Box flex={1}>
+            <Flex align="center" justifyContent="flex-end">
+              <Flex
+                border="1px solid #DDEEE0"
+                justifyContent={{ base: "space-between", md: "unset" }}
+                w={{ base: "100%", md: "unset" }}
+                borderRadius="16px"
+                p="6px"
               >
-                <div className="text-[#0A3421] w-full">
-                  Sort By: <span className="font-gordita-medium">{sortBy}</span>
-                </div>
-
-                <div>
-                  <IoIosArrowDown />
-                </div>
-
-                {showSort ? (
-                  <div className="absolute bg-white top-[50px] left-0 w-full border border-[#D4D6D8] rounded-[9px] rounded-t-none pb-0">
-                    {sortings.map((item: any, i: any) => (
-                      <div
-                        key={i}
-                        onClick={() => {
-                          setSortBy(item);
-                        }}
-                        className="px-[16px] py-[16px] hover:bg-[#f4f6f8]"
-                      >
-                        {item}
-                      </div>
-                    ))}
-                  </div>
-                ) : (
-                  ""
-                )}
-              </div>
-            </div>
-
-            <CarList />
-          </div>
-        </div>
+                {["Regular", "Electric"].map((item: any, i: any) => (
+                  <Flex
+                    key={i}
+                    bg={
+                      filters?.vehicle_type === item ? "#DDEEE0" : "transparent"
+                    }
+                    borderRadius="12px"
+                    py="10px"
+                    px="20px"
+                    justifyContent="center"
+                    w={{ base: "100%", md: "unset" }}
+                    cursor="pointer"
+                    transition=".3s ease-in-out"
+                    fontSize="12px"
+                    fontWeight={500}
+                    color="#444444"
+                    _hover={{ color: "#214528" }}
+                    onClick={() =>
+                      setFilters({ ...filters, vehicle_type: item })
+                    }
+                  >
+                    {item} Vehicles
+                  </Flex>
+                ))}
+              </Flex>
+            </Flex>
+            <CarList values={values} data={data} isLoading={isLoading} />
+          </Box>
+        </Flex>
       </Container>
-    </div>
+    </Box>
   );
 };
 
