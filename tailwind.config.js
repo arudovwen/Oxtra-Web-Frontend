@@ -4,7 +4,7 @@ module.exports = {
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
     "./layout/**/*.{js,ts,jsx,tsx}",
-    "./node_modules/react-tailwindcss-datepicker/dist/index.esm.js"
+    "./node_modules/react-tailwindcss-datepicker/dist/index.esm.js",
   ],
   theme: {
     container: {
@@ -35,6 +35,9 @@ module.exports = {
         "gordita-black": ["Gordita Black"],
         "gordita-ultra": ["Gordita Ultra"],
       },
+      backgroundImage: {
+        "custom-gradient": "linear-gradient(90deg, #438950 0%, #19331E 100%)",
+      },
       fontSize: {
         xs: ["12px", { lineHeight: "18px" }],
         sm: ["14px", { lineHeight: "14px" }],
@@ -51,6 +54,7 @@ module.exports = {
         brandGreen: {
           100: "#8ce99a",
           300: "#42864F",
+          400: "#0A3421",
         },
         brandGray: {
           100: "#646668",
@@ -62,4 +66,5 @@ module.exports = {
       },
     },
   },
+  plugins: [require("@tailwindcss/typography")],
 };

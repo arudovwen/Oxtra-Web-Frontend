@@ -1,10 +1,25 @@
-import { sideBarRoutes } from "@/components/constants/arrays";
+import { carOwnerRoutes, sideBarRoutes } from "@/components/constants/arrays";
+import { useGetUser } from "@/services/query/auth";
 import { Box, Flex, Image, Spinner, Text } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const SideBar = () => {
   const router = useRouter();
+  const [user, setUser] = useState("");
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const storedUser =
+        // @ts-ignore
+        JSON.parse(localStorage.getItem("user"));
+      setUser(storedUser);
+    }
+  }, []);
+
+  // @ts-ignore
+  const { data: userData } = useGetUser(user?.user?.id);
+
   const [logginOut, setLogginOut] = useState(false);
 
   const action = () => {
@@ -12,12 +27,18 @@ const SideBar = () => {
     setTimeout(() => {
       setLogginOut(false);
       router.push("/login");
-      localStorage.removeItem("user");
+      localStorage.clear();
+      sessionStorage.clear();
     }, 2000);
   };
 
+  const isRouteActive = (route: any, pathname: any) => {
+    const cleanRoute = route.replace(/\[.*?\]/g, ""); // remove [id] parts
+    return pathname.startsWith(cleanRoute);
+  };
+
   return (
-    <Box>
+    <Box w="full">
       <Flex
         flexDir="column"
         border="1px solid #E4E4E4"
@@ -38,10 +59,11 @@ const SideBar = () => {
 
             <Flex color="#E9F6EC" flexDir="column" gap="12px">
               <Text color="#fff" fontWeight={700}>
-                Samuel Umoru
+                {userData?.data?.firstName || ""}{" "}
+                {userData?.data?.lastName || ""}
               </Text>
               <Text fontSize="10px" fontWeight={500}>
-                Sammyfish007@gmail.com
+                {userData?.data?.email}
               </Text>
               <Text fontSize="12px" fontWeight={500} textDecor="underline">
                 View Profile
@@ -50,18 +72,27 @@ const SideBar = () => {
           </Flex>
 
           <Flex flexDir="column" gap="16px" mt="24px">
-            {sideBarRoutes.map((item: any, i: any) => (
+            {(userData?.data?.user_type === 0
+              ? sideBarRoutes
+              : carOwnerRoutes
+            ).map((item: any, i: any) => (
               <Flex
                 key={i}
                 align="center"
                 gap="12px"
-                onClick={() => router.push(`/dashboard/${item.route}`)}
+                onClick={() => router.push(`/${item.route}`)}
                 cursor="pointer"
                 _hover={{ border: "1px solid #0A3421", color: "#0A3421" }}
                 transition=".3s ease-in-out"
-                bg={router.pathname.includes(item.route) ? "#DDEEE0" : "unset"}
+                bg={
+                  isRouteActive(item.route, router.pathname)
+                    ? "#DDEEE0"
+                    : "unset"
+                }
                 color={
-                  router.pathname.includes(item.route) ? "##102214" : "#666666"
+                  isRouteActive(item.route, router.pathname)
+                    ? "#102214"
+                    : "#666666"
                 }
                 py="10px"
                 px="12px"

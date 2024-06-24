@@ -2,47 +2,23 @@ import React from "react";
 import Image from "next/image";
 import Container from "@/layout/NonAuthLayout/Container";
 import Typography from "@/components/constants/Typorgraphy";
-import Navigation from "@/layout/NonAuthLayout/Navigation";
-import heroBackground from "../../../public/assets/herobackground.png";
 import heroCar from "../../../public/assets/heroCar.png";
 import heroCarHalf from "../../../public/assets/heroCarHalf.png";
 
-interface HeroProps {
-  activePage: string;
-}
-
-const Hero = ({ activePage }: HeroProps) => {
+const Hero = () => {
   return (
-    <div className="relative isolate overflow-hidden">
-      <Image
-        src={heroBackground}
-        alt="backgorund image"
-        className="absolute inset-0 -z-10 h-full w-full object-cover"
-        fill
-      />
+    <div className="relative isolate overflow-hidden bg-custom-gradient">
       <Container>
-        <Navigation
-          color="text-white"
-          hover="hover:text-brandGreen-100"
-          buttonBg="bg-white"
-          buttonHover="hover:bg-brandGreen-300"
-          buttonText="text-brandGray-300"
-          activePage={activePage}
-          navBackground="green"
-          menuColor="text-white"
-        />
-
-        <div className="text-white text-center xl:text-left pb-[204px] mt-[110px]">
+        <div className="text-white text-center xl:text-left pb-16 lg:pb-[204px] mt-[110px]">
           <div className="xl:max-w-[608px] mb-6">
             <Typography as="h2" font="font-gordita-medium">
               Search, and book a vehicle for rent easily
             </Typography>
           </div>
           <div className="xl:max-w-[648px] md:text-[20px] leading-[30px] font-gordita-light">
-            With our flexible options, you can easily get a vehicle for any{" "}
-            of your journey needs. Browse through our wide range of{" "}
-          
-            vehicles today!
+            Experience effortless vehicle rental! Find and book your perfect
+            ride with ease. Our flexible options ensure you get the ideal
+            vehicle for any journey. Explore our wide range of vehicles today!
           </div>
         </div>
       </Container>
@@ -55,7 +31,7 @@ const Hero = ({ activePage }: HeroProps) => {
         height={480}
         data-aos="slide-left"
         data-aos-duration="700"
-data-aos-once="true"
+        data-aos-once="true"
       />
       <Image
         src={heroCarHalf}
@@ -65,7 +41,7 @@ data-aos-once="true"
         height={380}
         data-aos="slide-left"
         data-aos-duration="700"
-data-aos-once="true"
+        data-aos-once="true"
       />
     </div>
   );

@@ -1,184 +1,286 @@
-import React from "react";
-import Typography from "../../constants/Typorgraphy";
+import AuthInput from "@/components/constants/AuthInput";
+import { countries } from "@/components/constants/arrays";
+import { signUpValues, validateSignupSchema } from "@/utils/validation";
+import { Box, Button, Flex, Image, Radio, Text } from "@chakra-ui/react";
+import Select from "react-select";
 import classNames from "classnames";
-import Button from "../../constants/Button";
+import { Form, Formik } from "formik";
 import { useRouter } from "next/router";
-import { useState } from "react";
-import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
+import React, { useState } from "react";
+import { IoIosArrowDown } from "react-icons/io";
+import DatePicker from "react-multi-date-picker";
+import { useRegisterUser } from "@/services/query/auth";
+import useCustomToast from "@/utils/notifications";
+import { formatDate } from "@/helpers/helpers";
 
-const labelClasses = classNames(
-  "block text-[14px] leading-[14px] font-gordita-medium text-brandGray-300",
-);
-
-const inputClasses = classNames(
-  `px-2  h-[40px] py-2 border border-[#d4d6d8] rounded-lg mt-3  w-full font-gordita-regular`,
-);
-
-const LeaseCarSignUp = () => {
-  const [enterPasswordHidden, setEnterPasswordHidden] = useState(true);
+const LeaseCarSignUpForm = () => {
+  const labelClasses = classNames(
+    "text-[12px] text-[#4c4c4c] font-gordita-medium",
+  );
   const router = useRouter();
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    router.push("/register-car/vehicle");
+  const [show, setShow] = useState(false);
+
+  const { successToast, errorToast } = useCustomToast();
+
+  const { mutate, isLoading } = useRegisterUser({
+    onSuccess: (res: any) => {
+      successToast(res?.message);
+      router.push("/register-car/vehicle");
+      localStorage.setItem("id", JSON.stringify(res));
+    },
+    onError: (err: any) => {
+      errorToast(
+        err?.response?.data?.message || err?.message || "An Error occurred",
+      );
+    },
+  });
+
+  const [check, setCheck] = useState(false);
+  const customStyles = {
+    control: (provided: any) => ({
+      ...provided,
+      width: "100%",
+      minHeight: "44px",
+      color: "#646668",
+      fontSize: "14px",
+      cursor: "pointer",
+      borderRadius: "8px",
+      border: "1px solid #C4C6C8",
+      background: "unset",
+    }),
+    menu: (provided: any) => ({
+      ...provided,
+      fontSize: "13px",
+      backgroundColor: "#fff",
+    }),
+    option: (provided: any, state: any) => ({
+      ...provided,
+      color: state.isFocused ? "" : "",
+      backgroundColor: state.isFocused ? "#f4f6f8" : "",
+    }),
   };
 
+  const handleSubmit = (values = "") => {
+    /* @ts-ignore */
+    const { phoneCode, dob, phone, ...rest } = values;
+    mutate({
+      ...rest,
+      user_type: 1,
+      phoneCode: phoneCode?.value,
+      dob: formatDate(dob),
+    });
+  };
+
+  const codeOption = countries?.map((code) => ({
+    value: `+${code?.code}`,
+    label: `+${code?.code}`,
+  }));
+
   return (
-    <main className="w-[90%] md:w-[39%] ">
-      <div className="mb-4 text-brandGray-300">
-        <Typography as="h4" font="font-gordita-medium">
-          Sign up to lease your car
-        </Typography>
-      </div>
-      <div className="text-brandGray-100 mb-8">
-        <Typography as="p" font="font-gordita-regular">
+    <Flex align="center" gap="52px" maxW={1100} mx="auto">
+      <Box display={{ base: "none", md: "block" }}>
+        <Image
+          src="/assets/car-key.jpg"
+          w="534px"
+          h="710px"
+          objectFit="contain"
+        />
+      </Box>
+      <Box>
+        <Text fontSize="32px" fontWeight={700} color="#444648">
+          Put up your car
+        </Text>
+        <Text mt="12px" fontSize="14px" color="#646668">
           Please enter the required details to get started
-        </Typography>
-      </div>
+        </Text>
 
-      <section className="flex-auto">
-        <form className="mt-6" onSubmit={handleSubmit}>
-          <div className="grid grid-cols-12 gap-y-6 gap-x-4">
-            <div className="col-span-full md:col-span-6">
-              <label htmlFor="expiration-date" className={labelClasses}>
-                First name
-              </label>
-              <div className="mt-1">
-                <input
-                  type="text"
-                  required
-                  placeholder="First name"
-                  className={inputClasses}
-                />
-              </div>
-            </div>
+        <Formik
+          /* @ts-ignore */
+          onSubmit={handleSubmit}
+          initialValues={signUpValues}
+          validationSchema={validateSignupSchema}
+        >
+          {({
+            values,
+            errors,
+            touched,
+            handleChange,
+            handleBlur,
+            handleSubmit,
+            setValues,
+            isValid,
+            dirty,
+          }) => (
+            /* @ts-ignore */
+            <Form onSubmit={handleSubmit}>
+              <Flex flexDir="column" gap="24px" mt="28px">
+                <Flex w="full" align="center" gap="20px">
+                  <Box w="full">
+                    <Text className={labelClasses}>First name</Text>
+                    <AuthInput
+                      placeholder="Enter your first name"
+                      name="firstName"
+                      mt
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values?.firstName}
+                      error={
+                        errors?.firstName &&
+                        touched?.firstName &&
+                        errors?.firstName
+                      }
+                    />
+                  </Box>
 
-            <div className="col-span-full md:col-span-6">
-              <label htmlFor="cvc" className={labelClasses}>
-                Last name
-              </label>
-              <div className="mt-1">
-                <input
-                  type="text"
-                  required
-                  placeholder="Last name"
-                  className={inputClasses}
-                />
-              </div>
-            </div>
-            <div className="col-span-full">
-              <label htmlFor="card-number" className={labelClasses}>
-                Phone number
-              </label>
-              <div className="mt-1">
-                <input type="number" required className={inputClasses} />
-              </div>
-            </div>
-            <div className="col-span-full">
-              <label htmlFor="" className={labelClasses}>
-                Email
-              </label>
-              <div className="mt-1">
-                <input
-                  type="email"
-                  id="email-address"
-                  required
-                  name="email-address"
-                  autoComplete="email"
-                  placeholder="Enter your email address"
-                  className={inputClasses}
-                />
-              </div>
-            </div>
-            <div className="col-span-full">
-              <label htmlFor="" className={labelClasses}>
-                Password
-              </label>
-              <div className="mt-1 relative">
-                <input
-                  type={`${enterPasswordHidden ? "password" : "text"}`}
-                  placeholder="Enter password"
-                  className={inputClasses}
-                />
+                  <Box w="full">
+                    <Text className={labelClasses}>Last name</Text>
+                    <AuthInput
+                      placeholder="Enter your last name"
+                      name="lastName"
+                      mt
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values?.lastName}
+                      error={
+                        errors?.lastName &&
+                        touched?.lastName &&
+                        errors?.lastName
+                      }
+                    />
+                  </Box>
+                </Flex>
 
-                {enterPasswordHidden ? (
-                  <AiOutlineEye
-                    className="absolute top-[24px] right-[12px]"
-                    onClick={() => setEnterPasswordHidden(!enterPasswordHidden)}
+                <Flex align="center" w="full" gap="24px">
+                  <Box w="30%">
+                    <label htmlFor="expiration-date" className={labelClasses}>
+                      Phone code
+                    </label>
+                    <div className="mt-[5px]">
+                      <Select
+                        styles={customStyles}
+                        placeholder="+234"
+                        /* @ts-ignore */
+                        options={codeOption}
+                        value={values?.phoneCode}
+                        defaultValue={values?.phoneCode}
+                        onChange={(selectionOption) =>
+                          setValues({
+                            ...values,
+                            /* @ts-ignore */
+                            phoneCode: selectionOption,
+                          })
+                        }
+                        components={{
+                          IndicatorSeparator: () => (
+                            <div style={{ display: "none" }}></div>
+                          ),
+                          DropdownIndicator: () => (
+                            <div className="mr-[16px]">
+                              <IoIosArrowDown size="20px" />
+                            </div>
+                          ),
+                        }}
+                      />
+                    </div>
+                  </Box>
+
+                  <Box w="80%">
+                    <label htmlFor="expiration-date" className={labelClasses}>
+                      Phone number
+                    </label>
+                    <div>
+                      <AuthInput
+                        placeholder="08083594505"
+                        name="phoneNumber"
+                        onChange={(e: any) => {
+                          const inputPhone = e.target.value
+                            .replace(/\D/g, "")
+                            .slice(0, 11);
+                          handleChange({
+                            target: {
+                              name: "phoneNumber",
+                              value: `${inputPhone}`,
+                            },
+                          });
+                        }}
+                        onBlur={handleBlur}
+                        value={values?.phoneNumber}
+                        error={
+                          errors?.phoneNumber &&
+                          touched?.phoneNumber &&
+                          errors?.phoneNumber
+                        }
+                      />
+                    </div>
+                  </Box>
+                </Flex>
+
+                <Box>
+                  <Text className={labelClasses}>Email</Text>
+                  <AuthInput
+                    placeholder="Enter your email address"
+                    name="email"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values?.email}
+                    error={errors?.email && touched?.email && errors?.email}
                   />
-                ) : (
-                  <AiOutlineEyeInvisible
-                    className="absolute top-[24px] right-[12px]"
-                    onClick={() => setEnterPasswordHidden(!enterPasswordHidden)}
-                  />
-                )}
-              </div>
-            </div>
+                </Box>
 
-            <div className="col-span-full">
-              <label htmlFor="card-number" className={labelClasses}>
-                Address
-              </label>
-              <div className="mt-1">
-                <input
-                  type="text"
-                  required
-                  className={inputClasses}
-                  placeholder="Enter your residential address"
-                />
-              </div>
-            </div>
+                <Box>
+                  <Text className={labelClasses}>Password</Text>
+                  <AuthInput
+                    placeholder="Enter password"
+                    value={values?.password}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    name="password"
+                    error={
+                      errors?.password && touched?.password && errors?.password
+                    }
+                    onClick={() => setShow((prev) => !prev)}
+                    password={show ? false : true}
+                    show
+                    type={show ? "text" : "password"}
+                  />{" "}
+                </Box>
+              </Flex>
 
-            <div className="col-span-6 md:col-span-6">
-              <label htmlFor="expiration-date" className={labelClasses}>
-                State
-              </label>
-              <div className="mt-1">
-                <input type="text" required className={inputClasses} />
-              </div>
-            </div>
+              <Box flexDir="column" mt="28px">
+                <Flex
+                  align="center"
+                  cursor="pointer"
+                  w="fit-content"
+                  onClick={() => setCheck(!check)}
+                  gap="8px"
+                >
+                  <Radio isChecked={check} />
+                  <Text fontSize="12px" color="#444648">
+                    Accept our{" "}
+                    <span style={{ fontWeight: 700 }}>
+                      Terms and Conditions
+                    </span>
+                  </Text>
+                </Flex>
 
-            <div className="col-span-6 md:col-span-6">
-              <label htmlFor="city" className={labelClasses}>
-                City
-              </label>
-              <div className="mt-1">
-                <input type="text" required className={inputClasses} />
-              </div>
-            </div>
-          </div>
-
-          <div className="mt-6 flex space-x-2 mb-[35.5px]">
-            <div className="flex h-5 gap-2 items-center">
-              <input
-                id="same-as-shipping"
-                name="same-as-shipping"
-                type="checkbox"
-                className=""
-                required
-              />
-              <p className="text-[12px] text-brandGray-300 leading-[12px] font-gordita-regular">
-                Accept our{" "}
-                <span className="font-gordita-medium">
-                  Terms and Conditions
-                </span>{" "}
-              </p>
-            </div>
-          </div>
-          <Button
-            bg="bg-brandGreen-300"
-            hover="hover:bg-brandGray-200"
-            textColor="text-white"
-            width={true}
-            type="submit"
-            size="text-base"
-          >
-            Next
-          </Button>
-        </form>
-      </section>
-    </main>
+                <Button
+                  type="submit"
+                  isLoading={isLoading}
+                  h="56px"
+                  mt="28px"
+                  w="full"
+                  isDisabled={!isValid || !dirty || !check}
+                >
+                  Next
+                </Button>
+              </Box>
+            </Form>
+          )}
+        </Formik>
+      </Box>
+    </Flex>
   );
 };
 
-export default LeaseCarSignUp;
+export default LeaseCarSignUpForm;

@@ -36,7 +36,6 @@ export default function App({ Component, pageProps }: AppProps) {
         <QueryClientProvider client={queryClient}>
           <Fonts />
           <Toaster position="top-right" />
-          {/* @ts-ignore */}
           <Pages>
             {/* @ts-ignore */}
             <Component {...pageProps} />

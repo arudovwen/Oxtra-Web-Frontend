@@ -3,11 +3,8 @@ import PutUpYourVehicleLayout from "@/components/data/register-car/PutUpYourVehi
 import DocumentForm from "@/components/data/register-car/DocumentForm";
 
 const Document = () => {
-  const putYourVehicleLayoutActivePage = "Documents";
   return (
-    <PutUpYourVehicleLayout
-      putYourVehicleLayoutActivePage={putYourVehicleLayoutActivePage}
-    >
+    <PutUpYourVehicleLayout>
       <DocumentForm />
     </PutUpYourVehicleLayout>
   );

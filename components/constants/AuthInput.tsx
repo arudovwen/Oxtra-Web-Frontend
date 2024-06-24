@@ -7,12 +7,22 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import styled from "@emotion/styled";
+
+const StyledInput = styled(Input)`
+  &:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 30px #fff inset;
+    -webkit-text-fill-color: #000;
+    transition: background-color 5000s ease-in-out 0s;
+  }
+`;
 
 const AuthInput = ({
   id,
   onChange,
   onBlur,
   value,
+  mt,
   onFocus,
   show,
   onKeyPress,
@@ -24,12 +34,12 @@ const AuthInput = ({
   password,
 }: any) => {
   return (
-    <FormControl mt="5px" id={id} isInvalid={error}>
+    <FormControl mt={mt ? "12px" : "5px"} id={id} isInvalid={error}>
       <InputGroup
         width="full"
         color={error ? "red" : value ? "#7B47CC" : "#BDBDBD"}
       >
-        <Input
+        <StyledInput
           px="16px"
           py="15px"
           h="44px"

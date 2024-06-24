@@ -18,6 +18,48 @@ export const customTheme = extendTheme({
           },
         },
       },
+    },
+    Switch: {
+      variants: {
+        primary: {
+          container: {
+            border: "2px solid #C4C6C8",
+            rounded: "full",
+            _checked: {
+              border: "2px solid #0A3421",
+            },
+          },
+          thumb: {
+            bg: "#C4C6C8",
+            _checked: {
+              bg: "#0A3421",
+            },
+          },
+          track: {
+            bg: "transparent",
+          },
+        },
+
+        adminPrimary: {
+          container: {
+            border: "2px solid #C4C6C8",
+            rounded: "full",
+            _checked: {
+              border: "2px solid #0D0718",
+            },
+          },
+          thumb: {
+            bg: "#C4C6C8",
+            _checked: {
+              bg: "#0D0718",
+            },
+          },
+          track: {
+            bg: "transparent",
+          },
+        },
+      },
+
       defaultProps: {
         variant: "primary",
       },
@@ -30,7 +72,7 @@ export const customTheme = extendTheme({
         primary: {
           field: {
             bgColor: "#fff",
-            borderRadius: "10px",
+            borderRadius: "8px",
             color: "#000",
             _placeholder: {
               color: "gray",
@@ -42,7 +84,7 @@ export const customTheme = extendTheme({
           field: {
             bgColor: "unset",
             border: "",
-            borderRadius: "10px",
+            borderRadius: "8px",
             color: "#BDBDBD",
             _placeholder: {
               color: "gray",
@@ -109,26 +151,29 @@ export const customTheme = extendTheme({
       variants: {
         primary: {
           border: "none",
-          borderRadius: "10px",
-          bgColor: "blueBg",
+          borderRadius: "8px",
+          bgColor: "#438950",
+          transition: ".3s ease-in-out",
           color: "#fff",
-          fontWeight: 600,
+          fontSize: "14px",
+          fontWeight: 500,
           _hover: {
-            bgColor: "orangeBg",
+            bgColor: "#438950",
             color: "#fff",
+            opacity: 0.8,
           },
           _disabled: {
             _hover: {
-              opacity: 0.4,
+              opacity: 0.6,
               color: "#fff",
             },
           },
           _focus: {
-            bgColor: "blueBg",
+            bgColor: "#438950",
             color: "#fff",
           },
           _active: {
-            bgColor: "orangeBg",
+            bgColor: "#438950",
             color: "#fff",
           },
         },
