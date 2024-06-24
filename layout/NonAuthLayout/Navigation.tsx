@@ -32,7 +32,7 @@ const navigation = [
     path: "putupvehicle",
   },
   { name: "Company", href: "/company", path: "company" },
-  { name: "Blog", href: "/", path: "rentavehicle" },
+  // { name: "Blog", href: "/", path: "rentavehicle" },
 ];
 
 const Navigation = ({
