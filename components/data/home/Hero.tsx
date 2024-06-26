@@ -9,7 +9,7 @@ const Hero = () => {
   return (
     <div className="relative isolate overflow-hidden bg-custom-gradient">
       <Container>
-        <div className="text-white text-center xl:text-left pb-[204px] mt-[110px]">
+        <div className="text-white text-center xl:text-left pb-16 lg:pb-[204px] mt-[110px]">
           <div className="xl:max-w-[608px] mb-6">
             <Typography as="h2" font="font-gordita-medium">
               Search, and book a vehicle for rent easily

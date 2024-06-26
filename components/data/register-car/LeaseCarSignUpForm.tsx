@@ -78,7 +78,7 @@ const LeaseCarSignUpForm = () => {
   }));
 
   return (
-    <Flex align="center" gap="52px">
+    <Flex align="center" gap="52px" maxW={1100} mx="auto">
       <Box display={{ base: "none", md: "block" }}>
         <Image
           src="/assets/car-key.jpg"
@@ -243,19 +243,6 @@ const LeaseCarSignUpForm = () => {
                     password={show ? false : true}
                     show
                     type={show ? "text" : "password"}
-                  />{" "}
-                </Box>
-
-                <Box>
-                  <Text mb="4px" className={labelClasses}>
-                    Date of birth
-                  </Text>
-                  <DatePicker
-                    placeholder="Select Date"
-                    value={values?.dob}
-                    onChange={(date: any) => {
-                      setValues({ ...values, dob: date });
-                    }}
                   />{" "}
                 </Box>
               </Flex>

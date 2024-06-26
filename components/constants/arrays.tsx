@@ -28,7 +28,7 @@ export const navigation = {
     { name: "About us", href: "#" },
     { name: "Company", href: "/company" },
     { name: "Press", href: "#" },
-    { name: "Blog", href: "#" },
+    // { name: "Blog", href: "#" },
   ],
   products: [
     { name: "Rent a car", href: "/rent-a-car" },

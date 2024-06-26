@@ -32,7 +32,7 @@ const navigation = [
     path: "putupvehicle",
   },
   { name: "Company", href: "/company", path: "company" },
-  { name: "Blog", href: "/", path: "rentavehicle" },
+  // { name: "Blog", href: "/", path: "rentavehicle" },
 ];
 
 const Navigation = ({
@@ -55,15 +55,16 @@ const Navigation = ({
     const userValue = localStorage.getItem("user");
     /* @ts-ignore */
     setUser(userValue);
+    
   }, [router.pathname]);
-
+ 
   return (
     <header>
       <nav
-        className="flex items-center pt-6 justify-between"
+        className="flex items-center pt-4 pb-4 justify-between text-sm font-medium"
         aria-label="Global"
       >
-        <div className="flex lg:flex-1">
+        <div className="flex">
           <Link href="/" className=" z-10 ">
             <Image
               src={logoGreen}
@@ -81,9 +82,9 @@ const Navigation = ({
                 <Link
                   href={item.href}
                   className={`${color}  pb-1 ${hover} duration-300 ${
-                    activePage?.toLowerCase() ===
-                      item.path.toLocaleLowerCase() &&
-                    "font-gordita-bold text-brandGreen-300"
+                    item.href?.toLowerCase() ===
+                    router.pathname &&
+                    "font-gordita-bold text-brandGreen-400"
                   }`}
                 >
                   {item.name}
@@ -99,7 +100,7 @@ const Navigation = ({
                 href="/login"
                 className={`${color}  pb-1 ${hover} duration-300 ${
                   activePage?.toLowerCase() === "login" &&
-                  "font-gordita-bold text-brandGreen-300"
+                  "font-gordita-bold text-brandGreen-400"
                 }`}
               >
                 Login
@@ -140,7 +141,7 @@ const Navigation = ({
           >
             <span className="sr-only">Open main menu</span>
             <RiMenu3Fill
-              className={`${menuColor} h-9 w-9`}
+              className={`${menuColor} !text-white h-9 w-9`}
               aria-hidden="true"
             />
           </button>
@@ -210,7 +211,7 @@ const Navigation = ({
                   <button className="w-full">
                     <Link
                       href="/signup"
-                      className="bg-brandGreen-300 rounded py-[16px] text-white font-gordita-medium w-full block"
+                      className="bg-brandGreen-400 rounded py-[16px] text-white font-gordita-medium w-full block"
                     >
                       Sign Up
                     </Link>
@@ -220,7 +221,7 @@ const Navigation = ({
                 <button className="w-full">
                   <Link
                     href="/dashboard"
-                    className="bg-brandGreen-300 rounded py-[16px] text-white font-gordita-medium w-full block"
+                    className="bg-brandGreen-400 rounded py-[16px] text-white font-gordita-medium w-full block"
                   >
                     Dashboard
                   </Link>
