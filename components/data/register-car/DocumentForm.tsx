@@ -741,7 +741,7 @@ const DocumentForm = () => {
         <Button
           onClick={action}
           isLoading={isLoading}
-          w={{ base: "100%", md: "60%" }}
+          w="100%"
           h="48px"
         >
           Next
