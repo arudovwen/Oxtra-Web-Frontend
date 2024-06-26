@@ -242,11 +242,11 @@ export const sideBarRoutes = [
     route: "/customer/rent-a-car/requests",
     img: "/assets/rent-car.svg",
   },
-  {
-    name: "Courier service",
-    route: "/customer/courier-service",
-    img: "/assets/courier.svg",
-  },
+  // {
+  //   name: "Courier service",
+  //   route: "/customer/courier-service",
+  //   img: "/assets/courier.svg",
+  // },
 
   {
     name: "Payments",

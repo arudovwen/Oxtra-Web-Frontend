@@ -15,7 +15,7 @@ import { formatDate } from "@/helpers/helpers";
 
 const LeaseCarSignUpForm = () => {
   const labelClasses = classNames(
-    "text-[12px] text-[#4c4c4c] font-gordita-medium",
+    "text-[12px] text-[#4c4c4c] font-gordita-medium"
   );
   const router = useRouter();
 
@@ -31,7 +31,7 @@ const LeaseCarSignUpForm = () => {
     },
     onError: (err: any) => {
       errorToast(
-        err?.response?.data?.message || err?.message || "An Error occurred",
+        err?.response?.data?.message || err?.message || "An Error occurred"
       );
     },
   });
@@ -258,9 +258,13 @@ const LeaseCarSignUpForm = () => {
                   <Radio isChecked={check} />
                   <Text fontSize="12px" color="#444648">
                     Accept our{" "}
-                    <span style={{ fontWeight: 700 }}>
+                    <a
+                      onClick={(e) => e.stopPropagation()}
+                      href="/legal-and-compliance"
+                      style={{ fontWeight: 500 }}
+                    >
                       Terms and Conditions
-                    </span>
+                    </a>{" "}
                   </Text>
                 </Flex>
 
