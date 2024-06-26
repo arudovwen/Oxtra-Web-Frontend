@@ -41,7 +41,9 @@ const AuthLayout = ({ children }: any) => {
             display={
               isMobile
                 ? "none"
-                : isLoading || router.pathname === "/client/vehicles/[id]"
+                : isLoading ||
+                    router.pathname === "/client/vehicles/[id]" ||
+                    router.pathname === "/customer/rent-a-car/requests/[id]"
                   ? "block"
                   : !isSideBarRouteActive()
                     ? "none"
@@ -57,7 +59,8 @@ const AuthLayout = ({ children }: any) => {
             w={
               isMobile
                 ? "100%"
-                : router.pathname === "/client/vehicles/[id]"
+                : router.pathname === "/client/vehicles/[id]" ||
+                    router.pathname === "/customer/rent-a-car/requests/[id]"
                   ? "70%"
                   : !isSideBarRouteActive()
                     ? "100%"
@@ -66,7 +69,8 @@ const AuthLayout = ({ children }: any) => {
             px={
               isMobile
                 ? "20px"
-                : router.pathname === "/client/vehicles/[id]"
+                : router.pathname === "/client/vehicles/[id]" ||
+                    router.pathname === "/customer/rent-a-car/requests/[id]"
                   ? "20px"
                   : !isSideBarRouteActive()
                     ? "0"
