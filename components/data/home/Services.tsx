@@ -65,8 +65,8 @@ const sponsors = [
 
 const Services = () => {
   return (
-    <div className="relative">
-      <Container marginBottom="mb-[120px]" className="relative">
+    <div className="relative pt-[120px] pb-[120px]">
+      <Container className="relative">
         <div
           className="text-center text-brandGray-300 mb-12"
           data-aos="fade-up"
@@ -82,7 +82,7 @@ const Services = () => {
             return (
               <div
                 key={offer.title}
-                className={`flex flex-col cursor-pointer rounded items-center pt-[33px] z-0 px-[25px] pb-[25px] ${offer.background} hover:shadow-lg`}
+                className={`flex flex-col cursor-pointer rounded-[6px] items-center pt-[33px] z-0 px-[25px] pb-[25px] ${offer.background} hover:shadow-lg`}
                 data-aos="fade-up"
                 data-aos-duration="700"
                 data-aos-once="true"

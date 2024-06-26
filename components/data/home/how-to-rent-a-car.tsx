@@ -50,80 +50,82 @@ const HowToRentaCar = () => {
 
   const currentItem = procedures[currentIndex];
   return (
-    <Container
-      marginBottom="mb-[120px]"
-      className="relative pt-[452px] sm:pt-[521px]  lg:pt-[260px] xl:pt-[200px]"
-    >
-      <Image
-        data-aos="slide-right"
-        src={animatedCar}
-        width={140}
-        height={100}
-        alt="car"
-        className="top-20 hidden xl:block absolute left-20 h-auto"
-      />
-      <div className="text-center text-brandGray-300 mb-[44px] md:mb-[9rem]">
-        <Typography as="h3" font="font-gordita-bold">
-          How to rent a car on Oxtra
-        </Typography>
-      </div>
-      <div className="flex flex-col md:flex-row items-center md:h-[408px] justify-center gap-8 mb-[24px] md:mb-[154px]">
-        <div className="flex items-center gap-[24px]">
-          <Image src={currentItem.image1} alt={currentItem.name} priority />
-          <div className="md:w-[360px] ">
-            <div className="mb-[16px]">
-              <Typography as="h5" font="font-gordita-bold">
-                {currentItem.name}
-              </Typography>
+    <div className="bg-[url('/oxtrabg.png')] bg-no-repeat bg-cover pt-[120px] pb-[120px]">
+      <Container
+       
+        className="relative"
+      >
+        <Image
+          data-aos="slide-right"
+          src={animatedCar}
+          width={140}
+          height={100}
+          alt="car"
+          className="top-20 hidden xl:block absolute left-20 h-auto"
+        />
+        <div className="text-center text-brandGray-300 mb-[44px] md:mb-[9rem]">
+          <Typography as="h3" font="font-gordita-bold">
+            How to rent a car on Oxtra
+          </Typography>
+        </div>
+        <div className="flex flex-col md:flex-row items-center md:h-[408px] justify-center gap-8 mb-[24px] md:mb-[154px]">
+          <div className="flex items-center gap-[24px]">
+            <Image src={currentItem.image1} alt={currentItem.name} priority />
+            <div className="md:w-[360px] ">
+              <div className="mb-[16px]">
+                <Typography as="h5" font="font-gordita-bold">
+                  {currentItem.name}
+                </Typography>
+              </div>
+              <p className="font-gordita-regular   text-[16px] text-brandGray-300 leading-[21px]">
+                {currentItem.content}
+              </p>
             </div>
-            <p className="font-gordita-regular   text-[16px] text-brandGray-300 leading-[21px]">
-              {currentItem.content}
-            </p>
+          </div>
+
+          <div className="w-[560px] hidden md:block ">
+            <Image priority src={currentItem.image2} alt={currentItem.name} />
           </div>
         </div>
 
-        <div className="w-[560px] hidden md:block ">
-          <Image priority src={currentItem.image2} alt={currentItem.name} />
+        <div className="flex justify-center">
+          <Button
+            data-aos="fade-up"
+            data-aos-duration="700"
+            data-aos-once="true"
+            bg="bg-brandGreen-300"
+            hover="hover:bg-brandGray-200"
+            textColor="text-white"
+            width={false}
+            size="text-sm"
+            link="rent-a-car"
+          >
+            <div className="flex items-center  gap-4">
+              <span>Find a vehicle</span>
+              <span>
+                <BsArrowRight />
+              </span>
+            </div>
+          </Button>
         </div>
-      </div>
 
-      <div className="flex justify-center">
-        <Button
-          data-aos="fade-up"
-          data-aos-duration="700"
-          data-aos-once="true"
-          bg="bg-brandGreen-300"
-          hover="hover:bg-brandGray-200"
-          textColor="text-white"
-          width={false}
-          size="text-sm"
-          link="rent-a-car"
-        >
-          <div className="flex items-center  gap-4">
-            <span>Find a vehicle</span>
-            <span>
-              <BsArrowRight />
-            </span>
-          </div>
-        </Button>
-      </div>
+        <Image
+          src={green}
+          width={1000}
+          height={1000}
+          alt="pink"
+          className="right-[44rem]  hidden xl:block top-[17rem] absolute opacity-70"
+        />
 
-      <Image
-        src={green}
-        width={1000}
-        height={1000}
-        alt="pink"
-        className="right-[44rem]  hidden xl:block top-[17rem] absolute opacity-70"
-      />
-
-      <Image
-        src={green}
-        width={1000}
-        height={1000}
-        alt="pink"
-        className="right-[-36rem]  hidden xl:block top-[-14rem] absolute opacity-70"
-      />
-    </Container>
+        <Image
+          src={green}
+          width={1000}
+          height={1000}
+          alt="pink"
+          className="right-[-36rem]  hidden xl:block top-[-14rem] absolute opacity-70"
+        />
+      </Container>
+    </div>
   );
 };
 

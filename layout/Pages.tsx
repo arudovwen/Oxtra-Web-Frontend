@@ -7,7 +7,7 @@ import { customerRoutes, clientRoutes, nonAuthRoutes } from "../utils/routes";
 const Pages = ({ children }: any) => {
   const [user, setUser] = useState<string | null>(null);
   const router = useRouter();
-
+  const page = children.type.name.toLowerCase();
   useEffect(() => {
     const userValue = localStorage.getItem("user");
     // @ts-ignore
@@ -36,7 +36,7 @@ const Pages = ({ children }: any) => {
 
   return user === null || user === "null" ? (
     // @ts-ignore
-    <NonAuthLayout>{children}</NonAuthLayout>
+    <NonAuthLayout page={page}>{children}</NonAuthLayout>
   ) : (
     // @ts-ignore
     <AuthLayout>{children}</AuthLayout>

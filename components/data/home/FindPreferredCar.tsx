@@ -4,8 +4,8 @@ import FindCarForm from "../../constants/forms/FindCarForm";
 
 const FindPreferredCar = () => {
   return (
-    <div className="flex justify-center">
-      <div className="bg-white absolute box-shadow w-[90%]  xl:w-[1164px] top-[523px] min-[1179px]:top-[464px]  xl:top-[550px]  p-6">
+    <div className="flex justify-center py-10 lg:py-0">
+      <div className="z-[800] bg-white lg:absolute lg:box-shadow w-full  xl:w-[1280px] top-[523px] min-[1179px]:top-[464px]  xl:top-[550px]  p-6 lg:rounded-lg">
         <div>
           <div className="text-brandGray-300 mb-[26px]">
             <Typography
