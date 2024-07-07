@@ -81,10 +81,10 @@ const Navigation = ({
               <Typography as="p" key={item.name} font="font-gordita-regular">
                 <Link
                   href={item.href}
-                  className={`text-white  pb-1 ${hover} duration-300 ${
+                  className={`${color}  pb-1 ${hover} duration-300 ${
                     item.href?.toLowerCase() ===
                     router.pathname &&
-                    "font-gordita-bold"
+                    "font-gordita-bold text-brandGreen-400"
                   }`}
                 >
                   {item.name}
@@ -98,9 +98,9 @@ const Navigation = ({
             <Typography as="p" font="font-gordita-regular">
               <Link
                 href="/login"
-                className={`text-white pb-1 ${hover} duration-300 ${
+                className={`${color}  pb-1 ${hover} duration-300 ${
                   activePage?.toLowerCase() === "login" &&
-                  "font-gordita-bold"
+                  "font-gordita-bold text-brandGreen-400"
                 }`}
               >
                 Login
