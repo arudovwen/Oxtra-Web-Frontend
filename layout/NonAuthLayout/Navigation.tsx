@@ -81,10 +81,10 @@ const Navigation = ({
               <Typography as="p" key={item.name} font="font-gordita-regular">
                 <Link
                   href={item.href}
-                  className={`${color}  pb-1 ${hover} duration-300 ${
+                  className={`text-white  pb-1 ${hover} duration-300 ${
                     item.href?.toLowerCase() ===
                     router.pathname &&
-                    "font-gordita-bold text-brandGreen-400"
+                    "font-gordita-bold"
                   }`}
                 >
                   {item.name}
