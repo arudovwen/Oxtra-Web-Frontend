@@ -98,9 +98,9 @@ const Navigation = ({
             <Typography as="p" font="font-gordita-regular">
               <Link
                 href="/login"
-                className={`${color}  pb-1 ${hover} duration-300 ${
+                className={`text-white pb-1 ${hover} duration-300 ${
                   activePage?.toLowerCase() === "login" &&
-                  "font-gordita-bold text-brandGreen-400"
+                  "font-gordita-bold"
                 }`}
               >
                 Login
