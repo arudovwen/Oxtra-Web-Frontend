@@ -18,6 +18,7 @@ import DateTimePicker from "@/components/constants/DateTimePicker";
 import GoBack from "@/components/constants/GoBack";
 import { useRouter } from "next/router";
 import { useLoadScript } from "@react-google-maps/api";
+import config from "@/utils/config";
 
 const RentVehicle = () => {
   const [filters, setFilters] = useState({
@@ -33,9 +34,9 @@ const RentVehicle = () => {
   const libraries = ["places"];
   const [suggestions, setSuggestions] = useState([]);
   const autocompleteRef = useRef(null);
-
+  
   const { isLoaded } = useLoadScript({
-    googleMapsApiKey: "AIzaSyCgAZVD_PeXEVjb7NMpTzQ2XwDup7xGLE8",
+    googleMapsApiKey: config.api_map_url,
     // @ts-ignore
     libraries,
   });
