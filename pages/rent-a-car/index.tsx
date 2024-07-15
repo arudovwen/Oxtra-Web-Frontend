@@ -1,5 +1,5 @@
 import Container from "@/layout/NonAuthLayout/Container";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { RiSearchLine } from "react-icons/ri";
 import Filters from "@/components/data/rent-a-car/Filters";
 import CarList from "@/components/data/rent-a-car/CarList";
@@ -10,9 +10,13 @@ import {
   Input,
   InputGroup,
   InputRightElement,
+  List,
+  ListItem,
   Text,
 } from "@chakra-ui/react";
 import DateTimePicker from "@/components/constants/DateTimePicker";
+import { useLoadScript } from "@react-google-maps/api";
+import config from "@/utils/config";
 
 const RentVehicle = () => {
   const [filters, setFilters] = useState({
@@ -24,6 +28,48 @@ const RentVehicle = () => {
     search: "",
     price_max: "",
   });
+
+  const libraries = ["places"];
+  const [suggestions, setSuggestions] = useState([]);
+  const autocompleteRef = useRef(null);
+
+  const { isLoaded } = useLoadScript({
+    googleMapsApiKey: config.api_map_url,
+    // @ts-ignore
+    libraries,
+  });
+
+  const handleInputChange = (e: any) => {
+    setValues({ ...values, pickup_location: e.target.value });
+
+    if (!autocompleteRef.current) {
+      // @ts-ignore
+      autocompleteRef.current =
+        new window.google.maps.places.AutocompleteService();
+    }
+
+    if (e.target.value) {
+      // @ts-ignore
+      autocompleteRef.current.getPlacePredictions(
+        { input: e.target.value },
+
+        (predictions: any, status: any) => {
+          if (status === window.google.maps.places.PlacesServiceStatus.OK) {
+            setSuggestions(predictions);
+          } else {
+            setSuggestions([]);
+          }
+        }
+      );
+    } else {
+      setSuggestions([]);
+    }
+  };
+
+  const handleSuggestionClick = (suggestion: any) => {
+    setValues({ ...values, pickup_location: suggestion.description });
+    setSuggestions([]);
+  };
 
   const [values, setValues] = useState({
     pickUp: new Date(),
@@ -40,7 +86,7 @@ const RentVehicle = () => {
     sessionStorage.removeItem("rent_values");
   }, []);
 
-  return (
+  return isLoaded ? (
     <Box fontFamily="gordita" mb="154px">
       <Container>
         <Flex
@@ -94,6 +140,7 @@ const RentVehicle = () => {
               <Text fontSize="14px" mb="8px" color="#444648" fontWeight={500}>
                 Pick-up Location
               </Text>
+
               <Input
                 border="1px solid #D4D6D8"
                 placeholder="Enter address or airport"
@@ -101,10 +148,33 @@ const RentVehicle = () => {
                 _placeholder={{ color: "#646668" }}
                 h="45px"
                 value={values?.pickup_location}
-                onChange={(e) =>
-                  setValues({ ...values, pickup_location: e.target.value })
-                }
+                onChange={handleInputChange}
               />
+              {suggestions.length > 0 && (
+                <List
+                  h="12.5rem"
+                  overflowY="scroll"
+                  className="rent_scroll"
+                  mt="15px"
+                  boxShadow="lg"
+                >
+                  {suggestions.map((suggestion) => (
+                    <ListItem
+                      p="10px"
+                      cursor="pointer"
+                      _hover={{ bg: "#f6f6f6" }}
+                      fontSize="13px"
+                      fontWeight={500}
+                      // @ts-ignore
+                      key={suggestion?.place_id}
+                      onClick={() => handleSuggestionClick(suggestion)}
+                    >
+                      {/* @ts-ignore */}
+                      {suggestion.description}
+                    </ListItem>
+                  ))}
+                </List>
+              )}
             </Box>
 
             <Flex align="center" gap="20px" w="100%">
@@ -179,6 +249,8 @@ const RentVehicle = () => {
         </Flex>
       </Container>
     </Box>
+  ) : (
+    ""
   );
 };
 
