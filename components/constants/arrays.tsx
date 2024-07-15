@@ -33,7 +33,7 @@ export const navigation = {
   products: [
     { name: "Rent a car", href: "/rent-a-car" },
     { name: "Vehicle owners", href: "#" },
-    { name: "Courier", href: "#" },
+    { name: "Sustainability plan", href: "/company#commitment" },
   ],
   business: [
     { name: "Our Terms", href: "/legal-and-compliance" },
