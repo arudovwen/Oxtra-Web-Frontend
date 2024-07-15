@@ -10,8 +10,6 @@ import {
   Input,
   InputGroup,
   InputRightElement,
-  List,
-  ListItem,
   Text,
 } from "@chakra-ui/react";
 import DateTimePicker from "@/components/constants/DateTimePicker";
@@ -34,7 +32,7 @@ const RentVehicle = () => {
   const libraries = ["places"];
   const [suggestions, setSuggestions] = useState([]);
   const autocompleteRef = useRef(null);
-  
+
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: config.api_map_url,
     // @ts-ignore
@@ -138,7 +136,7 @@ const RentVehicle = () => {
         </Box>
 
         <Flex flexDir="column" gap="24px" w={{ base: "100%", md: "35%" }}>
-          <Box>
+          <Box pos="relative">
             <Text fontSize="14px" mb="8px" color="#444648" fontWeight={500}>
               Pick-up Location
             </Text>
@@ -151,16 +149,21 @@ const RentVehicle = () => {
               value={values?.pickup_location}
               onChange={handleInputChange}
             />
-            {suggestions.length > 0 && (
-              <List
+
+            {suggestions?.length > 0 && (
+              <Box
+                pos="absolute"
+                boxShadow="lg"
+                bg="#fff"
+                zIndex={99}
+                w="full"
+                top="80px"
                 h="12.5rem"
                 overflowY="scroll"
                 className="rent_scroll"
-                mt="15px"
-                boxShadow="lg"
               >
-                {suggestions.map((suggestion) => (
-                  <ListItem
+                {suggestions?.map((suggestion) => (
+                  <Box
                     p="10px"
                     cursor="pointer"
                     _hover={{ bg: "#f6f6f6" }}
@@ -172,9 +175,9 @@ const RentVehicle = () => {
                   >
                     {/* @ts-ignore */}
                     {suggestion.description}
-                  </ListItem>
+                  </Box>
                 ))}
-              </List>
+              </Box>
             )}
           </Box>
 
