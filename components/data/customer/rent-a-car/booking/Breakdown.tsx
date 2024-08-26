@@ -73,7 +73,33 @@ const Breakdown = ({
       h={{ base: "unset", md: "37.5rem" }}
     >
       <Box>
-        <Box>
+
+      <Box mb={2}>
+          <Text mb="8px" color="#444648" fontSize="14px" fontWeight={500}>
+            Area where you plan to use the rental  <span className="text-red-500">*</span>
+          </Text>
+
+          <Input
+            h="48px"
+            border="1px solid #c4c6c8"
+            bg="transparent"
+            p="16px"
+            borderRadius="3px"
+            value={values?.area_of_usage}
+            onChange={(e) =>
+              setValues({ ...values, area_of_usage: e.target.value })
+            }
+            fontSize="14px"
+            color="#646668"
+            required
+          />
+        </Box>
+
+        <Text mt="8px" color="#0A3421" fontWeight={500} fontSize="12px">
+          Please note that outskirt locations attract extra charges on the
+          booking.
+        </Text>
+        <Box mt={6}>
           <Text mb="8px" color="#444648" fontSize="12px" fontWeight={700}>
             Add note to driver
           </Text>
@@ -92,30 +118,6 @@ const Breakdown = ({
           />
         </Box>
 
-        <Box mt="20px">
-          <Text mb="8px" color="#444648" fontSize="14px" fontWeight={500}>
-            Area where you plan to use the rental
-          </Text>
-
-          <Input
-            h="48px"
-            border="1px solid #c4c6c8"
-            bg="transparent"
-            p="16px"
-            borderRadius="3px"
-            value={values?.area_of_usage}
-            onChange={(e) =>
-              setValues({ ...values, area_of_usage: e.target.value })
-            }
-            fontSize="14px"
-            color="#646668"
-          />
-        </Box>
-
-        <Text mt="8px" color="#0A3421" fontWeight={500} fontSize="12px">
-          Please note that outskirt locations attract extra charges on the
-          booking.
-        </Text>
       </Box>
 
       <Box mt="20px" border="1px solid #e4e4e4" borderRadius="12px" p="24px">
@@ -187,6 +189,8 @@ const Breakdown = ({
         isLoading={isRent}
         bg="#42864F"
         borderRadius="8px"
+        className="disabled:opacity-50 cursor-not-allowed"
+        isDisabled={!values?.area_of_usage}
       >
         Submit
       </Button>
