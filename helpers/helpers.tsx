@@ -41,6 +41,18 @@ export const formatTimeMinute = (date: any, fallback = "") => {
   });
 };
 
+export const formatt = (date: any, fallback = "") => {
+  if (!date) return fallback;
+
+  const formattedDate = new Date(date);
+
+  const year = formattedDate.getUTCFullYear();
+  const month = (formattedDate.getUTCMonth() + 1).toString().padStart(2, "0");
+  const day = formattedDate.getUTCDate().toString().padStart(2, "0");
+
+  return `${year}-${month}-${day}`;
+};
+
 export const formatDate = (date: any, fallback = "", withTime = false) => {
   if (!date) return fallback;
 
@@ -54,6 +66,44 @@ export const formatDate = (date: any, fallback = "", withTime = false) => {
   const minutes = formattedDate.getUTCMinutes().toString().padStart(2, "0");
 
   return `${year}-${month}-${day} ${withTime ? `${hours}:${minutes}` : ""}`;
+};
+
+// Helper function to format the date
+export const formatNewDates = (
+  date: Date,
+  options?: any,
+  hasTime?: boolean,
+) => {
+  const optionsWithTime = hasTime
+    ? {
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: true,
+      }
+    : { year: "numeric", month: "2-digit", day: "2-digit" };
+  // @ts-ignore
+  return date.toLocaleString("en-US", optionsWithTime).replace(", ", ", ");
+};
+
+export const formatDat = (dateTime: any) => {
+  const date = new Date(dateTime);
+  return date.toLocaleDateString("en-US", {
+    weekday: "short",
+    day: "numeric",
+    month: "short",
+  });
+};
+
+export const formatTime = (dateTime: any) => {
+  const date = new Date(dateTime);
+  return date.toLocaleTimeString("en-US", {
+    hour: "numeric",
+    minute: "numeric",
+    hour12: true,
+  });
 };
 
 export const formatTimeToHHMMSS = (time: any) => {

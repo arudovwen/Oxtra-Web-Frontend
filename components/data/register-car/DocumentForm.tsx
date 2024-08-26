@@ -1,284 +1,753 @@
-import React from "react";
-import Typography from "../../constants/Typorgraphy";
+import React, { useState, useRef, useEffect } from "react";
 import classNames from "classnames";
-import Button from "../../constants/Button";
-import { TbPointFilled, TbPoint } from "react-icons/tb";
-import { useState, useRef } from "react";
-import { AiOutlineCloudUpload } from "react-icons/ai";
-
-const labelClasses = classNames(
-  "block text-[14px] leading-[14px] font-gordita-medium text-brandGray-300",
-);
-
-const inputClasses = classNames(
-  `px-2  h-[40px] py-2 border border-[#d4d6d8] rounded-lg mt-3  w-full font-gordita-regular`,
-);
-
-const dragAndDropClasses = classNames(
-  `font-gordita-medium my-2 text-[10px] text-[#41454C] `,
-);
-
-const typeDocClasses = classNames(
-  `text-[#797980] font-gordita-regular text-[12px] leading-[17px] `,
-);
+import {
+  Box,
+  RadioGroup,
+  Button,
+  Flex,
+  Input,
+  Radio,
+  Text,
+  Grid,
+  GridItem,
+  Image,
+  Spinner,
+  useDisclosure,
+} from "@chakra-ui/react";
+import useCustomToast from "@/utils/notifications";
+import { useAddVehicleDocs } from "@/services/query/vehicle";
+import { useRouter } from "next/router";
+import { useUploadFile } from "@/services/query/file";
+import { MdClose } from "react-icons/md";
+import VehicleSuccess from "@/components/modals/VehicleSuccess";
 
 const DocumentForm = () => {
-  const [wantToDrive, setWantToDrive] = useState(false);
-  const wrapperRef = useRef(null);
+  const inputClasses = classNames(
+    "mt-[12px] text-[14px]  text-[#666666] rounded-[8px] py-[14px] px-[16px] border border-[#cccccc]",
+  );
 
-  const [CertVehicleReg, setCertVehicleReg] = useState<{
-    name: string;
-  } | null>();
+  const labelClasses = classNames("mt-auto text-[#797980] text-[10px]");
 
-  const [roadWorthiness, setRoadWorthiness] = useState<{
-    name: string;
-  } | null>();
+  const boxClasses = classNames(
+    "bg-[#F9FAFB] h-[138px] text-[10px] rounded-[12px] p-[16px]",
+  );
 
-  const [vehicleInsuranceCert, setVehicleInsuranceCert] = useState<{
-    name: string;
-  } | null>();
+  const holderClasses = classNames(
+    "text-[#41454C] text-[10px] font-gordita-medium",
+  );
 
-  const [vehiclePlateNumber, setVehiclePlateNumber] = useState<{
-    name: string;
-  } | null>();
+  const [values, setValues] = useState({
+    license_number: "",
+    driver_type: "",
+  });
 
-  const [driverLicense, setDriverLicense] = useState<{
-    name: string;
-  } | null>();
+  const [newFiles, setNewFiles] = useState([]);
+
+  const { successToast, errorToast } = useCustomToast();
+
+  const currentFileInfo = useRef({ name: "", url: "" });
+
+  const [files, setFiles] = useState({
+    certificate: "",
+    license: "",
+    insurance: "",
+    plateNo: "",
+    roadWorthy: "",
+  });
+
+  const { mutate: uploadMutate, isLoading: isUploading } = useUploadFile({
+    onSuccess: (res: any) => {
+      const { name } = currentFileInfo.current;
+
+      // @ts-ignore
+      const fileIndex = newFiles.findIndex((file) => file.name === name);
+
+      if (fileIndex !== -1) {
+        const updatedFiles = [...newFiles];
+        // @ts-ignore
+        updatedFiles[fileIndex] = { label: toWords(name), url: res?.data };
+        setNewFiles(updatedFiles);
+      } else {
+        // @ts-ignore
+        setNewFiles((prevFiles) => [
+          ...prevFiles,
+          { label: toWords(name), url: res?.data },
+        ]);
+      }
+    },
+    onError: (err: any) => {
+      errorToast(
+        err?.response?.data?.message || err?.message || "An Error occurred",
+      );
+    },
+  });
+
+  const [currentImage, setCurrentImage] = useState("");
+
+  const router = useRouter();
+
+  const [user, setUser] = useState("");
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const storedUser =
+        // @ts-ignore
+        JSON.parse(localStorage.getItem("user"));
+      setUser(storedUser);
+    }
+  }, []);
+  const { isOpen, onClose, onOpen } = useDisclosure();
+  const { mutate, isLoading } = useAddVehicleDocs({
+    onSuccess: (res: any) => {
+      successToast(res?.message);
+      if (user) {
+        onOpen();
+      } else {
+        router.push("/login");
+      }
+      sessionStorage.removeItem("vehicleId");
+    },
+    onError: (err: any) => {
+      errorToast(
+        err?.response?.data?.message || err?.message || "An Error occurred",
+      );
+    },
+  });
+
+  const [currentInfo, setCurrentInfo] = useState();
+
+  const [fileLimit, setFileLimit] = useState(false);
+
+  const handleUploadChange = (e: any, { name }: any) => {
+    const newFile = e.target.files[0];
+
+    if (!newFile) {
+      return;
+    }
+
+    const fileSizeInBytes = newFile.size;
+    const newFileURL = URL.createObjectURL(newFile);
+    const formData = new FormData();
+    formData.append("file", newFile);
+
+    const limitInMB = Math.ceil(fileSizeInBytes / 1048576);
+    if (limitInMB > 2) {
+      setFileLimit(true);
+      setCurrentInfo(name);
+    } else {
+      setFileLimit(false);
+      currentFileInfo.current = { name, url: newFileURL };
+      setCurrentInfo(name);
+      uploadMutate(formData);
+      setCurrentImage(name);
+      setFiles((prevFiles) => ({
+        ...prevFiles,
+        [name]: newFile?.name,
+      }));
+    }
+  };
+
+  const toWords = (str: any) => {
+    return str
+      .replace(/([A-Z])/g, " $1")
+      .replace(/^./, (s: any) => s.toUpperCase());
+  };
+
+  const handleRemove = (nameToRemove: any) => {
+    const indexToRemove = newFiles.findIndex(
+      // @ts-ignore
+      (file) => file?.label === toWords(nameToRemove),
+    );
+
+    if (indexToRemove !== -1) {
+      const updatedNewFiles = [...newFiles];
+      updatedNewFiles.splice(indexToRemove, 1);
+      setNewFiles(updatedNewFiles);
+
+      setFiles((prevFiles) => ({
+        ...prevFiles,
+        [nameToRemove]: "",
+      }));
+    }
+  };
+
+  const certificate = useRef(null);
+  const roadWorthy = useRef(null);
+  const insurance = useRef(null);
+  const plateNo = useRef(null);
+  const license = useRef(null);
+
+  const handleButtonClick = ({ ref }: any) => {
+    if (ref && ref.current) {
+      ref.current.click();
+    }
+  };
+
+  const [vehicleId, setVehicleId] = useState("");
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const storedVehicles =
+        // @ts-ignore
+        JSON.parse(sessionStorage.getItem("vehicleId")) || [];
+      setVehicleId(storedVehicles);
+    }
+  }, []);
+
+  const action = () => {
+    mutate({
+      // @ts-ignore
+      vehicle_id: vehicleId,
+      license_number: values?.license_number,
+      driver_type: values?.driver_type,
+
+      // @ts-ignore
+      document_images: newFiles,
+    });
+  };
 
   return (
-    <main className="w-[90%] lg:mx-auto lg:max-w-[500px]">
-      <div className="mb-4  text-brandGray-300">
-        <Typography as="h4" font="font-gordita-medium">
-          Documents
-        </Typography>
-      </div>
-      <div className="text-brandGray-100 mb-8">
-        <Typography as="p" font="font-gordita-regular">
-          Please enter the required details to get started
-        </Typography>
-      </div>
+    <Box mt="-30px">
+      <VehicleSuccess isOpen={isOpen} onClose={onClose} />
+      <Text color="#444648" fontWeight={500} fontSize="24px">
+        Documents
+      </Text>
 
-      <section className="flex-auto">
-        <div className="">
-          <form className="mt-6">
-            <div className="grid grid-cols-12 gap-y-6 gap-x-4">
-              <div className="col-span-full">
-                <label className={labelClasses}>License number</label>
-                <div className="mt-1">
-                  <input type="number" className={inputClasses} required />
-                </div>
-              </div>
-            </div>
+      <Text mt="16px" color="#646668" fontSize="14px">
+        Please enter the required details to get started
+      </Text>
 
-            <div className="my-[20px] text-brandGray-100 font-gordita-regular text-[14px] leading-[21px]">
-              Oxtra offers trained drivers to handle your vehicle. Will you
-              drive or use our driver? Choosing to drive yourself can earn you
-              more.
-            </div>
+      <Box w="full" my="32px">
+        <Text className={labelClasses} fontSize="12px" fontWeight={500}>
+          License number
+        </Text>
 
-            <div className="mt-6 flex gap-[32px] mb-[35.5px]">
-              <div className="flex gap-1 items-center">
-                {wantToDrive ? (
-                  <TbPoint
-                    className="w-5 h-5 cursor-pointer"
-                    onClick={() => setWantToDrive(false)}
+        <Input
+          h="44px"
+          className={inputClasses}
+          value={values?.license_number}
+          onChange={(e) => {
+            setValues({
+              ...values,
+              license_number: e.target.value,
+            });
+          }}
+        />
+      </Box>
+
+      <Text color="#444648" fontSize="13px">
+        Oxtra offers trained drivers to handle your vehicle. Will you drive or
+        use our driver? Choosing to drive yourself can earn you more.
+      </Text>
+
+      <Flex>
+        <Flex my="16px" align="center">
+          <RadioGroup
+            value={values?.driver_type}
+            onChange={(e) =>
+              setValues({
+                ...values,
+                driver_type: e,
+              })
+            }
+            display="flex"
+            // @ts-ignore
+            align="center"
+            gap="32px"
+          >
+            <Radio size="sm" value={"assigned"} colorScheme="green">
+              <Text
+                pt="3px"
+                color={
+                  values?.driver_type === "assigned" ? "#438950" : "##444648"
+                }
+                fontWeight={values?.driver_type === "assigned" ? 500 : 400}
+                fontSize="13px"
+              >
+                Oxtra can provide driver
+              </Text>
+            </Radio>
+            <Radio size="sm" value={"self"} colorScheme="green">
+              <Text
+                pt="3px"
+                color={values?.driver_type === "self" ? "#438950" : "#444648"}
+                fontWeight={values.driver_type === "self" ? 500 : 400}
+                fontSize="13px"
+              >
+                I want to drive
+              </Text>
+            </Radio>
+          </RadioGroup>
+        </Flex>
+      </Flex>
+
+      <Box mt="32px">
+        <Grid
+          mt="24px"
+          gap="24px"
+          templateColumns={{ base: "repeat(1,1fr)", md: "repeat(2,1fr)" }}
+        >
+          <GridItem>
+            <Flex flexDir="column" className={boxClasses}>
+              <Flex align="center" justifyContent="space-between">
+                <Flex align="center" gap="8px">
+                  <Image
+                    src="/assets/upload.jpg"
+                    w="32px"
+                    h="32px"
+                    objectFit="contain"
                   />
+                  <Text className={holderClasses}>Select file to upload</Text>
+                </Flex>
+                {isUploading && currentImage === "certificate" ? (
+                  <Spinner color="#438950" size="sm" />
                 ) : (
-                  <TbPointFilled className="w-5 h-5 text-[#438950]" />
+                  <Flex
+                    w="20px"
+                    h="20px"
+                    border="1px solid #e0e0e0"
+                    cursor="pointer"
+                    display={files?.certificate ? "flex" : "none"}
+                    rounded="full"
+                    onClick={() => handleRemove("certificate")}
+                    justifyContent="center"
+                    align="center"
+                  >
+                    <MdClose size="13px" />
+                  </Flex>
                 )}
+              </Flex>
+              <Text
+                /* @ts-ignore */
+                textAlign={files.certificate ? "center" : "start"}
+                className={labelClasses}
+              >
+                {/* @ts-ignore */}
+                {files.certificate || "Certificate of vehicle registration"}
+              </Text>
 
-                <span
-                  className={`${
-                    !wantToDrive
-                      ? "text-brandGreen-300 font-gordita-bold "
-                      : " font-gordita-regular"
-                  } text-[12px] text-brandGray-300 leading-[12px] `}
+              <Input
+                id="image_upload"
+                ref={certificate}
+                onChange={(e) =>
+                  handleUploadChange(e, {
+                    name: "certificate",
+                  })
+                }
+                type="file"
+                display="none"
+                borderColor="black"
+              />
+              <label htmlFor="image_upload">
+                <Button
+                  mt="12px"
+                  bg="transparent"
+                  border="1px solid #438950"
+                  color="#438950"
+                  w="full"
+                  isDisabled={isUploading}
+                  onClick={() =>
+                    handleButtonClick({
+                      ref: certificate,
+                    })
+                  }
+                  h="32px"
+                  _hover={{ bg: "transparent" }}
+                  _active={{ bg: "transparent" }}
+                  _focus={{ bg: "transparent" }}
                 >
-                  Oxtra can provide driver
-                </span>
-              </div>
-              <div className="flex h-5 gap-1 items-center">
-                {wantToDrive ? (
-                  <TbPointFilled className="w-5 h-5 text-[#438950]" />
-                ) : (
-                  <TbPoint
-                    className="w-5 h-5 cursor-pointer"
-                    onClick={() => setWantToDrive(true)}
-                  />
-                )}
-                <span
-                  className={`${
-                    wantToDrive
-                      ? "text-brandGreen-300 font-gordita-bold "
-                      : " font-gordita-regular"
-                  } text-[12px] text-brandGray-300 leading-[12px] `}
-                >
-                  I want to drive
-                </span>
-              </div>
-            </div>
+                  Upload
+                </Button>
+              </label>
+            </Flex>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-[32px]">
-              {/* first row */}
-              <div
-                ref={wrapperRef}
-                className="drop-file-input bg-[#f9fafb]
-                "
-              >
-                <span className="">
-                  <AiOutlineCloudUpload className="w-7 h-7" />
-                </span>
-
-                <div className={dragAndDropClasses}>
-                  Drag and drop or Choose file to upload
-                </div>
-                <span className={typeDocClasses}>
-                  {CertVehicleReg?.name ||
-                    "Certificate of vehicle registration"}{" "}
-                </span>
-                <input
-                  multiple={false}
-                  type="file"
-                  required
-                  onChange={(e) => {
-                    if (!e.target.files) {
-                      return;
-                    }
-                    setCertVehicleReg(e.target.files[0]);
-                  }}
-                />
-              </div>
-
-              <div
-                ref={wrapperRef}
-                className="drop-file-input bg-[#f9fafb]
-                "
-              >
-                <span className="">
-                  <AiOutlineCloudUpload className="w-7 h-7" />
-                </span>
-
-                <div className={dragAndDropClasses}>
-                  Drag and drop or Choose file to upload
-                </div>
-                <span className={typeDocClasses}>
-                  {roadWorthiness?.name || "Road worthiness"}{" "}
-                </span>
-                <input
-                  type="file"
-                  required
-                  onChange={(e) => {
-                    if (!e.target.files) {
-                      return;
-                    }
-                    setRoadWorthiness(e.target.files[0]);
-                  }}
-                />
-              </div>
-
-              {/* second row */}
-
-              <div
-                ref={wrapperRef}
-                className="drop-file-input mb-8  bg-[#f9fafb]
-                "
-              >
-                <span className="">
-                  <AiOutlineCloudUpload className="w-7 h-7" />
-                </span>
-
-                <div className={dragAndDropClasses}>
-                  Drag and drop or Choose file to upload
-                </div>
-                <span className={typeDocClasses}>
-                  {vehicleInsuranceCert?.name ||
-                    "Vehicle insurance certificate"}{" "}
-                </span>
-                <input
-                  multiple={false}
-                  type="file"
-                  required
-                  onChange={(e) => {
-                    if (!e.target.files) {
-                      return;
-                    }
-                    setVehicleInsuranceCert(e.target.files[0]);
-                  }}
-                />
-              </div>
-
-              <div
-                ref={wrapperRef}
-                className="drop-file-input mb-8 bg-[#f9fafb]
-                "
-              >
-                <span className="">
-                  <AiOutlineCloudUpload className="w-7 h-7" />
-                </span>
-
-                <div className={dragAndDropClasses}>
-                  Drag and drop or Choose file to upload
-                </div>
-                <span className={typeDocClasses}>
-                  {vehiclePlateNumber?.name || "Vehicle plate number "}{" "}
-                </span>
-                <input
-                  type="file"
-                  required
-                  onChange={(e) => {
-                    if (!e.target.files) {
-                      return;
-                    }
-                    setVehiclePlateNumber(e.target.files[0]);
-                  }}
-                />
-              </div>
-
-              {wantToDrive && (
-                <div
-                  ref={wrapperRef}
-                  className="drop-file-input mb-8 bg-[#f9fafb]
-                "
-                >
-                  <span className="">
-                    <AiOutlineCloudUpload className="w-7 h-7" />
-                  </span>
-
-                  <div className={dragAndDropClasses}>
-                    Drag and drop or Choose file to upload
-                  </div>
-                  <span className={typeDocClasses}>
-                    {driverLicense?.name || "Drivers license"}{" "}
-                  </span>
-                  <input
-                    type="file"
-                    required
-                    onChange={(e) => {
-                      if (!e.target.files) {
-                        return;
-                      }
-                      setDriverLicense(e.target.files[0]);
-                    }}
-                  />
-                </div>
-              )}
-            </div>
-
-            <Button
-              bg="bg-brandGreen-300"
-              hover="hover:bg-brandGray-200"
-              textColor="text-white"
-              width={true}
-              size="text-sm"
-              type="submit"
+            <Text
+              color="tomato"
+              display={
+                fileLimit && currentInfo === "certificate" ? "block" : "none"
+              }
+              textAlign="center"
+              mt="5px"
+              fontSize="12px"
             >
-              Next
-            </Button>
-          </form>
-        </div>
-      </section>
-    </main>
+              File size exceeds 2MB limit!
+            </Text>
+          </GridItem>
+
+          <GridItem>
+            <Flex flexDir="column" className={boxClasses}>
+              <Flex align="center" justifyContent="space-between">
+                <Flex align="center" gap="8px">
+                  <Image
+                    src="/assets/upload.jpg"
+                    w="32px"
+                    h="32px"
+                    objectFit="contain"
+                  />
+                  <Text className={holderClasses}>Select file to upload</Text>
+                </Flex>
+                {isUploading && currentImage === "roadWorthy" ? (
+                  <Spinner color="#438950" size="sm" />
+                ) : (
+                  <Flex
+                    w="20px"
+                    h="20px"
+                    border="1px solid #e0e0e0"
+                    cursor="pointer"
+                    display={files?.roadWorthy ? "flex" : "none"}
+                    rounded="full"
+                    onClick={() => handleRemove("roadWorthy")}
+                    justifyContent="center"
+                    align="center"
+                  >
+                    <MdClose size="13px" />
+                  </Flex>
+                )}
+              </Flex>
+              <Text
+                /* @ts-ignore */
+                textAlign={files.roadWorthy ? "center" : "start"}
+                className={labelClasses}
+              >
+                {/* @ts-ignore */}
+                {files.roadWorthy || "Road worthiness"}
+              </Text>
+
+              <Input
+                id="image_upload"
+                ref={roadWorthy}
+                onChange={(e) =>
+                  handleUploadChange(e, {
+                    name: "roadWorthy",
+                  })
+                }
+                type="file"
+                display="none"
+                borderColor="black"
+              />
+              <label htmlFor="image_upload">
+                <Button
+                  mt="12px"
+                  bg="transparent"
+                  border="1px solid #438950"
+                  color="#438950"
+                  w="full"
+                  isDisabled={isUploading}
+                  onClick={() =>
+                    handleButtonClick({
+                      ref: roadWorthy,
+                    })
+                  }
+                  h="32px"
+                  _hover={{ bg: "transparent" }}
+                  _active={{ bg: "transparent" }}
+                  _focus={{ bg: "transparent" }}
+                >
+                  Upload
+                </Button>
+              </label>
+            </Flex>
+
+            <Text
+              color="tomato"
+              display={
+                fileLimit && currentInfo === "roadWorthy" ? "block" : "none"
+              }
+              textAlign="center"
+              mt="5px"
+              fontSize="12px"
+            >
+              File size exceeds 2MB limit!
+            </Text>
+          </GridItem>
+
+          <GridItem>
+            <Flex flexDir="column" className={boxClasses}>
+              <Flex align="center" justifyContent="space-between">
+                <Flex align="center" gap="8px">
+                  <Image
+                    src="/assets/upload.jpg"
+                    w="32px"
+                    h="32px"
+                    objectFit="contain"
+                  />
+                  <Text className={holderClasses}>Select file to upload</Text>
+                </Flex>
+                {isUploading && currentImage === "insurance" ? (
+                  <Spinner color="#438950" size="sm" />
+                ) : (
+                  <Flex
+                    w="20px"
+                    h="20px"
+                    border="1px solid #e0e0e0"
+                    cursor="pointer"
+                    display={files?.insurance ? "flex" : "none"}
+                    rounded="full"
+                    onClick={() => handleRemove("insurance")}
+                    justifyContent="center"
+                    align="center"
+                  >
+                    <MdClose size="13px" />
+                  </Flex>
+                )}
+              </Flex>
+              <Text
+                /* @ts-ignore */
+                textAlign={files.insurance ? "center" : "start"}
+                className={labelClasses}
+              >
+                {/* @ts-ignore */}
+                {files.insurance || "Vehicle insurance certificate"}
+              </Text>
+
+              <Input
+                id="image_upload"
+                ref={insurance}
+                onChange={(e) =>
+                  handleUploadChange(e, {
+                    name: "insurance",
+                  })
+                }
+                type="file"
+                display="none"
+                borderColor="black"
+              />
+              <label htmlFor="image_upload">
+                <Button
+                  mt="12px"
+                  bg="transparent"
+                  border="1px solid #438950"
+                  color="#438950"
+                  w="full"
+                  isDisabled={isUploading}
+                  onClick={() =>
+                    handleButtonClick({
+                      ref: insurance,
+                    })
+                  }
+                  h="32px"
+                  _hover={{ bg: "transparent" }}
+                  _active={{ bg: "transparent" }}
+                  _focus={{ bg: "transparent" }}
+                >
+                  Upload
+                </Button>
+              </label>
+            </Flex>
+
+            <Text
+              color="tomato"
+              display={
+                fileLimit && currentInfo === "insurance" ? "block" : "none"
+              }
+              textAlign="center"
+              mt="5px"
+              fontSize="12px"
+            >
+              File size exceeds 2MB limit!
+            </Text>
+          </GridItem>
+
+          <GridItem>
+            <Flex flexDir="column" className={boxClasses}>
+              <Flex align="center" justifyContent="space-between">
+                <Flex align="center" gap="8px">
+                  <Image
+                    src="/assets/upload.jpg"
+                    w="32px"
+                    h="32px"
+                    objectFit="contain"
+                  />
+                  <Text className={holderClasses}>Select file to upload</Text>
+                </Flex>
+                {isUploading && currentImage === "plateNo" ? (
+                  <Spinner color="#438950" size="sm" />
+                ) : (
+                  <Flex
+                    w="20px"
+                    h="20px"
+                    border="1px solid #e0e0e0"
+                    cursor="pointer"
+                    display={files?.plateNo ? "flex" : "none"}
+                    rounded="full"
+                    onClick={() => handleRemove("plateNo")}
+                    justifyContent="center"
+                    align="center"
+                  >
+                    <MdClose size="13px" />
+                  </Flex>
+                )}
+              </Flex>
+              <Text
+                /* @ts-ignore */
+                textAlign={files.plateNo ? "center" : "start"}
+                className={labelClasses}
+              >
+                {/* @ts-ignore */}
+                {files.plateNo || "Vehicle plate number"}
+              </Text>
+
+              <Input
+                id="image_upload"
+                ref={plateNo}
+                onChange={(e) =>
+                  handleUploadChange(e, {
+                    name: "plateNo",
+                  })
+                }
+                type="file"
+                display="none"
+                borderColor="black"
+              />
+              <label htmlFor="image_upload">
+                <Button
+                  mt="12px"
+                  bg="transparent"
+                  border="1px solid #438950"
+                  color="#438950"
+                  w="full"
+                  isDisabled={isUploading}
+                  onClick={() =>
+                    handleButtonClick({
+                      ref: plateNo,
+                    })
+                  }
+                  h="32px"
+                  _hover={{ bg: "transparent" }}
+                  _active={{ bg: "transparent" }}
+                  _focus={{ bg: "transparent" }}
+                >
+                  Upload
+                </Button>
+              </label>
+            </Flex>
+
+            <Text
+              color="tomato"
+              display={
+                fileLimit && currentInfo === "plateNo" ? "block" : "none"
+              }
+              textAlign="center"
+              mt="5px"
+              fontSize="12px"
+            >
+              File size exceeds 2MB limit!
+            </Text>
+          </GridItem>
+
+          <GridItem>
+            <Flex flexDir="column" className={boxClasses}>
+              <Flex align="center" justifyContent="space-between">
+                <Flex align="center" gap="8px">
+                  <Image
+                    src="/assets/upload.jpg"
+                    w="32px"
+                    h="32px"
+                    objectFit="contain"
+                  />
+                  <Text className={holderClasses}>Select file to upload</Text>
+                </Flex>
+                {isUploading && currentImage === "license" ? (
+                  <Spinner color="#438950" size="sm" />
+                ) : (
+                  <Flex
+                    w="20px"
+                    h="20px"
+                    border="1px solid #e0e0e0"
+                    cursor="pointer"
+                    display={files?.license ? "flex" : "none"}
+                    rounded="full"
+                    onClick={() => handleRemove("license")}
+                    justifyContent="center"
+                    align="center"
+                  >
+                    <MdClose size="13px" />
+                  </Flex>
+                )}
+              </Flex>
+              <Text
+                /* @ts-ignore */
+                textAlign={files.license ? "center" : "start"}
+                className={labelClasses}
+              >
+                {/* @ts-ignore */}
+                {files.license || "Drivers license"}
+              </Text>
+
+              <Input
+                id="image_upload"
+                ref={license}
+                onChange={(e) =>
+                  handleUploadChange(e, {
+                    name: "license",
+                  })
+                }
+                type="file"
+                display="none"
+                borderColor="black"
+              />
+              <label htmlFor="image_upload">
+                <Button
+                  mt="12px"
+                  bg="transparent"
+                  border="1px solid #438950"
+                  color="#438950"
+                  w="full"
+                  isDisabled={isUploading}
+                  onClick={() =>
+                    handleButtonClick({
+                      ref: license,
+                    })
+                  }
+                  h="32px"
+                  _hover={{ bg: "transparent" }}
+                  _active={{ bg: "transparent" }}
+                  _focus={{ bg: "transparent" }}
+                >
+                  Upload
+                </Button>
+              </label>
+            </Flex>
+
+            <Text
+              color="tomato"
+              display={
+                fileLimit && currentInfo === "license" ? "block" : "none"
+              }
+              textAlign="center"
+              mt="5px"
+              fontSize="12px"
+            >
+              File size exceeds 2MB limit!
+            </Text>
+          </GridItem>
+        </Grid>
+      </Box>
+
+      <Flex align="center" mt="40px" gap="24px">
+        {/* <Button
+          bg="transparent"
+          border="1px solid #646464"
+          color="#646464"
+          w="40%"
+          h="48px"
+          _hover={{ bg: "transparent" }}
+          _active={{ bg: "transparent" }}
+          onClick={() => router.push("/register-car/documents")}
+          _focus={{ bg: "transparent" }}
+        >
+          Skip
+        </Button> */}
+        <Button
+          onClick={action}
+          isLoading={isLoading}
+          w="100%"
+          h="48px"
+        >
+          Next
+        </Button>
+      </Flex>
+    </Box>
   );
 };
 

@@ -1,94 +1,105 @@
-import car1 from "../../public/assets/Rectangle 13.png";
-import car2 from "../../public/assets/Rectangle 14.png";
-import car5 from "../../public/assets/Rectangle 17.png";
-import veriftyme from "../../public/assets/verifyme.png";
-import wooven from "../../public/assets/wooven.png";
-import paystack from "../../public/assets/paystack.png";
-import nimc from "../../public/assets/nimc.png";
-import { GrFacebook, GrInstagram, GrTwitter } from "react-icons/gr";
-import offerCar from "../../public/assets/offerCar.png";
-import pricing from "../../public/assets/pricing.png";
+import { GrInstagram, GrSnapchat, GrLinkedin } from "react-icons/gr";
+import { BsTwitterX } from "react-icons/bs";
+import { FaFacebookF } from "react-icons/fa";
+import mission from "../../public/assets/mission.png";
+import vission from "../../public/assets/vission.png";
+import values from "../../public/assets/values.png";
+import TermsOfUse from "@/components/LegalContent/terms-of-use.mdx";
+import PrivacyPolicy from "@/components/LegalContent/privacy-policy.mdx";
+import NonDiscriminationPolicy from "@/components/LegalContent/non-discrimination-policy.mdx";
+import OxtraAndRenters from "@/components/LegalContent/oxtra-and-renters.mdx";
+import OxtraAndVehicleOwners from "@/components/LegalContent/oxtra-and-vehicle-owners.mdx";
+
+type ContentMapType = {
+  [key: string]: {
+    content: React.ReactElement;
+  };
+};
+
+type TocMapType = {
+  [key: string]: string[];
+};
+
+export const brands = ["Toyota", "Chevrolet", "Ferrari"];
+export const model = ["Camry", "Buggati", "X2"];
 
 export const navigation = {
   company: [
     { name: "About us", href: "#" },
     { name: "Company", href: "/company" },
     { name: "Press", href: "#" },
-    { name: "Blog", href: "#" },
+    // { name: "Blog", href: "#" },
   ],
   products: [
-    { name: "Rent a car", href: "/rentVehicle" },
-    { name: "Put your car for rent", href: "#" },
-    { name: "Airport Trips", href: "#" },
-    { name: "Courier", href: "#" },
+    { name: "Rent a car", href: "/rent-a-car" },
+    { name: "Vehicle owners", href: "#" },
+    { name: "Sustainability plan", href: "/company#commitment" },
   ],
   business: [
-    { name: "Pricing", href: "#" },
-    { name: "Our Terms", href: "#" },
-    { name: "Privacy Policy", href: "#" },
-    { name: "Insurance Policy", href: "#" },
+    { name: "Our Terms", href: "/legal-and-compliance" },
+    { name: "Our Policies", href: "/legal-and-compliance" },
+    { name: "Oxtra and Renters", href: "/legal-and-compliance" },
+    { name: "Oxtra and Vehicle Owners", href: "/legal-and-compliance" },
   ],
   contact: [
-    { name: "Info@Oxtra.africa", href: "#" },
-    { name: "Whatsapp Support", href: "#" },
+    { name: "hello@Oxtra.africa", title: "Enquiries", href: "#" },
+    {
+      name: "08167329144",
+      title: "Call or Text",
+      href: "#",
+    },
   ],
 };
 
 export const offers = [
   {
-    title: "Wide Range of Vehicles",
+    title: "Our Mission",
     description:
-      "We have a ranged fleet of rental cars to meet your needs and preferences. From economy cars to luxury SUVs, we have the right vehicle for every occasion and budget.",
-    image: offerCar,
-    height: "h-[480px]",
-    linkText: "Check out our cars",
-    link: "/",
+      "Our mission at Oxtra is to accelerate Africas transition to sustainable transportation.",
+    image: mission,
   },
 
   {
-    title: "Flexible Rental Options",
+    title: "Our Vision",
     description:
-      "We understand that every customer has unique rental needs, that's why we offer flexible rental options, including hourly and  daily options. We also offer long-term rental options on special request for customers who need a car for an extended period of time.",
-    image: offerCar,
-    height: "h-[528px]",
-    linkText: "Check out our cars",
-    link: "/",
+      "Lead Africa towards a sustainable transportation future, empowering people, protecting the planet.",
+    image: vission,
   },
 
   {
-    title: "Competitive Pricing",
+    title: "Our Values",
     description:
-      "We want you to have the most affordable and stress-free rental experience possible. So why wait? Book your rental with us today and enjoy a fun and affordable road trip with Oxtra!",
-    image: pricing,
-    height: "h-[480px]",
-    linkText: "Check out our cars",
-    link: "/",
+      "Sustainability, Innovation, Customer-centricity, Inclusivity, and Transparency",
+    image: values,
   },
 ];
 
 export const socials = [
   {
     name: "Facebook",
-    icon: <GrFacebook />,
+    icon: <FaFacebookF color="#080891" />,
+    href: "https://www.facebook.com/profile.php?id=61557476565691&mibextid=ZbWKwL",
   },
   {
     name: "Twitter",
-    icon: <GrTwitter />,
+    icon: <BsTwitterX color="#00000" />,
+    href: "https://twitter.com/oxtraafrica",
   },
   {
     name: "Instagram",
-    icon: <GrInstagram />,
+    icon: <GrInstagram color="#C30098" />,
+    href: "https://www.instagram.com/oxtraafrica",
   },
-];
-
-export const trustedPartners = [
   {
-    partner: "verfiy me",
-    image: veriftyme,
+    name: "Snapchat",
+    icon: <GrSnapchat color="#B2B200" />,
+    href: "https://www.snapchat.com/add/oxtraafrica?share_id=Ce4biuz4wA0&locale=en-US",
   },
-  { partner: "wooven", image: wooven },
-  { partner: "nimc", image: nimc },
-  { partner: "paystack", image: paystack },
+  {
+    name: "Linkedin",
+    icon: <GrLinkedin color="#080891" />,
+    href: "https://www.linkedin.com/company/oxtra-africa/",
+  },
 ];
 
 export const filters = [
@@ -152,29 +163,6 @@ export const vehicles = [
   },
 ];
 
-export const placeholders = [
-  {
-    car: car1,
-  },
-  {
-    car: car2,
-  },
-
-  {
-    car: car5,
-  },
-  {
-    car: car1,
-  },
-  {
-    car: car2,
-  },
-
-  {
-    car: car5,
-  },
-];
-
 export const sortings = [
   "Most popular rentals",
   "Top rated rentals",
@@ -214,31 +202,31 @@ export const carAccessories = [
 export const carFeatures = [
   {
     name: "AC",
-    img: "../../assets/ac.jpg",
+    img: "/assets/ac.jpg",
   },
   {
     name: "6 Seater",
-    img: "../../assets/seater.jpg",
+    img: "/assets/seater.jpg",
   },
   {
     name: "4 Bags",
-    img: "../../assets/bags.jpg",
+    img: "/assets/bags.jpg",
   },
   {
     name: "Automatic",
-    img: "../../assets/automatic.jpg",
+    img: "/assets/automatic.jpg",
   },
   {
     name: "Bluetooth",
-    img: "../../assets/bluetooth.jpg",
+    img: "/assets/bluetooth.jpg",
   },
   {
     name: "4 Doors",
-    img: "../../assets/seater.jpg",
+    img: "/assets/seater.jpg",
   },
   {
     name: "Reverse Camera",
-    img: "../../assets/seater.jpg",
+    img: "/assets/seater.jpg",
   },
 ];
 
@@ -251,19 +239,61 @@ export const carBenefits = [
 export const sideBarRoutes = [
   {
     name: "Rent a car",
-    route: "/rent-a-car",
-    img: "../../assets/rent-car.svg",
+    route: "/customer/rent-a-car/requests",
+    img: "/assets/rent-car.svg",
+  },
+  // {
+  //   name: "Courier service",
+  //   route: "/customer/courier-service",
+  //   img: "/assets/courier.svg",
+  // },
+
+  {
+    name: "Payments",
+    route: "/customer/payments",
+    img: "/assets/payment.svg",
   },
   {
-    name: "Courier service",
-    route: "/courier-service",
-    img: "../../assets/courier.svg",
+    name: "History",
+    route: "/customer/history",
+    img: "/assets/history.svg",
+  },
+  { name: "Help", route: "/customer/help", img: "/assets/help.svg" },
+  {
+    name: "Settings",
+    route: "/customer/settings",
+    img: "/assets/settings.svg",
+  },
+];
+
+export const carOwnerRoutes = [
+  {
+    name: "Car Rental Requests",
+    route: "/client/rentals",
+    img: "/assets/rent-car.svg",
+  },
+  {
+    name: "Vehicles",
+    route: "/client/vehicles",
+    img: "/assets/courier.svg",
   },
 
-  { name: "Payments", route: "/payments", img: "../../assets/payment.svg" },
-  { name: "History", route: "/history", img: "../../assets/history.svg" },
-  { name: "Help", route: "/help", img: "../../assets/help.svg" },
-  { name: "Settings", route: "/settings", img: "../../assets/settings.svg" },
+  {
+    name: "Payments",
+    route: "/client/payments",
+    img: "/assets/payment.svg",
+  },
+  {
+    name: "History",
+    route: "/client/history",
+    img: "/assets/history.svg",
+  },
+  { name: "Help", route: "/client/help", img: "/assets/help.svg" },
+  {
+    name: "Promos",
+    route: "/client/promos",
+    img: "/assets/settings.svg",
+  },
 ];
 
 export const paymentOptions = ["Card", "Wallet", "Transfer"];
@@ -509,4 +539,339 @@ export const countries = [
   { country: "Yemen", code: "967", iso: "YE" },
   { country: "Zambia", code: "260", iso: "ZM" },
   { country: "Zimbabwe", code: "263", iso: "ZW" },
+];
+
+export const contentMap: ContentMapType = {
+  "Terms of Use": {
+    content: <TermsOfUse />,
+  },
+  "Privacy Policy": {
+    content: <PrivacyPolicy />,
+  },
+  "Non-discrimination Policy": {
+    content: <NonDiscriminationPolicy />,
+  },
+  "Oxtra and Renters": {
+    content: <OxtraAndRenters />,
+  },
+  "Oxtra and Vehicle Owners": {
+    content: <OxtraAndVehicleOwners />,
+  },
+};
+
+export const tocMap: TocMapType = {
+  "Terms of Use": [
+    "1. OUR SERVICES",
+    "2. INTELLECTUAL PROPERTY RIGHTS",
+    "3. USER REPRESENTATIONS",
+    "4. USER REGISTRATION",
+    "5. VEHICLE AND IDENTITY VERIFICATION",
+    "6. PAYMENTS",
+    "7. PROHIBITED ACTIVITIES",
+    "8. USER GENERATED CONTRIBUTIONS",
+    "9. GUIDELINES FOR REVIEWS",
+    "10. MOBILE APPLICATION LICENSE",
+    "11. SOCIAL MEDIA",
+    "12. SERVICES MANAGEMENT",
+    "13. PRIVACY POLICY",
+    "14. COPYRIGHT INFRINGEMENTS",
+    "15. TERMS AND TERMINATIONS",
+    "16. MODIFICATIONS AND INTERRUPTIONS",
+    "17. GOVERNING LAW",
+    "18. DISPUTE RESOLUTION",
+    "20. DISCLAIMER",
+    "21. LIMITATIONS OF LIABILITY",
+    "22. INDEMNIFICATION",
+    "23. USER DATA",
+    "24. ELECTRONIC COMMUNICATIONS, TRANSACTIONS, AND SIGNATURES",
+    "25. MISCELLANEOUS",
+    "26. LIABILITY",
+    "27. CONTACT US AND CUSTOMER SUPPORT",
+  ],
+  "Privacy Policy": [
+    "1. OUR COMMITMENT TO YOUR PRIVACY",
+    "2. WHO WE ARE",
+    "3. CONTACT DETAILS",
+    "4. WHY WE COLLECT YOUR PERSONAL DATA",
+    "5. SOURCES WE COLLECT YOUR PERSONAL DATA FROM",
+    "6. INFORMATION WE COLLECT ABOUT YOU",
+    "7. HOW WE USE YOUR PERSONAL DATA",
+    "8. COOKIES AND OTHER TECHNOLOGIES",
+    "9. WHO DO WE SHARE YOUR PERSONAL DATA WITH?",
+    "10. DATA SECURITY",
+    "11. DATA RETENTION",
+    "12. YOUR RIGHTS",
+    "13. RIGHT TO COMPLAINT",
+    "14. UPDATING PERSONAL DATA ABOUT YOU",
+    "15. CHANGES TO OUR PRIVACY NOTICE",
+  ],
+  "Non-discrimination Policy": [
+    "1. INFORMATION ON THE FEATURES OF LISTING",
+    "2. STATEMENT OF PREFERENCE",
+    "3. DECLINE OR CANCELLATION",
+    "4. DIFFERENT TERMS AND CONDITIONS",
+    "5. RESERVATION BASED ON AGE/PREGNANCY / FAMILY STATUS",
+    "6. WHAT WILL NOT AMOUNT TO DECLINE OR CANCELLATION",
+    "7. ASSUMPTIONS",
+    "8. DISABILITY",
+    "9. STATEMENT ON DISABILITY",
+  ],
+  "Oxtra and Renters": [
+    "1. INTRODUCTION",
+    "2. DESCRIPTION OF SERVICE",
+    "3. ACCEPTANCE OF TERMS",
+    "4. USER ELIGIBILITY",
+    "5. REGISTERING AN ACCOUNT",
+    "6. WHAT WILL NOT AMOUNT TO DECLINE OR CANCELLATION",
+    "7. BOOKING A VEHICLE",
+    "8. STANDARD RENTAL TERMS",
+    "9. VERIFICATION OF RENTERS IDENTITY",
+    "10. VEHICLE OWNER CANCELLATION",
+    "11. TRIPS CANCELED BY OXTRA",
+    "12. COMPLIMENTARY RIDE",
+    "13. EXTRA CHARGES",
+    "14. AIRPORT PICK-UP AND DROP-OFF",
+    "15. MONTHLY BOOKING",
+    "16. CONDITION OF VEHICLES BOOKED",
+    "17. USE OF THE RENTED VEHICLE",
+    "18. PAYMENT OF PARKING FEES AND FINES",
+    "19. RETURN OF VEHICLE",
+    "20. REPOSSESSION",
+    "21. CHARGES AND PAYMENTS",
+    "22. ACCEPTANCE OF TERMS THROUGH PAYMENT ",
+    "23. TAXES",
+    "24. YOUR COMMITMENTS",
+    "25. COMMUNICATIONS WITH YOU",
+    "26. GOVERNING LAW",
+    "27. DISPUTE RESOLUTION",
+    "28. SEVERABILITY",
+    "29. VARIATION AND MODIFICATION OF TERMS",
+    "30. CONCLUSION",
+  ],
+  "Oxtra and Vehicle Owners": [
+    "1. INTRODUCTION",
+    "2. ACCEPTANCE OF TERMS",
+    "3. USER ELIGIBILITY",
+    "4. REGISTERING AN ACCOUNT",
+    "5. LISTING YOUR VEHICLE",
+    "6. VEHICLE OWNERS VERIFICATION",
+    "7. CONDITION OF VEHICLES LISTED",
+    "8. VEHICLE AVAILABILITY",
+    "9. PAYMENT AND FEES",
+    "10. TAXES",
+    "11. YOUR COMMITMENTS",
+    "12. ACCOUNT ACTIVITY",
+    "13. PROHIBITED ACTIVITIES",
+    "14. YOUR CONTENT",
+    "15. COMMUNICATIONS WITH YOU",
+    "16. GOVERNING LAW",
+    "17. DISPUTE RESOLUTION",
+    "18. SEVERABILITY",
+    "19. VARIATION AND MODIFICATION OF TERMS",
+  ],
+};
+
+export const topics = [
+  "Terms of Use",
+  "Privacy Policy",
+  "Non-discrimination Policy",
+  "Oxtra and Renters",
+  "Oxtra and Vehicle Owners",
+];
+
+export const category = [
+  {
+    id: 0,
+    name: "Requirements",
+    questions: [
+      {
+        question: "What are the age requirements to rent a car?",
+        answer:
+          "We have partnered with Paystack to give our customers as many payment options as possible to promote flexibility",
+      },
+
+      {
+        question: "What methods of payment do you accept?",
+        answer:
+          "We have partnered with Paystack to give our customers as many payment options as possible to promote flexibility",
+      },
+      {
+        question: "Do I need to refill the gas tank before returning the car?",
+        answer:
+          "We have partnered with Paystack to give our customers as many payment options as possible to promote flexibility",
+      },
+
+      {
+        question: "What are your cancellation policies?",
+        answer:
+          "We have partnered with Paystack to give our customers as many payment options as possible to promote flexibility",
+      },
+
+      {
+        question: "What happens if I need to extend my rental period?",
+        answer:
+          "We have partnered with Paystack to give our customers as many payment options as possible to promote flexibility",
+      },
+    ],
+  },
+  {
+    id: 1,
+    name: "Vehicles",
+    questions: [
+      {
+        question: "What are the age requirements to rent a car?",
+        answer:
+          "We have partnered with Paystack to give our customers as many payment options as possible to promote flexibility",
+      },
+
+      {
+        question: "What methods of payment do you accept?",
+        answer:
+          "We have partnered with Paystack to give our customers as many payment options as possible to promote flexibility",
+      },
+      {
+        question: "Do I need to refill the gas tank before returning the car?",
+        answer:
+          "We have partnered with Paystack to give our customers as many payment options as possible to promote flexibility",
+      },
+
+      {
+        question: "What are your cancellation policies?",
+        answer:
+          "We have partnered with Paystack to give our customers as many payment options as possible to promote flexibility",
+      },
+
+      {
+        question: "What happens if I need to extend my rental period?",
+        answer:
+          "We have partnered with Paystack to give our customers as many payment options as possible to promote flexibility",
+      },
+    ],
+  },
+  {
+    id: 2,
+    name: "Payments",
+    questions: [
+      {
+        question: "What are the age requirements to rent a car?",
+        answer:
+          "We have partnered with Paystack to give our customers as many payment options as possible to promote flexibility",
+      },
+
+      {
+        question: "What methods of payment do you accept?",
+        answer:
+          "We have partnered with Paystack to give our customers as many payment options as possible to promote flexibility",
+      },
+      {
+        question: "Do I need to refill the gas tank before returning the car?",
+        answer:
+          "We have partnered with Paystack to give our customers as many payment options as possible to promote flexibility",
+      },
+
+      {
+        question: "What are your cancellation policies?",
+        answer:
+          "We have partnered with Paystack to give our customers as many payment options as possible to promote flexibility",
+      },
+
+      {
+        question: "What happens if I need to extend my rental period?",
+        answer:
+          "We have partnered with Paystack to give our customers as many payment options as possible to promote flexibility",
+      },
+    ],
+  },
+  {
+    id: 3,
+    name: "How to book?",
+
+    questions: [
+      {
+        question: "What are the age requirements to rent a car?",
+        answer:
+          "We have partnered with Paystack to give our customers as many payment options as possible to promote flexibility",
+      },
+
+      {
+        question: "What methods of payment do you accept?",
+        answer:
+          "We have partnered with Paystack to give our customers as many payment options as possible to promote flexibility",
+      },
+      {
+        question: "Do I need to refill the gas tank before returning the car?",
+        answer:
+          "We have partnered with Paystack to give our customers as many payment options as possible to promote flexibility",
+      },
+
+      {
+        question: "What are your cancellation policies?",
+        answer:
+          "We have partnered with Paystack to give our customers as many payment options as possible to promote flexibility",
+      },
+
+      {
+        question: "What happens if I need to extend my rental period?",
+        answer:
+          "We have partnered with Paystack to give our customers as many payment options as possible to promote flexibility",
+      },
+    ],
+  },
+];
+
+export const colorTypes = [
+  { value: "Blue", label: "Blue", color: "#00629F", fontColor: "#FFFFFF" },
+  {
+    value: "Maroon",
+    label: "Maroon",
+    color: "#6D191B",
+    fontColor: "#FFFFFF",
+  },
+  {
+    value: "Yellow",
+    label: "Yellow",
+    color: "#FFEE36",
+    fontColor: "#000000",
+  },
+  {
+    value: "Silver",
+    label: "Silver",
+    color: "#D1D2D1",
+    fontColor: "#000000",
+  },
+  {
+    value: "Purple",
+    label: "Purple",
+    color: "#683276",
+    fontColor: "#FFFFFF",
+  },
+  {
+    value: "Orange",
+    label: "Orange",
+    color: "#E86D34",
+    fontColor: "#FFFFFF",
+  },
+  { value: "Green", label: "Green", color: "#00744E", fontColor: "#FFFFFF" },
+  { value: "Gray", label: "Gray", color: "#7C7C7C", fontColor: "#FFFFFF" },
+  { value: "Pink", label: "Pink", color: "#EA7B88", fontColor: "#000000" },
+  { value: "Tan", label: "Tan", color: "#BE9A6D", fontColor: "#000000" },
+  { value: "Brown", label: "Brown", color: "#3C271C", fontColor: "#FFFFFF" },
+  { value: "Black", label: "Black", color: "#000000", fontColor: "#FFFFFF" },
+  { value: "Red", label: "Red", color: "#AB1A30", fontColor: "#FFFFFF" },
+  { value: "Gold", label: "Gold", color: "#D1A631", fontColor: "#000000" },
+  { value: "Beige", label: "Beige", color: "#EADBBA", fontColor: "#000000" },
+  { value: "White", label: "White", color: "#FFFFFF", fontColor: "#000000" },
+  {
+    value: "Claret",
+    label: "Claret",
+    color: "#7f1734",
+    fontColor: "#FFFFFF",
+  },
+  {
+    value: "Copper",
+    label: "Copper",
+    color: "#b87333",
+    fontColor: "#FFFFFF",
+  },
+  { value: "Cream", label: "Cream", color: "#fffdd0", fontColor: "#000000" },
 ];

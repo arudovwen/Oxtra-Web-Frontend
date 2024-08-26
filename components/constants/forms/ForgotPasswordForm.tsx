@@ -1,109 +1,133 @@
 import React from "react";
-import Typography from "../Typorgraphy";
-import Button from "../Button";
 import classNames from "classnames";
-import { useState } from "react";
-import { forgotPassword, handleCsrf } from "@/services/authservices";
 import Link from "next/link";
-import { useAuth } from "@/hooks/useAuth";
-import Loader from "../Loader";
-import { SyntheticEvent } from "react";
+import { Form, Formik } from "formik";
+import * as Yup from "yup";
+import AuthInput from "../AuthInput";
+import { Box, Button, Flex, Text } from "@chakra-ui/react";
+import { useRouter } from "next/router";
+import useCustomToast from "@/utils/notifications";
+import { useForgotPassword } from "@/services/query/auth";
 
 const labelClasses = classNames(
-  "block text-[14px] leading-[14px] font-gordita-medium text-brandGray-300",
-);
-
-const inputClasses = classNames(
-  `px-2 py-2 border  border-[#d4d6d8] rounded-lg my-3  w-full font-gordita-regular`,
+  "text-[12px] leading-[12px] font-gordita-bold text-[#444648]",
 );
 
 const ForgotPasswordForm = () => {
-  const [email, setEmail] = useState("");
-  const { disable, setDisable } = useAuth();
+  const router = useRouter();
 
-  const handleSubmit = (e: SyntheticEvent) => {
-    e.preventDefault();
-    setDisable(true);
+  const { successToast, errorToast } = useCustomToast();
 
-    const user = {
-      email,
-    };
+  const { mutate, isLoading } = useForgotPassword({
+    onSuccess: (res: any) => {
+      successToast(res?.message);
+    },
+    onError: (err: any) => {
+      errorToast(
+        err?.response?.data?.message || err?.message || "An Error occurred",
+      );
+    },
+  });
 
-    forgotPassword(user)
-      .then((res) => {
-        setDisable(false);
-      })
-      .catch((err) => {
-        console.log(err);
-
-        setDisable(false);
-      });
-
-    // setDisable(false);
+  const handleSubmit = (values: any) => {
+    mutate(values);
   };
 
   return (
-    <main className="w-[90%] lg:mx-auto lg:max-w-[500px]">
-      <div className="mb-4 mt-[40px] text-brandGray-300">
-        <Typography as="h4" font="font-gordita-medium">
-          Forgot Password?
-        </Typography>
-      </div>
-      <div className="text-brandGray-100 mb-8">
-        <p className="font-gordita-regular text-[16px]">
-          Not to worry, just enter your email address and we will send you an
-          email to reset your password.
-        </p>
-      </div>
+    <Box fontFamily="gordita" w={{ base: "95%", md: "100%" }}>
+      <Flex mt="30px" justifyContent="center" w="100%" align="center">
+        <Box
+          border="1px solid #EAEAEA"
+          w="30rem"
+          borderRadius="10px"
+          py="28px"
+          px="20px"
+        >
+          <Box>
+            <Text color="#444648" fontWeight={700} fontSize="24px">
+              Forgot Password?
+            </Text>
 
-      <section className="flex w-full flex-col">
-        <form className="mt-6" onSubmit={handleSubmit}>
-          <div className="grid grid-cols-12 gap-y-6">
-            <div className="col-span-full">
-              <label htmlFor="" className={labelClasses}>
-                Email address
-              </label>
-              <div className="mt-1">
-                <input
-                  type="email"
-                  id="email-address"
-                  name="email-address"
-                  autoComplete="email"
-                  placeholder="Enter your email address"
-                  onChange={(e) => setEmail(e.target.value)}
-                  className={inputClasses}
-                  required
-                />
-              </div>
-            </div>
-          </div>
+            <Text color="#646668" mt="5px">
+              Not to worry, just enter your email address and we will send you
+              an email to reset your password.
+            </Text>
+          </Box>
 
-          <Button
-            bg={!disable ? "bg-brandGreen-300" : "bg-brandGreen-100"}
-            hover="hover:bg-brandGray-200"
-            textColor="text-white"
-            width={true}
-            size="text-sm"
-            type="submit"
-            disable={disable}
-          >
-            {!disable ? (
-              "Reset Password"
-            ) : (
-              <Loader type="spin" width={14} height={14} color="#42864F" />
-            )}
-          </Button>
-          <div className="text-center mt-[32px]">
-            <span className="text-[12px] text-brandGray-300 leading-[12px] font-gordita-medium">
+          <Box w="full" maxW="500px" mt="32px">
+            <Formik
+              /* @ts-ignore */
+              onSubmit={handleSubmit}
+              initialValues={{ email: "" }}
+              validationSchema={Yup.object().shape({
+                email: Yup.string().email().required("Email is required"),
+              })}
+            >
+              {({
+                values,
+                errors,
+                touched,
+                handleChange,
+                handleBlur,
+                handleSubmit,
+                isValid,
+                dirty,
+              }) => (
+                /* @ts-ignore */
+                <Form onSubmit={handleSubmit}>
+                  <Flex flexDirection="column" rowGap={6}>
+                    <Box>
+                      <Text className={labelClasses}>Email address</Text>
+
+                      <AuthInput
+                        placeholder="Enter your email address"
+                        name="email"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values?.email}
+                        error={errors?.email && touched?.email && errors?.email}
+                      />
+                    </Box>
+                  </Flex>
+                  <Button
+                    mt="32px"
+                    bg="#438950"
+                    _hover={{ opacity: 0.8 }}
+                    borderRadius="8px"
+                    h="48px"
+                    color="#fff"
+                    fontSize="14px"
+                    fontWeight={500}
+                    isLoading={isLoading}
+                    w="full"
+                    type="submit"
+                    _active={{ bg: "#438950" }}
+                    _focus={{ bg: "#438950" }}
+                    isDisabled={!isValid || !dirty}
+                  >
+                    Reset Password
+                  </Button>{" "}
+                </Form>
+              )}
+            </Formik>
+
+            <Box
+              fontSize="12px"
+              color="brandGray-300"
+              lineHeight="12px"
+              fontWeight={500}
+              textAlign="center"
+              mt="32px"
+            >
               Go back to{" "}
               <Link href="/login" className="text-brandGreen-300 ">
                 Login
               </Link>
-            </span>
-          </div>
-        </form>
-      </section>
-    </main>
+            </Box>
+          </Box>
+        </Box>
+      </Flex>
+    </Box>
   );
 };
 

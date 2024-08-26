@@ -1,5 +1,4 @@
 import React from "react";
-import Navigation from "../../layout/NonAuthLayout/Navigation";
 import Container from "../../layout/NonAuthLayout/Container";
 import AlterFooter from "../../layout/NonAuthLayout/Footers/AlterFooter";
 import { AiOutlineArrowLeft } from "react-icons/ai";
@@ -33,17 +32,6 @@ const SendPackageLayout = ({
   return (
     <div className="text-brandGray-500 h-screen flex flex-col ">
       <Container>
-        <Navigation
-          color="text-brandGray-300"
-          hover="hover:text-brandGreen-300"
-          buttonBg="bg-brandGreen-300"
-          buttonText="text-white"
-          buttonHover="hover:bg-white"
-          activePage={activePage}
-          navBackground="white"
-          menuColor="text-brandGreen-300"
-        />
-
         <div className="relative mx-auto max-w-[500px] mt-[69px] mb-[49px] flex flex-col lg:flex-row gap-[15px]  justify-between lg:gap-0">
           {nav.map((n, index) => {
             return (

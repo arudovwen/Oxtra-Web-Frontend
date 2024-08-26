@@ -5,15 +5,14 @@ import { useState } from "react";
 import { useAuth } from "@/hooks/useAuth";
 import { SyntheticEvent } from "react";
 import { rentVehicle } from "@/services/vehicleservices";
-// @ts-ignore 
-import DatePickerInput from "@/components/DatePicker/index";
+import DatePickerInput from "@/components/Datepicker";
 
 const inputClasses = classNames(
-  "px-2 py-2 border rounded border-[#d4d6d8] mt-3  w-full h-[40px]"
+  "px-2 py-2 border rounded border-[#d4d6d8] mt-3  w-full h-[40px]",
 );
 
 const labelClasses = classNames(
-  "font-gordita-medium text-brandGray-300 text-xs lg:text-sm"
+  "font-gordita-medium text-brandGray-300 text-xs lg:text-sm",
 );
 
 const FindCarForm = () => {
@@ -63,7 +62,7 @@ const FindCarForm = () => {
     setValue(newValue);
   };
   return (
-    <form className="flex items-center flex-col lg:flex-row gap-[20px]">
+    <form className="flex items-center flex-col lg:flex-row gap-[16px]">
       <div className="flex-1 flex flex-col lg:flex-row gap-y-5 lg:gap-y-0 lg:gap-x-5 w-full lg:w-auto">
         <div className="flex-1">
           <label htmlFor="Pick up location" className={labelClasses}>
@@ -77,16 +76,30 @@ const FindCarForm = () => {
         </div>
         <div className="flex-1">
           <label htmlFor="pick up Date" className={labelClasses}>
-            Pick up Date & Time
+            Pick up Date
           </label>
-          <DatePickerInput handleChange={() => {}} showTimeSelect dateFormat="MMMM d, yyyy h:mm aa" />
+          <DatePickerInput
+            handleChange={() => {}}
+            showTimeSelect
+            dateFormat="MMMM d, yyyy h:mm aa"
+          />
         </div>
-   
+
         <div className="flex-1">
           <label htmlFor="Return Date & Time" className={labelClasses}>
             Return Date & Time
           </label>
-          <DatePickerInput handleChange={() => {}} showTimeSelect dateFormat="MMMM d, yyyy h:mm aa" />
+          <DatePickerInput
+            handleChange={() => {}}
+            showTimeSelect
+            dateFormat="MMMM d, yyyy h:mm aa"
+          />
+        </div>
+        <div className="lg:max-w-[100px]">
+          <label htmlFor="Pick up location" className={labelClasses}>
+            Days
+          </label>
+          <input type="number" placeholder="2" className={inputClasses} />
         </div>
       </div>
 
