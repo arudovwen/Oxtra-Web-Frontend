@@ -70,7 +70,7 @@ const Faq = () => {
             />
           ))}
         </div>
-        <div className="w-[371px]  py-[24px] px-[20px] border rounded-[16px] border-[#DADADA]">
+        <div className="lg:w-[371px]  py-[24px] px-[20px] border rounded-[16px] border-[#DADADA]">
           <div className="mb-[20px]">
             <Image src={bubble} alt="bubble" width={92} height={80} />
           </div>
