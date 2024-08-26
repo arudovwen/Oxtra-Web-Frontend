@@ -95,12 +95,12 @@ const FindCarForm = () => {
             dateFormat="MMMM d, yyyy h:mm aa"
           />
         </div>
-        <div className="lg:max-w-[100px]">
+        {/* <div className="lg:max-w-[100px]">
           <label htmlFor="Pick up location" className={labelClasses}>
             Days
           </label>
           <input type="number" placeholder="2" className={inputClasses} />
-        </div>
+        </div> */}
       </div>
 
       <div className="bg-brandGreen-300 text-white py-2 lg:py-6 flex flex-col items-center justify-center  col-span-full xl:col-auto rounded cursor-pointer lg:h-[72px] w-full lg:w-[72px]">

@@ -69,13 +69,13 @@ const Commitment = ({ marginBottom }: { marginBottom: string }) => {
     <div className="relative" id="commitment">
       <Container className="z-[2] relative">
         <div className="text-brandGray-300 pt-[64px] md:pt-[160px] pb-[120px]">
-          <div className="text-brandGreen-400 mb-4">
+          <div className="text-brandGreen-400 mb-6">
             <Typography as="h2" font="font-gordita-ultra">
-              Our Commitment
+              Our Commitment to Sustainable Transportation
             </Typography>
           </div>
-          <div className="lg:w-[800px]">
-            <div className="mb-10 text-base leading-normal font-gordita-regular">
+          <div className="lg:w-[880px]">
+            <div className="mb-10 text-lg leading-normal font-gordita-regular">
               At Oxtra, we are dedicated to guiding the shift towards
               eco-friendly travel in Africa. Our initiatives in Compressed
               Natural Gas (CNG) and Electric Vehicles (EVs) align with the
@@ -123,9 +123,8 @@ const Commitment = ({ marginBottom }: { marginBottom: string }) => {
               ))}
             </ul>
           </div>
-          <div className="mt-[56px] text-base leading-normal">
-           <span className="!font-bold  text-brandGreen-400">A Greener Tomorrow with Oxtra:
-           </span> Through these comprehensive efforts, Oxtra aims to significantly
+          <div className="mt-[56px] text-lg leading-normal">
+            Through these comprehensive efforts, Oxtra aims to significantly
             reduce its carbon footprint, support the transition to CNG and
             electric vehicles, and promote sustainable transportation solutions
             across Africa. We are committed to making urban transportation more
