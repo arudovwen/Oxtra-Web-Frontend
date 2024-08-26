@@ -69,7 +69,7 @@ const commitments = [
 
 const Commitment = ({ marginBottom }: { marginBottom: string }) => {
   return (
-   <div className="relative">
+   <div className="relative" id="commitment">
      <Container className="z-[2] relative">
       <div className="text-brandGray-300 pt-[64px] md:pt-[160px] pb-[120px]">
         <div className="text-brandGreen-400 mb-4">

@@ -1,20 +1,25 @@
 import Navigation from "./Navigation";
 import Container from "./Container";
+import { useRouter } from "next/router";
 
 const NonAuthLayout = ({ children, page }: any) => {
+  const { pathname } = useRouter();
+
   return (
     <div className="">
-      <div className={`${page === "home" ? "bg-custom-gradient" : "bg-white"}`}>
+      <div
+        className={`${pathname === "/" ? "bg-custom-gradient" : "bg-white border-b border-gray-100"} `}
+      >
         <Container className="relative">
           <Navigation
-            color={`${page === "home" ? "text-white" : "text-brandGray-300"}`}
-            hover="hover:text-brandGreen-100"
-            buttonBg={`${page === "home" ? "bg-white" : "bg-brandGreen-300"}`}
+            color={`${pathname === "/" ? "text-white" : "text-brandGray-300"}`}
+            hover="hover:text-brandGreen-200"
+            buttonBg={`${pathname === "/" ? "bg-white" : "bg-brandGreen-300"}`}
             buttonHover="hover:bg-brandGreen-300"
-            buttonText={`${page === "home" ? "text-brandGray-300" : "text-white"}`}
+            buttonText={`${pathname === "/" ? "text-brandGray-300" : "text-white"}`}
             activePage={page}
             navBackground="green"
-            menuColor={`${page === "Home" ? "text-white" : "text-brandGreen-300"}`}
+            menuColor={`${pathname === "/" ? "text-white" : "text-brandGreen-300"}`}
             page={page}
           />
         </Container>

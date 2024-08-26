@@ -28,12 +28,12 @@ export const navigation = {
     { name: "About us", href: "#" },
     { name: "Company", href: "/company" },
     { name: "Press", href: "#" },
-    { name: "Blog", href: "#" },
+    // { name: "Blog", href: "#" },
   ],
   products: [
     { name: "Rent a car", href: "/rent-a-car" },
     { name: "Vehicle owners", href: "#" },
-    { name: "Courier", href: "#" },
+    { name: "Sustainability plan", href: "/company#commitment" },
   ],
   business: [
     { name: "Our Terms", href: "/legal-and-compliance" },
@@ -242,11 +242,11 @@ export const sideBarRoutes = [
     route: "/customer/rent-a-car/requests",
     img: "/assets/rent-car.svg",
   },
-  {
-    name: "Courier service",
-    route: "/customer/courier-service",
-    img: "/assets/courier.svg",
-  },
+  // {
+  //   name: "Courier service",
+  //   route: "/customer/courier-service",
+  //   img: "/assets/courier.svg",
+  // },
 
   {
     name: "Payments",
