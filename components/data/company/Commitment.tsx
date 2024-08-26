@@ -74,7 +74,7 @@ const Commitment = ({ marginBottom }: { marginBottom: string }) => {
               Our Commitment to Sustainable Transportation
             </Typography>
           </div>
-          <div className="lg:w-[880px]">
+          <div className="">
             <div className="mb-10 text-lg leading-normal font-gordita-regular">
               At Oxtra, we are dedicated to guiding the shift towards
               eco-friendly travel in Africa. Our initiatives in Compressed
