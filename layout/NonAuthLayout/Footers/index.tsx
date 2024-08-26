@@ -23,14 +23,13 @@ const Footer = () => {
             />
 
             <div className="text-brandGray-100 text-sm font-gordita-regular leading-normal mb-[16px]">
-            We are a tech-mobility company providing sustainable transportation solutions in Africa's urban cities.
-
+              We are a tech-mobility company providing sustainable
+              transportation solutions in Africa's urban cities.
             </div>
-            <p className="hidden lg:block text-[#242424] text-xs font-gordita-regular leading-normal">
+            <p className="hidden lg:block text-[#242424] text-xs  leading-normal">
               ©2024 Oxtra Limited. All Rights Reserved.{" "}
               <span className="font-bold text-[#242424]">RC 1891082</span>
             </p>
-           
           </div>
           <div className="flex-1 grid grid-cols-1 sm:grid-cols-2  gap-y-6 lg:gap-y-0 lg:gap-x-5 lg:flex gap-x-6 justify-between">
             <div>
@@ -174,10 +173,10 @@ const Footer = () => {
               </ul>
             </div>
           </div>
-          <p className="lg:hidden text-[#242424] text-xs font-gordita-regular leading-normal">
-              ©2024 Oxtra Limited. All Rights Reserved.{" "}
-              <span className="font-bold text-[#242424]">RC 1891082</span>
-            </p>
+          <p className="lg:hidden text-[#242424] text-xs  leading-normal">
+            ©2024 Oxtra Limited. All Rights Reserved.{" "}
+            <span className="font-bold text-[#242424]">RC 1891082</span>
+          </p>
         </div>
       </Container>
     </footer>
